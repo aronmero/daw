@@ -1,0 +1,25 @@
+div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+#logo{
+    width: 100vw;
+    max-width: 720px;
+}
+.idioma{
+    height: 50px;
+}
+.idioma div{
+    align-self: end;
+    margin-right: 2vw;
+}
+*{
+    border: 1px red dotted;
+}
+
+img{
+    max-width: 720px;
+    width: 100%;
+}
