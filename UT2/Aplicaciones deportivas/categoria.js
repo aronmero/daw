@@ -1,8 +1,9 @@
 function solicitarDatos() {
   let edad = prompt("Introduce el año de nacimiento");
+  debugger;
   let categoria;
   let calculo = 2023 - edad;
-
+  debugger;
   let categoria1 = "Pre-Benjamin";
   let categoria2 = "Benjamin";
   let categoria3 = "Alevín";
@@ -10,7 +11,7 @@ function solicitarDatos() {
   let categoria5 = "Cadete";
   let categoria6 = "Juvenil";
   let categoria7 = "Senior";
-
+  debugger;
   /*Evitar datos incorrectos */
   if (!isNaN(calculo) && calculo >= 5 && calculo < 150) {
     if (calculo < 9) {
@@ -28,6 +29,7 @@ function solicitarDatos() {
     } else {
       categoria = categoria7;
     }
+    debugger;
     document.write("Pertenecea a " + categoria + "<br>");
 
     document.write("En españa existen 7 categorias<br>");
@@ -43,7 +45,7 @@ function solicitarDatos() {
     calculo = null;
     edad = null;
   }
-
+  debugger;
   return calculo;
 }
 

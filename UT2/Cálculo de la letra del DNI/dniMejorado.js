@@ -34,7 +34,7 @@ var letras = [
 letraDni = letraDni.toUpperCase();//la letra a mayusculas para evitar errores
 
 if (dni < 0 || dni > 99999999) {
-  alert("Error:1");
+  alert("Error: 1. Numero no valido.");
 } else {
   let letra = dni % 23;
 
@@ -43,6 +43,6 @@ if (dni < 0 || dni > 99999999) {
   if (letraComprobada == letraDni) {
     alert("Dni y letra correctos");
   } else {
-    alert("Letra indicada incorrecta <br>Error:2");
+    alert("Error: 2. Letra indicada invalida.");
   }
 }

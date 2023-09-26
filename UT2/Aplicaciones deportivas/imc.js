@@ -1,12 +1,16 @@
 function solicitarDatos() {
   let peso = prompt("Introduce el peso en kg");
+  debugger;
   let altura = prompt("Introduce la altura en cm");
-
+  debugger;
   altura = altura / 100;
+  debugger;
   /*Calculo del IMC */
   let calculo = peso / Math.pow(altura, 2);
+  debugger;
   /*Redondear a dos decimales*/
   calculo = Math.round(calculo * 100) / 100;
+  debugger;
 
   /*Evitar datos incorrectos */
   if (!isNaN(calculo) && calculo != Infinity && calculo != 0 && calculo > 0) {
@@ -29,11 +33,13 @@ function solicitarDatos() {
     } else if (calculo > 40.0) {
       document.write("Obeso (Tipo III)");
     }
+    debugger;
   } else {
     /*Limpiar datos para proximo bucle*/
     calculo = null; 
     peso = null;
     altura = null;
+    debugger;
   }
 
   return calculo;

@@ -1,5 +1,7 @@
 let dni = prompt("Introduce los numeros del DNI ");
+debugger;
 let letraDni = prompt("Introduce la letra");
+debugger;
 var letras = [
   "T",
   "R",
@@ -28,17 +30,17 @@ var letras = [
 ];
 
 letraDni = letraDni.toUpperCase();//la letra a mayusculas para evitar errores
-
-if (dni < 0 || dni > 99999999) {
-  alert("Error:1");
-} else {
+debugger;
+if (dni.length ==8) {
   let letra = dni % 23;
-
+  debugger;
   letraComprobada = letras[letra];
-
+  debugger;
   if (letraComprobada == letraDni) {
     alert("Dni y letra correctos");
   } else {
-    alert("Letra indicada incorrecta <br>Error:2");
+    alert("Error: 2. Letra indicada invalida.");
   }
+} else {
+  alert("Error: 1. Numero no valido.");
 }
