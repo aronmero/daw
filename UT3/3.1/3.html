@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="stylesheet" type="text/css" media="screen" href="3.css" />
+    <title>3</title>
+  </head>
+  <body>
+    <div class="pomodoro">
+      <div class="contador">
+        <p id="tipoTiempo"></p>
+        <p id="tRestante">00:00</p>
+      </div>
+      <div class="selectores">
+        <p>Tiempo de trabajo</p>
+        <input type="number" id="tTrabajo" min="1" value="25" />
+        <p>Tiempo de descanso</p>
+        <input type="number" id="tDescanso" min="1" value="5" />
+        <button onclick="prueba()">Click me</button>
+      </div>
+    </div>
+    <script src="3.js"></script>
+  </body>
+</html>
