@@ -11,6 +11,7 @@
       media="screen"
       href="css/estilo.css"
     />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="img/favicon_d1_res.ico" />
   </head>
   <body>
@@ -27,7 +28,7 @@
     </div>
 
     <!--Logo-->
-    <div><img src="img/logo2XL+10+aniversario-804w.webp" id="logo" /></div>
+    <div class="logo"><img src="img/logo2XL+10+aniversario-804w.webp" id="logo" /></div>
     <section>
       <div>
         <a href="+34922444427">
@@ -40,8 +41,8 @@
     <!--Seccion-->
     <section>
       <div>
-        <h3 lang="es">Espacio gastronómico</h3>
-        <h3 lang="en">Gastronomic space</h3>
+        <h1 lang="es">Espacio gastronómico</h1>
+        <h1 lang="en">Gastronomic space</h1>
         <p lang="es">Especialistas en los vinos y productos de La Palma</p>
         <p lang="en">Specialists in the wines and products of La Palma</p>
       </div>
@@ -50,19 +51,80 @@
     <!--Seccion-->
     <section>
       <div>
-        <p lang="es">Horario</p>
+        <h1 lang="es">Horario</h1>
+        <h1 lang="en">Schedule</h1>
         <p lang="es">De Martes a Sábado</p>
         <p lang="es">Cocina: 13h-17h</p>
         <p lang="es">Domingo y Lunes, cerrado</p>
-        <p lang="en">Horario</p>
         <p lang="en">From Tuesday to Saturday</p>
         <p lang="en">Cooking: 13h-17h</p>
         <p lang="en">Sunday and Monday, closed</p>
       </div>
-      <img src="img/Calabacín+con+ventresca+de+albacora-1920w.webp" />
+      <div class="contenedorImg">
+        <img src="img/Calabacín+con+ventresca+de+albacora-1920w.webp" />
+        <img src="img/DSCF0322-640w.webp" />
+        <img src="img/DSCF1594+(Copiar)-640w.webp" />
+      </div>
     </section>
-    <section>MENU</section>
-    <section>CONTACTO</section>
+    <section>
+      <div class="menu">
+        <h1 lang="es">MENU</h1>
+        <div>
+          <span>
+            <p lang="es">Carta</p>
+            <p lang="es">textoprueba</p>
+          </span>
+          <span>
+            <p lang="es">Degustacion</p>
+            <p lang="es">textoprueba</p>
+          </span>
+        </span>
+      </div>
+    </section>
+    <section>
+      <div>
+        <h1>CONTACTO</h1>
+        <p lang="es">
+          Puede enviar un mensaje para reservas con varios días de antelación.
+          Para reservas próximas llamar al teléfono 922 444 427. Muchas gracias.
+        </p>
+        <p lang="en">
+          You can send a message for reservations several days in advance. For
+          upcoming reservations please call 922 444 427. Thank you very much.
+        </p>
+        <div class="formulario">
+          <form method="post" action="">
+            <span style="display: flex; justify-content: space-between">
+              <span style="width: 47%">
+                <label for="nombre" lang="es">Nombre</label>
+                <label for="nombre" lang="en">Name</label>
+                <input type="text" id="nombre" name="nombre" required /> </span
+              ><span style="width: 47%">
+                <label for="telefono" lang="es">Telefono</label>
+                <label for="telefono" lang="en">Phone</label>
+                <input
+                  type="tel"
+                  id="telefono"
+                  name="telefono"
+                  required
+                /> </span
+            ></span>
+            <br />
+            <label for="email" lang="es">Correo electrónico</label>
+            <label for="email" lang="en">Email</label>
+            <input type="email" id="email" name="email" required />
+            <br />
+            <label for="mensaje" lang="es">Mensaje</label>
+            <label for="mensaje" lang="en">Message</label>
+            <textarea type="text" id="mensaje" name="mensaje"></textarea>
+            <span style="display: flex; justify-content: center">
+              <input type="submit" value="Enviar" lang="es" />
+              <input type="submit" value="Send" lang="en" />
+            </span>
+          </form>
+        </div>
+      </div>
+    </section>
   </body>
   <script
     src="https://code.jquery.com/jquery-2.2.4.min.js"
