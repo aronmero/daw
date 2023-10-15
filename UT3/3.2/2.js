@@ -49,7 +49,6 @@ function procesamiento() {
   }
 }
 
-
 //Muestra todos los datos en una tabla
 function imprimirTodo() {
   let row = crearCabeceraTabla();

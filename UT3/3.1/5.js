@@ -1,10 +1,11 @@
 contadorVisitas();
 
 function contadorVisitas() {
-  if (localStorage.contadorVisitas) {
-    localStorage.contadorVisitas = Number(localStorage.contadorVisitas) + 1;
+  if (isNaN(parseInt(localStorage.getItem("visitas")))) {
+    localStorage.setItem("visitas", "1");
   } else {
-    localStorage.contadorVisitas = 1;
+    visita = parseInt(localStorage.getItem("visitas")) + 1;
+    localStorage.setItem("visitas", visita.toString());
   }
-  document.write(localStorage.contadorVisitas);
+  document.write(localStorage.getItem("visitas"));
 }
