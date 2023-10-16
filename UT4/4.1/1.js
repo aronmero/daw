@@ -5,7 +5,6 @@ let valorExtra = document.getElementById("valorExtra");
 let valorExtra2 = document.getElementById("valorExtra2");
 let selectorOpciones = document.getElementById("selectorOpciones");
 
-
 function procesamiento() {
   switch (opcion.value) {
     case "1":
@@ -13,13 +12,13 @@ function procesamiento() {
         "Hay " + mostrarNumElementos(arrayPaises) + " paises almacenados";
       break;
     case "2":
-      mostrarElmentos(arrayPaises, mostrarDatos);
+      mostrarElementos(arrayPaises, mostrarDatos);
       break;
     case "3":
-      mostrarElmentosInverso(arrayPaises, mostrarDatos);
+      mostrarElementosInverso(arrayPaises, mostrarDatos);
       break;
     case "4":
-      mostrarElmentosOdenados(arrayPaises, mostrarDatos);
+      mostrarElementosOrdenados(arrayPaises, mostrarDatos);
       break;
     case "5":
       mostrarPanel2();
@@ -97,7 +96,7 @@ function procesamiento() {
 
       break;
     case "11":
-      mostraPranel2();
+      mostrarPanel2();
       valorExtra2.hidden = false;
 
       if (valorExtra.value != "" && valorExtra2.value != "") {
@@ -144,10 +143,10 @@ function mostrarNumElementos(array = []) {
 }
 /**
  * Imprime los elementos del array en el html dado
- * @param {Array} array 
+ * @param {Array.<String>} array
  * @param {HTMLElement|document.getElementById} ubicacion un elemento HTML donde se mostrara el texto
  */
-function mostrarElmentos(array = [], ubicacion) {
+function mostrarElementos(array = [], ubicacion) {
   limpiarMuestraDatos(ubicacion);
   array.forEach((element) => {
     ubicacion.innerHTML = ubicacion.innerHTML + " " + element;
@@ -155,10 +154,10 @@ function mostrarElmentos(array = [], ubicacion) {
 }
 /**
  * Imprime los elementos del array en orden inverso en el html dado
- * @param {Array} array 
+ * @param {Array.<String>} array
  * @param {HTMLElement|document.getElementById} ubicacion un elemento HTML donde se mostrara el texto
  */
-function mostrarElmentosInverso(array = [], ubicacion) {
+function mostrarElementosInverso(array = [], ubicacion) {
   limpiarMuestraDatos(ubicacion);
   array.reverse();
   array.forEach((element) => {
@@ -169,10 +168,10 @@ function mostrarElmentosInverso(array = [], ubicacion) {
 
 /**
  * Imprime los elementos del array ordenados alfabeticamente en el html dado
- * @param {Array} array 
+ * @param {Array.<String>} array
  * @param {HTMLElement|document.getElementById} ubicacion un elemento HTML donde se mostrara el texto
  */
-function mostrarElmentosOdenados(array = [], ubicacion) {
+function mostrarElementosOrdenados(array = [], ubicacion) {
   limpiarMuestraDatos(ubicacion);
   array.sort();
 
@@ -190,8 +189,8 @@ function limpiarMuestraDatos(ubicacion) {
 
 /**
  * Inserta el elemento dado al final del array
- * @param {Array} array 
- * @param {String} elemento 
+ * @param {Array.<String>} array
+ * @param {String} elemento
  * @returns devuelve la ejecucion del comando
  */
 function insertarFinal(array = [], elemento) {
@@ -199,8 +198,8 @@ function insertarFinal(array = [], elemento) {
 }
 /**
  * Inserta el elemento dado al principio del array
- * @param {Array} array 
- * @param {String} elemento 
+ * @param {Array.<String>} array
+ * @param {String} elemento
  * @returns devuelve la ejecucion del comando
  */
 function insertarPrincipio(array = [], elemento) {
@@ -208,8 +207,8 @@ function insertarPrincipio(array = [], elemento) {
 }
 /**
  * Eliminba un elemento al principio del array
- * @param {Array} array 
- * @param {String} elemento 
+ * @param {Array.<String>} array
+ * @param {String} elemento
  * @returns devuelve la ejecucion del comando
  */
 function borrarPrincipio(array = []) {
@@ -218,8 +217,8 @@ function borrarPrincipio(array = []) {
 
 /**
  * Eliminba un elemento al final del array
- * @param {Array} array 
- * @param {String} elemento 
+ * @param {Array.<String>} array
+ * @param {String} elemento
  * @returns devuelve la ejecucion del comando
  */
 function borrarFinal(array = []) {
@@ -227,8 +226,8 @@ function borrarFinal(array = []) {
 }
 
 /**
- * 
- * @param {Array} array 
+ *
+ * @param {Array.<String>} array
  * @param {number} num posicion de un elemento dentro del array
  * @returns Muestra el elemento del array indicado
  */
@@ -236,8 +235,8 @@ function mostrarElementoIndicado(array = [], num) {
   return array[num];
 }
 /**
- * 
- * @param {Array} array 
+ *
+ * @param {Array.<String>} array
  * @param {String} elemento dentro del array que se desea buscar
  * @returns Muestra el elemento del array indicado
  */
@@ -252,7 +251,7 @@ function mostrarPosicionIndicada(array = [], elemento) {
 }
 /**
  * Imprime en el html dado los elementos del array que se encuentran en el intervalo dado
- * @param {Array} array 
+ * @param {Array.<String>} array
  * @param {HTMLElement|document.getElementById} ubicacion  un elemento HTML donde se mostrara el texto
  * @param {Number} numInicial Inicio del intervalo
  * @param {Number} numFinal Final del intervalo
