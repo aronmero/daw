@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION["ocultar"]= "";//Elimina la ocultacion de elementos
     } else {
         //mensaje de error
-        $_SESSION["error"] = "El nombre es Obligaroio!!!!";
+        $_SESSION["error"] = "El nombre es Obligatorio!!!!";
     }
     $_SESSION["agenda"] = $agenda;
     header('Location: agenda.php');
