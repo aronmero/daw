@@ -41,8 +41,11 @@ switch (opcionElegida) {
 
     break;
   case 3:
-    let inicio = parseInt(prompt("Introduce el valor de inicio", 0));
-    let final = parseInt(prompt("Introduce el valor final", 2));
+    let intervalo = prompt("Introduce el el intervalo inicio-fin", "0-2");
+    intervaloArray = intervalo.split("-");
+
+    inicio = intervaloArray[0];
+    final = intervaloArray[1];
 
     if (inicio != null && final != null) {
       mostrarElementoIntervalo(arrayPaises, mostrarDatos, inicio, final);
@@ -55,23 +58,24 @@ switch (opcionElegida) {
     );
     let pais = prompt("Nombre del pais");
     if (pais != "") {
-      
       switch (opcion4) {
         case 1:
           mostrarDatos.innerHTML = "<h1>Insertar valor al principio</h1><br>";
-          debugger
+          debugger;
           if (insertarPrincipio(arrayPaises, pais) != null) {
-            mostrarDatos.innerHTML = mostrarDatos.innerHTML+ "Valor insertado";
+            mostrarDatos.innerHTML = mostrarDatos.innerHTML + "Valor insertado";
           } else {
-            mostrarDatos.innerHTML =  mostrarDatos.innerHTML+"Valor no insertado";
+            mostrarDatos.innerHTML =
+              mostrarDatos.innerHTML + "Valor no insertado";
           }
           break;
         case 2:
           mostrarDatos.innerHTML = "<h1>Insertar valor al final</h1><br>";
           if (insertarFinal(arrayPaises, pais) != null) {
-            mostrarDatos.innerHTML = mostrarDatos.innerHTML+ "Valor insertado";
+            mostrarDatos.innerHTML = mostrarDatos.innerHTML + "Valor insertado";
           } else {
-            mostrarDatos.innerHTML =  mostrarDatos.innerHTML+"Valor no insertado";
+            mostrarDatos.innerHTML =
+              mostrarDatos.innerHTML + "Valor no insertado";
           }
           break;
 
@@ -89,17 +93,19 @@ switch (opcionElegida) {
       case 1:
         mostrarDatos.innerHTML = "<h1>Eliminar al principio</h1><br>";
         if ((elementoTemp = borrarPrincipio(arrayPaises)) == undefined) {
-          mostrarDatos.innerHTML = mostrarDatos.innerHTML+"No hay elemento que eliminar";
+          mostrarDatos.innerHTML =
+            mostrarDatos.innerHTML + "No hay elemento que eliminar";
         } else {
-          mostrarDatos.innerHTML =mostrarDatos.innerHTML+ elementoTemp;
+          mostrarDatos.innerHTML = mostrarDatos.innerHTML + elementoTemp;
         }
         break;
       case 2:
         mostrarDatos.innerHTML = "<h1>Eliminar al final</h1><br>";
         if ((elementoTemp = borrarFinal(arrayPaises)) == undefined) {
-          mostrarDatos.innerHTML =mostrarDatos.innerHTML+ "No hay elemento que eliminar";
+          mostrarDatos.innerHTML =
+            mostrarDatos.innerHTML + "No hay elemento que eliminar";
         } else {
-          mostrarDatos.innerHTML =mostrarDatos.innerHTML+ elementoTemp;
+          mostrarDatos.innerHTML = mostrarDatos.innerHTML + elementoTemp;
         }
         break;
       default:
@@ -129,7 +135,8 @@ switch (opcionElegida) {
           (elementoTemp = mostrarElementoIndicado(arrayPaises, opcion6extra)) ==
           -1
         ) {
-          mostrarDatos.innerHTML = "<h1>Consultar un país por posicion</h1><br>";
+          mostrarDatos.innerHTML =
+            "<h1>Consultar un país por posicion</h1><br>";
           mostrarDatos.innerHTML = "No hay elemento que mostrar";
         } else {
           mostrarDatos.innerHTML = elementoTemp;
