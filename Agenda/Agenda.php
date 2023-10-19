@@ -1,16 +1,23 @@
 <?php
 session_start();
 
+//Recibir mensaje de error
 if (empty($_SESSION["error"])) {
   $_SESSION["error"] = "";
 }
-if(isset($_SESSION["agenda"])){
+//Recibir agenda
+if (isset($_SESSION["agenda"])) {
   $agenda = $_SESSION["agenda"];
-}else{
+} else {
   $agenda = [];
 }
 
-
+//Ocultacion de elementos
+if (isset($_SESSION["ocultar"])) {
+  $ocultar = $_SESSION["ocultar"];
+}  else {
+  $ocultar = "hidden";
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -27,7 +34,7 @@ if(isset($_SESSION["agenda"])){
   <p id="errores"><?php echo $_SESSION["error"] ?></p>
   <div id="divAgenda">
     <h1>Agenda</h1>
-    <fieldset id="datosAgenda">
+    <fieldset id="datosAgenda" <?php print $ocultar ?>>
 
       <legend>Datos Agenda</legend>
       <?php
@@ -50,12 +57,12 @@ if(isset($_SESSION["agenda"])){
       </form>
     </fieldset>
 
-    <fieldset>
+    <fieldset <?php print $ocultar ?>>
       <legend>Vaciar Agenda</legend>
-      <form method="post" action="vaciado.php">
+      <form method="GET" action="procesamiento.php">
+      
         <input type="submit" value="Vaciar" id="vaciarDatos">
       </form>
-
     </fieldset>
 
   </div>
