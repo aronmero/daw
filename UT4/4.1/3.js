@@ -1,4 +1,4 @@
-import { disco } from "./disco.js";
+import { disco } from "./modulos/disco.js";
 let juan = new disco("paco", "el teniente", 2023, 2, 3);
 console.log(juan);
 
