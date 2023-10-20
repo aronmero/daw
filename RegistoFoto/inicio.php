@@ -32,7 +32,7 @@
             $contrasena = $_POST["contrasena"];
 
             //JSON
-            $targetDir =  "/../../../../DocumentosXAMPP/RegistroFoto/";
+            $targetDir =  "../DocumentosXAMPP/RegistroFoto/";
             $datosUsuario = file_get_contents($targetDir . "$emailUsuario.json", true);
             $usuario = json_decode($datosUsuario);
             if ($usuario != null) {

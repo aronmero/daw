@@ -73,10 +73,9 @@
 
                 //JSON
                 //Creacion de directorio para los archivos JSON fuera del servidor
-                $targetDir =  "/../../../../DocumentosXAMPP/RegistroFoto/";
+                $targetDir =  "../DocumentosXAMPP/RegistroFoto/";
                 if (!file_exists($targetDir)) {
                     mkdir($targetDir, 0777, true); //Creacion de carpeta con permisos
-
                 }
 
                 //Creacion de clase con variables

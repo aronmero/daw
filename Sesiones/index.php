@@ -4,6 +4,18 @@ if(empty($_SESSION["formulario"])){
     $_SESSION["formulario"]="";
 }
 
+if(empty($_SESSION["nombreUsuario"])){
+    $_SESSION["nombreUsuario"]="";
+}
+
+if(empty($_SESSION["apellidoUsuario"])){
+    $_SESSION["apellidoUsuario"]="";
+}
+
+if(empty($_SESSION["numeroUsuario"])){
+    $_SESSION["numeroUsuario"]="";
+}
+
 ?>
 <!DOCTYPE html>
 <html>
