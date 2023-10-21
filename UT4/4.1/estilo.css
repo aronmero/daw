@@ -1,0 +1,163 @@
+@import url("https://fonts.googleapis.com/css2?family=VT323&display=swap");
+html {
+  font-family: "VT323", monospace;
+  font-size: 21px;
+}
+body {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  background: linear-gradient(0deg, rgb(0, 0, 129), rgb(69, 142, 103));
+  height: 100vh;
+  margin: 0px;
+}
+
+/*
+* animacion static noise de 
+* https://codepen.io/iceable/pen/yLBrZOd
+*/
+.bg {
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  right: -50%;
+  bottom: -50%;
+  width: 200%;
+  height: 200vh;
+  z-index: -1;
+  background: transparent
+    url("http://assets.iceable.com/img/noise-transparent.png") repeat 0 0;
+  background-repeat: repeat;
+  animation: bg-animation 0.2s infinite;
+  opacity: 0.9;
+  visibility: visible;
+}
+
+/*
+* animacion static noise de 
+* https://codepen.io/iceable/pen/yLBrZOd
+*/
+@keyframes bg-animation {
+  0% {
+    transform: translate(0, 0);
+  }
+  10% {
+    transform: translate(-5%, -5%);
+  }
+  20% {
+    transform: translate(-10%, 5%);
+  }
+  30% {
+    transform: translate(5%, -10%);
+  }
+  40% {
+    transform: translate(-5%, 15%);
+  }
+  50% {
+    transform: translate(-10%, 5%);
+  }
+  60% {
+    transform: translate(15%, 0);
+  }
+  70% {
+    transform: translate(0, 10%);
+  }
+  80% {
+    transform: translate(-15%, 0);
+  }
+  90% {
+    transform: translate(10%, 5%);
+  }
+  100% {
+    transform: translate(5%, 0);
+  }
+}
+
+div {
+  width: 245px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+div#divTipoMusica {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+div select {
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-family: "VT323", monospace;
+  font-size: 16px;
+}
+
+div input {
+  font-family: "VT323", monospace;
+  font-size: 16px;
+  width: 220px;
+}
+
+div label {
+  margin: 10px 0px;
+}
+
+div button {
+  font-family: "VT323", monospace;
+  font-size: 16px;
+  margin: 20px 0px;
+  align-self: center;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid rgb(48, 47, 47);
+}
+
+div input {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid rgb(48, 47, 47);
+}
+
+aside {
+  margin-left: 50px;
+  height: 800px;
+  border-radius: 10px;
+  padding: 30px 30px 00px 30px;
+  width: 245px;
+  background: linear-gradient(
+    0deg,
+    rgba(0, 70, 129, 1) 0%,
+    rgba(77, 158, 159, 1) 100%
+  );
+}
+
+section {
+  max-width: 950px;
+  width: 100%;
+  height: 800px;
+  margin-left: 50px;
+  border-radius: 10px;
+  padding: 30px 40px 00px 40px;
+  background: linear-gradient(
+    0deg,
+    rgba(0, 70, 129, 1) 0%,
+    rgba(77, 158, 159, 1) 100%
+  );
+}
+
+h1 {
+  margin-top: 12px;
+}
+
+section div {
+  max-width: 950px;
+  width: 100%;
+  height: 800px;
+}
+
+div .selectores {
+  width: 245px;
+}

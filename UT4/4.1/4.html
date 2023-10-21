@@ -1,32 +1,93 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link rel="stylesheet" type="text/css" media="screen" href="estilo.css" />
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>4.4</title>
+    <title>4.4. Retro Disco</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
   </head>
   <body>
-    <div id="selectorOpciones">
-      <select id="opciones">
-        <option value="1">Mostrar número de discos.</option>
-        <option value="2">Mostrar listado de discos</option>
-        <option value="3">Mostrar un intervalo de discos</option>
-        <option value="4">AAñadir un disco</option>
-        <option value="5">Borrar un disco</option>
-        <option value="6">Consultar un disco</option>
-      </select>
-      <button id="boton">Enviar</button>
-    </div>
-    <br />
-    <div id="opcionesExtra" hidden>
-      <p>Introduce el valor</p>
-      <input type="text" id="valorExtra" />
-      <input type="text" id="valorExtra2" hidden />
+    <div class="bg"></div>
+    <aside>
+      <div id="selectorOpciones">
+        <p>Que opcion desea realizar</p>
+        <select id="opciones" class="selectores">
+          <option value="1">Mostrar número de discos.</option>
+          <option value="2">Mostrar listado de discos</option>
+          <option value="3">Mostrar un intervalo de discos</option>
+          <option value="4">Añadir un disco</option>
+          <option value="5">Borrar un disco</option>
+          <option value="6">Consultar un disco</option>
+        </select>
+        <button id="boton">Enviar</button>
+      </div>
 
-      <button id="boton2">Enviar</button>
-    </div>
-    <div id="mostrarDatos"></div>
+      <div id="opcionesExtra">
+        <p id="mostrarInfo">Introduce el valor</p>
+        <div id="reemplazable"></div>
+        <input type="number" id="valorExtra" />
+        <br />
+        <input type="number" id="valorExtra2" />
+        <br />
+        <input type="text" id="valorExtraTextual" />
+
+        <button id="boton2">Enviar</button>
+      </div>
+
+      <div id="panelOrden">
+        <p>Elige en que orden de los datos</p>
+        <select id="opcionInsertado" class="selectores">
+          <option value="1">Principio</option>
+          <option value="2">Final</option>
+        </select>
+        <button id="boton3">Enviar</button>
+      </div>
+      <div id="panelConsulta">
+        <p>Elige que desea ver</p>
+        <select id="opcionConsulta" class="selectores">
+          <option value="1">Disco</option>
+          <option value="2">La poscion</option>
+        </select>
+        <button id="boton6">Enviar</button>
+      </div>
+
+      <div id="panelConsultaEspecifico"></div>
+      <div id="panelOrdenMostrado">
+        <p>Elige en que orden de los datos</p>
+        <select id="opcionMostrado" class="selectores">
+          <option value="1">Actual</option>
+          <option value="2">Inverso</option>
+          <option value="2">Ordenado</option>
+        </select>
+        <button id="boton4">Enviar</button>
+      </div>
+
+      <div id="insertarDisco">
+        <br /><label for="nombreDisco">Nombre del Disco</label>
+        <input type="text" id="nombreDisco" name="nombreDisco" />
+        <br /><label for="grupoCantante">Grupo o cantante</label>
+        <input type="text" id="grupoCantante" name="grupoCantante" />
+        <br /><label for="anioPublicacion">Año de publicacin</label>
+        <input type="number" id="anioPublicacion" name="anioPublicacion" />
+        <br />
+        <div id="divTipoMusica">
+          <label for="tipoMusica">Tipo Musica</label>
+          <select id="tipoMusica" name="tipoMusica">
+            <option value="0">rock</option>
+            <option value="1">pop</option>
+            <option value="2">punk</option>
+            <option value="3">indie</option>
+          </select>
+        </div>
+        <br /><label for="localizacion">localizacion en la estanteria</label>
+        <input type="number" id="localizacion" name="localizacion" />
+
+        <button id="boton5">Enviar</button>
+      </div>
+    </aside>
+    <section><div id="mostrarDatos"></div></section>
+
     <script type="module" src="4.js"></script>
   </body>
 </html>

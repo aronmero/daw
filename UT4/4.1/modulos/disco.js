@@ -37,6 +37,9 @@ export class disco {
   setPrestado(prestado) {
     this.prestado = prestado;
   }
+  obtenerNombre(){
+    return this.nombreDisco;
+  }
 
   toString() {
     return (
