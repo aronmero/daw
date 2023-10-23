@@ -1,51 +1,35 @@
-import { edificio } from "./edificio.js";
+import {
+  agregarPropietarioTexto,
+  crearEdificio,
+} from "./modulos/edificio.js";
 
-/**
- * Crea un edificio y lo devuelve
- * @param {String} calle 
- * @param {number} numero 
- * @param {number} codigo 
- * @returns 
- */
-function crearEdificio(calle, numero, codigo) {
-  let edificioTemp = new edificio(calle, numero, codigo);
-
-  return edificioTemp;
-}
-
-/**
- * Muestra los datos de un edificio por consola
- * @param {edificio} nombreEdificio 
- */
-function mostrarDatosEdificio(nombreEdificio) {
-    let numero=(nombreEdificio.imprimeNumero() == "") ? "S/n": nombreEdificio.imprimeNumero();
-  console.log(
-    "Construido nuevo edificio en calle: " +
-      nombreEdificio.imprimeCalle() +
-      ", nº: " +
-      numero +
-          ", CP: " +
-          nombreEdificio.imprimeCodigoPostal()
-  );
-}
 let edificioA = crearEdificio("Garcia Prieto", 58, 15706);
-mostrarDatosEdificio(edificioA);
-
 let edificioB = crearEdificio("Camino Caneiro", 29, 32004);
-mostrarDatosEdificio(edificioB);
+let edificioC = crearEdificio("San Clemente", "", 15705);
 
-let edificioC = crearEdificio("San Clemente", '', 15705);
-mostrarDatosEdificio(edificioC);
+console.log("-----------------Separador--------------------------");
+console.log(
+  "El código postal del edificio A es: " + edificioA.imprimeCodigoPostal()
+);
+console.log("El calle del edificio C es: " + edificioC.imprimeCalle());
+console.log(
+  "El edificio B esta situado en la calle " +
+    edificioB.imprimeCalle() +
+    " numero " +
+    edificioB.imprimeNumero()
+);
 
+console.log("-----------------Separador--------------------------");
 edificioA.agregarPlantasYPuertas(3, 2);
+agregarPropietarioTexto(edificioA, "Jose Antonio Lopez", 0, 0);
+agregarPropietarioTexto(edificioA, "Luisa Martinez", 0, 1);
+agregarPropietarioTexto(edificioA, "Marta Castellón", 0, 2);
+agregarPropietarioTexto(edificioA, "Antonio Pereira", 1, 1);
 
-edificioA.agregarPropietario("Jose Antonio Lopez.", 0, 0);
-edificioA.agregarPropietario("Luisa Martinez.", 0, 1);
-edificioA.agregarPropietario("Marta Castellón.", 0, 2);
-edificioA.agregarPropietario("Antonio Pereira.", 1, 2);
+console.log("-----------------Separador--------------------------");
 edificioA.imprimePlantas();
-console.log(edificioA);
 
-edificioA.agregarPlantasYPuertas(1, 3);
-edificioA.agregarPropietario("Pedro Meijide.", 2, 1);
+console.log("-----------------Separador--------------------------");
+edificioA.agregarPlantasYPuertas(2, 1);
+agregarPropietarioTexto(edificioA, "Pedro Meijide.", 2, 1);
 edificioA.imprimePlantas();

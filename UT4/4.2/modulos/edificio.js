@@ -2,7 +2,7 @@ export class edificio {
   calle;
   numero;
   codigo_postal;
-  plantas; //Falta puerta y propietario
+  plantas;
 
   constructor(calle, numero, codigo_postal) {
     this.calle = calle;
@@ -15,7 +15,7 @@ export class edificio {
    * Se le pasa el número de plantas que queremos crear en el piso y el número de puertas por planta.
    * Cada vez que se llame a este método, añadirá el número de plantas y puertas indicadas en los parámetros, a las que ya están creadas en el edificio.
    * @param {number} puertas
-   * @param {number} numplantas
+   * @param {number} numPlantas
    */
   agregarPlantasYPuertas(puertas, numPlantas) {
     for (let i = 0; i < numPlantas; i++) {
@@ -77,9 +77,9 @@ export class edificio {
 
   /**
    * Agrega un propietario a una puerta de una planta
-   * @param {String} nombre 
-   * @param {number} planta 
-   * @param {number} puerta 
+   * @param {String} nombre
+   * @param {number} planta
+   * @param {number} puerta
    */
   agregarPropietario(nombre, planta, puerta) {
     this.plantas[planta][puerta] = nombre;
@@ -89,7 +89,12 @@ export class edificio {
    * Imprime por consola la informacion de todas las puertas y plantas de un edificio
    */
   imprimePlantas() {
-
+    const titulo =
+      "Listado de propietarios del edificio calle " +
+      this.imprimeCalle() +
+      " número " +
+      this.imprimeNumero();
+    console.log(titulo);
     for (let planta = 0; planta < this.plantas.length; planta++) {
       for (let puerta = 0; puerta < this.plantas[planta].length; puerta++) {
         const element =
@@ -102,16 +107,52 @@ export class edificio {
         console.log(element);
       }
     }
-  } 
-   mostrarDatosEdificio(nombreEdificio) {
-    let numero=(nombreEdificio.imprimeNumero() == "") ? "S/n": nombreEdificio.imprimeNumero();
+  }
+
+  /**
+   * Muestra los datos iniciales de un edificio
+   */
+  mostrarDatosEdificio() {
+    let numero = this.imprimeNumero() == "" ? "S/n" : this.imprimeNumero();
+    console.log(
+      "Construido nuevo edificio en calle: " +
+        this.imprimeCalle() +
+        ", nº: " +
+        numero +
+        ", CP: " +
+        this.imprimeCodigoPostal()
+    );
+  }
+}
+
+/**
+ * Agrega un propietario a una puerta de una planta de un edificio y muestra informacion por consola
+ * @param {edificio} edificio
+ * @param {String} nombre
+ * @param {number} planta
+ * @param {number} puerta
+ */
+export function agregarPropietarioTexto(edificio, nombre, planta, puerta) {
+  edificio.agregarPropietario(nombre, planta, puerta);
   console.log(
-    "Construido nuevo edificio en calle: " +
-      nombreEdificio.imprimeCalle() +
-      ", nº: " +
-      numero +
-          ", CP: " +
-          nombreEdificio.imprimeCodigoPostal()
+    nombre +
+      " es ahora el propietario de la puerta " +
+      puerta +
+      " de la planta " +
+      planta +
+      "."
   );
 }
+
+/**
+ * Crea un edificio, muestra los datos de ese edificio y lo devuelve
+ * @param {String} calle
+ * @param {number} numero
+ * @param {number} codigoPostal
+ * @returns
+ */
+export function crearEdificio(calle, numero, codigoPostal) {
+  let edificioTemp = new edificio(calle, numero, codigoPostal);
+  edificioTemp.mostrarDatosEdificio();
+  return edificioTemp;
 }
