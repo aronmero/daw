@@ -137,9 +137,9 @@ export function agregarPropietarioTexto(edificio, nombre, planta, puerta) {
   console.log(
     nombre +
       " es ahora el propietario de la puerta " +
-      puerta +
+      (puerta+1) +
       " de la planta " +
-      planta +
+      (planta+1) +
       "."
   );
 }
