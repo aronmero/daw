@@ -54,14 +54,15 @@ require "../../../dbinfo/loginInfo.php";
                     $stmt = $conn->prepare("SELECT * FROM usuarios where emailUsuario=:email");
                     $stmt->bindParam(':email', $emailUsuario);
                     $stmt->execute();
-                    $resultado = $stmt->fetchAll();
+                    $datoMostrar = $stmt->fetch();
 
-                    echo $resultado[0]["nombreUsuario"] . "<br>";
-                    echo $resultado[0]["apellidosUsuario"] . "<br>";
-                    echo $resultado[0]["emailUsuario"] . "<br>";
-                    echo $resultado[0]["fechaNac"] . "<br>";
+                    echo "Nombre de usuario: " . $datoMostrar["nombreUsuario"] . "<br>";
 
-                    $imagenPerfil = $resultado[0]["foto"];
+                    echo "Apellidos de usuario: " . $datoMostrar["apellidosUsuario"] . "<br>";
+                    echo "Email: " . $datoMostrar["emailUsuario"] . "<br>";
+                    echo "Fecha de nacimiento: " . $datoMostrar["fechaNac"] . "<br>";
+
+                    $imagenPerfil = $datoMostrar["foto"];
                     if ($imagenPerfil != null) {
                         echo  "<img src='$imagenPerfil'>;";
                     } else {
