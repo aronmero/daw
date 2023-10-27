@@ -8,7 +8,7 @@
 
 Toda la logica de elementos Edificio esta en /modulos/edificio.js, en 1.js solamente esta la logica de console log para separar las salidad de comando.
 
-En edificio.js los metodos devuelven console.log como ha sido solicitado.
+En edificio.js los metodos devuelven console.log .
 
 ---
 
