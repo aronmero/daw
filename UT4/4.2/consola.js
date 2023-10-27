@@ -3,6 +3,7 @@ import {
   crearEdificio,
 } from "./modulos/edificio.js";
 
+
 let edificioA = crearEdificio("Garcia Prieto", 58, 15706);
 let edificioB = crearEdificio("Camino Caneiro", 29, 32004);
 let edificioC = crearEdificio("San Clemente", "", 15705);
