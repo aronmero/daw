@@ -10,6 +10,7 @@ Toda la logica de elementos Edificio esta en /modulos/edificio.js, en 1.js solam
 
 En edificio.js los metodos devuelven console.log .
 
+*Al mostrar los datos de las plantas y puertas todos los datos tienen un +1 para no mostrar planta 0 ni puerta 0*
 ---
 
 **ENUNCIADO**
