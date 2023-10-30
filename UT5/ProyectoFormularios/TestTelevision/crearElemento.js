@@ -18,22 +18,18 @@ export function crearElemento(elemento, contenido = "") {
  * @export
  * @param {HTMLElement} elemento
  * @param {String} clase
- * @return {HTMLElement}
  */
 export function anadirClase(elemento, clase) {
   elemento.classList.add(clase);
-  return elemento;
 }
 
 /**
- * Añade un id a un elemento HTML y lo devuelve
+ * Añade un id a un elemento HTML
  *
  * @export
  * @param {HTMLElement} elemento
  * @param {String} id
- * @return {HTMLElement}
  */
 export function anadirId(elemento, id) {
   elemento.id = id;
-  return elemento;
 }
