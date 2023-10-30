@@ -6,6 +6,8 @@ let preguntasTest = new Array();
 /** Preguntas Totales*/
 let preguntas = new Array();
 
+let puntuacioActual=0;
+let puntuacioTotal=0;
 /**
  *Crea los elementos HTML necesarios para generar una pregunta y sus respuestas
  *
@@ -94,12 +96,18 @@ function imprimirPregunta(pregunta) {
       return null;
     } else {
       let propuesta = crearElemento("div");
+      anadirClase(propuesta, "divRespuesta");
+      let espacioComprobacion = crearElemento("label");
+      anadirClase(espacioComprobacion, "espacioCheck");
+      espacioComprobacion.setAttribute("name", "c" + pregunta.getIdPregunta());
+      propuesta.appendChild(espacioComprobacion);
+
       let boton = crearElemento("input");
       boton.setAttribute("type", "radio");
-
       boton.setAttribute("value", numOpcion);
       boton.setAttribute("name", pregunta.getIdPregunta());
       propuesta.appendChild(boton);
+
       propuesta.appendChild(crearElemento("label", textoOpcion));
       return propuesta;
     }
@@ -123,7 +131,7 @@ function imprimirPregunta(pregunta) {
 
 /**
  *
- * Valida las respuestas del HTML con respecto al array de preguntas
+ * Comprueba la respuesta almacenada con la seleccionada en el input.
  */
 function validarRespuestas() {
   for (
@@ -132,22 +140,33 @@ function validarRespuestas() {
     i++
   ) {
     let respuestas = document.getElementsByName(preguntasTest[i]);
+    
+    let casillaResultado = document.getElementsByName("c" + preguntasTest[i]);
     let respuesta = preguntas[preguntasTest[i]];
+
     for (let j = 0; j < 3; j++) {
       let puntuacion = 0.0;
-
       respuestas[j].disabled = true;
-      //TODO: cambiar el if a uno doble para poner el check verde o el rojo
-      if (
-        respuestas[j].checked == true &&
-        respuestas[j].value == respuesta.getPropuestaCorrecta()
-      ) {
-        puntuacion = respuesta.getPuntuacion();
-        actualizarPuntuacion(preguntasTest[i], puntuacion);
-        break;
+
+      //Segun si es correcta o no cambia el color y actualiza la puntuacion
+      if (respuestas[j].checked == true) {
+        if (respuestas[j].value == respuesta.getPropuestaCorrecta()) {
+          anadirClase(casillaResultado[j],"espacioCheckVerde");
+          casillaResultado[j].innerHTML = "🗸";
+          puntuacion = respuesta.getPuntuacion();
+          actualizarPuntuacion(preguntasTest[i], puntuacion);
+          //FIXME:
+          puntuacioActual=puntuacioActual+puntuacion;
+        } else {
+          anadirClase(casillaResultado[j],"espacioCheckRojo");
+          casillaResultado[j].innerHTML = "✗";
+        }
       }
+
       if (j == 2) {
         actualizarPuntuacion(preguntasTest[i], puntuacion);
+        //FIXME:
+        puntuacioTotal=puntuacioTotal+respuesta.getPuntuacion();
       }
     }
   }
@@ -207,11 +226,13 @@ document
   .getElementById("botonEnvio")
   .addEventListener("click", validarRespuestas);
 
+
+function imprimirResultados() {
+  
+}
 /**
  * TODO:
  * * Cuando el usuario conteste las 10 preguntas obtendrá el resultado final en un cuadro de texto.
- * * Además, el usuario podrá ver qué preguntas ha fallado, porque al enviar el formulario le aparecerá un
- * pequeño icono con un tick verde en las preguntas correctas y una cruz roja en las preguntas incorrectas.
  * * En caso de que el usuario deje alguna pregunta sin contestar, no mostrará el resultado e indicará con un mensaje
  * "No has respondido a todas las preguntas". Y se marcará en color rojo la pregunta que no haya sido respondida.
  */
