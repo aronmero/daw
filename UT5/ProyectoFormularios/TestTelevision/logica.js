@@ -170,7 +170,9 @@ function comprobarRespuestas() {
     }
     validarRespuestas();
   } else {
-    anadirMensajeError();
+    if (document.getElementById("divResultadoError") == undefined) {
+      anadirMensajeError();
+    }
   }
 
   /** Añade un mensajee de error al final avisando de que no se han respondido todas las preguntas.*/
