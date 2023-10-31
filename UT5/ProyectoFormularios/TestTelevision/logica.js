@@ -1,16 +1,22 @@
-import { crearElemento, anadirClase, anadirId } from "./crearElemento.js";
-import { Pregunta } from "./pregunta.js";
+import {
+  crearElemento,
+  anadirClase,
+  anadirId,
+  eliminarClase,
+} from "./modulos/crearElemento.js";
+
+import { Pregunta } from "./modulos/pregunta.js";
 
 /** Id de preguntas Activas*/
-let preguntasTest = new Array();
+export let preguntasTest = new Array();
 /** Preguntas Totales*/
-let preguntas = new Array();
+export let preguntas = new Array();
+let puntuacioActual = 0;
+let puntuacioTotal = 0;
 
-let puntuacioActual=0;
-let puntuacioTotal=0;
 /**
  *Crea los elementos HTML necesarios para generar una pregunta y sus respuestas
- *
+ *@export
  * @param {String} idPregunta id de la pregunta
  * @param {String} valorPuntuacion puntuacion de la pregunta
  * @param {String} textoPregunta enunciado de la pegunta
@@ -19,7 +25,7 @@ let puntuacioTotal=0;
  * @param {String} propuesta2 texto de respuesta para opcion 2
  * @param {String} propuesta3 texto de respuesta para opcion 3
  */
-function crearPregunta(
+export function crearPregunta(
   idPregunta,
   valorPuntuacion,
   textoPregunta,
@@ -40,8 +46,9 @@ function crearPregunta(
 /**
  * Imprime en el HTML una pregunta
  * @param {Pregunta} pregunta
+ * @export
  */
-function imprimirPregunta(pregunta) {
+export function imprimirPregunta(pregunta) {
   let preguntaDiv = crearElemento("div");
   anadirClase(preguntaDiv, "pregunta");
   anadirId(preguntaDiv, pregunta.getIdPregunta());
@@ -130,8 +137,61 @@ function imprimirPregunta(pregunta) {
 }
 
 /**
+ * Comprueba si todas las preguntas han sido respondidas, las que no son marcadas en con CSS.
+ * Si todo esta respondido se llama a @function validarRespuestas
+ * @function anadirMensajeError funcion local. Añade un mensaje de error al final del documento HTML
+ */
+function comprobarRespuestas() {
+  let isCheckedAll = true;
+  for (
+    let i = 0;
+    i < document.querySelectorAll("#formulario .pregunta").length;
+    i++
+  ) {
+    let respuestas = document.getElementsByName(preguntasTest[i]);
+    let isChecked = false;
+    let pregunta = document.getElementById(preguntasTest[i]);
+    for (let j = 0; j < 3; j++) {
+      if (respuestas[j].checked == true) {
+        isChecked = true;
+        eliminarClase(pregunta, "preguntaSinResponder");
+        break;
+      }
+      if (j == 2 && isChecked == false) {
+        isCheckedAll = false;
+        anadirClase(pregunta, "preguntaSinResponder");
+      }
+    }
+  }
+
+  if (isCheckedAll == true) {
+    if (document.getElementById("divResultadoError") != undefined) {
+      document.getElementById("divResultadoError").remove();
+    }
+    validarRespuestas();
+  } else {
+    anadirMensajeError();
+  }
+
+  /** Añade un mensajee de error al final avisando de que no se han respondido todas las preguntas.*/
+  function anadirMensajeError() {
+    let resultadoDiv = crearElemento("div");
+    anadirClase(resultadoDiv, "divResultadoError");
+    anadirId(resultadoDiv, "divResultadoError");
+    let resultado = crearElemento(
+      "p",
+      "No has respondido a todas las preguntas"
+    );
+    resultadoDiv.appendChild(resultado);
+    document.body.appendChild(resultadoDiv);
+  }
+}
+/**
  *
- * Comprueba la respuesta almacenada con la seleccionada en el input.
+ * Comprueba la respuesta almacenada con la seleccionada en el input, si son correctas suma la puntuacion.
+ * Genera en el HTML un elemento si esta bien respondida o no.
+ * @function actualizarPuntuacion actualiza las puntuaciones en el HTML
+ * @function imprimirResultados imprime el resultado final en HTML
  */
 function validarRespuestas() {
   for (
@@ -140,36 +200,34 @@ function validarRespuestas() {
     i++
   ) {
     let respuestas = document.getElementsByName(preguntasTest[i]);
-    
+
     let casillaResultado = document.getElementsByName("c" + preguntasTest[i]);
     let respuesta = preguntas[preguntasTest[i]];
-
+    let puntuacion = 0.0;
     for (let j = 0; j < 3; j++) {
-      let puntuacion = 0.0;
       respuestas[j].disabled = true;
 
       //Segun si es correcta o no cambia el color y actualiza la puntuacion
       if (respuestas[j].checked == true) {
         if (respuestas[j].value == respuesta.getPropuestaCorrecta()) {
-          anadirClase(casillaResultado[j],"espacioCheckVerde");
+          anadirClase(casillaResultado[j], "espacioCheckVerde");
           casillaResultado[j].innerHTML = "🗸";
           puntuacion = respuesta.getPuntuacion();
           actualizarPuntuacion(preguntasTest[i], puntuacion);
-          //FIXME:
-          puntuacioActual=puntuacioActual+puntuacion;
+          puntuacioActual = puntuacioActual + puntuacion;
         } else {
-          anadirClase(casillaResultado[j],"espacioCheckRojo");
+          anadirClase(casillaResultado[j], "espacioCheckRojo");
           casillaResultado[j].innerHTML = "✗";
         }
       }
 
       if (j == 2) {
         actualizarPuntuacion(preguntasTest[i], puntuacion);
-        //FIXME:
-        puntuacioTotal=puntuacioTotal+respuesta.getPuntuacion();
+        puntuacioTotal = puntuacioTotal + respuesta.getPuntuacion();
       }
     }
   }
+  imprimirResultados();
 }
 
 /**
@@ -195,27 +253,17 @@ function actualizarPuntuacion(id, puntuacion) {
     );
 }
 
-crearPregunta("pre01", 1.0, "Lorem", 1, "aaa", "bbb", "ccc");
-crearPregunta("pre02", 13.0, "Lorem", 2, "a", "bbb", "ccc");
-crearPregunta("pre03", 2.0, "Lorem", 3, "b", "bbb", "ccc");
-crearPregunta("pre04", 1.5, "Lorem", 3, "d", "bbb", "ccc");
-crearPregunta("pre05", 1.0, "Lorem", 1, "e", "bbb", "ccc");
-crearPregunta("pre06", 1.0, "Lorem", 1, "aaa", "bbb", "ccc");
-crearPregunta("pre07", 13.0, "Lorem", 2, "a", "bbb", "ccc");
-crearPregunta("pre08", 2.0, "Lorem", 3, "b", "bbb", "ccc");
-crearPregunta("pre09", 1.5, "Lorem", 3, "d", "bbb", "ccc");
-crearPregunta("pre10", 1.0, "Lorem", 1, "e", "bbb", "ccc");
-
-imprimirPregunta(preguntas["pre01"]);
-imprimirPregunta(preguntas["pre02"]);
-imprimirPregunta(preguntas["pre03"]);
-imprimirPregunta(preguntas["pre04"]);
-imprimirPregunta(preguntas["pre05"]);
-imprimirPregunta(preguntas["pre06"]);
-imprimirPregunta(preguntas["pre07"]);
-imprimirPregunta(preguntas["pre08"]);
-imprimirPregunta(preguntas["pre09"]);
-imprimirPregunta(preguntas["pre10"]);
+function imprimirResultados() {
+  let resultadoDiv = crearElemento("div");
+  anadirClase(resultadoDiv, "resultadoDiv");
+  let resultado = crearElemento(
+    "p",
+    "Tu puntuacion es de " + puntuacioActual + " sobre " + puntuacioTotal
+  );
+  resultadoDiv.appendChild(resultado);
+  document.body.appendChild(resultadoDiv);
+  document.getElementById("botonEnvio").remove();
+}
 
 //Añadir boton de envio
 let botonEnvio = crearElemento("button", "Enviar y comprobar");
@@ -224,15 +272,4 @@ document.getElementById("test").appendChild(botonEnvio);
 
 document
   .getElementById("botonEnvio")
-  .addEventListener("click", validarRespuestas);
-
-
-function imprimirResultados() {
-  
-}
-/**
- * TODO:
- * * Cuando el usuario conteste las 10 preguntas obtendrá el resultado final en un cuadro de texto.
- * * En caso de que el usuario deje alguna pregunta sin contestar, no mostrará el resultado e indicará con un mensaje
- * "No has respondido a todas las preguntas". Y se marcará en color rojo la pregunta que no haya sido respondida.
- */
+  .addEventListener("click", comprobarRespuestas);

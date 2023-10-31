@@ -13,7 +13,7 @@ export function crearElemento(elemento, contenido = "") {
 }
 
 /**
- * Añade una clase a un elemento HTML y lo devuelve
+ * Añade una clase a un elemento HTML 
  *
  * @export
  * @param {HTMLElement} elemento
@@ -21,6 +21,17 @@ export function crearElemento(elemento, contenido = "") {
  */
 export function anadirClase(elemento, clase) {
   elemento.classList.add(clase);
+}
+
+/**
+ * Elimina una clase a un elemento HTML
+ *
+ * @export
+ * @param {HTMLElement} elemento
+ * @param {String} clase
+ */
+export function eliminarClase(elemento, clase) {
+  elemento.classList.remove(clase);
 }
 
 /**

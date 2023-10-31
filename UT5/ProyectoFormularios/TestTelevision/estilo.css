@@ -1,9 +1,32 @@
-/**
-* {
-  border: 1px dashed red;
+.divResultadoError {
+  margin: 20px;
+  display: flex;
+  justify-content: center;
 }
-/**/
+.divResultadoError p {
+  font-size: xx-large;
+}
 
+.resultadoDiv {
+  margin: 20px;
+  display: flex;
+  justify-content: center;
+}
+.resultadoDiv p {
+  background-color: rgb(141, 176, 206);
+  text-align: center;
+  border: 1px solid black;
+  width: 200px;
+  height: 140px;
+  padding: 50px 40px;
+  border-radius: 10px;
+  line-height: 50px;
+  font-size: 30px;
+  word-spacing: 10px;
+}
+.preguntaSinResponder {
+  background-color: rgb(234, 123, 123) !important;
+}
 .pregunta {
   display: flex;
   flex-direction: row;
@@ -11,7 +34,7 @@
   min-height: 250px;
   border: 1px solid black;
   border-radius: 10px;
-  background-color: rgb(101, 149, 189);
+  background-color: rgb(141, 176, 206);
   padding: 10px;
   margin: 30px;
 }
