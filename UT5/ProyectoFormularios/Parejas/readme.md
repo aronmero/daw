@@ -12,6 +12,8 @@ En primer lugar, crea un esquema en una hoja con el arbol DOM del documento html
 
 Trata de utilizar el menor número de variables posibles: utiliza las propiedades de los elementos para cambiar su comportamiento.
 # Comentarios
+Hay dos index uno realizado mediante una tabla, y otro realizado mediante div, el funcionamiento del js es el mismo, el cambio es visual
+
 Esta planteado como se especifico, al pulsar en una imagen un boton no visible cambia la visibilidad de la imagen, si hay mas de dos imagenes volteadas las oculta antes de mostrar la ultima que se pulso. Si las dos imagenes que estan volteadas son iguales el color se cambia junto con el texto de 0 a 1, este texto es un readonly ademas de que no es visible e interactuable por css.
 
 Cuando se aciertan las 12 imagenes sale un mensaje con el numero de movimientos utilizados en la parte inferior.
@@ -27,3 +29,5 @@ https://stackoverflow.com/a/18737649 Codigo css utilizado para alinear las image
 https://stackoverflow.com/a/3676132 Impedir la modificacion del texto, aunque ya es un display:none
 
 https://bost.ocks.org/mike/shuffle/ Funcion para aleatorizar elementos, utilizada para que las imagenes estuvieran en posiciones al azar.
+
+https://layout.bradwoods.io/customize Herramienta para hacer layout de css
