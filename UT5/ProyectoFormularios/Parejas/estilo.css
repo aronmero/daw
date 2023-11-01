@@ -1,0 +1,59 @@
+/**
+* {
+  border: 1px red dashed;
+}
+/**/
+
+.tarjetas {
+  width: 90%;
+  height: 80%;
+}
+
+.tarjetas p {
+  display: none;
+}
+
+.tarjeta{
+    border-radius: 10px;
+    background-color: rgb(255,255,255);
+    vertical-align: middle;
+    text-align: center;
+    width: 200px;
+    height: 250px;
+    max-width: 200px;
+    max-height: 250px;
+}
+.tarjeta img{
+    width: 200px;
+    height: 240px;
+    display: none;
+
+}
+.tarjeta.revelada img{
+    display: inline;
+}
+
+.tarjeta.revelada{ 
+    background-color: rgb(230, 208, 100)
+}
+
+.tarjeta.acertada{
+    background-color: rgb(248,219,39) !important;
+}
+button{
+    background-color: transparent;
+    border: none;
+    width: 99%;
+    height: 99%;
+}
+h1{
+    color:  rgb(248,219,39);
+}
+
+body {
+    display: flex;
+    min-height: 940px;
+    align-items: center;
+    flex-direction: column;
+    background-color: rgb(108 147 232);
+}
