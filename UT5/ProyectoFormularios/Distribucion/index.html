@@ -3,11 +3,47 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>DAW: Parejas</title>
+    <title>DAW: Distribucion</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" type="text/css" media="screen" href="estilo.css" />
   </head>
   <body>
-    <script src="main.js"></script>
+    <div>
+      <h1>Distribucion de bolsas</h1>
+      <form>
+        <div>
+          <label for="fecha">Introduzca la fecha</label
+          ><input type="date" name="fecha" id="fecha" />
+        </div>
+        <div>
+          <label for="cocinero">Introduzca el cocinero</label
+          ><input type="text" name="cocinero" id="cocinero" />
+        </div>
+        <div>
+          <label for="destinatario">Introduzca el destinatario</label
+          ><input type="text" name="destinatario" id="destinatario" />
+        </div>
+        <div>
+          <label for="gramos">Introduzca el peso en gramos</label
+          ><input
+            type="number"
+            name="gramos"
+            id="gramos"
+            min="100"
+            max="5000"
+          />
+        </div>
+        <div>
+          <label for="composicion">Introduzca el composicion</label
+          ><input type="text" name="composicion" id="composicion" />
+        </div>
+        <div>
+          <label for="numCuenta">Introduzca el numero de cuenta de EEUU</label
+          ><input type="text" name="numCuenta" id="numCuenta" />
+        </div>
+       <div> <input type="submit" id="enviar" /></div>
+      </form>
+    </div>
+    <script type="module" src="1.js"></script>
   </body>
 </html>
