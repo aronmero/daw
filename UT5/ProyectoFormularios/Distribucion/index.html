@@ -13,15 +13,15 @@
       <form>
         <div>
           <label for="fecha">Introduzca la fecha</label
-          ><input type="date" name="fecha" id="fecha" />
+          ><input type="text" name="fecha" id="fecha" required placeholder="dd/mm/aaaa" maxlength=10/>
         </div>
         <div>
           <label for="cocinero">Introduzca el cocinero</label
-          ><input type="text" name="cocinero" id="cocinero" />
+          ><input type="text" name="cocinero" id="cocinero" required placeholder="WW$1234"/>
         </div>
         <div>
           <label for="destinatario">Introduzca el destinatario</label
-          ><input type="text" name="destinatario" id="destinatario" />
+          ><input type="text" name="destinatario" id="destinatario" required placeholder="NM_alburquerque:1234"/>
         </div>
         <div>
           <label for="gramos">Introduzca el peso en gramos</label
@@ -31,19 +31,19 @@
             id="gramos"
             min="100"
             max="5000"
-          />
+            required/>
         </div>
         <div>
           <label for="composicion">Introduzca el composicion</label
-          ><input type="text" name="composicion" id="composicion" />
+          ><input type="text" name="composicion" id="composicion" required placeholder="200gC3OH7"/>
         </div>
         <div>
           <label for="numCuenta">Introduzca el numero de cuenta de EEUU</label
-          ><input type="text" name="numCuenta" id="numCuenta" />
+          ><input type="text" name="numCuenta" id="numCuenta" required placeholder="aa11-123456789012-11"/>
         </div>
-       <div> <input type="submit" id="enviar" /></div>
+       <div> <h4 id="enviar" >Enviar</h4></div>
       </form>
     </div>
-    <script type="module" src="1.js"></script>
+    <script type="module" src="logica.js"></script>
   </body>
 </html>

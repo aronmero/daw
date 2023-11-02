@@ -25,10 +25,6 @@ input {
   text-align: center;
 }
 
-input[type="submit"] {
-  text-align: center;
-  align-self: center;
-  width: 100px;
-  padding: 12px 00px;
-  border-radius: 12px;
+form > div:has(#enviar){
+  justify-content: center;
 }
