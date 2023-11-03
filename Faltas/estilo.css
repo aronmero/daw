@@ -1,0 +1,24 @@
+form>div{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 800px;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+form>div>div:nth-child(1),form>div>div:nth-child(2){
+    width: 20px;
+}
+form>div:nth-child(1){
+    font-weight: bold;
+}
+
+form>div>div{
+    width: 120px;
+
+}
+body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
