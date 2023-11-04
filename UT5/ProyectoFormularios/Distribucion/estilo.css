@@ -4,7 +4,7 @@ body > div {
   align-items: center;
 }
 
-form > div {
+form > div,#mostrarBolsa{
   display: flex;
   justify-content: space-between;
   width: 600px;
@@ -27,4 +27,15 @@ input {
 
 form > div:has(#enviar){
   justify-content: center;
+}
+
+div:has(p){
+  justify-content: flex-end;
+}
+p[name="numCuentaLimpio"]{
+  margin-right: 50px;
+}
+
+#mostrarBolsa p{
+  line-height: 30px;
 }

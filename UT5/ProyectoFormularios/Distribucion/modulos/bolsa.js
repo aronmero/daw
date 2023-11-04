@@ -1,4 +1,5 @@
 export class Bolsa {
+  /** Formato dd/mm/aaaa*/
   fecha;
   cocinero;
   destinatario;
@@ -6,8 +7,12 @@ export class Bolsa {
   composicion;
   numCuenta;
 
-  constructor(cocinero, destinatario, gramos, composicion, numCuenta) {
-    this.fecha = new Date();
+  constructor(fecha, cocinero, destinatario, gramos, composicion, numCuenta) {
+    this.fecha = new Date(
+      fecha.slice(6, 10),
+      fecha.slice(3, 5) - 1,
+      fecha.slice(0, 2)
+    );
     this.cocinero = cocinero;
     this.destinatario = destinatario;
     this.gramos = gramos;
@@ -59,5 +64,22 @@ export class Bolsa {
   }
   setNumCuenta(numCuenta) {
     this.numCuenta = numCuenta;
+  }
+
+  toString() {
+    return (
+      "Fecha: " +
+      this.fecha +
+      ", Cocinero: " +
+      this.cocinero +
+      ", Destinatario: " +
+      this.destinatario +
+      ", Gramos: " +
+      this.gramos +
+      ", Composición: " +
+      this.composicion +
+      ", Número de Cuenta: " +
+      this.numCuenta
+    );
   }
 }

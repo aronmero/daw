@@ -1,9 +1,9 @@
 import { Bolsa } from "./modulos/bolsa.js";
-
 document.getElementById("enviar").addEventListener("click", crearBolsa);
-let bolsa = new Bolsa();
+let bolsa;
+const letras = "abcdefghijklmnopqrstuvwxyz".split("");
 
-function crearBolsa(params) {
+function crearBolsa() {
   let isDatosCorrectos = true;
 
   let fecha = document.getElementById("fecha").value;
@@ -37,10 +37,73 @@ function crearBolsa(params) {
   }
 
   let numCuenta = document.getElementById("numCuenta").value;
+  numCuenta = numCuenta.toLowerCase();
   const regCuenta = /[a-z]{2}\d{2}-\d{12}-\d{2}/;
+  const numCuentaLimpio = numCuenta.replace(/-/g, "");
   if (!numCuenta.match(regCuenta)) {
     isDatosCorrectos = false;
-  }
+  } else {
+    const valorLetras =
+      letras.indexOf(numCuenta.charAt(0)) +
+      1 +
+      letras.indexOf(numCuenta.charAt(1)) +
+      1;
+    const valorDigitos = parseInt(numCuenta.charAt(2) + numCuenta.charAt(3));
 
-  console.log(isDatosCorrectos);
+    /** Separacion de los 12 digitos en dos numeros enteros*/
+    const doceDigitos = numCuenta.slice(5, 17);
+    const primerosSeisDigitos = doceDigitos.slice(0, 6).split("");
+    let sumaPrimerosSeisDigitos = 0;
+    for (let index = 0; index < primerosSeisDigitos.length; index++) {
+      sumaPrimerosSeisDigitos =
+        sumaPrimerosSeisDigitos + parseInt(primerosSeisDigitos[index]);
+    }
+    sumaPrimerosSeisDigitos = parseInt(sumaPrimerosSeisDigitos / 6);
+
+    const segundosSeisDigitos = doceDigitos.slice(6, 12).split("");
+    let sumaSegundosSeisDigitos = 0;
+    for (let index = 0; index < segundosSeisDigitos.length; index++) {
+      sumaSegundosSeisDigitos =
+        sumaSegundosSeisDigitos + parseInt(segundosSeisDigitos[index]);
+    }
+    sumaSegundosSeisDigitos = parseInt(sumaSegundosSeisDigitos / 6);
+    /**/
+
+    if (
+      valorLetras == valorDigitos &&
+      sumaPrimerosSeisDigitos == parseInt(numCuenta.charAt(18)) &&
+      sumaSegundosSeisDigitos == parseInt(numCuenta.charAt(19))
+    ) {
+      document.getElementsByName("numCuentaLimpio")[0].innerHTML =
+        numCuentaLimpio;
+    } else {
+      isDatosCorrectos = false;
+    }
+  }
+  if (isDatosCorrectos) {
+    bolsa = new Bolsa(
+      fecha,
+      cocinero,
+      destinatario,
+      gramos,
+      composicion,
+      numCuentaLimpio
+    );
+    document.getElementById("mostrarBolsa").innerHTML =
+      "<p>" +
+      "<b>Fecha:</b> " +
+      bolsa.getFecha() +
+      "<br><b>Cocinero:</b> " +
+      bolsa.getCocinero() +
+      "<br><b>Destinatario:</b> " +
+      bolsa.getDestinatario() +
+      "<br><b>Gramos:</b> " +
+      bolsa.getGramos() +
+      "g" +
+      "<br><b>Composicion:</b> " +
+      bolsa.getComposicion() +
+      "<br><b>Numero de cuenta:</b> " +
+      bolsa.getNumCuenta() +
+      "</p>";
+  }
 }

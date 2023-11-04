@@ -23,5 +23,8 @@ Walter White y Jesse Pinkman tienen que controlar las bolsas de producto azul qu
 
 
 # Comentarios
+Se realizo una clase bolsa para almacenar todos los datos introducidos. El formulario al enviar valida los datos introducidos como se ha solicitado, si todos estan correctos imprime el objeto bolsa con sus datos.
+
+La estructura de logica.js es simple, una serie de validacion de patrones regex hasta llegar al numero de Cuenta donde se requiere realizar sumas de la cadena de texto para validar datos. Si algun dato esta incorrecto, no pasa el patron regex, no se creara la bolsa y no se imprimira en pantalla.
 
 # Referencias
