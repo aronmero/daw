@@ -12,3 +12,4 @@
 # Comentarios
 
 # Referencias
+https://cybmeta.com/cookies-en-javascript

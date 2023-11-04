@@ -13,15 +13,15 @@
       <form>
         <div>
           <label for="fecha">Introduzca la fecha</label
-          ><input type="text" name="fecha" id="fecha"  placeholder="dd/mm/aaaa" maxlength=10 />
+          ><input type="text" name="fecha" id="fecha" required placeholder="dd/mm/aaaa" maxlength=10 value="10/12/2023"/>
         </div>
         <div>
           <label for="cocinero">Introduzca el cocinero</label
-          ><input type="text" name="cocinero" id="cocinero" placeholder="WW$1234"/>
+          ><input type="text" name="cocinero" id="cocinero" required placeholder="WW$1234" value="WW$1234"/>
         </div>
         <div>
           <label for="destinatario">Introduzca el destinatario</label
-          ><input type="text" name="destinatario" id="destinatario" placeholder="NM_alburquerque:1234" />
+          ><input type="text" name="destinatario" id="destinatario" required placeholder="NM_alburquerque:1234" value="NM_alburquerque:1234"/>
         </div>
         <div>
           <label for="gramos">Introduzca el peso en gramos</label
@@ -31,23 +31,22 @@
             id="gramos"
             min="100"
             max="5000"
-
-            />
+            value="200"
+            required/>
 
         </div>
         <div>
           <label for="composicion">Introduzca el composicion</label
-          ><input type="text" name="composicion" id="composicion"  placeholder="200gC3OH7"/>
+          ><input type="text" name="composicion" id="composicion" required placeholder="200gC3OH7"value="200gC3OH7"/>
         </div>
         <div>
           <label for="numCuenta">Introduzca el numero de cuenta de EEUU</label
-          ><input type="text" name="numCuenta" id="numCuenta"  placeholder="aa02-123456789012-34" />
+          ><input type="text" name="numCuenta" id="numCuenta" required placeholder="aa02-123456789012-34" value="aa02-123456789012-34"/>
         </div>
         <div>
           <p name="numCuentaLimpio"></p>
         </div>
        <div> <h4 id="enviar" >Enviar</h4></div>
-       <div id="cookiesMostrar"><h4>Reiniciar a 0</h4><p></p></div>
       </form>
       <div id="mostrarBolsa"></div>
     </div>
