@@ -1,13 +1,18 @@
 <?php
-require "../../../dbinfo/loginInfo.php";
-
+//require "../../../dbinfo/loginInfo.php";
+require "../loginInfo.php";
+session_start();
+//TODO: Obtener idCorreo profesor
+if (isset($_SESSION["identificador"])) {
+    $identificador = $_SESSION["identificador"];
+}
 try {
     $conn = new PDO("mysql:host=$servername;dbname=faltas", $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $stmt = $conn->prepare("SELECT * FROM alumno inner join usuario where alumno.dni=usuario.dni");
     $stmt->execute();
-    $datoMostrar = $stmt->fetchAll();
-    $longitud = count($datoMostrar);
+    $contrasenaDB = $stmt->fetchAll();
+    $longitud = count($contrasenaDB);
     $conn = "";
 } catch (PDOException $e) {
     echo "Conneccion fallida: " . $e->getMessage();
@@ -20,17 +25,48 @@ try {
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>DAW: Faltas</title>
+    <title>DAW: Faltas - Insertar Faltas</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='estilo.css'>
 
 </head>
 
 <body>
+    <?php
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        if (isset($_POST["fecha"])) {
+            $fecha = $_POST["fecha"];
 
+            for ($i = 0; $i < $longitud; $i++) {
+                $isCorrecto = true;
+                for ($j = 0; $j < 6; $j++) {
+                    if (isset($_POST[$i . "checkbox" . $j])) {
+                        /**Prevencion por si hay modificacion del html antes de enviar el formulario */
+                        isset($_POST[$i . "sesion" . $j]) ? $numSesion = $_POST[$i . "sesion" . $j] : $isCorrecto = false;
+                        isset($_POST["cialAlumno" . $i]) ? $cialAlumno = $_POST["cialAlumno" . $i] : $isCorrecto = false;
+                        if ($isCorrecto == true) {
+                            try {
+                                //TODO: añadir el tipo de la falta al DB
+                                $conn = new PDO("mysql:host=$servername;dbname=faltas", $username, $password);
+                                $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                                $stmt = $conn->prepare("INSERT INTO `falta` ( `cial`, `idCorreo`, `sesion`, `dia`, `fecha`) VALUES ($cialAlumno, $identificador, $numSesion, $fecha, current_timestamp())");
+                                $stmt->execute();
+                                $conn = "";
+                            } catch (PDOException $e) {
+                                echo "Conneccion fallida: " . $e->getMessage();
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+    ?>
     <h1>Lista de alumnos</h1>
-    <form method="POST">
-        <div>
+    <form method="POST" action="<?php echo $_SERVER["PHP_SELF"]; ?>">
+        <div><label>Seleccionar fecha:</label><input type="date" name="fecha" required> </div>
+        <div class="cabecera">
             <div>Check</div>
             <div>Sesion</div>
             <div>Nombre</div>
@@ -41,15 +77,16 @@ try {
         for ($i = 0; $i < $longitud; $i++) {
 
             for ($j = 1; $j <= 6; $j++) {
-                echo "<div><div>" . "<input type='checkbox'>" . "</div><div>" . $j . "</div><div>" . $datoMostrar[$i][3] . "</div><div>" . $datoMostrar[$i][4] . "</div><div>" . $datoMostrar[$i][5] . "</div></div>";
+                echo "<div>" . "<input type='checkbox' class=secretoCorto name=" . $i . "checkbox$j>" . "<input type=hidden name=cialAlumno$i value=" . $contrasenaDB[$i][0] . ">" . "<input class=secretoCorto  disabled value=$j name=" . $i . "sesion$j ></input><div>" . $contrasenaDB[$i][3] . " </div><div>" . $contrasenaDB[$i][4] . "</div><div>" . $contrasenaDB[$i][5] . " </div></div>";
             }
         }
+
         ?>
 
 
         <div> <input type="submit"></div>
     </form>
-    <a href="index.html">Volver</a>
+    <a href="index.php">Volver</a>
 </body>
 
 </html>

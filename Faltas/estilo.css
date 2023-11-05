@@ -1,24 +1,38 @@
-form>div{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    width: 800px;
-    justify-content: space-between;
-    margin-bottom: 10px;
+* {
+  border: 1px dashed red;
 }
-form>div>div:nth-child(1),form>div>div:nth-child(2){
-    width: 20px;
+form > div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 800px;
+  justify-content: space-between;
+  margin-bottom: 10px;
 }
-form>div:nth-child(1){
-    font-weight: bold;
+form > div > div:nth-child(1),
+form > div > div:nth-child(2) {
+  width: 20px;
+}
+/*
+form > div:nth-child(1) {
+  font-weight: bold;
+}*/
+
+form > div > div {
+  width: 120px;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.cabecera div {
+  font-weight: 700px;
 }
 
-form>div>div{
-    width: 120px;
-
-}
-body{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.secretoCorto {
+  border: none;
+  background: transparent;
+  width: 20px;
+  margin-left: 0;
 }

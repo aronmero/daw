@@ -26,15 +26,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $stmt = $conn->prepare("SELECT * FROM usuarios where emailUsuario=:email");
                 $stmt->bindParam(':email', $emailUsuario);
                 $stmt->execute();
-                $datoMostrar = $stmt->fetch();
+                $contrasenaDB = $stmt->fetch();
 
-                $_SESSION["inicioMensaje"]= "Nombre de usuario: " . $datoMostrar["nombreUsuario"] . "<br>";
+                $_SESSION["inicioMensaje"]= "Nombre de usuario: " . $contrasenaDB["nombreUsuario"] . "<br>";
 
-                $_SESSION["inicioMensaje"]=$_SESSION["inicioMensaje"]. "Apellidos de usuario: " . $datoMostrar["apellidosUsuario"] . "<br>";
-                $_SESSION["inicioMensaje"]=$_SESSION["inicioMensaje"]. "Email: " . $datoMostrar["emailUsuario"] . "<br>";
-                $_SESSION["inicioMensaje"]=$_SESSION["inicioMensaje"]. "Fecha de nacimiento: " . $datoMostrar["fechaNac"] . "<br>";
+                $_SESSION["inicioMensaje"]=$_SESSION["inicioMensaje"]. "Apellidos de usuario: " . $contrasenaDB["apellidosUsuario"] . "<br>";
+                $_SESSION["inicioMensaje"]=$_SESSION["inicioMensaje"]. "Email: " . $contrasenaDB["emailUsuario"] . "<br>";
+                $_SESSION["inicioMensaje"]=$_SESSION["inicioMensaje"]. "Fecha de nacimiento: " . $contrasenaDB["fechaNac"] . "<br>";
 
-                $imagenPerfil = $datoMostrar["foto"];
+                $imagenPerfil = $contrasenaDB["foto"];
                 if ($imagenPerfil != null) {
                     $_SESSION["inicioMensaje"]=$_SESSION["inicioMensaje"].  "<img src='$imagenPerfil'>;";
                 } else {
