@@ -8,12 +8,10 @@ import {
 } from "./modulos/cookie.js";
 
 if (obtenerCookie("contadorErrores") == undefined) {
-  crearCookie("contadorErrores","0");
   anadirCaducidadCookie("contadorErrores","0",30);
 }
 
-console.log(obtenerValorCookie("contadorErrores"));
-let contadorErrores = obtenerValorCookie("contadorErrores");
+let contadorErrores = parseInt(obtenerValorCookie("contadorErrores"));
 let bolsa;
 const letras = "abcdefghijklmnopqrstuvwxyz".split("");
 document.getElementById("enviar").addEventListener("click", crearBolsa);
@@ -22,7 +20,7 @@ document
   .getElementById("cookiesMostrar")
   .childNodes[0].addEventListener("click", function reiniciarContador() {
     contadorErrores = 0;
-    modificarCookie("contadorErrores", contadorErrores);
+    anadirCaducidadCookie("contadorErrores",contadorErrores.toString(),30);
     imprimirNumErrores();
   });
 
@@ -136,7 +134,8 @@ function crearBolsa() {
       "</p>";
   } else {
     contadorErrores++;
-    modificarCookie("contadorErrores", contadorErrores.toString());
+    anadirCaducidadCookie("contadorErrores",contadorErrores.toString(),30);
+    
   }
   imprimirNumErrores();
 }
