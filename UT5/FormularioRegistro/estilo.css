@@ -1,0 +1,50 @@
+body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+form{
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.info,.info p{
+    width: 500px;
+    text-align: center;
+}
+form>div{
+    width: 500px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    align-items: center;
+}
+input{
+    width: 240px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid black;
+}
+
+select{
+    width: 262px;
+    padding: 5px;
+}
+#selectorGrupos{
+display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  width: 265px;
+}
+#selectorGrupos p{
+    margin: 0px;
+}
+#selectorGrupos>div{
+    display: flex;
+    align-items: center;
+}
+
+input[type=checkbox]{
+    width: 15px;
+}
