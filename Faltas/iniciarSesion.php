@@ -3,6 +3,14 @@
 require "../loginInfo.php";
 session_start();
 
+if (!isset($_SESSION["tipoUsuario"])) {
+    $_SESSION["tipoUsuario"] = null;
+}
+
+if (!isset($_SESSION["identificador"])) {
+    $_SESSION["identificador"] = null;
+}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -44,6 +52,7 @@ session_start();
                 if (isset($datosProfesor[0])) {
                     $_SESSION["tipoUsuario"] = "profesor";
                     $_SESSION["identificador"] = $datosProfesor[0];
+                    header('Location: index.php');
                 } else {
                     $stmt = $conn->prepare("SELECT * FROM  alumno where dni=:dni");
                     $stmt->bindParam(':dni', $dni);
@@ -52,7 +61,7 @@ session_start();
 
                     $_SESSION["tipoUsuario"] = "alumno";
                     $_SESSION["identificador"] = $datosAlumno[0];
-
+                    header('Location: index.php');
                 }
             }
             $conn = "";
@@ -60,6 +69,7 @@ session_start();
             echo "Conneccion fallida: " . $e->getMessage();
         }
     }
+
     ?>
 </body>
 

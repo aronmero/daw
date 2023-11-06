@@ -11,8 +11,8 @@ try {
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $stmt = $conn->prepare("SELECT * FROM alumno inner join usuario where alumno.dni=usuario.dni");
     $stmt->execute();
-    $contrasenaDB = $stmt->fetchAll();
-    $longitud = count($contrasenaDB);
+    $datosAlumno = $stmt->fetchAll();
+    $longitud = count($datosAlumno);
     $conn = "";
 } catch (PDOException $e) {
     echo "Conneccion fallida: " . $e->getMessage();
@@ -32,6 +32,7 @@ try {
 </head>
 
 <body>
+    <a id="cerrarSesion" href='cerrarSesion.php'>Cerrar sesión</a>
     <?php
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (isset($_POST["fecha"])) {
@@ -60,7 +61,6 @@ try {
                 }
             }
         }
-
     }
     ?>
     <h1>Lista de alumnos</h1>
@@ -77,7 +77,7 @@ try {
         for ($i = 0; $i < $longitud; $i++) {
 
             for ($j = 1; $j <= 6; $j++) {
-                echo "<div>" . "<input type='checkbox' class=secretoCorto name=" . $i . "checkbox$j>" . "<input type=hidden name=cialAlumno$i value=" . $contrasenaDB[$i][0] . ">" . "<input class=secretoCorto  disabled value=$j name=" . $i . "sesion$j ></input><div>" . $contrasenaDB[$i][3] . " </div><div>" . $contrasenaDB[$i][4] . "</div><div>" . $contrasenaDB[$i][5] . " </div></div>";
+                echo "<div>" . "<input type='checkbox' class=secretoCorto name=" . $i . "checkbox$j>" . "<input type=hidden name=cialAlumno$i value=" . $datosAlumno[$i][0] . ">" . "<input class=secretoCorto  disabled value=$j name=" . $i . "sesion$j ></input><div>" . $datosAlumno[$i][3] . " </div><div>" . $datosAlumno[$i][4] . "</div><div>" . $datosAlumno[$i][5] . " </div></div>";
             }
         }
 

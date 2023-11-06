@@ -36,3 +36,7 @@ body {
   width: 20px;
   margin-left: 0;
 }
+
+#cerrarSesion {
+  align-self: flex-end;
+}

@@ -1,8 +1,6 @@
 <?php
 session_start();
-if (isset($_SESSION["tipoUsuario"])) {
-
-} else{
+if (!isset($_SESSION["tipoUsuario"])) {
     $_SESSION["tipoUsuario"] = null;
 }
 
@@ -21,20 +19,22 @@ if (isset($_SESSION["tipoUsuario"])) {
 
 <body>
 
+
     <?php
-    if (!isset($_SESSION["tipoUsuario"])) {
+    if ($_SESSION["tipoUsuario"] == null) {
         echo "<a href=iniciarSesion.php>Iniciar Sesion</a>";
     } else {
         if ($_SESSION["tipoUsuario"] == "alumno" || $_SESSION["tipoUsuario"] == "profesor") {
+            echo "<a id='cerrarSesion' href='cerrarSesion.php'>Cerrar sesión</a>";
             echo "<a href=visualizarFalta.php>Visualizar faltas</a>";
         }
         if ($_SESSION["tipoUsuario"] == "profesor") {
             echo "<a href= insertarFalta.php>InsertarFalta</a>";
         }
     }
-    
+
     ?>
-    
+
 </body>
 
 </html>
