@@ -21,6 +21,10 @@ form > div:nth-child(1) {
 form > div > div {
   width: 120px;
 }
+form > div > div:nth-child(3) {
+  margin-left: 20px;
+}
+
 body {
   display: flex;
   flex-direction: column;
@@ -33,10 +37,41 @@ body {
 .secretoCorto {
   border: none;
   background: transparent;
-  width: 20px;
+  width: 30px;
   margin-left: 0;
 }
 
 #cerrarSesion {
   align-self: flex-end;
+}
+
+.encabezado{
+  font-weight: bold;
+}
+.mostrarFaltas{
+  display: grid;
+  grid-template-columns: 1fr 0.5fr 1fr 1fr 1fr;
+  gap: 8px;
+}
+.mostrarFaltas>div{
+  min-width: 100px;
+  margin-top: 5px;
+}
+
+
+
+div:has(.mostrarFaltas){
+  margin-bottom: 20px;
+}
+.mostrarFaltasProfesor{
+  grid-template-columns: auto 50px auto 250px 250px 100px;
+}
+
+#infoFalta{
+  width: 500px;
+  margin-bottom: 20px;
+}
+
+#infoFalta div{
+margin-bottom: 10px;
 }
