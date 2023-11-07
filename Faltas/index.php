@@ -29,7 +29,7 @@ if (!isset($_SESSION["tipoUsuario"])) {
             echo "<a href=visualizarFalta.php>Visualizar faltas</a>";
         }
         if ($_SESSION["tipoUsuario"] == "profesor") {
-            echo "<a href= insertarFalta.php>InsertarFalta</a>";
+            echo "<a href= insertarFalta.php>Insertar Falta</a>";
         }
     }
 
