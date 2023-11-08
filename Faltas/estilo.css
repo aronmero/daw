@@ -1,4 +1,4 @@
-/**/
+/**
 * {
   border: 1px dashed red;
 }
@@ -12,31 +12,31 @@
   margin-bottom: 10px;
 }
 
-form > div ,.datosAlumno>div{
+form > div,
+.datosAlumno > div {
   display: grid;
   align-items: center;
-  grid-template-columns: 1fr 1fr 3fr 3fr 3fr;
-
+  grid-template-columns: 1fr 1fr 3fr 3fr;
 }
-.datosAlumno >div> div:nth-child(1),
-.datosAlumno >div> div:nth-child(2) {
+.datosAlumno > div > div:nth-child(1),
+.datosAlumno > div > div:nth-child(2) {
   width: 20px;
 }
-.datosAlumno>div> div {
+.datosAlumno > div > div {
   width: 120px;
 }
-.datosAlumno >div> div:nth-child(3) {
+.datosAlumno > div > div:nth-child(3) {
   margin-left: 20px;
 }
-.datosAlumno{
+.datosAlumno {
   display: block;
 }
 
-.datosAlumno p{
+.datosAlumno p {
   margin: 0px;
 }
-.navAlumno{
-  display: flex!important;
+.navAlumno {
+  display: flex !important;
 }
 body {
   display: flex;
@@ -58,44 +58,60 @@ body {
   align-self: flex-end;
 }
 
-.encabezado{
+.encabezado {
   font-weight: bold;
 }
-.mostrarFaltas{
-  display: grid;
-  grid-template-columns: 1fr 0.5fr 1fr 1fr 1fr;
-  gap: 8px;
-}
-.mostrarFaltas>div{
-  min-width: 100px;
-  margin-top: 5px;
-}
 
-.faltaExistente{
+.faltaExistente {
   background-color: #c5c5c5;
 }
 
-div:has(.mostrarFaltas){
+div:has(.mostrarFaltas) {
   margin-bottom: 20px;
 }
-.mostrarFaltasProfesor{
-  grid-template-columns: auto 50px auto 250px 250px 100px;
+.mostrarFaltas {
+  display: grid;
+  grid-template-columns: 1fr 0.5fr 1fr 1fr;
+  gap: 8px;
+}
+.mostrarFaltas > div {
+  min-width: 100px;
+  margin-top: 5px;
+}
+.mostrarFaltasProfesor {
+  grid-template-columns: auto 80px auto 300px 150px;
 }
 
-#infoFalta{
+#infoFalta {
   width: 500px;
   margin-bottom: 20px;
 }
 
-#infoFalta div{
-margin-bottom: 10px;
+#infoFalta div {
+  margin-bottom: 10px;
 }
 
-.botonesFalta{
+.botonesFalta {
   display: block;
 }
 
-.inicioSesion div{
+.inicioSesion div {
   display: flex;
-    justify-content: space-between;
+  justify-content: space-between;
+}
+
+.selectorCurso {
+  display: flex;
+}
+
+.selectorCurso div {
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.selectorCurso div.seleccionado {
+  background-color: rgb(243, 181, 66);
 }

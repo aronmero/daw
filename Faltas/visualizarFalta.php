@@ -1,8 +1,13 @@
 <?php
 //require "../../../dbinfo/loginInfo.php";
 require "../loginInfo.php";
+require "./logicaAUX.php";
 session_start();
-
+if (isset($_POST["grupoSeleccionado"])) {
+  $grupoSeleccionado = $_POST["grupoSeleccionado"];
+} else {
+  $grupoSeleccionado = null;
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -18,6 +23,8 @@ session_start();
 
 <body>
   <a id='cerrarSesion' href='cerrarSesion.php'>Cerrar sesión</a>
+
+
   <?php
   if ($_SESSION["tipoUsuario"] == "alumno") {
     try {
@@ -36,12 +43,9 @@ session_start();
       $datosAlumno = $stmt->fetchAll();
       $longitud = count($datosAlumno);
 
-      //TODO: Visualziacion
-      //echo $datosAlumno[0][0];
-
-      echo "<div><div class='mostrarFaltas encabezado'>" . "<div>Fecha</div><div>" . "Sesion" . " </div><div>" . "Tipo falta" . "</div><div>" . "Motivo" . " </div></div>";
+      echo "<div><div class='mostrarFaltas encabezado'>" . "<div>Fecha</div><div>" . "Sesion" . " </div><div>" . "Tipo falta" . "</div></div>";
       for ($i = 0; $i < $longitud; $i++) {
-        echo "<div class=mostrarFaltas>" . "<div>" . $datosAlumno[$i][4] . "</div><div>" . $datosAlumno[$i][3] . " </div><div>" . '$tipoFalta' . "</div><div>" ."Motivo". " </div></div>";
+        echo "<div class=mostrarFaltas>" . "<div>" . $datosAlumno[$i][4] . "</div><div>" . $datosAlumno[$i][3] . " </div><div>" . '$tipoFalta' . "</div></div>";
       }
       echo "</div>";
       $conn = "";
@@ -50,6 +54,7 @@ session_start();
     }
   } else if ($_SESSION["tipoUsuario"] == "profesor") {
     try {
+      
       $conn = new PDO("mysql:host=$servername;dbname=faltas", $username, $password);
       $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
       $stmt = $conn->prepare("SELECT * FROM  usuario inner join profesor on usuario.dni=profesor.dni where idCorreo=:idCorreo");
@@ -59,15 +64,17 @@ session_start();
 
       echo "<div id=infoFalta><div>Profesor: $infoProfesor[0] $infoProfesor[1] $infoProfesor[2] </div><div>DNI: " . $infoProfesor[3] . "</div><div>Correo: " . $infoProfesor[5] . "</div></div>";
 
-      echo "<div><div class='mostrarFaltas mostrarFaltasProfesor encabezado'>" . "<div>Fecha</div><div>" . "Sesion" . " </div><div>" . "Tipo falta" . "</div><div>" . "Motivo" . " </div><div>" . "Alumno" . " </div><div>" . "DNI" . " </div></div>";
+      ImprimirCurso($conn, $grupoSeleccionado);
+      echo "<div><div class='mostrarFaltas mostrarFaltasProfesor encabezado'>" . "<div>Fecha</div><div>" . "Sesion" . " </div><div>" . "Tipo falta" . "</div><div>" . "Alumno" . " </div><div>" . "DNI" . " </div></div>";
 
-      $stmt = $conn->prepare("SELECT * FROM falta inner join alumno on falta.cial=alumno.cial inner join usuario on alumno.dni=usuario.dni");
+      $stmt = $conn->prepare("SELECT * FROM falta inner join alumno on falta.cial=alumno.cial inner join usuario on alumno.dni=usuario.dni WHERE idCurso=:idCurso");
+      $stmt->bindParam(':idCurso', $grupoSeleccionado);
       $stmt->execute();
       $datosAlumno = $stmt->fetchAll();
       $longitud = count($datosAlumno);
 
       for ($i = 0; $i < $longitud; $i++) {
-        echo "<div class='mostrarFaltas mostrarFaltasProfesor'>" . "<div>" . $datosAlumno[$i][4] . "</div><div>" . $datosAlumno[$i][3] . " </div><div>" . '$tipoFalta' . "</div><div>" .'$motivo'. " </div><div>" . $datosAlumno[$i][9] ." ". $datosAlumno[$i][10] ." ". $datosAlumno[$i][11] . " </div><div>" . $datosAlumno[$i][7] . " </div></div>";
+        echo "<div class='mostrarFaltas mostrarFaltasProfesor'>" . "<div>" . $datosAlumno[$i][4] . "</div><div>" . $datosAlumno[$i][3] . " </div><div>" . '$tipoFalta' . "</div><div>" . $datosAlumno[$i][9] . " " . $datosAlumno[$i][10] . " " . $datosAlumno[$i][11] . " </div><div>" . $datosAlumno[$i][7] . " </div></div>";
       }
 
 
@@ -80,7 +87,7 @@ session_start();
 
   ?>
   <a href="index.php">Volver</a>
-
+  <script src="./js/seleccionGrupos.js"></script>
 </body>
 
 </html>

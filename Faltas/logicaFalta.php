@@ -1,7 +1,9 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $_SESSION["recargarPagina"] = false;
     if (isset($_POST["fecha"])) {
         $fecha = $_POST["fecha"];
+        $longitud=$_SESSION["numAlumnosInserccion"];
         for ($i = 0; $i < $longitud; $i++) {
             $isCorrecto = true;
             for ($j = 1; $j <= 6; $j++) {
@@ -29,13 +31,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             } catch (PDOException $e) {
                                 echo "Conneccion fallida: " . $e->getMessage();
                             }
-                        }
-                    }
+                        } 
+                    }//Evitar repeticion de peticion de formulario al refrescar
+                    $_SESSION["recargarPagina"] = true;
                 }
             }
+
         }
-    };
-    //Evitar repeticion de peticion de formulario al refrescar
-    
+    }
+    ;
+
+   
 }
 

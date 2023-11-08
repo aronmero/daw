@@ -18,8 +18,6 @@ if (!isset($_SESSION["tipoUsuario"])) {
 </head>
 
 <body>
-
-
     <?php
     if ($_SESSION["tipoUsuario"] == null) {
         echo "<a href=iniciarSesion.php>Iniciar Sesion</a>";
