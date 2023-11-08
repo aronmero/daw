@@ -27,7 +27,7 @@
 - <font color="#38c4e0">**[Prioridad: Media]**</font> Actualizar falta <font color="#e33955">**PHP**</font>
   - Cambiar tipo
   - Justificar
-
+- Añadir un $_SESSION para la fecha y utilizar multiples formularios ¿?
 
 <h2>DONE:</h2>
 

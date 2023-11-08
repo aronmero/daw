@@ -94,3 +94,8 @@ margin-bottom: 10px;
 .botonesFalta{
   display: block;
 }
+
+.inicioSesion div{
+  display: flex;
+    justify-content: space-between;
+}

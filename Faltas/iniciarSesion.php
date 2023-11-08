@@ -25,7 +25,7 @@ if (!isset($_SESSION["identificador"])) {
 </head>
 
 <body>
-    <form method="post" action="<?php echo $_SERVER["PHP_SELF"]; ?>">
+    <form class="inicioSesion" method="post" action="<?php echo $_SERVER["PHP_SELF"]; ?>">
         <div><label>Dni: </label><input type="text" name=dni required></div>
         <div><label>Contraseña: </label><input type="password" name=contrasena required></div>
         <div><input type="submit"></div>
