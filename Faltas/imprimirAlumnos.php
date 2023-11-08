@@ -1,6 +1,6 @@
 <?php
 
-function imprimirAlumnado($grupoSeleccionado): void
+function imprimirAlumnado($grupoSeleccionado,$fecha): void
 {
     require "../loginInfo.php";
 

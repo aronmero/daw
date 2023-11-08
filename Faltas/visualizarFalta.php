@@ -13,19 +13,19 @@ if (isset($_POST["grupoSeleccionado"])) {
 <html>
 
 <head>
-  <meta charset='utf-8'>
-  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-  <title>DAW: Faltas - Visualizar faltas</title>
-  <meta name='viewport' content='width=device-width, initial-scale=1'>
-  <link rel='stylesheet' type='text/css' media='screen' href='estilo.css'>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>DAW: Faltas - Visualizar faltas</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='estilo.css'>
 
 </head>
 
 <body>
-  <a id='cerrarSesion' href='cerrarSesion.php'>Cerrar sesión</a>
+    <a id='cerrarSesion' href='cerrarSesion.php'>Cerrar sesión</a>
 
 
-  <?php
+    <?php
   if ($_SESSION["tipoUsuario"] == "alumno") {
     try {
       $conn = new PDO("mysql:host=$servername;dbname=faltas", $username, $password);
@@ -45,7 +45,7 @@ if (isset($_POST["grupoSeleccionado"])) {
 
       echo "<div><div class='mostrarFaltas encabezado'>" . "<div>Fecha</div><div>" . "Sesion" . " </div><div>" . "Tipo falta" . "</div></div>";
       for ($i = 0; $i < $longitud; $i++) {
-        echo "<div class=mostrarFaltas>" . "<div>" . $datosAlumno[$i][4] . "</div><div>" . $datosAlumno[$i][3] . " </div><div>" . '$tipoFalta' . "</div></div>";
+        echo "<div class=mostrarFaltas>" . "<div>" . $datosAlumno[$i][4] . "</div><div>" . $datosAlumno[$i][3] . " </div><div>" . $datosAlumno[$i][6]. "</div></div>";
       }
       echo "</div>";
       $conn = "";
@@ -74,7 +74,7 @@ if (isset($_POST["grupoSeleccionado"])) {
       $longitud = count($datosAlumno);
 
       for ($i = 0; $i < $longitud; $i++) {
-        echo "<div class='mostrarFaltas mostrarFaltasProfesor'>" . "<div>" . $datosAlumno[$i][4] . "</div><div>" . $datosAlumno[$i][3] . " </div><div>" . '$tipoFalta' . "</div><div>" . $datosAlumno[$i][9] . " " . $datosAlumno[$i][10] . " " . $datosAlumno[$i][11] . " </div><div>" . $datosAlumno[$i][7] . " </div></div>";
+        echo "<div class='mostrarFaltas mostrarFaltasProfesor'>" . "<div>" . $datosAlumno[$i][4] . "</div><div>" . $datosAlumno[$i][3] . " </div><div>" . $datosAlumno[$i][6] . "</div><div>" . $datosAlumno[$i][10] . " " . $datosAlumno[$i][11] . " " . $datosAlumno[$i][12] . " </div><div>" . $datosAlumno[$i][8] . " </div></div>";
       }
 
 
@@ -86,8 +86,8 @@ if (isset($_POST["grupoSeleccionado"])) {
   }
 
   ?>
-  <a href="index.php">Volver</a>
-  <script src="./js/seleccionGrupos.js"></script>
+    <a href="index.php">Volver</a>
+    <script src="./js/seleccionGrupos.js"></script>
 </body>
 
 </html>

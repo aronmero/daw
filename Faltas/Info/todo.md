@@ -11,6 +11,7 @@
 
 <h2>TODO: Concreto</h2>
 
+- <font color="#e04c38">**[Prioridad: Alta ++]**</font> Organizar el codigo <font color="#e33955">**VS Code**</font>
 - <font color="#e04c38">**[Prioridad: Alta]**</font> Modelo ER <font color="#e33955">**Diagrama**</font>
   - Evitar que se puedan añadir faltas repetidas misma sesion dia
 - <font color="#e04c38">**[Prioridad: Alta]**</font> Readaptacion base de datos <font color="#e33955">**SQL**</font>
@@ -24,8 +25,6 @@
     - Añadir tipo de falta
   - Profesor
     - Añadir tipo de falta
-- Añadir algo similar a Grupos js para actualizar la fecha en la inserccion y modificacion de faltas
-- Añadir un $_SESSION para la fecha y utilizar multiples formularios ¿?
 
 <h2>DONE:</h2>
 

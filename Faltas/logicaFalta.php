@@ -18,6 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         } else {
                             //Inserccion falta
                             try {
+                                //FIXME:
                                 //TODO: añadir el tipo de la falta al DB
                                 $conn = new PDO("mysql:host=$servername;dbname=faltas", $username, $password);
                                 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -43,4 +44,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
    
 }
-

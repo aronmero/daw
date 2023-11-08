@@ -1,17 +1,18 @@
 let grupos = document.getElementsByClassName("selectorCurso")[0].childNodes;
+
 for (let index = 0; index < grupos.length; index++) {
   const element = grupos[index];
   element.addEventListener("click", cambiarSeleccion);
 }
 
 function cambiarSeleccion() {
-  eliminarSelccion();
+  eliminarSeleccion();
   this.classList.add("seleccionado");
 
   generarFormulario(document.location.pathname,"grupoSeleccionado", this.id);
 }
 
-function eliminarSelccion() {
+function eliminarSeleccion() {
   for (let index = 0; index < grupos.length; index++) {
     const element = grupos[index];
     element.classList.remove("seleccionado");
@@ -21,7 +22,6 @@ function eliminarSelccion() {
 function generarFormulario(webPHP,nombre, valor) {
   let formulario = document.createElement("form");
   formulario.action =webPHP;
-  ("post");
   formulario.method = "POST";
   formulario.setAttribute("name", "autoFormulario");
   let input = document.createElement("input");

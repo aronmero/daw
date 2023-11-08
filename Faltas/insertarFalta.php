@@ -5,7 +5,6 @@ require "../loginInfo.php";
 require "./logicaAUX.php";
 require "./imprimirAlumnos.php";
 require "./logicaFalta.php";
-
 if (isset($_POST["grupoSeleccionado"])) {
     $_SESSION["grupoSeleccionado"] = $_POST["grupoSeleccionado"];
     $grupoSeleccionado = $_SESSION["grupoSeleccionado"];
@@ -21,7 +20,7 @@ if (isset($_POST["fechaSeleccionado"])) {
 } else if (isset($_SESSION["fechaSeleccionado"])) {
     $fechaSeleccionado = $_SESSION["fechaSeleccionado"];
 } else {
-    $fechaSeleccionado = null;
+    $fechaSeleccionado = date("Y-m-d");
 }
 
 //Obtener idCorreo profesor
@@ -45,6 +44,8 @@ if (isset($_SESSION["identificador"])) {
 <body>
     <?php if (isset($_SESSION["recargarPagina"]) && $_SESSION["recargarPagina"] == true) {
         //Evitar reenvios de formulario
+        unset($_SESSION["grupoSeleccionado"]);
+        unset($_SESSION["fechaSeleccionado"]);
         unset($_SESSION["recargarPagina"]);
         header("Location: insertarFalta.php");
     } ?>
@@ -62,18 +63,16 @@ if (isset($_SESSION["identificador"])) {
     }
     ?>
     <form method="POST" action="<?php echo $_SERVER["PHP_SELF"]; ?>">
-        <div class="selectorFecha"><label>Seleccionar fecha:</label><input type="date" name="fecha" required value=<?php if (isset($fechaSeleccionado)) {
-            echo $fechaSeleccionado;
-        } else {
-            echo date("Y-m-d");
-        } ?>> </div>
-        <?php imprimirAlumnado($grupoSeleccionado) ?>
+        <div class="selectorFecha"><label>Seleccionar fecha:</label><input type="date" name="fecha" required value=<?php echo $fechaSeleccionado;
+        ?>> </div>
+        <?php imprimirAlumnado($grupoSeleccionado, $fechaSeleccionado) ?>
         <div class="botonesFalta"> <input type="submit" value="Crear Faltas"> <input type="submit"
                 value="Modificar Faltas"></div>
     </form>
-    <a href="index.php" <?php unset($_SESSION["grupoSeleccionado"]); ?>>Volver</a>
+    <a href="index.php">Volver</a>
     <script src="./js/logicaListaAlumnos.js"></script>
     <script src="./js/seleccionGrupos.js"></script>
+    <script src="./js/seleccionFecha.js"></script>
 </body>
 
 </html>
