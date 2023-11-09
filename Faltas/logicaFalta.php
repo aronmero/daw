@@ -15,6 +15,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         $nameFaltaExistente = $j . "faltaExistente$i ";
                         if (isset($_POST["$nameFaltaExistente"])) {
                             //TODO: Update falta
+                            //TODO: hacer que segun el valor de accionFaltaSeleccionada se selecione update o crear
+
                         } else {
                             //Inserccion falta
                             try {
