@@ -2,7 +2,9 @@ import "./modulos/actividad.js";
 import { crearElemento } from "./modulos/manipularElementos.js";
 let profesPrueba = ["profe1", "profe2", "profe3"];
 let grupos = ["1º ESO", "2º ESO", "3º ESO", "4º ESO"];
-
+document
+  .getElementById("botonEnviar")
+  .addEventListener("click", validacionDatos);
 /**
  * Muestra un array de profesores en el HTML en formato de <option>
  * @date 11/6/2023 - 6:46:22 PM
@@ -40,9 +42,40 @@ function mostrarGruposHTML(arrayGrupos) {
     contenedor.appendChild(check);
     contenedor.appendChild(grupo);
     selectorProfes.appendChild(contenedor);
-    console.log(contenedor);
+  }
+}
+
+function anadirInteraccionBotones() {
+  let selectProfesores = document.getElementById("selectorProfesores");
+  for (let index = 0; index < selectProfesores.childNodes.length; index++) {
+    const element = selectProfesores.childNodes[index];
+    element.addEventListener("click", cambiarSeleccion);
   }
 }
 
 mostrarProfesoresHTML(profesPrueba);
 mostrarGruposHTML(grupos);
+
+function cambiarSeleccion() {
+  this.parentNode.id == "selectorProfesores"
+    ? document.getElementById("selectorProfesoresAsignados").appendChild(this)
+    : document.getElementById("selectorProfesores").appendChild(this);
+}
+
+/*
+/**
+ * TODO: validacion de entrada
+ */
+function validacionLugar(nombre) {
+  document.getElementsByName(nombre)[0].value;
+  //QUE SEA STRING NO VACIA
+}
+
+/**
+ * TODO: validacion al enviar que llama a validar cada dato y genera objeto actividad y mustre un alert con dichos datos
+ */
+function validacionDatos() {
+  validacionLugar("lugar");
+}
+//FIXME:Añadir mensajes de error al validar incorrecto y eliminar los de html
+anadirInteraccionBotones();
