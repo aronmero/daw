@@ -100,11 +100,11 @@ div:has(.mostrarFaltas) {
   justify-content: space-between;
 }
 
-.selectorCurso {
+.selectorCurso, .selectorFalta{
   display: flex;
 }
 
-.selectorCurso div {
+.selectorCurso div,.selectorFalta div {
   border: 1px solid black;
   border-radius: 5px;
   padding: 5px 10px;
@@ -112,6 +112,6 @@ div:has(.mostrarFaltas) {
   cursor: pointer;
 }
 
-.selectorCurso div.seleccionado {
+.selectorCurso div.seleccionado,.selectorFalta div.seleccionado {
   background-color: rgb(243, 181, 66);
 }
