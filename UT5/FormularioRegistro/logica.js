@@ -138,6 +138,12 @@ function limpiarErrores() {
     }
 }
 
+
+/**
+ * Comprueba que los datos introducidos son correctos, y si lo son crea una actividad
+ * @date 11/12/2023 - 9:37:57 AM
+ * @author Aarón Medina Rodríguez
+ */
 function validacionDatos() {
   limpiarErrores();
   let isValidacionCorrecta = true;
