@@ -14,15 +14,19 @@ form{
     text-align: center;
 }
 form>div{
-    width: 500px;
-    display: flex;
-    justify-content: space-between;
+    width: 800px;
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: repeat(3, 1fr);;
+    gap: 8px;
     margin-bottom: 10px;
     align-items: center;
 }
 
 form>div:last-child{
-    justify-content: center;
+    margin-top: 20px;
+    display: flex;
+    margin-left: 400px;
 
 }
 form>div:last-child p{
@@ -60,4 +64,13 @@ display: flex;
 
 input[type=checkbox]{
     width: 15px;
+}
+
+p{
+    margin: 0px;
+    margin-left: 10px;
+}
+
+.error{
+    color: red;
 }

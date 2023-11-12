@@ -7,7 +7,7 @@
  * @class Actividad
  * @typedef {Actividad}
  */
-export default class Actividad {
+export class Actividad {
   lugar;
   fecha;
   profesor;
@@ -32,5 +32,9 @@ export default class Actividad {
     this.profesor = profesor;
     this.grupos = grupos;
     this.descripcion = descripcion;
+  }
+
+  toString(){
+    return "Lugar: "+this.lugar+"; Fecha: "+this.fecha+"; Descripcion: "+this.descripcion+"; Grupos: "+this.grupos+"; Profesores: "+this.profesor
   }
 }

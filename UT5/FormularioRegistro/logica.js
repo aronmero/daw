@@ -1,5 +1,11 @@
-import "./modulos/actividad.js";
+import { Actividad } from "./modulos/actividad.js";
 import { crearElemento } from "./modulos/manipularElementos.js";
+import {
+  validacionCadenas,
+  validacionFecha,
+  validacionGrupos,
+  validacionProfesores,
+} from "./modulos/validacionEntrada.js";
 let profesPrueba = ["profe1", "profe2", "profe3"];
 let grupos = ["1º ESO", "2º ESO", "3º ESO", "4º ESO"];
 document
@@ -17,8 +23,6 @@ function mostrarProfesoresHTML(arrayProfesores) {
     const element = crearElemento("option", arrayProfesores[index]);
     element.value = arrayProfesores[index];
     selectorProfes.appendChild(element);
-    //TODO para la seleccion multiple
-    //https://stackoverflow.com/a/5867262
   }
 }
 
@@ -56,26 +60,117 @@ function anadirInteraccionBotones() {
 mostrarProfesoresHTML(profesPrueba);
 mostrarGruposHTML(grupos);
 
+/**
+ * Mueve un profesor de un elemento HTML a otro
+ * @author Aarón Medina Rodríguez
+ */
 function cambiarSeleccion() {
   this.parentNode.id == "selectorProfesores"
     ? document.getElementById("selectorProfesoresAsignados").appendChild(this)
     : document.getElementById("selectorProfesores").appendChild(this);
 }
 
-/*
 /**
- * TODO: validacion de entrada
+ * Obtiene los grupos asiganados y los almacena en un array
+ * @date 11/12/2023 - 8:55:00 AM
+ * @author Aarón Medina Rodríguez
+ *
+ * @param {string} nombreContenedor
+ * @returns {boolean}
  */
-function validacionLugar(nombre) {
-  document.getElementsByName(nombre)[0].value;
-  //QUE SEA STRING NO VACIA
+function obtenerGruposAsignados(nombreContenedor) {
+  const contenedor = document
+    .getElementById(nombreContenedor)
+    .getElementsByTagName("div");
+  const gruposAsiganados = new Array();
+  for (let index = 0; index < contenedor.length; index++) {
+    const element = contenedor[index].getElementsByTagName("input")[0];
+    if (element.checked) {
+      gruposAsiganados.push(element.value);
+    }
+  }
+  return gruposAsiganados;
 }
 
 /**
- * TODO: validacion al enviar que llama a validar cada dato y genera objeto actividad y mustre un alert con dichos datos
+ * Obtiene los profesores asiganados y los almacena en un array
+ * @date 11/12/2023 - 8:53:00 AM
+ * @author Aarón Medina Rodríguez
+ *
+ * @param {string} nombreContenedor
+ * @returns {Array} array de profesores asignados
  */
-function validacionDatos() {
-  validacionLugar("lugar");
+function obtenerProfesoresAsignados(nombreContenedor) {
+  const contenedor = document.getElementById(nombreContenedor);
+  const profesoresAsigandos = new Array();
+  for (let index = 0; index < contenedor.length; index++) {
+    const element = contenedor.getElementsByTagName("option")[index];
+    profesoresAsigandos.push(element.value);
+  }
+
+  return profesoresAsigandos;
 }
-//FIXME:Añadir mensajes de error al validar incorrecto y eliminar los de html
+
+
+/**
+ * Añade un mensaje de error a un elemento HTML
+ * @date 11/12/2023 - 9:32:10 AM
+ * @author Aarón Medina Rodríguez
+ *
+ * @param {string} idHTML id del elemento
+ * @param {string} error mensaje de error
+ */
+function anadirMensajeError(idHTML, error) {
+  document.getElementById(idHTML).innerHTML = error;
+}
+
+
+/**
+ * Elimina todos los mensajes de error del formulario HTML
+ * @date 11/12/2023 - 9:36:49 AM
+ * @author Aarón Medina Rodríguez
+ */
+function limpiarErrores() {
+    const errores=document.getElementsByClassName("error")
+    for (let index = 0; index < errores.length; index++) {
+      const element = errores[index];
+      element.innerHTML="";
+    }
+}
+
+function validacionDatos() {
+  limpiarErrores();
+  let isValidacionCorrecta = true;
+  if (!validacionCadenas("lugar")) {
+    isValidacionCorrecta = false;
+    anadirMensajeError("errorLugar", "*Obligatorio");
+  }
+  if (!validacionFecha("fecha")) {
+    isValidacionCorrecta = false;
+    anadirMensajeError("errorFecha", "*Obligatorio");
+  }
+  if (!validacionCadenas("descripcion")) {
+    isValidacionCorrecta = false;
+    anadirMensajeError("errorDescripcion", "*Obligatorio");
+  }
+  if (!validacionGrupos("selectorGrupos")) {
+    isValidacionCorrecta = false;
+    anadirMensajeError("errorGrupos", "*Obligatorio");
+  }
+  if (!validacionProfesores("selectorProfesoresAsignados")) {
+    isValidacionCorrecta = false;
+    anadirMensajeError("errorProfesor", "*Obligatorio");
+  }
+  if (isValidacionCorrecta) {
+    let actividad = new Actividad(
+      document.getElementsByName("lugar")[0].value,
+      document.getElementsByName("fecha")[0].value,
+      obtenerProfesoresAsignados("selectorProfesoresAsignados"),
+      obtenerGruposAsignados("selectorGrupos"),
+      document.getElementsByName("descripcion")[0].value
+    );
+    alert(actividad);
+  }
+}
+
 anadirInteraccionBotones();

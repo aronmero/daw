@@ -37,4 +37,6 @@ Genera una función de aceptación (la que se ejecutará a la hora de pulsar el 
 
 # Referencias
 
-https://stackoverflow.com/a/5867262
+https://stackoverflow.com/a/5867262 How to get all selected values of a multiple select box?
+
+https://stackoverflow.com/a/37485871  Javascript how to check if a date is greater than or equal to a date value

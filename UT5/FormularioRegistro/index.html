@@ -9,19 +9,19 @@
   </head>
   <body>
     <form>
-      <div><label>Lugar</label><input type="text" required name="lugar" /></div>
-      <div><label>Fecha</label><input type="date" required name="fecha" /></div>
+      <div><label>Lugar</label><input type="text" required name="lugar" /><p id="errorLugar" class="error"></p></div>
+      <div><label>Fecha</label><input type="date" required name="fecha" /><p id="errorFecha" class="error"></p></div>
       <div>
         <label>Descripcion</label
-        ><input type="text" required name="descripcion" />
+        ><input type="text" required name="descripcion" /><p id="errorDescripcion" class="error"></p>
       </div>
       <div>
         <label>Grupos</label>
-        <div id="selectorGrupos"></div>
+        <div id="selectorGrupos"></div><p id="errorGrupos" class="error"></p>
       </div>
       <div>
         <label>Profesores</label>
-        <select id="selectorProfesores" multiple></select>
+        <select id="selectorProfesores" multiple></select><p id="errorProfesor" class="error"></p>
       </div>
       <div>
         <label>Profesores asignados</label>
