@@ -70,18 +70,18 @@ function imprimirAlumnado($grupoSeleccionado, $fecha): void
         $checked = "";
         $existeFalta = "";
         $idfalta = "";
-        $disabled = "";
+        $readonly = "";
         for ($w = 0; $w < $numFaltas; $w++) {
           if ($faltas[$w][3] == $j) {
             $existeFalta = "faltaExistente";
             $checked = "checked";
-            $disabled = "disabled";
+            $readonly = "read-only";
             $idfalta = $faltas[$w][0];
             break;
           }
         }
         $nombreCheck = $i . "checkbox$j";
-        echo "<div class=$existeFalta>" . "<input type='checkbox' $disabled " . "" . "class=secretoCorto name='$nombreCheck'  $checked >";
+        echo "<div class=$existeFalta>" . "<input type='checkbox' $readonly " . "" . "class=secretoCorto name='$nombreCheck'  $checked >";
 
         echo "<input type=hidden name=" . $j . "faltaExistente$i value=" . $idfalta . ">";
 
