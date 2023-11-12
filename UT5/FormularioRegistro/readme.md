@@ -34,7 +34,11 @@ Genera las funciones que consideres para validar cada uno de los campos por sepa
 Genera una función de aceptación (la que se ejecutará a la hora de pulsar el botón de enviar) que comprobará que se cumplan las validaciones y en caso de cumplirse genere un objeto del tipo actividad (a partir de la clase definida) con los datos del formulario y muestre un mensaje alert con dichos datos.
 
 # Comentarios
+Simple formulario, los profesores y grupos se generan en el html con JS apartir de un array. Los profesores al seleccionarlos se mueven a una seccion de asignados.
 
+Las validaciones comprueban que los compos no esten vacios y tengan un elemento ademas del formato de la variable. Al crear una actividad se genera una alerta.
+
+Si lo datos introducidos son incorrectos salta un error generico en el html, este mensaje se puede modificar en el JS.
 # Referencias
 
 https://stackoverflow.com/a/5867262 How to get all selected values of a multiple select box?
