@@ -10,6 +10,14 @@
 
 
 # Comentarios
+Para la resolucion de cookies se utilizo [1](#referencias).
+
+Utilizando el codigo de logica.js de distribucion, se le añadio una cookie que cuenta el numero de intentos incorrectos, al final del codigo, se añadio  como se aumentaria este numero ademas de poder imprimirlo en pantalla para reiniciarlo.
+
+En modulos/cookie.js se realizaron multiples funciones para crear, modificiar y eliminar cookies, las funciones concreatamente utiles son crearCookie(), obtenerCookie(), obtenerValorCookie(),eliminarCookie() y anadirCaducidadCookie().
+
+Añadir la fecha de caducidad es muy importante porque sino se elimina la cookie al terminar la sesion asi que es casi mas util crear una cookie directamente con esa funcion, y al modificar la cookie lo mismo si no queremos que pierda su valor.
+
 
 # Referencias
-https://cybmeta.com/cookies-en-javascript
+1.https://cybmeta.com/cookies-en-javascript

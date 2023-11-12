@@ -18,7 +18,7 @@ Esta planteado como se especifico, al pulsar en una imagen un boton no visible c
 
 Cuando se aciertan las 12 imagenes sale un mensaje con el numero de movimientos utilizados en la parte inferior.
 
-La validacion de las imagenes se hace mediante el nombre de ellas. Las imagenes se imprimen de un array de imagenes que las desordena cada vez que se carga la pagina.
+La validacion de las imagenes se hace mediante el nombre de ellas. Las imagenes se imprimen de un array de imagenes que las desordena cada vez que se carga la pagina, el metodo utilizado para desordenarlas es Fisher–Yates Shuffle, concretamente @Mike_Bostock https://bost.ocks.org/mike/shuffle/ .
 
 # Referencias
 

@@ -17,8 +17,8 @@ https://stackoverflow.com/a/9681629
 
 Utilice stackoverflow para la siguiente linea *document.querySelectorAll("#formulario .pregunta").length* esta linea busca en el fomulario todas las clase preguntas, esto lo utilizo en la logica de validacion de las preguntas.
 
-# Resolucion
-La manera en la que resolvi este ejercicio es bastante enrevesada para poder practicar js al maximo. Se realizo la creacion de las preguntas mediante JS estas preguntas son una clase, y se añaden a un array donde son almacenadas.
+# Comentarios
+La manera en la que resolvi este ejercicio es bastante enrevesada con respecto a lo que se pedia, para poder practicar js. Se realizo la creacion de las preguntas mediante JS estas preguntas son una clase, y se añaden a un array donde son almacenadas.
 
 Cuando se imprimen las preguntas, las id de estas son almacenadas en un array de preguntas activas, esto se utilizara para la validacion.
 
