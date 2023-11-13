@@ -76,4 +76,5 @@ button:active {
     font-weight: bolder;
     background-color: #4aa8e7;
     color: white;
-}
+    cursor:default;  
+  }

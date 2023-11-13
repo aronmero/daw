@@ -143,9 +143,9 @@ function imprimirIngredientesPizza(ingredientesSeleccionados) {
         console.log(" " + key[0] + " ");
       }
     }
-    ingredientes = document.createTextNode(ingredientesSeleccionados);
+   ingredientes = document.createTextNode(ingredientesSeleccionados);
   }
-  lista.appendChild(ingredientes);
+  //lista.appendChild(ingredientes);
 }
 
 /**
