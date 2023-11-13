@@ -1,0 +1,79 @@
+/**
+* {
+  border: 1px dashed red;
+}
+/**/
+body,p {
+  margin: 0;
+}
+.content {
+  margin: 15px;
+  display: flex;
+  flex-direction: row;
+  background-color: #e9dfc3;
+  padding: 30px;
+  min-height: 550px;
+}
+.contenedorIngredientes {
+  width: 60%;
+}
+.contenedorMasa {
+  display: flex;
+}
+.contenedorMasa > div {
+  margin-right: 10px;
+  padding-right: 10px;
+}
+
+.contenedorPizza {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.toppings {
+  display: grid;
+  grid-template-rows: repeat(auto-fill, 190px);
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+.topping {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.topping > img {
+  width: 100px;
+  height: 100px;
+}
+button {
+  box-shadow: 1px 1px 2px 0px #888888;
+}
+button:active {
+  transform: translateY(1px);
+}
+
+.incremento{
+    display: flex;
+    width: 75px;
+    justify-content: space-between;
+}
+
+.icono{
+    box-sizing: border-box;
+    background-color: #f5f5f5;
+    padding: 5px 10px;
+    border-radius: 100%;
+    font-weight: 800;
+    width: 30px;
+    text-align: center;
+    cursor: pointer;
+}
+.numIngrediente{
+    position: relative;
+    left: 60px;
+    top: -150px;
+    font-weight: bolder;
+    background-color: #4aa8e7;
+    color: white;
+}
