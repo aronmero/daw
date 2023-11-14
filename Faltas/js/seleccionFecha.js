@@ -2,7 +2,6 @@
 //FIXME: ESTO ES PA CURSOS NO FECHA
 let fecha = document.getElementsByClassName("selectorFecha")[0].getElementsByTagName("input")[0];
 const element = fecha;
-console.log(element);
 element.addEventListener("change", cambiarSeleccionFecha);
 
 function cambiarSeleccionFecha() {

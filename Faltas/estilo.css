@@ -78,6 +78,7 @@ div:has(.mostrarFaltas) {
   min-width: 100px;
   margin-top: 5px;
 }
+
 .mostrarFaltasProfesor {
   grid-template-columns: auto 80px auto 300px 150px;
 }
@@ -104,14 +105,22 @@ div:has(.mostrarFaltas) {
   display: flex;
 }
 
-.selectorCurso div,.selectorFalta div {
+.selectorCurso div,.selectorFalta div,.enviarFalta input{
   border: 1px solid black;
   border-radius: 5px;
   padding: 5px 10px;
   margin: 5px;
   cursor: pointer;
+  box-sizing: border-box;
+  height: 30px;
+ 
 }
 
-.selectorCurso div.seleccionado,.selectorFalta div.seleccionado {
+.selectorCurso div.seleccionado,.selectorFalta div.seleccionado,.enviarFalta input {
   background-color: rgb(243, 181, 66);
+}
+
+.selectorOpciones{
+  display: flex;
+  justify-content: space-between;
 }

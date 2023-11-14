@@ -29,7 +29,7 @@ if (isset($_POST["faltaSeleccionado"])) {
 } else if (isset($_SESSION["faltaSeleccionado"])) {
     $accionFaltaSeleccionada = $_SESSION["faltaSeleccionado"];
 } else {
-    $accionFaltaSeleccionada = null;
+    $accionFaltaSeleccionada =null;
 }
 
 //Obtener idCorreo profesor
@@ -55,6 +55,7 @@ if (isset($_SESSION["identificador"])) {
         //Evitar reenvios de formulario
         //unset($_SESSION["grupoSeleccionado"]);
         //unset($_SESSION["fechaSeleccionado"]);
+        unset($_SESSION["faltaSeleccionado"]);
         unset($_SESSION["recargarPagina"]);
         header("Location: insertarFalta.php");
     } ?>
@@ -75,8 +76,10 @@ if (isset($_SESSION["identificador"])) {
         <div class="selectorFecha"><label>Seleccionar fecha:</label><input type="date" name="fecha" required value=<?php echo $fechaSeleccionado; ?>> </div>
         <?php imprimirAlumnado($grupoSeleccionado, $fechaSeleccionado) ?>
 
+        <div class="selectorOpciones">
         <?php  imprimirAccionFalta($accionFaltaSeleccionada); ?>
-
+        <div class="enviarFalta"><input type="submit" value=Enviar></div>
+        </div>
 
         
     </form>
