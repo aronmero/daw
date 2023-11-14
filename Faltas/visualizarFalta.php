@@ -13,19 +13,19 @@ if (isset($_POST["grupoSeleccionado"])) {
 <html>
 
 <head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>DAW: Faltas - Visualizar faltas</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='estilo.css'>
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <title>DAW: Faltas - Visualizar faltas</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <link rel='stylesheet' type='text/css' media='screen' href='estilo.css'>
 
 </head>
 
 <body>
-    <a id='cerrarSesion' href='cerrarSesion.php'>Cerrar sesión</a>
+  <a id='cerrarSesion' href='cerrarSesion.php'>Cerrar sesión</a>
 
 
-    <?php
+  <?php
   if ($_SESSION["tipoUsuario"] == "alumno") {
     try {
       $conn = new PDO("mysql:host=$servername;dbname=faltas", $username, $password);
@@ -44,8 +44,8 @@ if (isset($_POST["grupoSeleccionado"])) {
       $longitud = count($datosAlumno);
 
       echo "<div><div class='mostrarFaltas encabezado'>" . "<div>Fecha</div><div>" . "Sesion" . " </div><div>" . "Tipo falta" . "</div></div>";
-      for ($i = 0; $i < $longitud; $i++) {
-        echo "<div class=mostrarFaltas>" . "<div>" . $datosAlumno[$i][4] . "</div><div>" . $datosAlumno[$i][3] . " </div><div>" . $datosAlumno[$i][6]. "</div></div>";
+      for ($alumno = 0; $alumno < $longitud; $alumno++) {
+        echo "<div class=mostrarFaltas>" . "<div>" . $datosAlumno[$alumno][4] . "</div><div>" . $datosAlumno[$alumno][3] . " </div><div>" . $datosAlumno[$alumno][6] . "</div></div>";
       }
       echo "</div>";
       $conn = "";
@@ -54,7 +54,7 @@ if (isset($_POST["grupoSeleccionado"])) {
     }
   } else if ($_SESSION["tipoUsuario"] == "profesor") {
     try {
-      
+
       $conn = new PDO("mysql:host=$servername;dbname=faltas", $username, $password);
       $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
       $stmt = $conn->prepare("SELECT * FROM  usuario inner join profesor on usuario.dni=profesor.dni where idCorreo=:idCorreo");
@@ -62,7 +62,7 @@ if (isset($_POST["grupoSeleccionado"])) {
       $stmt->execute();
       $infoProfesor = $stmt->fetch();
 
-      echo "<div id=infoFalta><div>Profesor: $infoProfesor[0] $infoProfesor[1] $infoProfesor[2] </div><div>DNI: " . $infoProfesor[3] . "</div><div>Correo: " . $infoProfesor[5] . "</div></div>";
+      echo "<div id=infoFalta><div>Profesor: $infoProfesor[0] $infoProfesor[1] $infoProfesor[2] </div><div>DNI: " . $infoProfesor['dni'] . "</div><div>Correo: " . $infoProfesor[5] . "</div></div>";
 
       ImprimirCurso($conn, $grupoSeleccionado);
       echo "<div><div class='mostrarFaltas mostrarFaltasProfesor encabezado'>" . "<div>Fecha</div><div>" . "Sesion" . " </div><div>" . "Tipo falta" . "</div><div>" . "Alumno" . " </div><div>" . "DNI" . " </div></div>";
@@ -73,8 +73,10 @@ if (isset($_POST["grupoSeleccionado"])) {
       $datosAlumno = $stmt->fetchAll();
       $longitud = count($datosAlumno);
 
-      for ($i = 0; $i < $longitud; $i++) {
-        echo "<div class='mostrarFaltas mostrarFaltasProfesor'>" . "<div>" . $datosAlumno[$i][4] . "</div><div>" . $datosAlumno[$i][3] . " </div><div>" . $datosAlumno[$i][6] . "</div><div>" . $datosAlumno[$i][10] . " " . $datosAlumno[$i][11] . " " . $datosAlumno[$i][12] . " </div><div>" . $datosAlumno[$i][8] . " </div></div>";
+      for ($alumno = 0; $alumno < $longitud; $alumno++) {
+        echo "<div class='mostrarFaltas mostrarFaltasProfesor'>" . "<div>" . $datosAlumno[$alumno]['dia'] . "</div><div>" . $datosAlumno[$alumno]['sesion'] . " </div><div>" .
+          $datosAlumno[$alumno]['tipoFalta'] . "</div><div>" . $datosAlumno[$alumno]['nombre'] . " " . $datosAlumno[$alumno]['primer_apellido'] . " " . $datosAlumno[$alumno]['segundo_apellido'] .
+          " </div><div>" . $datosAlumno[$alumno]['dni'] . " </div></div>";
       }
 
 
@@ -86,8 +88,8 @@ if (isset($_POST["grupoSeleccionado"])) {
   }
 
   ?>
-    <a href="index.php">Volver</a>
-    <script src="./js/seleccionGrupos.js"></script>
+  <a href="index.php">Volver</a>
+  <script src="./js/seleccionGrupos.js"></script>
 </body>
 
 </html>

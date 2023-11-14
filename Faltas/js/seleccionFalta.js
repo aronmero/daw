@@ -8,14 +8,14 @@ for (let index = 0; index < opcionesFalta.length; index++) {
 function cambiarSeleccion() {
   eliminarSeleccion();
   this.classList.add("seleccionado");
-  console.log(this.id);
-  generarFormulario(document.location.pathname,"faltaSeleccionado", this.id);
+  this.setAttribute("name","faltaSeleccionado");
 }
 
 function eliminarSeleccion() {
   for (let index = 0; index < opcionesFalta.length; index++) {
     const element = opcionesFalta[index];
     element.classList.remove("seleccionado");
+    element.removeAttribute("name");
   }
 }
 

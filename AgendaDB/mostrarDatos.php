@@ -12,8 +12,8 @@ try {
     $contactosAgenda = $stmt->fetchAll();
 
     $texto="";
-    for ($i=0; $i < count($contactosAgenda); $i++) { 
-      $texto = $texto."<div><p>".$contactosAgenda[$i]["nombre"]."</p> <p>".$contactosAgenda[$i]["telefono"]."</p></div>";
+    for ($alumno=0; $alumno < count($contactosAgenda); $alumno++) { 
+      $texto = $texto."<div><p>".$contactosAgenda[$alumno]["nombre"]."</p> <p>".$contactosAgenda[$alumno]["telefono"]."</p></div>";
     }
     $contactos=$texto;
 
