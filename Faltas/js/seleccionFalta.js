@@ -8,14 +8,17 @@ for (let index = 0; index < opcionesFalta.length; index++) {
 function cambiarSeleccion() {
   eliminarSeleccion();
   this.classList.add("seleccionado");
-  this.setAttribute("name","faltaSeleccionado");
+  this.childNodes[0].setAttribute("name","faltaSeleccionado");
+  this.childNodes[0].setAttribute("value",this.childNodes[0].id);
 }
 
 function eliminarSeleccion() {
   for (let index = 0; index < opcionesFalta.length; index++) {
     const element = opcionesFalta[index];
     element.classList.remove("seleccionado");
-    element.removeAttribute("name");
+    element.childNodes[0].removeAttribute("name");
+    element.childNodes[0].removeAttribute("class")
+    element.childNodes[0].removeAttribute("value");
   }
 }
 

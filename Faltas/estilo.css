@@ -75,7 +75,7 @@ div:has(.mostrarFaltas) {
   gap: 8px;
 }
 .mostrarFaltas > div {
-  min-width: 100px;
+  min-width: 120px;
   margin-top: 5px;
 }
 

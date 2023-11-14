@@ -21,7 +21,7 @@ function imprimirAccionFalta($accionFaltaSeleccionada)
   $accionesFalta = array("crearFalta" => "Crear faltas", "modificarFalta" => "Modificar faltas");
   echo "<div class=selectorFalta>";
   foreach ($accionesFalta as $idAccion => $textoAccion) {
-    $botonMostrar = ($idAccion == $accionFaltaSeleccionada) ? "<div id=$idAccion class=seleccionado>$textoAccion</div>" : "<div id=$idAccion>$textoAccion</div>";
+    $botonMostrar = ($idAccion == $accionFaltaSeleccionada) ? "<div  class=seleccionado>$textoAccion<input id=$idAccion type=hidden></div>" : "<div><input id=$idAccion type=hidden>$textoAccion</div>";
     echo $botonMostrar;
   }
   echo "</div>";
