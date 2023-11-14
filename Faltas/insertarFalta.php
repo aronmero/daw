@@ -77,7 +77,7 @@ if (isset($_SESSION["identificador"])) {
         <?php imprimirAlumnado($grupoSeleccionado, $fechaSeleccionado) ?>
 
         <div class="selectorOpciones">
-        <?php  imprimirAccionFalta($accionFaltaSeleccionada); ?>
+        <?php  imprimirAccionFalta($accionFaltaSeleccionada);?>
         <div class="enviarFalta"><input type="submit" value=Enviar></div>
         </div>
 

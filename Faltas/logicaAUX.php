@@ -70,7 +70,7 @@ function imprimirAlumnado($grupoSeleccionado, $fecha): void
         $existeFalta = "";
         $idfalta = "";
         $readonly = "";
-        $tipoFalta = "Falta sin Justificar";
+        $tipoFalta = $tiposFalta[0];
         for ($falta = 0; $falta < $numFaltas; $falta++) {
           if ($faltas[$falta]['sesion'] == $sesion) {
             $existeFalta = "faltaExistente";
@@ -87,10 +87,10 @@ function imprimirAlumnado($grupoSeleccionado, $fecha): void
         echo "<input type=hidden name=" . $sesion . "faltaExistente$alumno value=" . $idfalta . ">";
 
         echo "<input type=hidden name=cialAlumno$alumno value=" . $datosAlumno[$alumno]['cial'] . ">" .
-          "<div class=secretoCorto>$sesion</div><p>" .$datosAlumno[$alumno]['nombre'] . " " . $datosAlumno[$alumno]['primer_apellido'] . " " . $datosAlumno[$alumno]['segundo_apellido'] .
-          " </p><div><select name=".$alumno . "tipoFalta" . $sesion.">";
+          "<div class=secretoCorto>$sesion</div><p>" . $datosAlumno[$alumno]['nombre'] . " " . $datosAlumno[$alumno]['primer_apellido'] . " " . $datosAlumno[$alumno]['segundo_apellido'] .
+          " </p><div><select name=" . $alumno . "tipoFalta" . $sesion . ">";
         for ($falta = 0; $falta < count($tiposFalta); $falta++) {
-          echo ($tipoFalta==$tiposFalta[$falta]) ? "<option value=$tiposFalta[$falta] selected>$tiposFalta[$falta]</option>" : " <option value=$tiposFalta[$falta]>$tiposFalta[$falta]</option>" ;
+          echo ($tipoFalta == $tiposFalta[$falta]) ? "<option value='$tiposFalta[$falta]' selected>$tiposFalta[$falta]</option>" : " <option value='$tiposFalta[$falta]'>$tiposFalta[$falta]</option>";
         }
 
         echo "</select></div></div>";
