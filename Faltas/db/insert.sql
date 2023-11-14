@@ -1,47 +1,82 @@
-/*Datos prueba*/
-INSERT INTO `curso` (`nombre`, `idCurso`) VALUES ('2DAW', '2daw');
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 14-11-2023 a las 20:45:11
+-- Versión del servidor: 10.4.28-MariaDB
+-- Versión de PHP: 8.2.4
 
-INSERT INTO `usuario` (`nombre`, `primer_apellido`, `segundo_apellido`, `dni`, `contrasena`) VALUES
-('aaron', 'medina', 'rodriguez', '42424242P', '1234');
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
 
-INSERT INTO `alumno` (`cial`, `dni`, `idCurso`) VALUES ('457884164563468465465445234', '42424242P', '2daw');
 
-INSERT INTO `usuario` (`nombre`, `primer_apellido`, `segundo_apellido`, `dni`, `contrasena`) VALUES ('prof', 'prorf', 'prof', '12345678A', '123456');
-INSERT INTO `profesor` (`idCorreo`, `dni`) VALUES ('prof@prof.com', '12345678A');
-INSERT INTO `imparte` (`idCorreo`, `idCurso`) VALUES ('prof@prof.com', '2daw');
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
-/**/
+--
+-- Base de datos: `faltas`
+--
+
+--
+-- Volcado de datos para la tabla `alumno`
+--
+
+INSERT INTO `alumno` (`cial`, `dni`, `idCurso`) VALUES
+('2455647637856387385738738738738638', '12345678B', '2asir'),
+('3543876879689689698767678687', '78968213B', '2asir'),
+('457884164563468465465445234', '42424242P', '2daw'),
+('54635463868768778678', '78965413A', '2daw');
+
+--
+-- Volcado de datos para la tabla `curso`
+--
+
 INSERT INTO `curso` (`nombre`, `idCurso`) VALUES
 ('2ASIR', '2asir'),
 ('2DAW', '2daw');
-UPDATE `usuario` SET `nombre` = 'Aaron', `primer_apellido` = 'Medina', `segundo_apellido` = 'Rodriguez' WHERE `usuario`.`dni` = '12345678A';
+
+--
+-- Volcado de datos para la tabla `falta`
+--
+
+INSERT INTO `falta` (`idfalta`, `cial`, `idCorreo`, `sesion`, `dia`, `fecha`, `tipoFalta`) VALUES
+(211, '457884164563468465465445234', 'prof@prof.com', 1, '2023-11-14', '2023-11-14 20:42:02', 'Falta sin Justificar'),
+(212, '457884164563468465465445234', 'prof@prof.com', 2, '2023-11-14', '2023-11-14 20:42:02', 'Falta sin Justificar'),
+(213, '457884164563468465465445234', 'prof@prof.com', 3, '2023-11-14', '2023-11-14 20:42:02', 'Falta sin Justificar'),
+(214, '457884164563468465465445234', 'prof@prof.com', 4, '2023-11-14', '2023-11-14 20:42:02', 'Falta sin Justificar'),
+(215, '457884164563468465465445234', 'prof@prof.com', 5, '2023-11-14', '2023-11-14 20:42:02', 'Falta sin Justificar'),
+(216, '457884164563468465465445234', 'prof@prof.com', 6, '2023-11-14', '2023-11-14 20:42:02', 'Falta sin Justificar');
+
+--
+-- Volcado de datos para la tabla `imparte`
+--
+
+INSERT INTO `imparte` (`idCorreo`, `idCurso`) VALUES
+('prof@prof.com', '2daw');
+
+--
+-- Volcado de datos para la tabla `profesor`
+--
+
+INSERT INTO `profesor` (`idCorreo`, `dni`) VALUES
+('prof@prof.com', '12345678A');
+
+--
+-- Volcado de datos para la tabla `usuario`
+--
+
 INSERT INTO `usuario` (`nombre`, `primer_apellido`, `segundo_apellido`, `dni`, `contrasena`) VALUES
 ('prof', 'prorf', 'prof', '12345678A', '123456'),
 ('juan', 'juan', 'juan', '12345678B', '1234'),
-('aaron', 'medina', 'rodriguez', '42424242P', '1234');
-INSERT INTO `alumno` (`cial`, `dni`, `idCurso`) VALUES
-('2455647637856387385738738738738638', '12345678B', '2asir'),
-('457884164563468465465445234', '42424242P', '2daw');
+('aaron', 'medina', 'rodriguez', '42424242P', '1234'),
+('antonio', 'antonio', 'antonio', '78965413A', '1234'),
+('paco', 'paco', 'paco', '78968213B', '1234');
+COMMIT;
 
-INSERT INTO `falta` (`idfalta`, `cial`, `idCorreo`, `sesion`, `dia`, `fecha`) VALUES
-(1, '457884164563468465465445234', 'prof@prof.com', 1, '2023-11-02', '2023-11-02 18:45:25'),
-(25, '457884164563468465465445234', 'prof@prof.com', 1, '2023-11-07', '2023-11-07 19:43:08'),
-(26, '457884164563468465465445234', 'prof@prof.com', 4, '2023-11-07', '2023-11-07 19:46:11'),
-(27, '457884164563468465465445234', 'prof@prof.com', 1, '2023-11-08', '2023-11-08 18:25:51'),
-(28, '457884164563468465465445234', 'prof@prof.com', 2, '2023-11-08', '2023-11-08 18:25:51'),
-(29, '2455647637856387385738738738738638', 'prof@prof.com', 2, '2023-11-08', '2023-11-08 18:56:50'),
-(30, '2455647637856387385738738738738638', 'prof@prof.com', 3, '2023-11-08', '2023-11-08 19:22:46'),
-(31, '2455647637856387385738738738738638', 'prof@prof.com', 3, '2023-11-08', '2023-11-08 19:22:47'),
-(32, '2455647637856387385738738738738638', 'prof@prof.com', 1, '2023-11-08', '2023-11-08 19:26:03'),
-(33, '2455647637856387385738738738738638', 'prof@prof.com', 1, '2023-11-08', '2023-11-08 19:27:47'),
-(34, '457884164563468465465445234', NULL, 4, '2023-11-08', '2023-11-08 19:39:38'),
-(35, '457884164563468465465445234', NULL, 5, '2023-11-08', '2023-11-08 19:40:03'),
-(36, '2455647637856387385738738738738638', NULL, 4, '2023-11-08', '2023-11-08 19:40:43'),
-(37, '457884164563468465465445234', NULL, 3, '2023-11-08', '2023-11-08 19:40:47'),
-(38, '457884164563468465465445234', NULL, 6, '2023-11-08', '2023-11-08 19:42:23'),
-(39, '2455647637856387385738738738738638', NULL, 5, '2023-11-08', '2023-11-08 20:25:30'),
-(40, '2455647637856387385738738738738638', NULL, 6, '2023-11-08', '2023-11-08 20:25:30'),
-(41, '457884164563468465465445234', NULL, 2, '2023-11-09', '2023-11-08 20:26:06'),
-(42, '457884164563468465465445234', NULL, 4, '2023-11-09', '2023-11-08 20:26:06'),
-(43, '457884164563468465465445234', NULL, 3, '2023-11-09', '2023-11-08 20:26:12'),
-(44, '457884164563468465465445234', NULL, 5, '2023-11-09', '2023-11-08 20:26:13');
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
