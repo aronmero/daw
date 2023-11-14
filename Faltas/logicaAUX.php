@@ -61,7 +61,7 @@ function imprimirAlumnado($grupoSeleccionado, $fecha): void
       $numFaltas = count($faltas);
 
       echo "<div class=datosAlumno>";
-      echo "<div class=navAlumno><input type=checkbox> " . $datosAlumno[$alumno]['nombre'] . " " . $datosAlumno[$alumno]['primer_apellido'] . " " . $datosAlumno[$alumno]['segundo_apellido'] . "</div>";
+      echo "<div class=navAlumno><input type=checkbox>" . $datosAlumno[$alumno]['nombre'] . " " . $datosAlumno[$alumno]['primer_apellido'] . " " . $datosAlumno[$alumno]['segundo_apellido'] . "</div>";
 
       //Array con tipos de falta, como no hay tipos definidos en la base de datos
       $tiposFalta = ["Falta sin Justificar", "Falta Justificada"];
@@ -74,7 +74,7 @@ function imprimirAlumnado($grupoSeleccionado, $fecha): void
         for ($falta = 0; $falta < $numFaltas; $falta++) {
           if ($faltas[$falta]['sesion'] == $sesion) {
             $existeFalta = "faltaExistente";
-            $checked = "checked";
+           // $checked = "checked";
             $readonly = "read-only";
             $idfalta = $faltas[$falta]['idfalta'];
             $tipoFalta = $faltas[$falta]['tipoFalta'];
@@ -84,7 +84,7 @@ function imprimirAlumnado($grupoSeleccionado, $fecha): void
         $nombreCheck = $alumno . "checkbox$sesion";
         echo "<div class=$existeFalta>" . "<input type='checkbox' $readonly " . "" . "class=secretoCorto name='$nombreCheck'  $checked >";
 
-        echo "<input type=hidden name=" . $sesion . "faltaExistente$alumno value=" . $idfalta . ">";
+        echo "<input type=hidden name=" . $alumno . "faltaExistente$sesion value=" . $idfalta . ">";
 
         echo "<input type=hidden name=cialAlumno$alumno value=" . $datosAlumno[$alumno]['cial'] . ">" .
           "<div class=secretoCorto>$sesion</div><p>" . $datosAlumno[$alumno]['nombre'] . " " . $datosAlumno[$alumno]['primer_apellido'] . " " . $datosAlumno[$alumno]['segundo_apellido'] .

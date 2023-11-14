@@ -14,13 +14,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     isset($_POST["cialAlumno" . $alumno]) ? $cialAlumno = $_POST["cialAlumno" . $alumno] : $isCorrecto = false;
                     if ($isCorrecto) {
                         $tipoFaltaAlumno = $alumno . "tipoFalta" . $sesion;
-                        isset($_POST[$tipoFaltaAlumno]) ? $tipoFalta = $_POST[$tipoFaltaAlumno] : $tipoFalta = "FIXME:";
+                        isset($_POST[$tipoFaltaAlumno]) ? $tipoFalta = $_POST[$tipoFaltaAlumno] : $tipoFalta = null;
                         $numSesion = $sesion;
-                        $nameFaltaExistente = $sesion . "faltaExistente$alumno ";
-                        if ($opcionSeleccionada == "crearFalta") {
+                        $nameFaltaExistente = $alumno . "faltaExistente" . $sesion;
+                        isset($_POST[$nameFaltaExistente]) ? $idFaltaExistente = $_POST[$nameFaltaExistente] : $idFaltaExistente = null;
+                        if ($opcionSeleccionada == "crearFalta" && $idFaltaExistente == null) {
                             try {
-                                //FIXME:
-                                //TODO: añadir el tipo de la falta al DB
                                 $conn = new PDO("mysql:host=$servername;dbname=faltas", $username, $password);
                                 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                                 $stmt = $conn->prepare("INSERT INTO `falta` ( `cial`, `idCorreo`, `sesion`, `dia`, `tipoFalta`,`fecha`) VALUES (:cialAlumno, :identificador, :numSesion, :fecha,:tipoFalta ,current_timestamp())");
@@ -34,8 +33,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             } catch (PDOException $e) {
                                 echo "Conneccion fallida: " . $e->getMessage();
                             }
-                        } else if ($opcionSeleccionada == "modificarFalta") {
-                            //TODO: Update falta
+                        } else if ($opcionSeleccionada == "modificarFalta" && $idFaltaExistente != null) {
+                            try {
+                                $conn = new PDO("mysql:host=$servername;dbname=faltas", $username, $password);
+                                $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                                $stmt = $conn->prepare("UPDATE `falta` SET `fecha` = current_timestamp(), `tipoFalta` = :tipoFalta WHERE `falta`.`idfalta` = :idFalta");
+                                $stmt->bindParam(':idFalta', $idFaltaExistente);
+                                $stmt->bindParam(':tipoFalta', $tipoFalta);
+                                $stmt->execute();
+                                $nameFaltaExistente = $sesion . "faltaExistente$alumno ";
+                            } catch (PDOException $e) {
+                                echo "Conneccion fallida: " . $e->getMessage();
+                            }
                         }
 
 
