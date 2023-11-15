@@ -34,40 +34,25 @@ if (!isset($_SESSION["identificador"])) {
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $dni = $_POST["dni"];
         $contrasena = $_POST["contrasena"];
-        try {
-            $conn = new PDO("mysql:host=$servername;dbname=faltas", $username, $password);
-            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $stmt = $conn->prepare("SELECT contrasena FROM  usuario where dni=:dni");
-            $stmt->bindParam(':dni', $dni);
-            $stmt->execute();
-            $contrasenaDB = $stmt->fetch();
-            // $datoMostrar[0]; contraseña
-            //Todo: Cambiar metodo a HASH
-            if ($contrasenaDB[0] == $contrasena) {
 
-                $stmt = $conn->prepare("SELECT * FROM  profesor where dni=:dni");
-                $stmt->bindParam(':dni', $dni);
-                $stmt->execute();
-                $datosProfesor = $stmt->fetch();
-                if (isset($datosProfesor[0])) {
-                    $_SESSION["tipoUsuario"] = "profesor";
-                    $_SESSION["identificador"] = $datosProfesor[0];
-                    header('Location: index.php');
-                } else {
-                    $stmt = $conn->prepare("SELECT * FROM  alumno where dni=:dni");
-                    $stmt->bindParam(':dni', $dni);
-                    $stmt->execute();
-                    $datosAlumno = $stmt->fetch();
+        $contrasenaDB = obtenerContrasena($dni);
+        //Todo: Cambiar metodo a HASH
+        if ($contrasenaDB[0] == $contrasena) {
 
-                    $_SESSION["tipoUsuario"] = "alumno";
-                    $_SESSION["identificador"] = $datosAlumno[0];
-                    header('Location: index.php');
-                }
+            $datosProfesor = obtenerProfesorDni($dni);
+            if (isset($datosProfesor[0])) {
+                $_SESSION["tipoUsuario"] = "profesor";
+                $_SESSION["identificador"] = $datosProfesor[0];
+                header('Location: index.php');
+            } else {
+                $datosAlumno = obtenerAlumnoDni($dni);
+
+                $_SESSION["tipoUsuario"] = "alumno";
+                $_SESSION["identificador"] = $datosAlumno[0];
+                header('Location: index.php');
             }
-            $conn = "";
-        } catch (PDOException $e) {
-            echo "Conneccion fallida: " . $e->getMessage();
         }
+
     }
 
     ?>

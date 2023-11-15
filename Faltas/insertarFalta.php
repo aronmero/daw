@@ -1,7 +1,7 @@
 <?php
 //require "../../../dbinfo/loginInfo.php";
 session_start();
-require "../loginInfo.php";
+require "./coneccionDb.php";
 require "./logicaAUX.php";
 require "./logicaFalta.php";
 
@@ -29,7 +29,7 @@ if (isset($_POST["faltaSeleccionado"])) {
 } else if (isset($_SESSION["faltaSeleccionado"])) {
     $accionFaltaSeleccionada = $_SESSION["faltaSeleccionado"];
 } else {
-    $accionFaltaSeleccionada =null;
+    $accionFaltaSeleccionada = null;
 }
 
 //Obtener idCorreo profesor
@@ -63,29 +63,22 @@ if (isset($_SESSION["identificador"])) {
 
     <h1>Lista de alumnos</h1>
     <?php
-    try {
-        $conn = new PDO("mysql:host=$servername;dbname=faltas", $username, $password);
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        ImprimirCurso($conn, $grupoSeleccionado);
-        $conn = "";
-    } catch (PDOException $e) {
-        echo "Conneccion fallida: " . $e->getMessage();
-    }
+    ImprimirCurso($grupoSeleccionado);
     ?>
     <form method="POST" action="<?php echo $_SERVER["PHP_SELF"]; ?>">
         <div class="selectorFecha"><label>Seleccionar fecha:</label><input type="date" name="fecha" required value=<?php echo $fechaSeleccionado; ?>> </div>
         <?php imprimirAlumnado($grupoSeleccionado, $fechaSeleccionado) ?>
 
         <div class="selectorOpciones">
-        <?php  imprimirAccionFalta($accionFaltaSeleccionada);?>
-        <div class="enviarFalta"><input type="submit" value=Enviar></div>
+            <?php imprimirAccionFalta($accionFaltaSeleccionada); ?>
+            <div class="enviarFalta"><input type="submit" value=Enviar></div>
         </div>
 
-        
+
     </form>
 
     <a href="index.php">Volver</a>
-    <script src="./js/logicaListaAlumnos.js"></script>
+    <script src="./js/logicaFaltas.js"></script>
     <script src="./js/seleccionGrupos.js"></script>
     <script src="./js/seleccionFecha.js"></script>
     <script src="./js/seleccionFalta.js"></script>

@@ -2,17 +2,17 @@ let opcionesFalta = document.getElementsByClassName("selectorFalta")[0].getEleme
 
 for (let index = 0; index < opcionesFalta.length; index++) {
   const element = opcionesFalta[index];
-  element.addEventListener("click", cambiarSeleccion);
+  element.addEventListener("click", cambiarSeleccionFalta);
 }
 
-function cambiarSeleccion() {
-  eliminarSeleccion();
+function cambiarSeleccionFalta() {
+  eliminarSeleccionFalta();
   this.classList.add("seleccionado");
   this.childNodes[0].setAttribute("name","faltaSeleccionado");
   this.childNodes[0].setAttribute("value",this.childNodes[0].id);
 }
 
-function eliminarSeleccion() {
+function eliminarSeleccionFalta() {
   for (let index = 0; index < opcionesFalta.length; index++) {
     const element = opcionesFalta[index];
     element.classList.remove("seleccionado");
@@ -22,17 +22,3 @@ function eliminarSeleccion() {
   }
 }
 
-function generarFormulario(webPHP,nombre, valor) {
-  let formulario = document.createElement("form");
-  formulario.action =webPHP;
-  formulario.method = "POST";
-  formulario.setAttribute("name", "autoFormulario");
-  let input = document.createElement("input");
-  input.setAttribute("hidden", "");
-  input.setAttribute("type", "text");
-  input.setAttribute("value", valor);
-  input.setAttribute("name", nombre);
-  document.body.appendChild(formulario);
-  formulario.appendChild(input);
-  document.autoFormulario.submit();
-}
