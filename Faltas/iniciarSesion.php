@@ -1,15 +1,22 @@
 <?php
 //require "../../../dbinfo/loginInfo.php";
-require "../loginInfo.php";
-session_start();
+require "./coneccionDb.php";
+if (session_status() !== PHP_SESSION_ACTIVE) {
+    session_start();
+};
 
 if (!isset($_SESSION["tipoUsuario"])) {
     $_SESSION["tipoUsuario"] = null;
+} else {
+    header("Location:index.php");
 }
 
 if (!isset($_SESSION["identificador"])) {
     $_SESSION["identificador"] = null;
+} else {
+    header("Location:index.php");
 }
+
 
 ?>
 <!DOCTYPE html>
@@ -52,10 +59,10 @@ if (!isset($_SESSION["identificador"])) {
                 header('Location: index.php');
             }
         }
-
     }
 
     ?>
+    <a href="index.php">Volver</a>
 </body>
 
 </html>

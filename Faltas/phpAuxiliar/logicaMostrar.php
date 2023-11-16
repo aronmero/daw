@@ -1,36 +1,31 @@
 <?php
-require "../loginInfo.php";
+
 
 function ImprimirCurso($grupoSeleccionado)
 {
   $infoCursos = obtenerCurso();
   echo "<div class=selectorCurso>";
-
   for ($i = 0; $i < count($infoCursos); $i++) {
-
     $botonMostrar = ($grupoSeleccionado == $infoCursos[$i][1]) ? "<div class=seleccionado id=" . $infoCursos[$i][1] . ">" . $infoCursos[$i][0] . "</div>" : "<div id=" . $infoCursos[$i][1] . ">" . $infoCursos[$i][0] . "</div>";
     echo $botonMostrar;
   }
   echo "</div>";
-
 }
 
 
 function imprimirAccionFalta($accionFaltaSeleccionada)
 {
   $accionesFalta = array("crearFalta" => "Crear faltas", "modificarFalta" => "Modificar faltas");
-  echo "<div class=selectorFalta>";
+  echo "<div class=selectorFalta id=selectorFalta>";
   foreach ($accionesFalta as $idAccion => $textoAccion) {
-    $botonMostrar = ($idAccion == $accionFaltaSeleccionada) ? "<div  class=seleccionado>$textoAccion<input id=$idAccion type=hidden></div>" : "<div><input id=$idAccion type=hidden>$textoAccion</div>";
+    $botonMostrar = ($idAccion == $accionFaltaSeleccionada) ? "<div  class=seleccionado><input id=$idAccion type=hidden name=faltaSeleccionado value=$idAccion>$textoAccion</div>" : "<div><input id=$idAccion type=hidden>$textoAccion</div>";
     echo $botonMostrar;
   }
   echo "</div>";
 }
 
-function imprimirAlumnado($grupoSeleccionado, $fecha): void
+function imprimirAlumnado($grupoSeleccionado, $fecha)
 {
-  require "../loginInfo.php";
-
   echo '<div class="encabezado"><div>Check</div><div>Sesion</div><div>Nombre y apellidos</div><div>Tipo de falta</div></div>';
   $datosAlumno = obtenerAlumnoGrupo($grupoSeleccionado);
   $longitud = count($datosAlumno);
@@ -41,6 +36,7 @@ function imprimirAlumnado($grupoSeleccionado, $fecha): void
     }
     $cialAlumnoMostrar = $datosAlumno[$alumno]['cial'];
     $faltas = obtenerFaltasFecha($cialAlumnoMostrar, $fecha);
+    
     $numFaltas = count($faltas);
     $tiposFalta = ["Falta sin Justificar", "Falta Justificada"];
     echo "<div class=datosAlumno>";
@@ -52,19 +48,17 @@ function imprimirAlumnado($grupoSeleccionado, $fecha): void
     }
     echo "</select><div>Eliminar</div></div>";
 
-    //Array con tipos de falta, como no hay tipos definidos en la base de datos
-
     for ($sesion = 1; $sesion <= 6; $sesion++) {
       $checked = "";
       $existeFalta = "";
       $idfalta = "";
-      $readonly = "";
+    
       $tipoFalta = $tiposFalta[0];
       for ($falta = 0; $falta < $numFaltas; $falta++) {
         if ($faltas[$falta]['sesion'] == $sesion) {
           $existeFalta = "faltaExistente";
           // $checked = "checked";
-          $readonly = "read-only";
+        
           $idfalta = $faltas[$falta]['idfalta'];
           $tipoFalta = $faltas[$falta]['tipoFalta'];
           break;
@@ -72,8 +66,8 @@ function imprimirAlumnado($grupoSeleccionado, $fecha): void
       }
       $nombreCheck = $alumno . "checkbox$sesion";
 
-      $botonEliminarFalta = $existeFalta != "" ? "<input type=checkbox name=" . $alumno . "eliminarFalta$sesion>" : "";
-      echo "<div class=$existeFalta>" . "<input type='checkbox' $readonly " . "" . "class=secretoCorto name='$nombreCheck'  $checked >";
+      $botonEliminarFalta = $existeFalta != "" ? "<input type=checkbox class=botonEliminar name=" . $alumno . "eliminarFalta$sesion>" : "";
+      echo "<div class=$existeFalta >" . "<input type='checkbox'  " . "" . "class=secretoCorto name='$nombreCheck'  $checked >";
 
       echo "<input type=hidden name=" . $alumno . "faltaExistente$sesion value=" . $idfalta . ">";
 

@@ -1,9 +1,17 @@
 <?php
-//require "../../../dbinfo/loginInfo.php";
-session_start();
+if (session_status() !== PHP_SESSION_ACTIVE) {
+    session_start();
+};
 require "./coneccionDb.php";
-require "./logicaAUX.php";
-require "./logicaFalta.php";
+require "./phpAuxiliar/logicaMostrar.php";
+require "./phpAuxiliar/logicaFalta.php";
+
+if (!isset($_SESSION["identificador"])) {
+    header("Location:index.php");
+}
+if (isset($_SESSION["tipoUsuario"]) && $_SESSION["tipoUsuario"] != "profesor") {
+    header("Location:index.php");
+}
 
 if (isset($_POST["grupoSeleccionado"])) {
     $_SESSION["grupoSeleccionado"] = $_POST["grupoSeleccionado"];
@@ -53,9 +61,6 @@ if (isset($_SESSION["identificador"])) {
 <body>
     <?php if (isset($_SESSION["recargarPagina"]) && $_SESSION["recargarPagina"] == true) {
         //Evitar reenvios de formulario
-        //unset($_SESSION["grupoSeleccionado"]);
-        //unset($_SESSION["fechaSeleccionado"]);
-        unset($_SESSION["faltaSeleccionado"]);
         unset($_SESSION["recargarPagina"]);
         header("Location: insertarFalta.php");
     } ?>

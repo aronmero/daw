@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             if (isset($_POST["$nameFaltaEliminar"])) {
                                 eliminarFalta($idFaltaExistente);
                             } else {
-                                actualizarFalta($sesion, $alumno);
+                                actualizarFalta($idFaltaExistente, $tipoFalta);
                             }
                         }
                     } //Evitar repeticion de peticion de formulario al refrescar

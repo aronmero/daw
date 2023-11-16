@@ -1,8 +1,7 @@
 <?php
-session_start();
+if (session_status() !== PHP_SESSION_ACTIVE) {
+    session_start();
+};
 
-$_SESSION["identificador"]=null;
-$_SESSION["tipoUsuario"]=null;
-
-
+session_destroy();
 header("Location: index.php");

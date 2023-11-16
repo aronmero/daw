@@ -1,5 +1,6 @@
 <?php
 require "../loginInfo.php";
+
 $conn = generarConeccion();
 
 function anadirLogErrores($sql, $error)
@@ -29,7 +30,7 @@ function generarConeccion()
     return null;
 }
 
-function actualizarFalta($sesion, $alumno)
+function actualizarFalta($idFaltaExistente, $tipoFalta)
 {
     global $conn;
     try {
@@ -39,8 +40,6 @@ function actualizarFalta($sesion, $alumno)
         $stmt->bindParam(':idFalta', $idFaltaExistente);
         $stmt->bindParam(':tipoFalta', $tipoFalta);
         $stmt->execute();
-        $nameFaltaExistente = $sesion . "faltaExistente$alumno ";
-
     } catch (PDOException $e) {
         anadirLogErrores($sql, $e->getMessage());
     }
@@ -55,7 +54,6 @@ function eliminarFalta($idFaltaExistente)
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':idFalta', $idFaltaExistente);
         $stmt->execute();
-
     } catch (PDOException $e) {
         anadirLogErrores($sql, $e->getMessage());
     }
@@ -74,7 +72,6 @@ function anadirFalta($cialAlumno, $identificador, $numSesion, $tipoFalta, $fecha
         $stmt->bindParam(':tipoFalta', $tipoFalta);
         $stmt->bindParam(':fecha', $fecha);
         $stmt->execute();
-
     } catch (PDOException $e) {
         anadirLogErrores($sql, $e->getMessage());
     }
@@ -88,11 +85,11 @@ function obtenerCurso(): array|null
         $stmt = $conn->prepare($sql);
         $stmt->execute();
         $infoCursos = $stmt->fetchAll();
-        return $infoCursos;
+        return $infoCursos !== false ? $infoCursos : null;
     } catch (PDOException $e) {
         anadirLogErrores($sql, $e->getMessage());
+        return null;
     }
-    return null;
 }
 
 function obtenerAlumnoGrupo($grupoSeleccionado): array|null
@@ -104,11 +101,11 @@ function obtenerAlumnoGrupo($grupoSeleccionado): array|null
         $stmt->bindParam(':idCurso', $grupoSeleccionado);
         $stmt->execute();
         $datosAlumno = $stmt->fetchAll();
-        return $datosAlumno;
+        return $datosAlumno !== false ? $datosAlumno : null;
     } catch (PDOException $e) {
         anadirLogErrores($sql, $e->getMessage());
+        return null;
     }
-    return null;
 }
 
 
@@ -122,11 +119,11 @@ function obtenerFaltasFecha($cialAlumnoMostrar, $fecha): array|null
         $stmt->bindParam(':dia', $fecha);
         $stmt->execute();
         $faltas = $stmt->fetchAll();
-        return $faltas;
+        return $faltas !== false ? $faltas : null;
     } catch (PDOException $e) {
         anadirLogErrores($sql, $e->getMessage());
+        return null;
     }
-    return null;
 }
 
 function obtenerFaltasAlumno($cialAlumnoMostrar): array|null
@@ -136,31 +133,30 @@ function obtenerFaltasAlumno($cialAlumnoMostrar): array|null
         $sql = "SELECT * FROM falta inner join alumno on falta.cial=alumno.cial where falta.cial=:cial";
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':cial', $cialAlumnoMostrar);
-        $stmt->bindParam(':dia', $fecha);
         $stmt->execute();
         $datosAlumno = $stmt->fetchAll();
-        return $datosAlumno;
+        return $datosAlumno !== false ? $datosAlumno : null;
     } catch (PDOException $e) {
         anadirLogErrores($sql, $e->getMessage());
+        return null;
     }
-    return null;
 }
 
 
-function obtenerAlumnoCial(): array|null
+function obtenerAlumnoCial($cial): array|null
 {
     global $conn;
     try {
         $sql = "SELECT * FROM  alumno where cial=:cial";
         $stmt = $conn->prepare($sql);
-        $stmt->bindParam(':cial', $_SESSION["identificador"]);
+        $stmt->bindParam(':cial', $cial);
         $stmt->execute();
         $infoAlumno = $stmt->fetch();
-        return $infoAlumno;
+        return $infoAlumno !== false ? $infoAlumno : null;
     } catch (PDOException $e) {
         anadirLogErrores($sql, $e->getMessage());
+        return null;
     }
-    return null;
 }
 
 function obtenerFaltasAlumnoProfesor($grupoSeleccionado): array|null
@@ -172,11 +168,11 @@ function obtenerFaltasAlumnoProfesor($grupoSeleccionado): array|null
         $stmt->bindParam(':idCurso', $grupoSeleccionado);
         $stmt->execute();
         $datosAlumno = $stmt->fetchAll();
-        return $datosAlumno;
+        return $datosAlumno !== false ? $datosAlumno : null;;
     } catch (PDOException $e) {
         anadirLogErrores($sql, $e->getMessage());
+        return null;
     }
-    return null;
 }
 
 function obtenerProfesor($identificador): array|null
@@ -188,11 +184,11 @@ function obtenerProfesor($identificador): array|null
         $stmt->bindParam(':idCorreo', $identificador);
         $stmt->execute();
         $infoProfesor = $stmt->fetch();
-        return $infoProfesor;
+        return $infoProfesor !== false ? $infoProfesor : null;
     } catch (PDOException $e) {
         anadirLogErrores($sql, $e->getMessage());
+        return null;
     }
-    return null;
 }
 
 function obtenerContrasena($dni): array|null
@@ -204,15 +200,15 @@ function obtenerContrasena($dni): array|null
         $stmt->bindParam(':dni', $dni);
         $stmt->execute();
         $contrasenaDB = $stmt->fetch();
-        return $contrasenaDB;
+        return $contrasenaDB !== false ? $contrasenaDB : null;
     } catch (PDOException $e) {
         anadirLogErrores($sql, $e->getMessage());
+        return null;
     }
-    return null;
 }
 
 
-function obtenerProfesorDni($dni): array|null
+function obtenerProfesorDni($dni): array | null
 {
     global $conn;
     try {
@@ -221,11 +217,11 @@ function obtenerProfesorDni($dni): array|null
         $stmt->bindParam(':dni', $dni);
         $stmt->execute();
         $datosProfesor = $stmt->fetch();
-        return $datosProfesor;
+        return $datosProfesor !== false ? $datosProfesor : null;
     } catch (PDOException $e) {
         anadirLogErrores($sql, $e->getMessage());
+        return null;
     }
-    return null;
 }
 
 function obtenerAlumnoDni($dni): array|null
@@ -237,9 +233,9 @@ function obtenerAlumnoDni($dni): array|null
         $stmt->bindParam(':dni', $dni);
         $stmt->execute();
         $datosAlumno = $stmt->fetch();
-        return $datosAlumno;
+        return $datosAlumno !== false ? $datosAlumno : null;
     } catch (PDOException $e) {
         anadirLogErrores($sql, $e->getMessage());
+        return null;
     }
-    return null;
 }

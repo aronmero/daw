@@ -1,7 +1,14 @@
 <?php
 require "./coneccionDb.php";
-require "./logicaAUX.php";
-session_start();
+require "./phpAuxiliar/logicaMostrar.php";
+if (session_status() !== PHP_SESSION_ACTIVE) {
+  session_start();
+};
+
+if (!isset($_SESSION["identificador"]) ||!isset($_SESSION["tipoUsuario"]) ) {
+  header("Location:index.php");
+}
+
 if (isset($_POST["grupoSeleccionado"])) {
   $grupoSeleccionado = $_POST["grupoSeleccionado"];
 } else {
@@ -26,8 +33,10 @@ if (isset($_POST["grupoSeleccionado"])) {
 
   <?php
   if ($_SESSION["tipoUsuario"] == "alumno") {
-    $infoAlumno = obtenerAlumnoCial();
+    $cialAlumnoMostrar=$_SESSION["identificador"];
+    $infoAlumno = obtenerAlumnoCial($cialAlumnoMostrar);
     echo "<div id=infoFalta><div>Cial:" . $infoAlumno[0] . "</div><div>DNI: " . $infoAlumno[1] . "</div><div>Grupo: " . $infoAlumno[2] . "</div></div>";
+    
     $datosAlumno = obtenerFaltasAlumno($cialAlumnoMostrar);
     $longitud = count($datosAlumno);
 
