@@ -1,13 +1,13 @@
 let fecha = document.getElementsByClassName("selectorFecha")[0].getElementsByTagName("input")[0];
-const element = fecha;
-element.addEventListener("change", cambiarSeleccionFecha);
+const selectorFecha = fecha;
+selectorFecha.addEventListener("change", cambiarSeleccionFecha);
 
 function cambiarSeleccionFecha() {
  
-  generarFormularioFecha(document.location.pathname,"fechaSeleccionado", this.value,"date");
+  generarFormulario(document.location.pathname,"fechaSeleccionado", this.value,"date");
 }
 
-function generarFormularioFecha(webPHP,nombre, valor,atributoInput) {
+function generarFormulario(webPHP,nombre, valor,atributoInput) {
   let formulario = document.createElement("form");
   formulario.action =webPHP;
   formulario.method = "POST";

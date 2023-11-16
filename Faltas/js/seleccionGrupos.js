@@ -19,14 +19,14 @@ function eliminarSeleccion() {
   }
 }
 
-function generarFormulario(webPHP,nombre, valor) {
+function generarFormulario(webPHP,nombre, valor,atributoInput) {
   let formulario = document.createElement("form");
   formulario.action =webPHP;
   formulario.method = "POST";
   formulario.setAttribute("name", "autoFormulario");
   let input = document.createElement("input");
   input.setAttribute("hidden", "");
-  input.setAttribute("type", "text");
+  input.setAttribute("type", atributoInput);
   input.setAttribute("value", valor);
   input.setAttribute("name", nombre);
   document.body.appendChild(formulario);
