@@ -6,7 +6,9 @@ function ImprimirCurso($identificacion,$grupoSeleccionado)
   $infoCursos = obtenerCursoImpartido($identificacion);
   echo "<div class=selectorCurso>";
   for ($i = 0; $i < count($infoCursos); $i++) {
-    $botonMostrar = ($grupoSeleccionado == $infoCursos[$i]['idCurso']) ? "<div class=seleccionado id=" . $infoCursos[$i]['idCurso'] . ">" . $infoCursos[$i]['nombre'] . "</div>" : "<div id=" . $infoCursos[$i]['idCurso'] . ">" . $infoCursos[$i]['nombre'] . "</div>";
+    $botonMostrar = ($grupoSeleccionado == $infoCursos[$i]['idCurso']) ? 
+    "<div class=seleccionado id=" . $infoCursos[$i]['idCurso'] . ">" . $infoCursos[$i]['nombre'] . "</div>" 
+     : "<div id=" . $infoCursos[$i]['idCurso'] . ">" . $infoCursos[$i]['nombre'] . "</div>";
     echo $botonMostrar;
   }
   echo "</div>";

@@ -3,7 +3,8 @@ require "./coneccionDb.php";
 require "./phpAuxiliar/logicaMostrar.php";
 if (session_status() !== PHP_SESSION_ACTIVE) {
   session_start();
-};
+}
+;
 
 if (!isset($_SESSION["identificador"]) || !isset($_SESSION["tipoUsuario"])) {
   header("Location:index.php");
@@ -65,9 +66,9 @@ $offset = $maxNumFaltas * (intval($_SESSION["numPaginaVistaActual"]) - 1);
   if ($_SESSION["tipoUsuario"] == "alumno") {
     $cialAlumnoMostrar = $_SESSION["identificador"];
     $infoAlumno = obtenerAlumnoCial($cialAlumnoMostrar);
-    echo "<div id=infoFalta><div>Cial:" . $infoAlumno[0] . "</div><div>DNI: " . $infoAlumno[1] . "</div><div>Grupo: " . $infoAlumno[2] . "</div></div>";
+    echo "<div id=infoFalta><div>Cial:" . $infoAlumno['cial'] . "</div><div>DNI: " . $infoAlumno['dni'] . "</div><div>Grupo: " . $infoAlumno['nombre'] . "</div></div>";
 
-    $datosAlumno = obtenerFaltasAlumno($cialAlumnoMostrar , $offset, $maxNumFaltas);
+    $datosAlumno = obtenerFaltasAlumno($cialAlumnoMostrar, $offset, $maxNumFaltas);
     $longitud = count($datosAlumno);
 
     echo "<div><div class='mostrarFaltas encabezado'>" . "<div>Fecha</div><div>" . "Sesion" . " </div><div>" . "Tipo falta" . "</div></div>";
@@ -83,17 +84,17 @@ $offset = $maxNumFaltas * (intval($_SESSION["numPaginaVistaActual"]) - 1);
     $infoProfesor = obtenerProfesor($identificador);
 
     echo "<div id=infoFalta><div>Profesor: $infoProfesor[0] $infoProfesor[1] $infoProfesor[2] </div><div>DNI: " . $infoProfesor['dni'] . "</div><div>Correo: " . $infoProfesor[5] . "</div></div>";
-    ImprimirCurso($grupoSeleccionado);
+    ImprimirCurso($identificador, $grupoSeleccionado);
     echo "<div><div class='mostrarFaltas mostrarFaltasProfesor encabezado'>" . "<div>Fecha</div><div>" . "Sesion" . " </div><div>" . "Tipo falta" . "</div><div>" . "Alumno" . " </div><div>" . "DNI" . " </div></div>";
 
     $datosAlumno = obtenerFaltasAlumnoProfesor($grupoSeleccionado, $offset, $maxNumFaltas);
+    
     $longitud = (count($datosAlumno) > $maxNumFaltas) ? $maxNumFaltas : count($datosAlumno);
-
     for ($alumno = 0; $alumno < $longitud; $alumno++) {
-      echo "<div class='mostrarFaltas mostrarFaltasProfesor'>" . 
-      "<div>" . $datosAlumno[$alumno]['dia'] . "</div><div>" . $datosAlumno[$alumno]['sesion'] . " </div><div>" .
+      echo "<div class='mostrarFaltas mostrarFaltasProfesor'>" .
+        "<div>" . $datosAlumno[$alumno]['dia'] . "</div><div>" . $datosAlumno[$alumno]['sesion'] . " </div><div>" .
         $datosAlumno[$alumno]['tipoFalta'] . "</div><div>" .
-         $datosAlumno[$alumno]['nombre'] . " " . $datosAlumno[$alumno]['primer_apellido'] . " " . $datosAlumno[$alumno]['segundo_apellido'] .
+        $datosAlumno[$alumno]['nombre'] . " " . $datosAlumno[$alumno]['primer_apellido'] . " " . $datosAlumno[$alumno]['segundo_apellido'] .
         " </div><div>" . $datosAlumno[$alumno]['dni'] . " </div></div>";
     }
     echo "</div>";

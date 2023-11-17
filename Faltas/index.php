@@ -5,8 +5,6 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
 if (!isset($_SESSION["tipoUsuario"])) {
     $_SESSION["tipoUsuario"] = null;
 }
-unset($_SESSION["grupoSeleccionado"]);
-unset($_SESSION["fechaSeleccionado"]);
 
 ?>
 <!DOCTYPE html>

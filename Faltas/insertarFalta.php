@@ -12,7 +12,7 @@ if (!isset($_SESSION["identificador"])) {
 if (isset($_SESSION["tipoUsuario"]) && $_SESSION["tipoUsuario"] != "profesor") {
     header("Location:index.php");
 }
-
+$identificador = $_SESSION["identificador"];
 if (isset($_POST["grupoSeleccionado"])) {
     $_SESSION["grupoSeleccionado"] = $_POST["grupoSeleccionado"];
     $grupoSeleccionado = $_SESSION["grupoSeleccionado"];
@@ -31,19 +31,7 @@ if (isset($_POST["fechaSeleccionado"])) {
     $fechaSeleccionado = date("Y-m-d");
 }
 
-if (isset($_POST["faltaSeleccionado"])) {
-    $_SESSION["faltaSeleccionado"] = $_POST["faltaSeleccionado"];
-    $accionFaltaSeleccionada = $_SESSION["faltaSeleccionado"];
-} else if (isset($_SESSION["faltaSeleccionado"])) {
-    $accionFaltaSeleccionada = $_SESSION["faltaSeleccionado"];
-} else {
-    $accionFaltaSeleccionada = null;
-}
 
-//Obtener idCorreo profesor
-if (isset($_SESSION["identificador"])) {
-    $identificador = $_SESSION["identificador"];
-}
 
 ?>
 <!DOCTYPE html>
@@ -60,7 +48,6 @@ if (isset($_SESSION["identificador"])) {
 
 <body>
     <?php if (isset($_SESSION["recargarPagina"]) && $_SESSION["recargarPagina"] == true) {
-        //Evitar reenvios de formulario
         unset($_SESSION["recargarPagina"]);
         header("Location: insertarFalta.php");
     } ?>
@@ -78,8 +65,6 @@ if (isset($_SESSION["identificador"])) {
            
             <div class="enviarFalta"><input type="submit" value=Enviar></div>
         </div>
-
-
     </form>
 
     <a href="index.php">Volver</a>
