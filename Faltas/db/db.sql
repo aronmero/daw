@@ -34,8 +34,10 @@ CREATE TABLE falta(
     dia date,
     fecha datetime DEFAULT CURRENT_TIMESTAMP,
     tipoFalta VARCHAR(30) NOT NULL DEFAULT 'Falta sin Justificar',
+    idCurso varchar(9) NOT NULL,
     CONSTRAINT fal_idf_pk PRIMARY key (idfalta),
     CONSTRAINT fal_idco_fk FOREIGN key (idCorreo) REFERENCES profesor(idCorreo),
+    CONSTRAINT fal_idcu_fk FOREIGN key (idCurso) REFERENCES curso(idCurso),
     CONSTRAINT fal_cial_fk FOREIGN key (cial) REFERENCES alumno(cial)
 );
 create table imparte(

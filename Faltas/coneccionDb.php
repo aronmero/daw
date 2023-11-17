@@ -59,30 +59,32 @@ function eliminarFalta($idFaltaExistente)
     }
 }
 
-function anadirFalta($cialAlumno, $identificador, $numSesion, $tipoFalta, $fecha)
+function anadirFalta($cialAlumno, $identificador, $numSesion, $tipoFalta, $fecha,$idCurso)
 {
     global $conn;
     try {
 
-        $sql = "INSERT INTO `falta` ( `cial`, `idCorreo`, `sesion`, `dia`, `tipoFalta`,`fecha`) VALUES (:cialAlumno, :identificador, :numSesion, :fecha,:tipoFalta ,current_timestamp())";
+        $sql = "INSERT INTO `falta` ( `cial`, `idCorreo`, `sesion`, `dia`, `tipoFalta`,`fecha`,`idCurso`) VALUES (:cialAlumno, :identificador, :numSesion, :fecha,:tipoFalta ,current_timestamp(),:idCurso)";
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':cialAlumno', $cialAlumno);
         $stmt->bindParam(':identificador', $identificador);
         $stmt->bindParam(':numSesion', $numSesion);
         $stmt->bindParam(':tipoFalta', $tipoFalta);
         $stmt->bindParam(':fecha', $fecha);
+        $stmt->bindParam(':idCurso', $idCurso);
         $stmt->execute();
     } catch (PDOException $e) {
         anadirLogErrores($sql, $e->getMessage());
     }
 }
 
-function obtenerCurso(): array|null
+function obtenerCursoImpartido($idCorreo): array|null
 {
     global $conn;
     try {
-        $sql = "SELECT * FROM  curso ";
+        $sql = "SELECT * FROM  curso inner join imparte on curso.idCurso=imparte.idCurso where idCorreo=:idCorreo";
         $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':idCorreo', $idCorreo);
         $stmt->execute();
         $infoCursos = $stmt->fetchAll();
         return $infoCursos !== false ? $infoCursos : null;
@@ -112,14 +114,15 @@ function obtenerAlumnoGrupo($grupoSeleccionado): array|null
 }
 
 
-function obtenerFaltasFecha($cialAlumnoMostrar, $fecha): array|null
+function obtenerFaltasFecha($cialAlumnoMostrar, $fecha,$idCurso): array|null
 {
     global $conn;
     try {
-        $sql = "SELECT * FROM falta  where cial=:cial and dia=:dia";
+        $sql = "SELECT * FROM falta  where cial=:cial and dia=:dia and idCurso=:idCurso";
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':cial', $cialAlumnoMostrar);
         $stmt->bindParam(':dia', $fecha);
+        $stmt->bindParam(':idCurso', $idCurso);
         $stmt->execute();
         $faltas = $stmt->fetchAll();
         return $faltas !== false ? $faltas : null;

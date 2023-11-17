@@ -17,8 +17,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         $numSesion = $sesion;
                         $nameFaltaExistente = $alumno . "faltaExistente" . $sesion;
                         isset($_POST[$nameFaltaExistente]) ? $idFaltaExistente = $_POST[$nameFaltaExistente] : $idFaltaExistente = null;
-                        if ( $idFaltaExistente == null) {
-                            anadirFalta($cialAlumno, $identificador, $numSesion, $tipoFalta, $fecha);
+                        if ($idFaltaExistente == null) {
+                            anadirFalta($cialAlumno, $identificador, $numSesion, $tipoFalta, $fecha, $_SESSION["grupoSeleccionado"]);
                         } else if ($idFaltaExistente != null) {
                             $nameFaltaEliminar = $alumno . "eliminarFalta" . $sesion;
                             if (isset($_POST["$nameFaltaEliminar"])) {

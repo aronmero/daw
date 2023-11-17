@@ -68,7 +68,7 @@ if (isset($_SESSION["identificador"])) {
 
     <h1>Lista de alumnos</h1>
     <?php
-    ImprimirCurso($grupoSeleccionado);
+    ImprimirCurso($identificador,$grupoSeleccionado);
     ?>
     <form method="POST" action="<?php echo $_SERVER["PHP_SELF"]; ?>">
         <div class="selectorFecha"><label>Seleccionar fecha:</label><input type="date" name="fecha" required value=<?php echo $fechaSeleccionado; ?>> </div>

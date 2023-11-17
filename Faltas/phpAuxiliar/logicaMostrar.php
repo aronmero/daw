@@ -1,12 +1,12 @@
 <?php
 
 
-function ImprimirCurso($grupoSeleccionado)
+function ImprimirCurso($identificacion,$grupoSeleccionado)
 {
-  $infoCursos = obtenerCurso();
+  $infoCursos = obtenerCursoImpartido($identificacion);
   echo "<div class=selectorCurso>";
   for ($i = 0; $i < count($infoCursos); $i++) {
-    $botonMostrar = ($grupoSeleccionado == $infoCursos[$i][1]) ? "<div class=seleccionado id=" . $infoCursos[$i][1] . ">" . $infoCursos[$i][0] . "</div>" : "<div id=" . $infoCursos[$i][1] . ">" . $infoCursos[$i][0] . "</div>";
+    $botonMostrar = ($grupoSeleccionado == $infoCursos[$i]['idCurso']) ? "<div class=seleccionado id=" . $infoCursos[$i]['idCurso'] . ">" . $infoCursos[$i]['nombre'] . "</div>" : "<div id=" . $infoCursos[$i]['idCurso'] . ">" . $infoCursos[$i]['nombre'] . "</div>";
     echo $botonMostrar;
   }
   echo "</div>";
@@ -35,7 +35,7 @@ function imprimirAlumnado($grupoSeleccionado, $fecha)
       $fecha = date("Y-m-d");
     }
     $cialAlumnoMostrar = $datosAlumno[$alumno]['cial'];
-    $faltas = obtenerFaltasFecha($cialAlumnoMostrar, $fecha);
+    $faltas = obtenerFaltasFecha($cialAlumnoMostrar, $fecha,$grupoSeleccionado);
 
     $numFaltas = count($faltas);
     $tiposFalta = ["Falta sin Justificar", "Falta Justificada"];
