@@ -126,13 +126,15 @@ function obtenerFaltasFecha($cialAlumnoMostrar, $fecha): array|null
     }
 }
 
-function obtenerFaltasAlumno($cialAlumnoMostrar): array|null
+function obtenerFaltasAlumno($cialAlumnoMostrar,$offset,$numFaltas): array|null
 {
     global $conn;
     try {
-        $sql = "SELECT * FROM falta inner join alumno on falta.cial=alumno.cial where falta.cial=:cial";
+        $sql = "SELECT * FROM falta inner join alumno on falta.cial=alumno.cial where falta.cial=:cial ORDER BY falta.dia DESC limit :offset , :numFaltas";
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':cial', $cialAlumnoMostrar);
+        $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
+        $stmt->bindParam(':numFaltas', $numFaltas, PDO::PARAM_INT);
         $stmt->execute();
         $datosAlumno = $stmt->fetchAll();
         return $datosAlumno !== false ? $datosAlumno : null;
@@ -159,16 +161,50 @@ function obtenerAlumnoCial($cial): array|null
     }
 }
 
-function obtenerFaltasAlumnoProfesor($grupoSeleccionado): array|null
+function obtenerFaltasAlumnoProfesor($grupoSeleccionado,$offset,$numFaltas): array|null
 {
     global $conn;
     try {
-        $sql = "SELECT * FROM falta inner join alumno on falta.cial=alumno.cial inner join usuario on alumno.dni=usuario.dni WHERE idCurso=:idCurso";
+        $sql = "SELECT * FROM falta inner join alumno on falta.cial=alumno.cial inner join usuario on alumno.dni=usuario.dni WHERE idCurso=:idCurso ORDER BY falta.dia DESC,falta.cial, falta.sesion limit :offset , :numFaltas";
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':idCurso', $grupoSeleccionado);
+        $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
+        $stmt->bindParam(':numFaltas', $numFaltas, PDO::PARAM_INT);
         $stmt->execute();
         $datosAlumno = $stmt->fetchAll();
         return $datosAlumno !== false ? $datosAlumno : null;;
+    } catch (PDOException $e) {
+        anadirLogErrores($sql, $e->getMessage());
+        return null;
+    }
+}
+
+function obtenernNumFaltaGrupo($grupoSeleccionado): int|null
+{
+    global $conn;
+    try {
+        $sql = "SELECT count(idfalta) FROM falta inner join alumno on falta.cial=alumno.cial WHERE idCurso=:idCurso";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':idCurso', $grupoSeleccionado);
+        $stmt->execute();
+        $datosAlumno = $stmt->fetch();
+        return $datosAlumno !== false ? $datosAlumno[0] : null;
+    } catch (PDOException $e) {
+        anadirLogErrores($sql, $e->getMessage());
+        return null;
+    }
+}
+
+function obtenernNumFaltaAlumno($cial): int|null
+{
+    global $conn;
+    try {
+        $sql = "SELECT count(idfalta) FROM falta WHERE cial=:cial";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':cial', $cial);
+        $stmt->execute();
+        $datosAlumno = $stmt->fetch();
+        return $datosAlumno !== false ? $datosAlumno[0] : null;
     } catch (PDOException $e) {
         anadirLogErrores($sql, $e->getMessage());
         return null;

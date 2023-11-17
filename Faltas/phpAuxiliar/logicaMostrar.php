@@ -36,29 +36,30 @@ function imprimirAlumnado($grupoSeleccionado, $fecha)
     }
     $cialAlumnoMostrar = $datosAlumno[$alumno]['cial'];
     $faltas = obtenerFaltasFecha($cialAlumnoMostrar, $fecha);
-    
+
     $numFaltas = count($faltas);
     $tiposFalta = ["Falta sin Justificar", "Falta Justificada"];
     echo "<div class=datosAlumno>";
     echo "<div class=navAlumno><input type=checkbox class=secretoCorto>" . "<div class=secretoCorto></div><div>" .
       $datosAlumno[$alumno]['nombre'] . " " . $datosAlumno[$alumno]['primer_apellido'] . " " . $datosAlumno[$alumno]['segundo_apellido'] . "</div>"
       . "<select>";
+      echo "<option value=->-</option>";
     for ($falta = 0; $falta < count($tiposFalta); $falta++) {
       echo "<option value='$tiposFalta[$falta]'>$tiposFalta[$falta]</option>";
     }
-    echo "</select><div>Eliminar</div></div>";
+    echo "</select><div><input type=checkbox class=botonEliminar>Eliminar</div></div>";
 
     for ($sesion = 1; $sesion <= 6; $sesion++) {
       $checked = "";
       $existeFalta = "";
       $idfalta = "";
-    
+
       $tipoFalta = $tiposFalta[0];
       for ($falta = 0; $falta < $numFaltas; $falta++) {
         if ($faltas[$falta]['sesion'] == $sesion) {
           $existeFalta = "faltaExistente";
           // $checked = "checked";
-        
+
           $idfalta = $faltas[$falta]['idfalta'];
           $tipoFalta = $faltas[$falta]['tipoFalta'];
           break;
@@ -81,6 +82,36 @@ function imprimirAlumnado($grupoSeleccionado, $fecha)
       echo "</select></div><div class=secretoCorto>$botonEliminarFalta</div></div>";
     }
 
+    echo "</div>";
+  }
+}
+
+function imprimirBotonesNavegacion($numPaginasFaltas, $numPaginaActual)
+{
+  echo "<div class=navPaginas>";
+  if ($numPaginasFaltas > 1) {
+    if ( $numPaginaActual == 1) {
+      echo "<div numpagina=" .  $numPaginaActual . " class=botonPagina>Anterior</div>";
+    } else {
+      echo "<div numpagina=" .  $numPaginaActual- 1 . " class=botonPagina>Anterior</div>";
+    }
+
+    for ($index =  $numPaginaActual - 5; $index <  $numPaginaActual; $index++) {
+      if ($index > 0) {
+        echo "<div numpagina=$index class=botonPagina>" . $index . "</div>";
+      }
+    }
+    echo "<div numpagina=$_SESSION[numPaginaVistaActual] class='botonPagina seleccionado'>" .  $numPaginaActual . "</div>";;
+    for ($index =  $numPaginaActual + 1; $index <  $numPaginaActual + 5; $index++) {
+      if ($numPaginasFaltas >= $index) {
+        echo "<div numpagina=$index class=botonPagina>" . $index . "</div>";
+      }
+    }
+    if ( $numPaginaActual == $numPaginasFaltas) {
+      echo "<div numpagina=" .  $numPaginaActual . " class=botonPagina>Siguiente</div>";
+    } else {
+      echo "<div numpagina=" .  $numPaginaActual + 1 . " class=botonPagina>Siguiente</div>";
+    }
     echo "</div>";
   }
 }

@@ -11,15 +11,15 @@
   justify-content: space-between;
   margin-bottom: 10px;
 }
-select{
+select {
   width: fit-content;
   background: transparent;
   border: none;
 }
-form{
+form {
   min-width: 970px;
 }
-.navAlumno{
+.navAlumno {
   background-color: #e7e7e7;
   padding: 5px;
 }
@@ -81,9 +81,14 @@ div:has(.mostrarFaltas) {
   grid-template-columns: 1fr 0.5fr 1fr 1fr;
   gap: 8px;
 }
+.mostrarFaltas:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
 .mostrarFaltas > div {
   min-width: 120px;
   margin-top: 5px;
+  padding-bottom: 4px;
 }
 
 .mostrarFaltasProfesor {
@@ -108,11 +113,14 @@ div:has(.mostrarFaltas) {
   justify-content: space-between;
 }
 
-.selectorCurso, .selectorFalta{
+.selectorCurso,
+.selectorFalta {
   display: flex;
 }
 
-.selectorCurso div,.selectorFalta div,.enviarFalta input{
+.selectorCurso div,
+.selectorFalta div,
+.enviarFalta input {
   border: 1px solid black;
   border-radius: 5px;
   padding: 5px 10px;
@@ -120,14 +128,34 @@ div:has(.mostrarFaltas) {
   cursor: pointer;
   box-sizing: border-box;
   height: 30px;
- 
 }
 
-.selectorCurso div.seleccionado,.selectorFalta div.seleccionado,.enviarFalta input {
+.selectorCurso div.seleccionado,
+.selectorFalta div.seleccionado,
+.enviarFalta input {
   background-color: rgb(243, 181, 66);
 }
 
-.selectorOpciones{
+.selectorOpciones {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+}
+.navAlumno input[type="checkbox"] {
+  height: 15px;
+  width: 15px;
+}
+
+.navPaginas {
+  display: flex;
+  align-items: center;
+}
+.botonPagina{
+  margin: 0px 1px;
+  border: 1px solid grey;
+  border-radius: 8px;
+  padding: 5px 7px;
+  cursor: pointer;
+}
+.botonPagina.seleccionado{
+  background-color: rgb(243, 181, 66);
 }

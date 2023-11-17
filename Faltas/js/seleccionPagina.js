@@ -1,23 +1,16 @@
-let grupos = document.getElementsByClassName("selectorCurso")[0].childNodes;
+let botonesPagina = document.getElementsByClassName("botonPagina");
 
-for (let index = 0; index < grupos.length; index++) {
-  const element = grupos[index];
+for (let index = 0; index < botonesPagina.length; index++) {
+  const element = botonesPagina[index];
   element.addEventListener("click", cambiarSeleccion);
 }
 
 function cambiarSeleccion() {
-  eliminarSeleccion();
-  this.classList.add("seleccionado");
+  console.log(this.attributes['numpagina'].value);
 
-  generarFormulario(document.location.pathname,"grupoSeleccionado", this.id,"text");
+ generarFormulario(document.location.pathname,"numPaginaVistaActual", this.attributes['numpagina'].value,"number");
 }
 
-function eliminarSeleccion() {
-  for (let index = 0; index < grupos.length; index++) {
-    const element = grupos[index];
-    element.classList.remove("seleccionado");
-  }
-}
 
 function generarFormulario(webPHP,nombre, valor,atributoInput) {
   let formulario = document.createElement("form");

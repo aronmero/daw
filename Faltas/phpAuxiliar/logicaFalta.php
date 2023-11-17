@@ -2,7 +2,6 @@
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $_SESSION["recargarPagina"] = false;
     if (isset($_SESSION["identificador"]) && isset($_POST["fecha"])) {
-        isset($_POST["faltaSeleccionado"]) ? $opcionSeleccionada = $_POST["faltaSeleccionado"] : $opcionSeleccionada = null;
         $fecha = $_POST["fecha"];
         $longitud = $_SESSION["numAlumnosInserccion"];
         $identificador = $_SESSION["identificador"];
@@ -18,9 +17,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         $numSesion = $sesion;
                         $nameFaltaExistente = $alumno . "faltaExistente" . $sesion;
                         isset($_POST[$nameFaltaExistente]) ? $idFaltaExistente = $_POST[$nameFaltaExistente] : $idFaltaExistente = null;
-                        if ($opcionSeleccionada == "crearFalta" && $idFaltaExistente == null) {
+                        if ( $idFaltaExistente == null) {
                             anadirFalta($cialAlumno, $identificador, $numSesion, $tipoFalta, $fecha);
-                        } else if ($opcionSeleccionada == "modificarFalta" && $idFaltaExistente != null) {
+                        } else if ($idFaltaExistente != null) {
                             $nameFaltaEliminar = $alumno . "eliminarFalta" . $sesion;
                             if (isset($_POST["$nameFaltaEliminar"])) {
                                 eliminarFalta($idFaltaExistente);

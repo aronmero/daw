@@ -75,7 +75,7 @@ if (isset($_SESSION["identificador"])) {
         <?php imprimirAlumnado($grupoSeleccionado, $fechaSeleccionado) ?>
 
         <div class="selectorOpciones">
-            <?php imprimirAccionFalta($accionFaltaSeleccionada); ?>
+           
             <div class="enviarFalta"><input type="submit" value=Enviar></div>
         </div>
 
@@ -86,7 +86,6 @@ if (isset($_SESSION["identificador"])) {
     <script src="./js/logicaFaltas.js"></script>
     <script src="./js/seleccionGrupos.js"></script>
     <script src="./js/seleccionFecha.js"></script>
-    <script src="./js/seleccionFalta.js"></script>
 </body>
 
 </html>
