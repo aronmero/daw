@@ -129,23 +129,30 @@ function imprimirIngredientesPizza(ingredientesSeleccionados) {
     lista.removeChild(lista.childNodes[1]);
   }
   let ingredientes;
-  if (ingredientesSeleccionados.size == 0) {
+  const numIngredientes = ingredientesSeleccionados.size;
+  if (numIngredientes == 0) {
     ingredientes = document.createTextNode(" salsa");
     lista.appendChild(ingredientes);
   } else {
-    //FIXME: falta poner ingredientes dentro del for e igualar los elementos
-    let ingredientes="";
-    for (const key of ingredientesSeleccionados) {
-      if (key[1] > 1) {
-        console.log("extra de " + key[0] + " ");
-        
+    let listaIngredientes = " ";
+    let numIterado = 0;
+
+    for (const ingrediente of ingredientesSeleccionados) {
+      if (ingrediente[1] > 1) {
+        listaIngredientes = listaIngredientes + "extra de " + ingrediente[0];
       } else {
-        console.log(" " + key[0] + " ");
+        listaIngredientes = listaIngredientes + " " + ingrediente[0];
+      }
+      numIterado++;
+      if (numIterado < numIngredientes) {
+        listaIngredientes = listaIngredientes + ", ";
+      } else {
+        listaIngredientes = listaIngredientes + " ";
       }
     }
-   ingredientes = document.createTextNode(ingredientesSeleccionados);
+    ingredientes = document.createTextNode(listaIngredientes);
   }
-  //lista.appendChild(ingredientes);
+  lista.appendChild(ingredientes);
 }
 
 /**
