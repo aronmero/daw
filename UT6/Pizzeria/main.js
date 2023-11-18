@@ -1,16 +1,9 @@
-let listaIngredientes = [
-  "Tomate",
-  "Maiz",
-  "Salami",
-  "Pollo",
-  "Ternera",
-  "Piña",
-  "Datiles",
-];
+let listaIngredientes = ["Tomate", "Bacon", "Cebolla", "Champiñones", "Gambas", "Mozarella", "Peperoni","Pimientos","Piña"]; //TODO: MAPA DE INGREDIENTES CON IMAGENES
 let listaMasas = ["Regular", "Fina", "Estilo Chicago"];
 const limiteIngredientes = 2;
 let ingredientesSeleccionados = new Map();
-
+let numIngredientesSeleccionados=0;
+const precioPizzaDefault=6.5
 //TODO: Generar ticket al pulsar enviar, se debe descargar pdf o algo
 
 /**
@@ -26,9 +19,7 @@ function imprimirMasas() {
     input.setAttribute("type", "radio");
     input.setAttribute("name", "tipoPizza");
     input.setAttribute("value", listaMasas[index]);
-    if (index == 0) {
-      input.checked = true;
-    }
+    index == 0 ? (input.checked = true) : "";
 
     input.addEventListener("change", actualizarTipoPizza);
     const label = document.createElement("label");
@@ -54,13 +45,10 @@ function imprimirIngredientes() {
     contenedor.setAttribute("num_ing", 0);
     contenedor.setAttribute("info_ing", listaIngredientes[index]);
     const imagenIngrediente = document.createElement("img");
-    imagenIngrediente.setAttribute(
-      "src",
-      "./media/" + "tomate".toLowerCase() + ".webp"
-    );
+    imagenIngrediente.setAttribute("src", "./media/ingredientes/" + listaIngredientes[index].toLowerCase() + ".webp");
     //FIXME: Actualizar a listaIngredientes[index] cuando esten las imagenes
 
-    const botones = imprimirBotonesInteraccion();
+    const botones = imprimirBotonesInteraccionIngrediente();
 
     const label = document.createElement("label");
     label.appendChild(document.createTextNode(listaIngredientes[index]));
@@ -79,7 +67,7 @@ function imprimirIngredientes() {
    *
    * @returns {HTMLElement}
    */
-  function imprimirBotonesInteraccion() {
+  function imprimirBotonesInteraccionIngrediente() {
     const logicaIngrediente = document.createElement("div");
     logicaIngrediente.classList.add("incremento");
 
@@ -88,12 +76,14 @@ function imprimirIngredientes() {
     reducir.classList.add("icono");
     reducir.classList.add("restar");
     reducir.addEventListener("click", restar);
+    reducir.addEventListener("click", eliminarImagenTopping);
 
     const aumentar = document.createElement("div");
     aumentar.appendChild(document.createTextNode("+"));
     aumentar.classList.add("icono");
     aumentar.classList.add("sumar");
     aumentar.addEventListener("click", incrementar);
+    aumentar.addEventListener("click", anadirImagenTopping);
 
     logicaIngrediente.appendChild(reducir);
     logicaIngrediente.appendChild(aumentar);
@@ -122,33 +112,40 @@ function imprimirTipoPizza(tipoPizza) {
   tipo.innerHTML = tipoPizza;
 }
 
-//TODO: FIXME:
+/**
+ * Imprime en HTML la lista de ingredientes seleccionados con cierto formato
+ * @date 11/18/2023 - 7:38:57 AM
+ * @author Aarón Medina Rodríguez
+ *
+ * @param {Map} ingredientesSeleccionados
+ */
 function imprimirIngredientesPizza(ingredientesSeleccionados) {
   const lista = document.getElementById("ingredientesPizza");
-  if (lista.childNodes[1] != undefined) {
-    lista.removeChild(lista.childNodes[1]);
-  }
+  lista.childNodes[1] != undefined ? lista.removeChild(lista.childNodes[1]) : "";
+
   let ingredientes;
   const numIngredientes = ingredientesSeleccionados.size;
   if (numIngredientes == 0) {
     ingredientes = document.createTextNode(" salsa");
     lista.appendChild(ingredientes);
   } else {
-    let listaIngredientes = " ";
+    let listaIngredientes = " salsa";
     let numIterado = 0;
 
     for (const ingrediente of ingredientesSeleccionados) {
-      if (ingrediente[1] > 1) {
-        listaIngredientes = listaIngredientes + "extra de " + ingrediente[0];
-      } else {
-        listaIngredientes = listaIngredientes + " " + ingrediente[0];
-      }
+      numIngredientes == 1 ? (listaIngredientes += " y ") : numIterado == 0 ? (listaIngredientes += ", ") : "";
+
+      ingrediente[1] > 1
+        ? (listaIngredientes += " extra de " + ingrediente[0].toLowerCase())
+        : (listaIngredientes += " " + ingrediente[0].toLowerCase());
+
       numIterado++;
-      if (numIterado < numIngredientes) {
-        listaIngredientes = listaIngredientes + ", ";
-      } else {
-        listaIngredientes = listaIngredientes + " ";
-      }
+
+      numIterado == numIngredientes - 1
+        ? (listaIngredientes += " y ")
+        : numIterado < numIngredientes
+        ? (listaIngredientes += ", ")
+        : (listaIngredientes += ". ");
     }
     ingredientes = document.createTextNode(listaIngredientes);
   }
@@ -172,6 +169,22 @@ function limitesNumIngredientes(numIngredientes, contenedorPadre) {
   }
 }
 
+function actualizarPrecio() {
+  const parrafoPrecio=document.getElementsByClassName("contenedorInfoPizza")[0].getElementsByClassName("precioPizza")[0];
+
+  if(numIngredientesSeleccionados>4){
+    const precioPizza=precioPizzaDefault+0.5*(numIngredientesSeleccionados-4);
+    parrafoPrecio.setAttribute("valor_pizza",precioPizza);
+  }else{
+    parrafoPrecio.setAttribute("valor_pizza",precioPizzaDefault);
+  
+  }
+
+  parrafoPrecio.childNodes[0].remove();
+  parrafoPrecio.insertBefore(document.createTextNode(parrafoPrecio.getAttribute("valor_pizza")),parrafoPrecio.childNodes[0]);
+  
+}
+
 /**
  * Incrementa el numero de ingredientes en uno, hasta un cierto limite
  * @date 11/13/2023 - 6:31:48 PM
@@ -184,8 +197,10 @@ function incrementar() {
   if (numIngredientes < limiteIngredientes) {
     numIngredientes = numIngredientes + 1;
     contenedorPadre.setAttribute("num_ing", numIngredientes);
+    numIngredientesSeleccionados++;
   }
   crearContador(numIngredientes, contenedorPadre);
+  actualizarPrecio();
 }
 
 /**
@@ -201,8 +216,10 @@ function restar() {
   if (numIngredientes > 0) {
     numIngredientes = numIngredientes - 1;
     contenedorPadre.setAttribute("num_ing", numIngredientes);
+    numIngredientesSeleccionados--;
   }
   crearContador(numIngredientes, contenedorPadre);
+  actualizarPrecio();
 }
 
 /**
@@ -226,10 +243,7 @@ function crearContador(numIngredientes, contenedorPadre) {
   if (numIngredientes > 0) {
     contenedorPadre.appendChild(contenedor);
   }
-  actualizarIngredientesSeleccionados(
-    contenedorPadre,
-    ingredientesSeleccionados
-  );
+  actualizarIngredientesSeleccionados(contenedorPadre, ingredientesSeleccionados);
 }
 
 /**
@@ -240,23 +254,193 @@ function crearContador(numIngredientes, contenedorPadre) {
  * @param {HTMLElement} contenedorPadre
  * @param {Map} ingredientesSeleccionados
  */
-function actualizarIngredientesSeleccionados(
-  contenedorPadre,
-  ingredientesSeleccionados
-) {
+function actualizarIngredientesSeleccionados(contenedorPadre, ingredientesSeleccionados) {
   const ingrediente = contenedorPadre.getAttribute("info_ing");
   const numIngrediente = contenedorPadre.getAttribute("num_ing");
 
-  if (numIngrediente <= 0) {
-    ingredientesSeleccionados.delete(ingrediente);
-  } else {
-    ingredientesSeleccionados.set(ingrediente, numIngrediente);
-  }
-
+  numIngrediente <= 0
+    ? ingredientesSeleccionados.delete(ingrediente)
+    : ingredientesSeleccionados.set(ingrediente, numIngrediente);
   imprimirIngredientesPizza(ingredientesSeleccionados);
+}
+
+/**
+ * Renombrar pizza html
+ * @date 11/18/2023 - 8:02:47 AM
+ * @author Aarón Medina Rodríguez
+ */
+function renombrarPizza() {
+  const nombrePizza = document.getElementById("nombrePizza");
+  nombrePizza.removeChild(nombrePizza.lastChild);
+  nombrePizza.appendChild(document.createTextNode(" " + this.value));
+}
+
+/**
+ * Imprime una nueva pizza
+ * @date 11/18/2023 - 8:46:31 AM
+ * @author Aarón Medina Rodríguez
+ */
+function imprimirPizzaInfo() {
+  const contendorInfo = document.getElementsByClassName("contenedorInfoPizza")[0];
+  const contenedorPizza = contendorInfo.getElementsByClassName("contenedorPizza")[0];
+
+  const nombrePizza = document.createElement("p");
+  nombrePizza.id = "nombrePizza";
+  const textPizza = document.createElement("span");
+  textPizza.append(document.createTextNode("Pizza"));
+  nombrePizza.appendChild(textPizza);
+  nombrePizza.appendChild(document.createTextNode(" sin nombre"));
+
+  const tipoPizza = document.createElement("p");
+  tipoPizza.id = "tipoPizza";
+  tipoPizza.appendChild(document.createTextNode("Regular"));
+
+  const ingredientesPizza = document.createElement("p");
+  ingredientesPizza.id = "ingredientesPizza";
+  const textIngredientes = document.createElement("span");
+  textIngredientes.append(document.createTextNode("Con"));
+  ingredientesPizza.appendChild(textIngredientes);
+  ingredientesPizza.append(document.createTextNode(" salsa"));
+
+  const contendorImagen = document.createElement("div");
+  contendorImagen.classList.add("contendorImagenPizza");
+  const imagenPizza = document.createElement("img");
+  imagenPizza.src = "./media/masa.webp";
+  const precio=document.createElement("p");
+  precio.appendChild(document.createTextNode(precioPizzaDefault));
+  precio.appendChild(document.createTextNode("€"));
+  precio.classList.add("precioPizza");
+  precio.setAttribute("valor_pizza",precioPizzaDefault);
+
+  contenedorPizza.appendChild(nombrePizza);
+  contenedorPizza.appendChild(tipoPizza);
+  contenedorPizza.appendChild(ingredientesPizza);
+  contendorImagen.appendChild(imagenPizza);
+  contenedorPizza.appendChild(contendorImagen);
+  contenedorPizza.appendChild(precio);
+  return contenedorPizza;
+}
+
+/**
+ * Clona una pizza a la seccion de pedidos
+ * @date 11/18/2023 - 8:54:39 AM
+ * @author Aarón Medina Rodríguez
+ */
+function clonarPizza() {
+  const pizza = document.getElementsByClassName("contenedorInfoPizza")[0].getElementsByClassName("contenedorPizza")[0];
+  const copia = pizza.cloneNode(true);
+  document.getElementsByClassName("pizzasPedido")[0].append(copia);
+}
+
+/**
+ * Elimina de la seccion info la pizza
+ * @date 11/18/2023 - 8:57:14 AM
+ * @author Aarón Medina Rodríguez
+ */
+function eliminarPizzaInfo() {
+  const pizza = document.getElementsByClassName("contenedorInfoPizza")[0].getElementsByClassName("contenedorPizza")[0];
+  while (pizza.firstChild) {
+    pizza.removeChild(pizza.firstChild);
+  }
+}
+
+/**
+ * Cambiar los inputs a sus valores default
+ * @date 11/18/2023 - 9:25:16 AM
+ * @author Aarón Medina Rodríguez
+ */
+function limpiarInputs() {
+  document.getElementById("renombrarPizza").value = "";
+  const icoNumIngredientes = document.getElementsByClassName("numIngrediente");
+  while (icoNumIngredientes.length > 0) {
+    icoNumIngredientes[0].remove();
+  }
+  const toppingIngredientes = document.getElementsByClassName("topping");
+  for (let index = 0; index < toppingIngredientes.length; index++) {
+    const topping = toppingIngredientes[index];
+    topping.setAttribute("num_ing", 0);
+  }
+  ingredientesSeleccionados.clear();
+}
+
+function generarPizza() {
+  clonarPizza();
+  eliminarPizzaInfo();
+  imprimirPizzaInfo();
+  limpiarInputs();
+  numIngredientesSeleccionados=0;
+}
+
+/**
+ * Busca en el contenedor la img con el mismo nombre de mayor valor y la devuelve
+ * @date 11/18/2023 - 10:43:38 AM
+ * @author Aarón Medina Rodríguez
+ *
+ * @param {HTMLElement} contenedorPizza
+ * @param {string} informacionIngrediente
+ * @returns {HTMLImageElement} img de mayor valor
+ */
+function obtenerImgToppingMayor(contenedorPizza, informacionIngrediente) {
+  const imgUndefined = document.createElement("img");
+  imgUndefined.setAttribute("img_num_ing", 0);
+  let numMayor = 0;
+  let imgMayor;
+
+  for (let index = 0; index < contenedorPizza.getElementsByClassName("imgTopping").length; index++) {
+    const element = contenedorPizza.getElementsByClassName("imgTopping")[index];
+    if (
+      element.getAttribute("img_info_ing") == informacionIngrediente &&
+      element.getAttribute("img_num_ing") > numMayor
+    ) {
+      numMayor = element.getAttribute("img_num_ing");
+      imgMayor = element;
+    }
+  }
+  return imgMayor == undefined ? imgUndefined : imgMayor;
+}
+
+/**
+ * Elimina una imagen de ingrediente a la pizza
+ * @date 11/18/2023 - 10:46:00 AM
+ * @author Aarón Medina Rodríguez
+ */
+function eliminarImagenTopping() {
+  const contenedorPizza = document
+    .getElementsByClassName("contenedorInfoPizza")[0]
+    .getElementsByClassName("contendorImagenPizza")[0];
+  const informacionIngrediente = this.parentNode.parentNode.getAttribute("info_ing");
+  const numeroIngredientes = this.parentNode.parentNode.getAttribute("num_ing");
+  const imgMayor = obtenerImgToppingMayor(contenedorPizza, informacionIngrediente);
+
+  imgMayor.getAttribute("img_num_ing") > 0 ? contenedorPizza.removeChild(imgMayor) : "";
+}
+
+/**
+ * Añade una imagen de ingrediente a la pizza
+ * @date 11/18/2023 - 10:46:18 AM
+ * @author Aarón Medina Rodríguez
+ */
+function anadirImagenTopping() {
+  const contenedorPizza = document
+    .getElementsByClassName("contenedorInfoPizza")[0]
+    .getElementsByClassName("contendorImagenPizza")[0];
+  const informacionIngrediente = this.parentNode.parentNode.getAttribute("info_ing");
+  const numeroIngredientes = this.parentNode.parentNode.getAttribute("num_ing");
+  const imgMayor = obtenerImgToppingMayor(contenedorPizza, informacionIngrediente);
+
+  if (imgMayor.getAttribute("img_num_ing") < limiteIngredientes) {
+    const imagenIngredinte = document.createElement("img");
+    imagenIngredinte.src = "./media/ingredientes/"+informacionIngrediente.toLowerCase()+"_Topping.webp";
+    imagenIngredinte.setAttribute("img_info_ing", informacionIngrediente);
+    imagenIngredinte.setAttribute("img_num_ing", numeroIngredientes);
+    imagenIngredinte.classList.add("imgTopping");
+    contenedorPizza.appendChild(imagenIngredinte);
+  }
 }
 
 imprimirMasas();
 imprimirIngredientes();
 
-imprimirIngredientesPizza(ingredientesSeleccionados);
+imprimirPizzaInfo();
+document.getElementById("renombrarPizza").addEventListener("change", renombrarPizza);
+document.getElementById("generarPizza").addEventListener("click", generarPizza);

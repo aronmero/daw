@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
   </head>
   <body>
-    <div><h1>Pizzería La linea</h1></div>
+    <div class="navegador"><h1>Pizzería La linea</h1><div>Carrito</div></div>
     <div class="content">
       <div class="contenedorIngredientes">
         <div>
@@ -20,17 +20,16 @@
           <div class="toppings"></div>
         </div>
       </div>
-      <div class="contenedorPizza">
-        <div class=contenedorPizza>
-          <p id="nombrePizza">Pizza sin nombre</p>
-          <p id="tipoPizza">Regular</p>
-          <p id="ingredientesPizza"><span>Con </span></p>
-          <img src="https://www.dominospizza.es/images/FreshCreamBBQ.png" />
-        </div>
+      <div class="contenedorInfoPizza">
+        <div class="contenedorPizza"></div>
+
         <h3>Renombra tu pizza</h3>
-        <input type="text" />
-        <button>Enviar</button>
+        <input type="text" id="renombrarPizza" maxlength="25" />
+        <button id="generarPizza">Enviar</button>
       </div>
+    </div>
+    <div class="content">
+      <div class="pizzasPedido"></div>
     </div>
     <script src="main.js"></script>
   </body>
