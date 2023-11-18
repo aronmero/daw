@@ -107,19 +107,11 @@ function imprimirIngredientes() {
  * @author Aaron Medina Rodriguez
  */
 function actualizarTipoPizza() {
-  imprimirTipoPizza(this.value);
-}
+  const contendorInfo = document.getElementsByClassName("contenedorInfoPizza")[0];
+  const contenedorPizza = contendorInfo.getElementsByClassName("contenedorPizza")[0];
+  const tipo = contenedorPizza.childNodes[1];
 
-/**
- * Modifica el valor en HTML del tipo pizza seleccionado
- * @date 11/13/2023 - 4:29:12 PM
- * @author Aaron Medina Rodriguez
- * @param {String} tipoPizza
- */
-function imprimirTipoPizza(tipoPizza) {
-  const tipo = document.getElementById("tipoPizza");
-
-  tipo.innerHTML = tipoPizza;
+  tipo.innerHTML = this.value;
 }
 
 /**
@@ -130,7 +122,10 @@ function imprimirTipoPizza(tipoPizza) {
  * @param {Map} ingredientesSeleccionados
  */
 function imprimirIngredientesPizza(ingredientesSeleccionados) {
-  const lista = document.getElementById("ingredientesPizza");
+  const contendorInfo = document.getElementsByClassName("contenedorInfoPizza")[0];
+  const contenedorPizza = contendorInfo.getElementsByClassName("contenedorPizza")[0];
+  const lista = contenedorPizza.childNodes[2];
+
   lista.childNodes[1] != undefined ? lista.removeChild(lista.childNodes[1]) : "";
 
   let ingredientes;
@@ -285,7 +280,7 @@ function actualizarIngredientesSeleccionados(contenedorPadre, ingredientesSelecc
 function renombrarPizza() {
   const contendorInfo = document.getElementsByClassName("contenedorInfoPizza")[0];
   const contenedorPizza = contendorInfo.getElementsByClassName("contenedorPizza")[0];
-  const nombrePizza = contenedorPizza.childNodes[0]; 
+  const nombrePizza = contenedorPizza.childNodes[0];
   nombrePizza.removeChild(nombrePizza.lastChild);
   nombrePizza.appendChild(document.createTextNode(" " + this.value));
 }
@@ -307,11 +302,11 @@ function imprimirPizzaInfo() {
   nombrePizza.appendChild(document.createTextNode(" sin nombre"));
 
   const tipoPizza = document.createElement("p");
-  tipoPizza.id = "tipoPizza";
+  tipoPizza.classList.add("tipoPizza");
   tipoPizza.appendChild(document.createTextNode("Regular"));
 
   const ingredientesPizza = document.createElement("p");
-  ingredientesPizza.id = "ingredientesPizza";
+  ingredientesPizza.classList.add("ingredientesPizza");
   const textIngredientes = document.createElement("span");
   textIngredientes.append(document.createTextNode("Con"));
   ingredientesPizza.appendChild(textIngredientes);
@@ -384,6 +379,7 @@ function generarPizza() {
   imprimirPizzaInfo();
   limpiarInputs();
   numIngredientesSeleccionados = 0;
+  actualizarNumPizzasCarrito();
 }
 
 /**
@@ -451,6 +447,18 @@ function anadirImagenTopping() {
     imagenIngredinte.classList.add("imgTopping");
     contenedorPizza.appendChild(imagenIngredinte);
   }
+}
+
+
+/**
+ * Modificar el num en el HTML del contador de productos en el carrito
+ * @date 11/18/2023 - 10:59:18 PM
+ * @author Aarón Medina Rodríguez
+ */
+function actualizarNumPizzasCarrito() {
+  const numPizzas=document.getElementsByClassName("pizzasPedido")[0].childElementCount;
+  document.getElementById("iconoNumPizzas").innerHTML=numPizzas;
+  document.getElementById("iconoNumPizzas").classList.add("activo");
 }
 
 imprimirMasas();

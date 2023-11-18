@@ -9,36 +9,36 @@
   </head>
   <body>
     <div class="modalCarrito">
-      <div id="cerrarModal">Cerrar</div>
+      <div class="modalCarritoNav">
+        <p>Carrito</p>
+        <div id="cerrarModal"><img src="./media/icons/cross.webp" /></div>
+      </div>
       <div class="pizzasPedido"></div>
       <div><button>Realizar Pedido</button></div>
     </div>
     <div class="navegador">
       <h1>Pizzería La linea</h1>
-      <div id="abrirModal">Carrito</div>
+      <div id="abrirModal"><span id="iconoNumPizzas">0</span><img src="./media/icons/carrito.webp" /></div>
     </div>
 
     <div class="content">
       <div class="contenedorIngredientes">
         <div>
-          <h2>¿Que tipo de masa?</h2>
+          <h2>¿Que tipo de <span style="color: #d17200">masa</span>?</h2>
           <div class="contenedorMasa"></div>
         </div>
         <div>
-          <h2>¿Que ingredintes te ponemos?</h2>
+          <h2>¿Que <span style="color: #d17200">ingredintes</span> te ponemos?</h2>
           <div class="toppings"></div>
         </div>
       </div>
       <div class="contenedorInfoPizza">
         <div class="contenedorPizza"></div>
 
-        <h3>Renombra tu pizza</h3>
+        <h3>Renombra <span style="color: #d17200">tu pizza</span></h3>
         <input type="text" id="renombrarPizza" maxlength="25" />
         <button id="generarPizza">Enviar</button>
       </div>
-    </div>
-    <div class="content">
-      <div class=""></div>
     </div>
     <script src="main.js"></script>
   </body>

@@ -3,15 +3,20 @@
 * {
   /* border: 1px dashed red;*/
   font-family: "Antic Slab", serif;
+  color: #2b0b03;
 }
 .navegador {
   padding: 10px 30px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-bottom: 1px solid grey;
 }
 body {
-  background-color: #e9dfc3;
+  background-color: #f6e6bd;
+}
+label {
+  margin-top: 5px;
 }
 
 body,
@@ -59,7 +64,6 @@ p {
   align-items: center;
 }
 
-/*FIXME:*/
 .contenedorPizza {
   display: flex;
   flex-direction: column;
@@ -67,7 +71,7 @@ p {
 }
 .toppings {
   display: grid;
-  grid-template-rows: repeat(3, 180px);
+  grid-template-rows: repeat(3, 190px);
   grid-template-columns: repeat(4, 1fr);
   gap: 8px;
 }
@@ -91,7 +95,7 @@ button {
   cursor: pointer;
 }
 button:hover {
-  background-color: #ffbb00;
+  background-color: #ffc300;
 }
 
 .incremento {
@@ -102,7 +106,7 @@ button:hover {
 
 .icono {
   box-sizing: border-box;
-  background-color: #f5f5f5;
+  background-color: #fcf9ed;
   padding: 5px;
   border-radius: 100%;
   font-weight: 800;
@@ -112,22 +116,26 @@ button:hover {
   user-select: none;
 }
 .numIngrediente {
+  box-sizing: border-box;
+  padding-top: 4px;
+  padding-left: 4px;
   position: relative;
   left: 60px;
-  top: -150px;
+  top: -155px;
   font-weight: bolder;
   background-color: #4aa8e7;
   color: white;
   cursor: default;
 }
 
-p#nombrePizza {
+p.nombrePizza {
   font-weight: bold;
+  color: #d17200;
 }
 
 .modalCarrito {
-  background-color: white;
-  position: absolute;
+  background-color: #fcf9ed;
+  position: fixed;
   width: 500px;
   height: 95vh;
   right: 0;
@@ -139,14 +147,112 @@ p#nombrePizza {
   align-items: center;
 }
 
-.modalCarrito.activo{
+.modalCarrito.activo {
   display: flex;
 }
 
+.modalCarritoNav {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+  padding-left: 20px;
+  font-weight: 700;
+  font-size: 25px;
+  letter-spacing: 1.5px;
+}
+
 .pizzasPedido {
-  padding: 50px;
-  height: 600px;
+  width: 365px;
+  overflow: overlay;
+  height: 78vh;
 }
 .pizzasPedido > div {
   width: 350px;
+}
+
+.pizzasPedido .contendorImagenPizza {
+  width: 140px;
+  height: 140px;
+  margin: 8px 0px;
+}
+
+.pizzasPedido .contendorImagenPizza img {
+  width: 140px;
+  height: 140px;
+}
+
+.pizzasPedido .contenedorPizza {
+  padding-bottom: 15px;
+}
+.modalCarrito div:last-child {
+  margin-top: 10px;
+}
+#cerrarModal img,
+#abrirModal img {
+  height: 20px;
+}
+#abrirModal {
+  margin-top: 7px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+#cerrarModal {
+  align-self: flex-end;
+  padding: 10px;
+  margin: 7px;
+  cursor: pointer;
+}
+
+.ingredientesPizza {
+  text-align: justify;
+}
+#renombrarPizza {
+  border: 1px solid grey;
+  padding: 10px 15px;
+  border-radius: 15px;
+}
+#iconoNumPizzas.activo{
+  visibility: visible;
+}
+
+#iconoNumPizzas {
+  visibility: hidden;
+  font-size: 10px;
+  background-color: #d18168;
+  padding: 2px 6px 2px 5px;
+  border-radius: 50px;
+  border: none;
+  font-weight: 900;
+  color: white;
+  left: 30px;
+  bottom: -4px;
+  position: relative;
+}
+
+/* CUSTOM Scrollbar 
+ https://www.w3schools.com/howto/howto_css_custom_scrollbar.asp
+*/
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 5px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #aaaaaa;
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #888888;
 }
