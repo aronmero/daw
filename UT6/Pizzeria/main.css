@@ -4,25 +4,24 @@
   /* border: 1px dashed red;*/
   font-family: "Antic Slab", serif;
 }
-.navegador{
-  padding:10px 30px;
+.navegador {
+  padding: 10px 30px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-body{
+body {
   background-color: #e9dfc3;
 }
 
 body,
 p {
   margin: 0;
-
 }
-.imgTopping{
-scale: 0.9;
+.imgTopping {
+  scale: 0.9;
 }
-.contendorImagenPizza{
+.contendorImagenPizza {
   margin: 15px 0px;
   display: flex;
   position: relative;
@@ -30,7 +29,7 @@ scale: 0.9;
   height: 300px;
   width: 300px;
 }
-.contendorImagenPizza>img{
+.contendorImagenPizza > img {
   position: absolute;
   max-width: 300px;
   max-height: 300px;
@@ -65,7 +64,6 @@ scale: 0.9;
   display: flex;
   flex-direction: column;
   align-items: center;
-
 }
 .toppings {
   display: grid;
@@ -96,7 +94,6 @@ button:hover {
   background-color: #ffbb00;
 }
 
-
 .incremento {
   display: flex;
   width: 75px;
@@ -112,7 +109,7 @@ button:hover {
   width: 30px;
   text-align: center;
   cursor: pointer;
-  user-select: none
+  user-select: none;
 }
 .numIngrediente {
   position: relative;
@@ -124,10 +121,32 @@ button:hover {
   cursor: default;
 }
 
-.pizzasPedido >div{
-width: 350px;
+p#nombrePizza {
+  font-weight: bold;
 }
 
-p#nombrePizza{
-  font-weight: bold;
+.modalCarrito {
+  background-color: white;
+  position: absolute;
+  width: 500px;
+  height: 95vh;
+  right: 0;
+  z-index: 100;
+  margin: 2.5vh;
+  border-radius: 25px;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+}
+
+.modalCarrito.activo{
+  display: flex;
+}
+
+.pizzasPedido {
+  padding: 50px;
+  height: 600px;
+}
+.pizzasPedido > div {
+  width: 350px;
 }

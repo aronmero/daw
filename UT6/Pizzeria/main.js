@@ -1,9 +1,19 @@
-let listaIngredientes = ["Tomate", "Bacon", "Cebolla", "Champiñones", "Gambas", "Mozarella", "Peperoni","Pimientos","Piña"]; //TODO: MAPA DE INGREDIENTES CON IMAGENES
+let listaIngredientes = [
+  "Tomate",
+  "Bacon",
+  "Cebolla",
+  "Champiñones",
+  "Gambas",
+  "Mozarella",
+  "Peperoni",
+  "Pimientos",
+  "Piña",
+]; //TODO: MAPA DE INGREDIENTES CON IMAGENES
 let listaMasas = ["Regular", "Fina", "Estilo Chicago"];
 const limiteIngredientes = 2;
 let ingredientesSeleccionados = new Map();
-let numIngredientesSeleccionados=0;
-const precioPizzaDefault=6.5
+let numIngredientesSeleccionados = 0;
+const precioPizzaDefault = 6.5;
 //TODO: Generar ticket al pulsar enviar, se debe descargar pdf o algo
 
 /**
@@ -170,19 +180,22 @@ function limitesNumIngredientes(numIngredientes, contenedorPadre) {
 }
 
 function actualizarPrecio() {
-  const parrafoPrecio=document.getElementsByClassName("contenedorInfoPizza")[0].getElementsByClassName("precioPizza")[0];
+  const parrafoPrecio = document
+    .getElementsByClassName("contenedorInfoPizza")[0]
+    .getElementsByClassName("precioPizza")[0];
 
-  if(numIngredientesSeleccionados>4){
-    const precioPizza=precioPizzaDefault+0.5*(numIngredientesSeleccionados-4);
-    parrafoPrecio.setAttribute("valor_pizza",precioPizza);
-  }else{
-    parrafoPrecio.setAttribute("valor_pizza",precioPizzaDefault);
-  
+  if (numIngredientesSeleccionados > 4) {
+    const precioPizza = precioPizzaDefault + 0.5 * (numIngredientesSeleccionados - 4);
+    parrafoPrecio.setAttribute("valor_pizza", precioPizza);
+  } else {
+    parrafoPrecio.setAttribute("valor_pizza", precioPizzaDefault);
   }
 
   parrafoPrecio.childNodes[0].remove();
-  parrafoPrecio.insertBefore(document.createTextNode(parrafoPrecio.getAttribute("valor_pizza")),parrafoPrecio.childNodes[0]);
-  
+  parrafoPrecio.insertBefore(
+    document.createTextNode(parrafoPrecio.getAttribute("valor_pizza")),
+    parrafoPrecio.childNodes[0]
+  );
 }
 
 /**
@@ -270,7 +283,9 @@ function actualizarIngredientesSeleccionados(contenedorPadre, ingredientesSelecc
  * @author Aarón Medina Rodríguez
  */
 function renombrarPizza() {
-  const nombrePizza = document.getElementById("nombrePizza");
+  const contendorInfo = document.getElementsByClassName("contenedorInfoPizza")[0];
+  const contenedorPizza = contendorInfo.getElementsByClassName("contenedorPizza")[0];
+  const nombrePizza = contenedorPizza.childNodes[0]; 
   nombrePizza.removeChild(nombrePizza.lastChild);
   nombrePizza.appendChild(document.createTextNode(" " + this.value));
 }
@@ -285,7 +300,7 @@ function imprimirPizzaInfo() {
   const contenedorPizza = contendorInfo.getElementsByClassName("contenedorPizza")[0];
 
   const nombrePizza = document.createElement("p");
-  nombrePizza.id = "nombrePizza";
+  nombrePizza.classList.add("nombrePizza");
   const textPizza = document.createElement("span");
   textPizza.append(document.createTextNode("Pizza"));
   nombrePizza.appendChild(textPizza);
@@ -306,11 +321,11 @@ function imprimirPizzaInfo() {
   contendorImagen.classList.add("contendorImagenPizza");
   const imagenPizza = document.createElement("img");
   imagenPizza.src = "./media/masa.webp";
-  const precio=document.createElement("p");
+  const precio = document.createElement("p");
   precio.appendChild(document.createTextNode(precioPizzaDefault));
   precio.appendChild(document.createTextNode("€"));
   precio.classList.add("precioPizza");
-  precio.setAttribute("valor_pizza",precioPizzaDefault);
+  precio.setAttribute("valor_pizza", precioPizzaDefault);
 
   contenedorPizza.appendChild(nombrePizza);
   contenedorPizza.appendChild(tipoPizza);
@@ -368,7 +383,7 @@ function generarPizza() {
   eliminarPizzaInfo();
   imprimirPizzaInfo();
   limpiarInputs();
-  numIngredientesSeleccionados=0;
+  numIngredientesSeleccionados = 0;
 }
 
 /**
@@ -430,7 +445,7 @@ function anadirImagenTopping() {
 
   if (imgMayor.getAttribute("img_num_ing") < limiteIngredientes) {
     const imagenIngredinte = document.createElement("img");
-    imagenIngredinte.src = "./media/ingredientes/"+informacionIngrediente.toLowerCase()+"_Topping.webp";
+    imagenIngredinte.src = "./media/ingredientes/" + informacionIngrediente.toLowerCase() + "_Topping.webp";
     imagenIngredinte.setAttribute("img_info_ing", informacionIngrediente);
     imagenIngredinte.setAttribute("img_num_ing", numeroIngredientes);
     imagenIngredinte.classList.add("imgTopping");
@@ -444,3 +459,9 @@ imprimirIngredientes();
 imprimirPizzaInfo();
 document.getElementById("renombrarPizza").addEventListener("change", renombrarPizza);
 document.getElementById("generarPizza").addEventListener("click", generarPizza);
+document.getElementById("abrirModal").addEventListener("click", () => {
+  document.getElementsByClassName("modalCarrito")[0].classList.add("activo");
+});
+document.getElementById("cerrarModal").addEventListener("click", () => {
+  document.getElementsByClassName("modalCarrito")[0].classList.remove("activo");
+});
