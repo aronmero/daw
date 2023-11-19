@@ -66,14 +66,14 @@ $offset = $maxNumFaltas * (intval($_SESSION["numPaginaVistaActual"]) - 1);
   if ($_SESSION["tipoUsuario"] == "alumno") {
     $cialAlumnoMostrar = $_SESSION["identificador"];
     $infoAlumno = obtenerAlumnoCial($cialAlumnoMostrar);
-    echo "<div id=infoFalta><div>Cial:" . $infoAlumno['cial'] . "</div><div>DNI: " . $infoAlumno['dni'] . "</div><div>Grupo: " . $infoAlumno['nombre'] . "</div></div>";
+    echo "<div id=infoFalta><div>Alumno: ".$infoAlumno['nombre']." ".$infoAlumno['primer_apellido']." ".$infoAlumno['segundo_apellido']."</div><div>Cial:" . $infoAlumno['cial'] . "</div><div>DNI: " . $infoAlumno['dni'] . "</div></div>";
 
     $datosAlumno = obtenerFaltasAlumno($cialAlumnoMostrar, $offset, $maxNumFaltas);
     $longitud = count($datosAlumno);
 
-    echo "<div><div class='mostrarFaltas encabezado'>" . "<div>Fecha</div><div>" . "Sesion" . " </div><div>" . "Tipo falta" . "</div></div>";
+    echo "<div><div class='mostrarFaltas encabezado'>" . "<div>Fecha</div><div>" . "Sesion" . " </div><div>" . "Tipo falta" . "</div><div>" . "Grupo". "</div></div>";
     for ($alumno = 0; $alumno < $longitud; $alumno++) {
-      echo "<div class=mostrarFaltas>" . "<div>" . $datosAlumno[$alumno][4] . "</div><div>" . $datosAlumno[$alumno][3] . " </div><div>" . $datosAlumno[$alumno][6] . "</div></div>";
+      echo "<div class=mostrarFaltas>" . "<div>" . $datosAlumno[$alumno]['dia'] . "</div><div>" . $datosAlumno[$alumno]['sesion'] . " </div><div>" . $datosAlumno[$alumno]['tipoFalta'] . "</div><div>" . $datosAlumno[$alumno]['idCurso'] . "</div></div>";
     }
     echo "</div>";
     $numPaginasFaltas = ceil(obtenernNumFaltaAlumno($cialAlumnoMostrar) / $maxNumFaltas);

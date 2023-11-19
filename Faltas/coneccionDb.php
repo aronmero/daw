@@ -155,7 +155,7 @@ function obtenerAlumnoCial($cial): array|null
 {
     global $conn;
     try {
-        $sql = "SELECT * FROM  alumno  inner join cursa on alumno.cial=cursa.cial  inner join curso on cursa.idCurso=curso.idCurso where alumno.cial=:cial";
+        $sql = "SELECT * FROM  alumno inner join usuario on alumno.dni=usuario.dni where alumno.cial=:cial";
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':cial', $cial);
         $stmt->execute();
