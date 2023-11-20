@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>DAW: Skills - Modulo II</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" media="screen" href="estilo.css" />
+  </head>
+
+  <body>
+    <div>
+      <form id="formGeneradorMundos">
+        <div><h1>Generados de mundos</h1></div>
+
+        <div><label>Map size:</label><input type="number" id="mapSize" /></div>
+        <div>
+          <label>Max occupied area %:</label
+          ><input type="number" id="maxOccupiedArea" />
+        </div>
+        <div>
+          <h3>Nature:</h3>
+        </div>
+        <div>
+          <label>Min zones:</label><input type="number" id="natureMinZones" />
+        </div>
+        <div>
+          <label>Max zones:</label><input type="number" id="natureMaxZones" />
+        </div>
+        <div>
+          <label>Zone max sixe:</label
+          ><input type="number" id="natureZoneMaxSize" />
+        </div>
+        <div>
+          <label>Total max size:</label
+          ><input type="number" id="natureTotalMaxSize" />
+        </div>
+        <div>
+          <h3>Urban:</h3>
+        </div>
+        <div>
+          <label>Min zones:</label><input type="number" id="urbanMinZones" />
+        </div>
+        <div>
+          <label>Max zones:</label><input type="number" id="urbanMaxZones" />
+        </div>
+        <div>
+          <label>Zone max sixe:</label
+          ><input type="number" id="urbanZoneMaxSize" />
+        </div>
+        <div>
+          <label>Total max size:</label
+          ><input type="number" id="urbanTotalMaxSize" />
+        </div>
+        <div>
+          <h3>Commercial:</h3>
+        </div>
+        <div>
+          <label>Min zones:</label
+          ><input type="number" id="commercialMinZones" />
+        </div>
+        <div>
+          <label>Max zones:</label
+          ><input type="number" id="commercialMaxZones" />
+        </div>
+        <div>
+          <label>Zone max sixe:</label
+          ><input type="number" id="commercialZoneMaxSize" />
+        </div>
+        <div>
+          <label>Total max size:</label
+          ><input type="number" id="commercialTotalMaxSize" />
+        </div>
+       
+      </form> 
+      <div><button id="enviarForm">Enviar</button></div>
+    </div>
+    <div id="previsualizado"></div>
+    <script src="main.js"></script>
+  </body>
+</html>
