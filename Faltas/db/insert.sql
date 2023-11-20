@@ -25,6 +25,7 @@ INSERT INTO `profesor` (`idCorreo`, `dni`) VALUES
 ('prof@prof.com', '12345678A');
 
 INSERT INTO `imparte` (`idCorreo`, `idCurso`) VALUES
+('prof@prof.com', '1daw'),
 ('prof@prof.com', '2daw');
 
 INSERT INTO `cursa` (`cial`, `idCurso`) VALUES
@@ -33,4 +34,6 @@ INSERT INTO `cursa` (`cial`, `idCurso`) VALUES
 ('457884164563468465465445234', '2daw'),
 ('54635463868768778678', '2daw'),
 ('54854949564648542278587587658687', '2daw'),
-('963582765807926175962786275268752672672', '2daw');
+('963582765807926175962786275268752672672', '2daw'), 
+('963582765807926175962786275268752672672', '1daw'),
+ ('2455647637856387385738738738738638', '1daw');
