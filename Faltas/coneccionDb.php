@@ -136,7 +136,7 @@ function obtenerFaltasAlumno($cialAlumnoMostrar,$offset,$numFaltas): array|null
 {
     global $conn;
     try {
-        $sql = "SELECT * FROM falta inner join alumno on falta.cial=alumno.cial where falta.cial=:cial ORDER BY falta.dia DESC limit :offset , :numFaltas";
+        $sql = "SELECT * FROM falta inner join alumno on falta.cial=alumno.cial where falta.cial=:cial ORDER BY falta.dia DESC, falta.sesion limit :offset , :numFaltas";
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':cial', $cialAlumnoMostrar);
         $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);

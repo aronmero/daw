@@ -1,1 +1,0 @@
-ALTER TABLE `falta` ADD `tipoFalta` VARCHAR(30) NOT NULL DEFAULT 'Falta sin Justificar' AFTER `fecha`;
