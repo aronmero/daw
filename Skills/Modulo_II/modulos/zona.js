@@ -25,6 +25,9 @@ export class Zona {
   getEspacios() {
     return this.espacios;
   }
+  getId() {
+    return this.id;
+  }
   anadirEspacio(coordenada1, coordenada2) {
     if (this.parcelasActuales < this.tamanoMaximo) {
       this.espacios.push([coordenada1, coordenada2]);
