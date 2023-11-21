@@ -24,10 +24,10 @@ div:has(#enviarForm),form >div:first-child{
     background-color: green;
 }
 .commercial{
-    background-color: aqua;
+    background-color: orange;
 }
 .urban{
-    background-color: orange;
+    background-color: yellow;
 }
 
 td{
