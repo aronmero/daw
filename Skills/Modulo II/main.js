@@ -157,10 +157,13 @@ function generarMundo() {
       if (numParcelasNatureActuales < natureTotalMaxSize) {
         const zonaAzar=Math.round(Math.random()*espaciosNature.length);
         espaciosNature[zonaAzar];
-        console.log(espaciosNature[zonaAzar]);
+        const espaciosZona=espaciosNature[zonaAzar].getEspacios();
+        console.log(espaciosZona);
+        
         numParcelasNatureActuales++;
         numParcelasOcupadas++;
       }
+      
       //Comprobar cada linea
       if (numParcelasUrbanActuales < urbanTotalMaxSize) {
         numParcelasUrbanActuales++;
