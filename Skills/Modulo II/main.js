@@ -1,3 +1,5 @@
+import { Zona } from "./modulos/zona.js";
+
 const mapSizeDefault = 64;
 const maxOccupiedAreaDefault = 80;
 const natureMinZonesDefault = 2;
@@ -123,9 +125,12 @@ function generarMundo() {
   }
 
   function crecimiento() {
-    let espaciosNature = buscarEspaciosTipo("nature");
-    let espaciosUrban = buscarEspaciosTipo("urban");
-    let espaciosCommercial = buscarEspaciosTipo("commercial");
+    let espaciosNature = buscarEspaciosIniciales("nature", natureZoneMaxSize);
+    let espaciosUrban = buscarEspaciosIniciales("urban", urbanZoneMaxSize);
+    let espaciosCommercial = buscarEspaciosIniciales(
+      "commercial",
+      commercialZoneMaxSize
+    );
 
     let numParcelasNatureActuales = espaciosNature.length;
     let numParcelasUrbanActuales = espaciosUrban.length;
@@ -150,6 +155,9 @@ function generarMundo() {
     while (numParcelasOcupadas < numParcelasNecesarias) {
       //Comprobar cada linea
       if (numParcelasNatureActuales < natureTotalMaxSize) {
+        const zonaAzar=Math.round(Math.random()*espaciosNature.length);
+        espaciosNature[zonaAzar];
+        console.log(espaciosNature[zonaAzar]);
         numParcelasNatureActuales++;
         numParcelasOcupadas++;
       }
@@ -163,6 +171,20 @@ function generarMundo() {
         numParcelasOcupadas++;
         numParcelasCommercialActuales++;
       }
+    }
+
+    function buscarEspaciosIniciales(tipo, tamanoMaximo) {
+      let elementosTipo = new Array();
+      for (let j = 0; j < mapSize - 1; j++) {
+        for (let i = 0; i < mapSize - 1; i++) {
+          if (mapaMundo[j][i] == tipo) {
+            const zona = new Zona(tamanoMaximo, tipo);
+            zona.anadirEspacio(j,i);
+            elementosTipo.push(zona);
+          }
+        }
+      }
+      return elementosTipo;
     }
 
     /**

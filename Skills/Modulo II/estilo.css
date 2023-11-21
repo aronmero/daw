@@ -40,9 +40,6 @@ tr,td{
     padding: 0px;
 }
 
-*{
-    border: 1px dashed red;
-}
 table{
     border-spacing: 0px;
 }
