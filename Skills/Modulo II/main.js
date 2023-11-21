@@ -34,19 +34,46 @@ function validarEntrada(idElemento, variableDefault) {
 
 function generarMundo() {
   let mapSize = validarEntrada("mapSize", mapSizeDefault);
-  let maxOccupiedArea = validarEntrada("maxOccupiedArea", maxOccupiedAreaDefault);
+  let maxOccupiedArea = validarEntrada(
+    "maxOccupiedArea",
+    maxOccupiedAreaDefault
+  );
   let natureMinZones = validarEntrada("natureMinZones", natureMinZonesDefault);
   let natureMaxZones = validarEntrada("natureMaxZones", natureMaxZonesDefault);
-  let natureZoneMaxSize = validarEntrada("natureZoneMaxSize", natureZoneMaxSizeDefault);
-  let natureTotalMaxSize = validarEntrada("natureTotalMaxSize", natureTotalMaxSizeDefault);
+  let natureZoneMaxSize = validarEntrada(
+    "natureZoneMaxSize",
+    natureZoneMaxSizeDefault
+  );
+  let natureTotalMaxSize = validarEntrada(
+    "natureTotalMaxSize",
+    natureTotalMaxSizeDefault
+  );
   let urbanMinZones = validarEntrada("urbanMinZones", urbanMinZonesDefault);
   let urbanMaxZones = validarEntrada("urbanMaxZones", urbanMaxZonesDefault);
-  let urbanZoneMaxSize = validarEntrada("urbanZoneMaxSize", urbanZoneMaxSizeDefault);
-  let urbanTotalMaxSize = validarEntrada("urbanTotalMaxSize", urbanTotalMaxSizeDefault);
-  let commercialMinZones = validarEntrada("commercialMinZones", commercialMinZonesDefault);
-  let commercialMaxZones = validarEntrada("commercialMaxZones", commercialMaxZonesDefault);
-  let commercialZoneMaxSize = validarEntrada("commercialZoneMaxSize", commercialZoneMaxSizeDefault);
-  let commercialTotalMaxSize = validarEntrada("commercialTotalMaxSize", commercialTotalMaxSizeDefault);
+  let urbanZoneMaxSize = validarEntrada(
+    "urbanZoneMaxSize",
+    urbanZoneMaxSizeDefault
+  );
+  let urbanTotalMaxSize = validarEntrada(
+    "urbanTotalMaxSize",
+    urbanTotalMaxSizeDefault
+  );
+  let commercialMinZones = validarEntrada(
+    "commercialMinZones",
+    commercialMinZonesDefault
+  );
+  let commercialMaxZones = validarEntrada(
+    "commercialMaxZones",
+    commercialMaxZonesDefault
+  );
+  let commercialZoneMaxSize = validarEntrada(
+    "commercialZoneMaxSize",
+    commercialZoneMaxSizeDefault
+  );
+  let commercialTotalMaxSize = validarEntrada(
+    "commercialTotalMaxSize",
+    commercialTotalMaxSizeDefault
+  );
 
   //https://stackoverflow.com/a/38213067
   let mapaMundo = [...Array(mapSize)].map((e) => Array(mapSize));
@@ -57,10 +84,15 @@ function generarMundo() {
   imprimirMundo();
 
   function poblar() {
-    let zoneNatureRNG = natureMinZones + Math.round(Math.random() * (natureMaxZones - natureMinZones));
-    let zoneUrbanRNG = urbanMinZones + Math.round(Math.random() * (urbanMaxZones - urbanMinZones));
+    let zoneNatureRNG =
+      natureMinZones +
+      Math.round(Math.random() * (natureMaxZones - natureMinZones));
+    let zoneUrbanRNG =
+      urbanMinZones +
+      Math.round(Math.random() * (urbanMaxZones - urbanMinZones));
     let zoneCommercialRNG =
-      commercialMinZones + Math.round(Math.random() * (commercialMaxZones - commercialMinZones));
+      commercialMinZones +
+      Math.round(Math.random() * (commercialMaxZones - commercialMinZones));
     let cordenadasIniciales = new Array();
     generarSpawn(zoneNatureRNG, "nature");
     generarSpawn(zoneUrbanRNG, "urban");
@@ -99,39 +131,39 @@ function generarMundo() {
     let numParcelasUrbanActuales = espaciosUrban.length;
     let numParcelasCommercialActuales = espaciosCommercial.length;
 
-    let numParcelasTotales = Math.round((mapSize * mapSize * maxOccupiedArea) / 100);
+    let numParcelasTotales = Math.round(
+      (mapSize * mapSize * maxOccupiedArea) / 100
+    );
+    let sumParcelasMax =
+      natureTotalMaxSize + urbanTotalMaxSize + commercialTotalMaxSize;
+
+    let numParcelasNecesarias =
+      sumParcelasMax < numParcelasTotales ? sumParcelasMax : numParcelasTotales;
     let numParcelasOcupadas =
-      numParcelasNatureActuales + numParcelasUrbanActuales + numParcelasCommercialActuales;
+      numParcelasNatureActuales +
+      numParcelasUrbanActuales +
+      numParcelasCommercialActuales;
 
+    console.log(espaciosNature);
+    console.log(espaciosUrban);
+    console.log(espaciosCommercial);
+    while (numParcelasOcupadas < numParcelasNecesarias) {
       //Comprobar cada linea
-    while (numParcelasNatureActuales < natureTotalMaxSize) {
-      numParcelasNatureActuales = numParcelasNatureActuales + 100;
-      numParcelasOcupadas =
-        numParcelasNatureActuales + numParcelasUrbanActuales + numParcelasCommercialActuales;
-      if (numParcelasOcupadas == numParcelasTotales) {
-        break;
+      if (numParcelasNatureActuales < natureTotalMaxSize) {
+        numParcelasNatureActuales++;
+        numParcelasOcupadas++;
+      }
+      //Comprobar cada linea
+      if (numParcelasUrbanActuales < urbanTotalMaxSize) {
+        numParcelasUrbanActuales++;
+        numParcelasOcupadas++;
+      }
+      //Comprobar cada linea
+      if (numParcelasCommercialActuales < commercialTotalMaxSize) {
+        numParcelasOcupadas++;
+        numParcelasCommercialActuales++;
       }
     }
-     //Comprobar cada linea
-    while (numParcelasUrbanActuales < urbanTotalMaxSize) {
-      numParcelasUrbanActuales = numParcelasUrbanActuales + 100;
-      numParcelasOcupadas =
-        numParcelasNatureActuales + numParcelasUrbanActuales + numParcelasCommercialActuales;
-      if (numParcelasOcupadas == numParcelasTotales) {
-        break;
-      }
-    }
-     //Comprobar cada linea
-    while (numParcelasCommercialActuales < commercialTotalMaxSize) {
-      numParcelasOcupadas =
-        numParcelasNatureActuales + numParcelasUrbanActuales + numParcelasCommercialActuales;
-      numParcelasCommercialActuales = numParcelasCommercialActuales + 100;
-      if (numParcelasOcupadas == numParcelasTotales) {
-        break;
-      }
-    }
-
-    console.log(numParcelasTotales);
 
     /**
      * Encuentra las coordenadas de todos los elementos de un tipo
