@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\JuegosController;
 use Illuminate\Support\Facades\Route;
 use App\http\controllers\LoginPruebaController;
 
@@ -25,4 +26,7 @@ Route::get('/dashboard', function () {
 Route::get('/login', [LoginPruebaController::class, 'login']);
 
 
-Route::get('/login/{usuario}/{apellidos?}', [LoginPruebaController::class, 'loginUsuario']);
+Route::get('/login/{usuario}/{apellidos?}', [LoginPruebaController::class, 'usuario']);
+
+Route::get('/juegos/{juego}/{categoria}', [JuegosController::class, 'mostrarJuegoCategoria']);
+Route::get('/juegos', [JuegosController::class, 'mostrarCategoria']);

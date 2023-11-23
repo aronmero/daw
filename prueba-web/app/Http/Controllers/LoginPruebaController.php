@@ -8,15 +8,12 @@ class LoginPruebaController extends Controller
 {
     public function login()
     {
-        return "hola estas en el login";
+        $array = [];//["juan", "paco", "teresa"];
+        return view('login', ['usuarios' => $array]);
     }
 
-    public function loginUsuario($usuarios, $apellidos = null)
+    public function usuario($usuarios, $apellidos = null)
     {
-        if ($apellidos) {
-            return "hola estas en el login: " . $usuarios . ' ' . $apellidos;
-        } else {
-            return "hola estas en el login: " . $usuarios;
-        }
+        return view('usuario', ['usuario' => $usuarios, 'apellidos' => $apellidos]);
     }
 }
