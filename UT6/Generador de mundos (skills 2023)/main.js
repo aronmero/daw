@@ -34,6 +34,11 @@ function validarEntrada(idElemento, variableDefault) {
     : variableDefault;
 }
 
+/**
+ * Crea un mundo, y lo hace crecer.
+ * @date 11/23/2023 - 6:30:05 PM
+ * @author Aaron Medina Rodriguez
+ */
 function generarMundo() {
   let mapSize = validarEntrada("mapSize", mapSizeDefault);
   let maxOccupiedArea = validarEntrada("maxOccupiedArea", maxOccupiedAreaDefault);
@@ -68,6 +73,11 @@ function generarMundo() {
   console.log(mapaMundo);
   imprimirMundo();
 
+  /**
+   * Generacion inicial de elementos
+   * @date 11/23/2023 - 6:28:34 PM
+   * @author Aaron Medina Rodriguez
+   */
   function poblar() {
     let idZona = 0;
     let zoneNatureRNG = natureMinZones + Math.round(Math.random() * (natureMaxZones - natureMinZones));
@@ -109,6 +119,11 @@ function generarMundo() {
     }
   }
 
+  /**
+   * Expansion de los mundos
+   * @date 11/23/2023 - 6:28:52 PM
+   * @author Aaron Medina Rodriguez
+   */
   function crecimiento() {
     let numParcelasNatureActuales = espaciosNature.length;
     let numParcelasUrbanActuales = espaciosUrban.length;
@@ -121,7 +136,7 @@ function generarMundo() {
     let numParcelasOcupadas =
       numParcelasNatureActuales + numParcelasUrbanActuales + numParcelasCommercialActuales;
     let numExpansion = 0;
-    let numIntentosFallidosExpandir=0
+    let numIntentosFallidosExpandir = 0;
     while (numParcelasOcupadas < numParcelasNecesarias) {
       if (numParcelasNatureActuales < natureTotalMaxSize) {
         numExpansion = expandir("nature", espaciosNature);
@@ -140,17 +155,17 @@ function generarMundo() {
         numParcelasOcupadas = numParcelasOcupadas + numExpansion;
         numParcelasCommercialActuales = numParcelasCommercialActuales + numExpansion;
       }
-      if(numExpansion===0){
-        numIntentosFallidosExpandir++
+      if (numExpansion === 0) {
+        numIntentosFallidosExpandir++;
       }
       //Para evitar bucles infinitos
-      if(numIntentosFallidosExpandir>50){
+      if (numIntentosFallidosExpandir > 50) {
         break;
       }
     }
 
     /**
-     * Descripcion...
+     * Extiende una zona al azar en una direccion al azar
      * @date 11/21/2023 - 4:43:23 PM
      * @author Aaron Medina Rodriguez
      *
@@ -200,19 +215,16 @@ function generarMundo() {
             if (comprobarInsertado(coordenada1 + 1, coordenada2 + 1)) {
               numExpansion++;
             }
-
             break;
           case 7:
             if (comprobarInsertado(coordenada1, coordenada2 - 1)) {
               numExpansion++;
             }
-
             break;
           case 8:
             if (comprobarInsertado(coordenada1, coordenada2 + 1)) {
               numExpansion++;
             }
-
             break;
           default:
             break;
@@ -255,6 +267,11 @@ function generarMundo() {
     }
   }
 
+  /**
+   * Imprime en HTML el array de mundo
+   * @date 11/23/2023 - 6:29:29 PM
+   * @author Aaron Medina Rodriguez
+   */
   function imprimirMundo() {
     const contenedorVisualizado = document.getElementById("previsualizado");
     if (contenedorVisualizado.childElementCount >= 1) {
