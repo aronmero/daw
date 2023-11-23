@@ -1,0 +1,39 @@
+{
+  "eventos": [
+    {
+      "lugar": "Roque",
+      "fecha": "23-11-2023",
+      "descripcion": "Visita al roque",
+      "grupos": ["1ºESO", "2ºESO"],
+      "profesores": ["Nico", "Luis"]
+    },
+    {
+      "lugar": "Roque",
+      "fecha": "8-12-2023",
+      "descripcion": "Visita a puntagorda",
+      "grupos": ["1ºESO", "2ºESO"],
+      "profesores": ["Paco", "Luz", "Estela"]
+    },
+    {
+      "lugar": "Roque",
+      "fecha": "18-12-2023",
+      "descripcion": "Visita a las salinas",
+      "grupos": ["4ºESO"],
+      "profesores": ["Nico"]
+    },
+    {
+      "lugar": "Roque",
+      "fecha": "7-12-2023",
+      "descripcion": "Visita al time",
+      "grupos": ["1ºESO", "2ºESO"],
+      "profesores": ["Nico", "Luis"]
+    },
+    {
+      "lugar": "Roque",
+      "fecha": "23-12-2023",
+      "descripcion": "Visita al ",
+      "grupos": ["1ºESO", "2ºESO"],
+      "profesores": ["Nico", "Luis"]
+    }
+  ]
+}

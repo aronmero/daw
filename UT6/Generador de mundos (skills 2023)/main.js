@@ -70,7 +70,7 @@ function generarMundo() {
   poblar();
 
   crecimiento();
-  console.log(mapaMundo);
+  
   imprimirMundo();
 
   /**
@@ -299,5 +299,5 @@ function generarMundo() {
 
     contenedorVisualizado.append(tabla);
   }
-  console.log(mapaMundo);
+
 }
