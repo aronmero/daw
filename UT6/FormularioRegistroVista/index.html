@@ -3,14 +3,29 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Page Title</title>
+    <title>DAW</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" type="text/css" media="screen" href="estilo.css" />
   </head>
+
   <body>
     <div class="encabezado">
       <h1>Selecciona como deseas visualizar los eventos</h1>
-      <div><button>Tabla</button><button>Carta</button></div>
+      <div>
+        <div>
+          <button id="tabla" class="selectorVista">Tabla</button
+          ><button id="carta" class="selectorVista">Carta</button>
+        </div>
+        <div class="selectorFiltro"><img src="./media/icons/config.png" /></div>
+      </div>
+    </div>
+    <div class="filtros">
+      <form>
+       <div> <label>Lugar</label><input type="text" name="lugar" id="filtroLugar" /></div> <div><label>Fecha</label
+        ><input type="date" name="fecha" id="filtroFecha" /></div><div> <label>Grupo</label
+        ><input type="text" name="grupo" id="filtroGrupo" /></div><div> <label>Profesor</label
+        ><input type="text" name="profesor" id="filtroProfesor" /></div>
+      </form>
     </div>
     <div class="contenedor"></div>
     <script type="module" src="main.js"></script>
