@@ -64,7 +64,7 @@ function cambiarVista() {
     imprimirTabla();
   } else if (this.id == "carta") {
     vistaActiva = this.id;
-    imprimirCarta();
+    imprimirCartas();
   } else {
     vistaActiva = null;
   }
@@ -80,7 +80,7 @@ function actualizarVista() {
   if (vistaActiva == "tabla") {
     imprimirTabla();
   } else if (vistaActiva == "carta") {
-    imprimirCarta();
+    imprimirCartas();
   }
 }
 
@@ -173,7 +173,13 @@ function imprimirTabla() {
   contenedor.append(tabla);
 }
 
-function imprimirCarta() {
+
+/**
+ * Imprime unos div como si fueran cartas en HTML con los datos de los eventos
+ * @date 11/27/2023 - 2:33:21 PM
+ * @author Aaron Medina Rodriguez
+ */
+function imprimirCartas() {
   const contenedorCartas = document.createElement("div");
   contenedorCartas.classList.add("contenedorCartas");
   data.eventos.forEach((evento) => {
