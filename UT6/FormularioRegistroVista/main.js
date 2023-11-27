@@ -9,7 +9,10 @@ let filtroFecha = "";
 let filtroGrupo = "";
 let filtroProfesor = "";
 let vistaActiva;
-
+let isFiltroActivo = false;
+setInterval(() => {
+  isFiltroActivo = false;
+}, 1000);
 document.getElementById("tabla").addEventListener("click", cambiarSeleccion);
 document.getElementById("tabla").addEventListener("click", cambiarVista);
 const contenedor = document.getElementsByClassName("contenedor")[0];
@@ -19,11 +22,14 @@ document.getElementById("carta").addEventListener("click", cambiarVista);
 document.getElementsByClassName("selectorFiltro")[0].addEventListener("click", function () {
   if (document.getElementsByClassName("filtros")[0].classList.contains("activo")) {
     document.getElementsByClassName("filtros")[0].classList.remove("activo");
+    isFiltroActivo = true;
   } else {
-    document.getElementsByClassName("filtros")[0].classList.add("activo");
+    if (!isFiltroActivo) {
+      isFiltroActivo = true;
+      document.getElementsByClassName("filtros")[0].classList.add("activo");
+    }
   }
 });
-
 document.getElementById("filtroLugar").addEventListener("change", function () {
   this.value != undefined && this.value.length > 0 ? (isFiltroLugar = true) : (isFiltroLugar = false);
   filtroLugar = this.value.toLowerCase();
@@ -63,7 +69,6 @@ function cambiarVista() {
     vistaActiva = null;
   }
 }
-
 
 /**
  * Actualiza la vista activa

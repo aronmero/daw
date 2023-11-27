@@ -106,7 +106,7 @@ button.seleccionado {
   padding: 30px;
   display: flex;
   justify-content: center;
-  transition: height 0.4s ,opacity 1s ease 0.4s;
+ 
 }
 .filtros form {
   width: 800px;
@@ -131,7 +131,7 @@ input {
 
 .filtros.activo{
   /*TODO: transicion out*/
-  transition: height 0.4s ,opacity 1s ease 0.4s;
+  transition: height 0.3s ,opacity 0.3s ease 0.3s;
   opacity: 1;
   visibility: visible;
   height: 170px;
