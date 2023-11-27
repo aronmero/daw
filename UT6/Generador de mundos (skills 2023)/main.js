@@ -176,55 +176,17 @@ function generarMundo() {
       const espaciosZona = zona.getEspacios();
       const coordenada1 = espaciosZona[index][0];
       const coordenada2 = espaciosZona[index][1];
-      const direccion = Math.ceil(Math.random() * 8);
+      const direccion1 = Math.ceil(Math.random() * 3) - 2;
+      const direccion2 = Math.ceil(Math.random() * 3) - 2;
 
-      switch (direccion) {
-        case 1:
-          if (comprobarInsertado(coordenada1 - 1, coordenada2 - 1)) {
-            return 1;
-          }
-          break;
-        case 2:
-          if (comprobarInsertado(coordenada1 - 1, coordenada2)) {
-            return 1;
-          }
-          break;
-        case 3:
-          if (comprobarInsertado(coordenada1 - 1, coordenada2 + 1)) {
-            return 1;
-          }
-          break;
-        case 4:
-          if (comprobarInsertado(coordenada1 + 1, coordenada2)) {
-            return 1;
-          }
-          break;
-        case 5:
-          if (comprobarInsertado(coordenada1 + 1, coordenada2 - 1)) {
-            return 1;
-          }
-          break;
-        case 6:
-          if (comprobarInsertado(coordenada1 + 1, coordenada2 + 1)) {
-            return 1;
-          }
-          break;
-        case 7:
-          if (comprobarInsertado(coordenada1, coordenada2 - 1)) {
-            return 1;
-          }
-          break;
-        case 8:
-          if (comprobarInsertado(coordenada1, coordenada2 + 1)) {
-            return 1;
-          }
-          break;
-        default:
-          break;
+      for (let index = 1; index < mapSize - 1; index++) {
+        if (comprobarInsertado(coordenada1 + direccion1 * index, coordenada2 + direccion2 * index)) {
+          return 1;
+        } else {
+          return 0;
+        }
       }
 
-      espacio[zonaAzar] = zona;
-      return 0;
       /**
        * Comprueba si las coordenadas son correctas e inserta una parcela de un tipo
        * @date 11/21/2023 - 4:42:48 PM
