@@ -70,7 +70,7 @@ function generarMundo() {
   poblar();
 
   crecimiento();
-  
+
   imprimirMundo();
 
   /**
@@ -136,7 +136,7 @@ function generarMundo() {
     let numParcelasOcupadas =
       numParcelasNatureActuales + numParcelasUrbanActuales + numParcelasCommercialActuales;
     let numExpansion = 0;
-    let numIntentosFallidosExpandir = 0;
+
     while (numParcelasOcupadas < numParcelasNecesarias) {
       if (numParcelasNatureActuales < natureTotalMaxSize) {
         numExpansion = expandir("nature", espaciosNature);
@@ -155,13 +155,6 @@ function generarMundo() {
         numParcelasOcupadas = numParcelasOcupadas + numExpansion;
         numParcelasCommercialActuales = numParcelasCommercialActuales + numExpansion;
       }
-      if (numExpansion === 0) {
-        numIntentosFallidosExpandir++;
-      }
-      //Para evitar bucles infinitos
-      if (numIntentosFallidosExpandir > 50) {
-        break;
-      }
     }
 
     /**
@@ -173,66 +166,65 @@ function generarMundo() {
      * @param {Array} espacio
      */
     function expandir(tipo, espacio) {
-      let numExpansion = 0;
       const zonaAzar = Math.ceil(Math.random() * espacio.length - 1);
       const zona = espacio[zonaAzar];
 
       const parcelasActivas = zona.getParcelasActuales();
 
-      const espaciosZona = zona.getEspacios();
-      for (let index = 0; index < parcelasActivas; index++) {
-        const coordenada1 = espaciosZona[index][0];
-        const coordenada2 = espaciosZona[index][1];
-        const direccion = Math.ceil(Math.random() * 8);
+      const index = Math.ceil(Math.random() * (parcelasActivas - 1));
 
-        switch (direccion) {
-          case 1:
-            if (comprobarInsertado(coordenada1 - 1, coordenada2 - 1)) {
-              numExpansion++;
-            }
-            break;
-          case 2:
-            if (comprobarInsertado(coordenada1 - 1, coordenada2)) {
-              numExpansion++;
-            }
-            break;
-          case 3:
-            if (comprobarInsertado(coordenada1 - 1, coordenada2 + 1)) {
-              numExpansion++;
-            }
-            break;
-          case 4:
-            if (comprobarInsertado(coordenada1 + 1, coordenada2)) {
-              numExpansion++;
-            }
-            break;
-          case 5:
-            if (comprobarInsertado(coordenada1 + 1, coordenada2 - 1)) {
-              numExpansion++;
-            }
-            break;
-          case 6:
-            if (comprobarInsertado(coordenada1 + 1, coordenada2 + 1)) {
-              numExpansion++;
-            }
-            break;
-          case 7:
-            if (comprobarInsertado(coordenada1, coordenada2 - 1)) {
-              numExpansion++;
-            }
-            break;
-          case 8:
-            if (comprobarInsertado(coordenada1, coordenada2 + 1)) {
-              numExpansion++;
-            }
-            break;
-          default:
-            break;
-        }
+      const espaciosZona = zona.getEspacios();
+      const coordenada1 = espaciosZona[index][0];
+      const coordenada2 = espaciosZona[index][1];
+      const direccion = Math.ceil(Math.random() * 8);
+
+      switch (direccion) {
+        case 1:
+          if (comprobarInsertado(coordenada1 - 1, coordenada2 - 1)) {
+            return 1;
+          }
+          break;
+        case 2:
+          if (comprobarInsertado(coordenada1 - 1, coordenada2)) {
+            return 1;
+          }
+          break;
+        case 3:
+          if (comprobarInsertado(coordenada1 - 1, coordenada2 + 1)) {
+            return 1;
+          }
+          break;
+        case 4:
+          if (comprobarInsertado(coordenada1 + 1, coordenada2)) {
+            return 1;
+          }
+          break;
+        case 5:
+          if (comprobarInsertado(coordenada1 + 1, coordenada2 - 1)) {
+            return 1;
+          }
+          break;
+        case 6:
+          if (comprobarInsertado(coordenada1 + 1, coordenada2 + 1)) {
+            return 1;
+          }
+          break;
+        case 7:
+          if (comprobarInsertado(coordenada1, coordenada2 - 1)) {
+            return 1;
+          }
+          break;
+        case 8:
+          if (comprobarInsertado(coordenada1, coordenada2 + 1)) {
+            return 1;
+          }
+          break;
+        default:
+          break;
       }
 
       espacio[zonaAzar] = zona;
-      return numExpansion;
+      return 0;
       /**
        * Comprueba si las coordenadas son correctas e inserta una parcela de un tipo
        * @date 11/21/2023 - 4:42:48 PM
@@ -299,5 +291,4 @@ function generarMundo() {
 
     contenedorVisualizado.append(tabla);
   }
-
 }
