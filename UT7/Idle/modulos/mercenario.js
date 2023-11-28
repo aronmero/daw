@@ -1,27 +1,37 @@
-export class Unidad {
+const estadosPosibles = ["Vivo", "Muerto"];
+
+export class Mercenario {
+  nombre;
   puntosVidaMax;
   puntosVida;
   dano;
   velocidad;
   defensa;
   talentos;
+  estado;
   numMaximoTalentos = 5;
   nivel;
 
-  constructor(
-    vidaMaxima = 10,
-    dano = 10,
-    velocidad = 10,
-    defensa = 10,
-    nivel = 1
-  ) {
+  constructor(nombre = "", vidaMaxima = 10, dano = 10, velocidad = 10, defensa = 10, nivel = 1) {
+    this.nombre = nombre;
     this.puntosVidaMax = vidaMaxima;
     this.dano = dano;
     this.velocidad = velocidad;
     this.defensa = defensa;
-    this.puntos_vida = this.puntosVidaMax;
+    this.puntosVida = this.puntosVidaMax;
     this.talentos = [];
     this.nivel = nivel;
+    this.estado = estadosPosibles[0];
+  }
+  getEstado() {
+    return this.estado;
+  }
+
+  setEstado(estado) {
+    this.estado = estadosPosibles[estado];
+  }
+  getNombre() {
+    return this.nombre;
   }
   getPuntosVidaMax() {
     return this.puntosVidaMax;
