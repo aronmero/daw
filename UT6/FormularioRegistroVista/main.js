@@ -1,4 +1,3 @@
-"./datos/info.json";
 import data from "./datos/info.json" assert { type: "json" };
 let isFiltroLugar = false;
 let isFiltroFecha = false;
