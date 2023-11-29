@@ -1,0 +1,58 @@
+* {
+    border: 1px dashed red;
+  }
+.cartaMercenario {
+  box-sizing: border-box;
+  border: 1px solid black;
+  border-radius: 15px;
+  padding: 15px;
+  margin: 5px;
+  min-width: 220px;
+  max-width: 220px;
+  cursor: pointer;
+  background-color: white;
+}
+
+.cartaMercenario div {
+  margin: 5px 0px;
+}
+.cartaMercenario :nth-child(1) {
+  font-size: 24px;
+}
+
+.contenedorMercenario {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding: 20px;
+}
+
+#nav,.navSecundario {
+  min-width: 100px;
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+#nav a{
+    color: black;
+    text-decoration: none;
+    font-size: 24px;
+}
+.navSecundario{
+padding: 10px;
+}
+
+.prevent-select {
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+}
+
+button{
+    padding: 10px 13px;
+    border: 1px solid black;
+    border-radius: 12px;
+    font-size: 14px;
+    cursor: pointer;
+}

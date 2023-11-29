@@ -27,9 +27,6 @@ export class Mercenario {
     return this.estado;
   }
 
-  setEstado(estado) {
-    this.estado = estadosPosibles[estado];
-  }
   getNombre() {
     return this.nombre;
   }
@@ -56,12 +53,16 @@ export class Mercenario {
   getTalentos() {
     return this.talentos;
   }
+
   anadirTalento(talentoNuevo) {
     if (this.talentos.length < this.numMaximoTalentos) {
       this.talentos.push(talentoNuevo);
       return true;
     }
     return false;
+  }
+  setEstado(estado) {
+    this.estado = estadosPosibles[estado];
   }
 
   setPuntosVida(vidaNueva) {
