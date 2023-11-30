@@ -1,6 +1,12 @@
 * {
-    border: 1px dashed red;
-  }
+  border: 1px dashed red;
+}
+.contenedorIframe,.contenedorIframe iframe{
+  min-height: 90vh;
+}
+.contenedorIframe iframe{
+  height: max-content;
+}
 .cartaMercenario {
   box-sizing: border-box;
   border: 1px solid black;
@@ -11,6 +17,7 @@
   max-width: 220px;
   cursor: pointer;
   background-color: white;
+  height: max-content;
 }
 
 .cartaMercenario div {
@@ -25,22 +32,40 @@
   gap: 8px;
   flex-wrap: wrap;
   padding: 20px;
+  
+}
+.compraMercenarios{
+  display: grid;
+  grid-template-columns: 7fr 3fr;
+  gap: 8px;
+}
+.contenedorCompraMercenarioVista {
+  display: flex;
+  flex-wrap: wrap;
+  min-height: 200px;
+}
+.contenedorCompraMercenarioCompra {
+min-width: 100px;
+min-height: 100px;
+display: flex;
+flex-wrap: wrap;
 }
 
-#nav,.navSecundario {
+#nav,
+.navSecundario {
   min-width: 100px;
   min-height: 50px;
   display: flex;
   align-items: center;
   justify-content: space-around;
 }
-#nav a{
-    color: black;
-    text-decoration: none;
-    font-size: 24px;
+#nav a {
+  color: black;
+  text-decoration: none;
+  font-size: 24px;
 }
-.navSecundario{
-padding: 10px;
+.navSecundario {
+  padding: 10px;
 }
 
 .prevent-select {
@@ -49,10 +74,10 @@ padding: 10px;
   user-select: none; /* Standard syntax */
 }
 
-button{
-    padding: 10px 13px;
-    border: 1px solid black;
-    border-radius: 12px;
-    font-size: 14px;
-    cursor: pointer;
+button {
+  padding: 10px 13px;
+  border: 1px solid black;
+  border-radius: 12px;
+  font-size: 14px;
+  cursor: pointer;
 }

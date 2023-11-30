@@ -1,9 +1,8 @@
 const elementosNavegacion = [
-  ["vistaMercenarios.html", "Mercenarios"],
-  ["vistaExpediciones.html", "Expediciones"],
-  ["vistaEscuadrones.html", "Escuadrones"],
+  ["./vistas/vistaMercenarios.html", "Mercenarios"],
+  ["./vistas/vistaExpediciones.html", "Expediciones"],
+  ["./vistas/vistaEscuadrones.html", "Escuadrones"],
 ];
-let numMercenario = 0;
 
 /**
  * Imprime el menu de navegacion
@@ -32,9 +31,11 @@ export function imprimirNavegacion() {
  * @param {HTMLElement} ubicacion
  */
 export function limpiarUbicacion(ubicacion) {
+  
   while (ubicacion.firstChild) {
     ubicacion.removeChild(ubicacion.firstChild);
   }
+  
 }
 
 /**
@@ -45,17 +46,16 @@ export function limpiarUbicacion(ubicacion) {
  * @param {Mercenario} mercenario
  *  @param {HTMLElement} ubicacion
  */
-export function imprimirMercenario(mercenario, ubicacion,arrastrable=false) {
+export function imprimirMercenario(mercenario, ubicacion, arrastrable = false) {
   /*TODO:Que al imprimir funcione como las cartas de pares y se vea el retrato del mecenario */
-  numMercenario++;
   const carta = document.createElement("div");
   carta.classList.add("cartaMercenario");
   carta.classList.add("prevent-select");
-  if(arrastrable){
+  if (arrastrable) {
     carta.setAttribute("draggable", true);
     carta.setAttribute("ondragstart", "drag(event)");
   }
-  carta.id = "mer" + numMercenario;
+  carta.id = mercenario.getId();
   const nombre = document.createElement("div");
   const nombreTexto = document.createTextNode(mercenario.getNombre());
   nombre.append(nombreTexto);

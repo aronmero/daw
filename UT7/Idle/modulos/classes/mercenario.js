@@ -1,6 +1,7 @@
 const estadosPosibles = ["Vivo", "Muerto"];
 
 export class Mercenario {
+  id;
   nombre;
   puntosVidaMax;
   puntosVida;
@@ -13,6 +14,7 @@ export class Mercenario {
   nivel;
 
   constructor(nombre = "", vidaMaxima = 10, dano = 10, velocidad = 10, defensa = 10, nivel = 1) {
+    this.id = Math.round(Math.random() * Math.pow(10, 15));
     this.nombre = nombre;
     this.puntosVidaMax = vidaMaxima;
     this.dano = dano;
@@ -22,6 +24,10 @@ export class Mercenario {
     this.talentos = [];
     this.nivel = nivel;
     this.estado = estadosPosibles[0];
+  }
+  
+  getId() {
+    return this.id;
   }
   getEstado() {
     return this.estado;

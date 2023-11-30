@@ -31,4 +31,6 @@ function drop(ev) {
   ev.preventDefault();
   let data = ev.dataTransfer.getData("text");
   ev.target.appendChild(document.getElementById(data));
+  document.getElementById(data).removeAttribute("draggable");
+  document.getElementById(data).removeAttribute("ondragstart")
 }
