@@ -1,31 +1,38 @@
 import { generarMercenarioNuevo } from "./modulos/logicaMercenarios.js";
-import { imprimirNavegacion, imprimirMercenario, limpiarUbicacion } from "./modulos/mostrar.js";
+import { imprimirMercenario, limpiarUbicacion } from "./modulos/mostrar.js";
 
+const ubicacionIframe = document.getElementsByClassName("contenedorIframe")[0];
 const mercenariosDisponibles = [];
 const mercenariosTotales = [];
-const ubicacionMercenario = document.getElementsByClassName("contenedorMercenario")[0];
-const vistaActiva = document.body.id;
+
 const mercenariosVenta = [];
 
 for (let index = 0; index < 5; index++) {
   mercenariosVenta.push(generarMercenarioNuevo());
 }
 
-//imprimirNavegacion();
 
-if (vistaActiva == "vistaMercenarios") {
-  const botonCompra = document.getElementById("comprarMercenarios");
-  const botonVer = document.getElementById("verMercenarios");
+function activarVistaMercenarios() {
+  const ubicacionMercenario = document.createElement("div");
+  ubicacionMercenario.classList.add("contenedorMercenario");
 
+  const navSecundario = document.createElement("div");
+  navSecundario.classList.add("navSecundario");
+  const botonCompra = document.createElement("button");
+  botonCompra.append(document.createTextNode("Comprar Mercenarios"));
+  botonCompra.id = "comprarMercenarios";
   botonCompra.addEventListener("click", mostrarVentanaCompra);
+  const botonVer = document.createElement("button");
+  botonVer.append(document.createTextNode("Ver Mercenarios"));
+  botonVer.id = "verMercenarios";
   botonVer.addEventListener("click", mostrarVentanMercenarios);
-}
 
-mercenariosVenta.forEach((element) => {
-  console.log(element.getId());
-});
+  navSecundario.append(botonCompra);
+  navSecundario.append(botonVer);
+  ubicacionIframe.append(navSecundario);
+  ubicacionIframe.append(ubicacionMercenario);
 
-/**
+  /**
  * Muestra la ventana de compra de mercenarios
  * @date 11/30/2023 - 4:36:06 PM
  * @author Aaron Medina Rodriguez
@@ -93,6 +100,7 @@ function mostrarVentanMercenarios() {
 function limpiarContenedorMercenario() {
   ubicacionMercenario.classList.remove("verMercenarios");
   ubicacionMercenario.classList.remove("compraMercenarios");
-  
 }
-limpiarContenedorMercenario();
+}
+
+activarVistaMercenarios();

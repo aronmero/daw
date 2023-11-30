@@ -1,11 +1,15 @@
+/**
 * {
   border: 1px dashed red;
 }
-.contenedorIframe,.contenedorIframe iframe{
+/**/
+.contenedorIframe,
+.contenedorIframe iframe {
   min-height: 90vh;
 }
-.contenedorIframe iframe{
+.contenedorIframe iframe {
   height: max-content;
+  border-width:0px;
 }
 .cartaMercenario {
   box-sizing: border-box;
@@ -32,23 +36,34 @@
   gap: 8px;
   flex-wrap: wrap;
   padding: 20px;
-  
 }
-.compraMercenarios{
+.compraMercenarios {
   display: grid;
   grid-template-columns: 7fr 3fr;
-  gap: 8px;
+  gap: 70px;
 }
+.contenedorCompra {
+  display: flex;
+}
+
 .contenedorCompraMercenarioVista {
   display: flex;
   flex-wrap: wrap;
-  min-height: 200px;
+  min-height: 250px;
+  border: 1px solid black;
+  border-radius: 25px;
+  padding: 20px;
+  width: 100%;
 }
 .contenedorCompraMercenarioCompra {
-min-width: 100px;
-min-height: 100px;
-display: flex;
-flex-wrap: wrap;
+  min-width: 100px;
+  min-height: 100px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+  border-radius: 25px;
 }
 
 #nav,
@@ -63,6 +78,7 @@ flex-wrap: wrap;
   color: black;
   text-decoration: none;
   font-size: 24px;
+  cursor: pointer;
 }
 .navSecundario {
   padding: 10px;

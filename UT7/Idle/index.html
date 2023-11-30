@@ -6,17 +6,17 @@
     <title>DAW</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" type="text/css" media="screen" href="estilo.css" />
-    <script type="module" src="../main.js"></script>
+    <script src="./modulos/dragear.js"></script>
+    <script type="module" src="./main.js"></script>
   </head>
   <body>
     <div id="nav">
-      <a href="vistas/vistaMercenarios.html">Mercenarios</a>
-      <a href="vistas/vistaExpediciones.html">Expediciones</a>
-      <a href="vistas/vistaEscuadrones.html">Esquadrones</a>
+      <a class="prevent-select">Mercenarios</a>
+      <a class="prevent-select">Expediciones</a>
+      <a class="prevent-select">Esquadrones</a>
     </div>
     <div class="contenedorIframe">
-      <iframe src="./vistas/vistaMercenarios.html" width="100%" height="100%"></iframe>
-   
+    
     </div>
   </body>
 </html>

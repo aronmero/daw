@@ -5,7 +5,7 @@
  *
  * @param {Event} ev elemento donde se dropeara otro elemento
  */
-function allowDrop(ev) {
+ function allowDrop(ev) {
   ev.preventDefault();
 }
 
@@ -16,7 +16,7 @@ function allowDrop(ev) {
  *
  * @param {Event} ev elemento al que se le permite ser drageado
  */
-function drag(ev) {
+ function drag(ev) {
   ev.dataTransfer.setData("text", ev.target.id);
 }
 
@@ -27,10 +27,9 @@ function drag(ev) {
  *
  * @param {Event} ev elemento donde se soltara el elemento drageado
  */
-function drop(ev) {
+ function drop(ev) {
   ev.preventDefault();
   let data = ev.dataTransfer.getData("text");
   ev.target.appendChild(document.getElementById(data));
-  document.getElementById(data).removeAttribute("draggable");
-  document.getElementById(data).removeAttribute("ondragstart")
+
 }
