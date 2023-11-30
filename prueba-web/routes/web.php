@@ -28,5 +28,7 @@ Route::get('/login', [LoginPruebaController::class, 'login']);
 
 Route::get('/login/{usuario}/{apellidos?}', [LoginPruebaController::class, 'usuario']);
 
-Route::get('/juegos/{juego}/{categoria}', [JuegosController::class, 'mostrarJuegoCategoria']);
 Route::get('/juegos', [JuegosController::class, 'mostrarCategoria']);
+Route::get('/juegos/create', [JuegosController::class, 'create'])->name('create');
+Route::post('/juegos/juegosCreate', [JuegosController::class, 'juegosCreate'])->name('juegosCreate');
+Route::get('/juegos/{juego}/{categoria}', [JuegosController::class, 'mostrarJuegoCategoria']);
