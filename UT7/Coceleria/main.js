@@ -47,9 +47,14 @@ function imprimirBebida(bebida, ubicacion = document.body) {
   carta.classList.add("cartaBebida");
   let imagen = document.createElement("img");
   imagen.setAttribute("src", bebida["strDrinkThumb"]);
+  let boton=document.createElement("button");
+  boton.append(document.createTextNode("Añadir"))
+  let titulo=document.createElement("div");
+  titulo.appendChild(document.createTextNode(bebida["strDrink"]));
 
+  carta.appendChild(titulo);
   carta.appendChild(imagen);
-  carta.appendChild(document.createTextNode(bebida["strDrink"]));
+  carta.appendChild(boton);
   ubicacion.appendChild(carta);
 }
 
