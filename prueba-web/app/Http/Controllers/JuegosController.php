@@ -55,7 +55,7 @@ class JuegosController extends Controller
         $juego->idCategoria = $datos->idCategoria;
         $juego->activo = $datos->activo;
         $juego->save();
-        return redirect()->route('create');
+        return redirect()->route('update');
     }
    
 }
