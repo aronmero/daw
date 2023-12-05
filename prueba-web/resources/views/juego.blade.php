@@ -66,7 +66,7 @@
                     @endif
 
                     <td>{{ $juego->created_at }}</td>
-                    <td><button id_juego="{{ $juego->id }}">Editar</button></td>
+                    <td><a href="{{route('juegoView', $juego->id) }}">Editar</a></td>
                 </tr>
             @empty
                 <tr>

@@ -17,12 +17,12 @@ class JuegosController extends Controller
     public function mostrarCategoria()
     {
         $juegoCategoria = Juego::join('categorias', 'juegos.idCategoria', '=', 'categorias.id')
-            ->select('juegos.nombre', 'categorias.nombre as categoria', 'juegos.activo', 'juegos.created_at')
+            ->select('juegos.id','juegos.nombre', 'categorias.nombre as categoria', 'juegos.activo', 'juegos.created_at')
             ->orderBy('juegos.id', 'desc')
             ->get();
         //  $listaCategorias = Categoria::all();
         //$listaJuegos = Juego::all();
-        dump($juegoCategoria);
+       // dump($juegoCategoria);
         //$listaJuegos = ['Factorio', 'Satisfactory'];
         return view('juego', ['juegoCategoria' => $juegoCategoria]);
     }

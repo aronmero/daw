@@ -32,7 +32,7 @@ Route::get('/juegos', [JuegosController::class, 'mostrarCategoria']);
 Route::get('/juegos/create', [JuegosController::class, 'create'])->name('create');
 Route::post('/juegos/juegosCreate', [JuegosController::class, 'juegosCreate'])->name('juegosCreate');
 
-Route::get('/juegos/juegoView/{juego}', [JuegosController::class, 'juegoView'])->name('juegoView');
+Route::get('/juegos/{idjuego}', [JuegosController::class, 'juegoView'])->name('juegoView');
 Route::post('/juegos/juegosUpdate', [JuegosController::class, 'juegosUpdate'])->name('juegosUpdate');
 
 Route::get('/juegos/{juego}/{categoria}', [JuegosController::class, 'mostrarJuegoCategoria']);
