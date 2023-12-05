@@ -12,7 +12,7 @@
         @csrf
         <div>
             <label>Nombre juego</label>
-            <input type="text" name="NombreJuego" placeholder="Juego">
+            <input type="text" name="nombreJuego" placeholder="Juego">
         </div>
         <div>
             <label>Categoria juego</label>

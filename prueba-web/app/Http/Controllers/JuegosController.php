@@ -32,13 +32,30 @@ class JuegosController extends Controller
     {
         $categorias = Categoria::all();
         return view('create', ['categorias' => $categorias]);
-    }
+    } 
     public function juegosCreate(Request $datos)
     {
         $juego = new Juego();
-        $juego->nombre = $datos->NombreJuego;
+        $juego->nombre = $datos->nombreJuego;
         $juego->idCategoria = $datos->idCategoria;
         $juego->save();
-        return redirect ()->route('create');
+        return redirect()->route('create');
     }
+
+    public function juegoView($juegoID)
+    {
+        $juego = Juego::find($juegoID);
+        $categorias = Categoria::all();
+        return view('update', ['categorias' => $categorias, 'juego' => $juego]);
+    }
+    public function juegosUpdate(Request $datos)
+    {
+        $juego = Juego::find($datos->idJuego);
+        $juego->nombre = $datos->nombreJuego;
+        $juego->idCategoria = $datos->idCategoria;
+        $juego->activo = $datos->activo;
+        $juego->save();
+        return redirect()->route('create');
+    }
+   
 }

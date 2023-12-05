@@ -51,6 +51,7 @@
                 <td>Categoria</td>
                 <td>Estado</td>
                 <td>Fecha Creacion</td>
+                <td></td>
             </thead>
             @forelse ($juegoCategoria as $juego)
                 <tr>
@@ -65,6 +66,7 @@
                     @endif
 
                     <td>{{ $juego->created_at }}</td>
+                    <td><button id_juego="{{ $juego->id }}">Editar</button></td>
                 </tr>
             @empty
                 <tr>
