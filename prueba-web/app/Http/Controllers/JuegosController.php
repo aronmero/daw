@@ -17,12 +17,12 @@ class JuegosController extends Controller
     public function mostrarCategoria()
     {
         $juegoCategoria = Juego::join('categorias', 'juegos.idCategoria', '=', 'categorias.id')
-            ->select('juegos.id','juegos.nombre', 'categorias.nombre as categoria', 'juegos.activo', 'juegos.created_at')
+            ->select('juegos.id', 'juegos.nombre', 'categorias.nombre as categoria', 'juegos.activo', 'juegos.created_at')
             ->orderBy('juegos.id', 'desc')
             ->get();
         //  $listaCategorias = Categoria::all();
         //$listaJuegos = Juego::all();
-       // dump($juegoCategoria);
+        // dump($juegoCategoria);
         //$listaJuegos = ['Factorio', 'Satisfactory'];
         return view('juego', ['juegoCategoria' => $juegoCategoria]);
     }
@@ -32,7 +32,7 @@ class JuegosController extends Controller
     {
         $categorias = Categoria::all();
         return view('create', ['categorias' => $categorias]);
-    } 
+    }
     public function juegosCreate(Request $datos)
     {
         $juego = new Juego();
@@ -55,7 +55,6 @@ class JuegosController extends Controller
         $juego->idCategoria = $datos->idCategoria;
         $juego->activo = $datos->activo;
         $juego->save();
-        return redirect()->route('update');
+        return redirect()->route('juegoView', $datos->idJuego);
     }
-   
 }
