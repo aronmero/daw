@@ -1,10 +1,6 @@
 import { Coctel } from "./modulos/coctel.js";
-
-import {
-  obtenerValorCookie,
-  obtenerCookie,
-  anadirCaducidadCookie,
-} from "./modulos/cookie.js";
+import { convertHTMLtoPDF } from "./modulos/generarPDF.js";
+import { obtenerValorCookie, obtenerCookie, anadirCaducidadCookie } from "./modulos/cookie.js";
 const contenedorBebidas = document.getElementById("contBebidas");
 let carrito = new Array();
 const ubicacionModal = document.getElementsByClassName("containerBebidas")[0];
@@ -15,7 +11,6 @@ if (obtenerCookie("carrito") != undefined) {
   imprimirCarrito();
 }
 
-
 /**
  * Imprime el carrito
  * @date 12/11/2023 - 5:55:39 PM
@@ -23,11 +18,7 @@ if (obtenerCookie("carrito") != undefined) {
  */
 function imprimirCarrito() {
   for (let index = 0; index < carrito.length; index++) {
-    const coctel = new Coctel(
-      carrito[index]["id"],
-      carrito[index]["nombre"],
-      carrito[index]["imgUrl"]
-    );
+    const coctel = new Coctel(carrito[index]["id"], carrito[index]["nombre"], carrito[index]["imgUrl"]);
     imprimirCoctel(coctel, ubicacionModal);
   }
 }
@@ -57,9 +48,7 @@ async function procesarDatos() {
  * @returns {unknown}
  */
 async function pedirDatos() {
-  let bebidas = await fetch(
-    "https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=Rum"
-  )
+  let bebidas = await fetch("https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=Rum")
     .then((response) => response.json())
     .then((data) => data.drinks)
     .catch(() => console.warn("Error"));
@@ -86,7 +75,7 @@ function imprimirBebida(bebida, ubicacion = document.body) {
   let boton = document.createElement("button");
   boton.append(document.createTextNode("Añadir"));
   boton.addEventListener("click", anadirBebidaCarrito);
- // boton.addEventListener("click", limpiarCarritoVisual);
+  // boton.addEventListener("click", limpiarCarritoVisual);
   //boton.addEventListener("click", imprimirCarrito);
 
   boton.addEventListener("click", modificarCookieCarrito);
@@ -153,14 +142,12 @@ function imprimirCoctel(coctel, ubicacion) {
   ubicacion.append(contenedor);
 }
 
-
 /**
  * Elimina un coctel del carrito
  * @date 12/11/2023 - 4:03:06 PM
  * @author Aarón Medina Rodríguez
  */
 function eliminarCoctelCarrito() {
-  
   const idCoctel = this.parentNode.getAttribute("iddrink");
   const containerBebidas = this.parentNode.parentNode;
   containerBebidas.removeChild(this.parentNode);
@@ -175,10 +162,23 @@ function eliminarCoctelCarrito() {
 }
 
 function limpiarCarritoVisual() {
- const container= document.getElementsByClassName("containerBebidas")[0];
+  const container = document.getElementsByClassName("containerBebidas")[0];
   while (container.firstChild) {
-   container.removeChild(container.firstChild)
+    container.removeChild(container.firstChild);
   }
+}
+
+function actualizarFactura() {
+  const factura=document.getElementById("contenedorProducto");
+  while(factura.firstChild){
+    factura.removeChild(factura.firstChild)
+  }
+  carrito.forEach(element => {
+   const linea= document.createElement("div")
+   linea.append(document.createTextNode(element.nombre))
+   factura.append(linea);
+    console.log(element.nombre);
+  });
 }
 
 document.getElementById("abrirModal").addEventListener("click", () => {
@@ -189,3 +189,9 @@ document.getElementById("cerrarModal").addEventListener("click", () => {
 });
 
 procesarDatos();
+document.getElementById("realizarPedido").addEventListener("click", () => {
+  actualizarFactura();
+  convertHTMLtoPDF();
+  limpiarCarritoVisual();
+  carrito=[];
+});

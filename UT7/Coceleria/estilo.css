@@ -76,7 +76,6 @@ p {
   border-bottom: 1px solid grey;
 }
 
-
 .modalCarritoNav {
   box-sizing: border-box;
   display: flex;
@@ -121,10 +120,10 @@ button:hover {
   background-color: #ffc300;
 }
 
-.containerBebidas{
+.containerBebidas {
   overflow: auto;
 }
-.containerBebidas>div {
+.containerBebidas > div {
   display: grid;
   grid-template-rows: 120px;
   grid-template-columns: 1fr 2.5fr 0.5fr;
@@ -137,11 +136,10 @@ button:hover {
   height: 100px;
   border-radius: 25px;
 }
-.eliminarCoctel img{
+.eliminarCoctel img {
   width: 20px;
   height: 20px;
   cursor: pointer;
-
 }
 
 /* CUSTOM Scrollbar 
@@ -168,4 +166,15 @@ button:hover {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #888888;
+}
+
+#containerPDF {
+  position: absolute;
+  top: 0;
+  z-index: -1;
+  transform: scale(0.5); 
+  transform-origin: 0 0; 
+}
+h5 {
+  margin: 0;
 }
