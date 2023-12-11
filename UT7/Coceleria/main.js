@@ -6,22 +6,30 @@ import {
   anadirCaducidadCookie,
 } from "./modulos/cookie.js";
 const contenedorBebidas = document.getElementById("contBebidas");
-let carrito;
+let carrito = new Array();
+const ubicacionModal = document.getElementsByClassName("containerBebidas")[0];
 
 if (obtenerCookie("carrito") != undefined) {
   const json_str = obtenerValorCookie("carrito");
   carrito = JSON.parse(json_str);
-  const ubicacionModal = document.getElementsByClassName("containerBebidas")[0];
+  imprimirCarrito();
+}
+
+
+/**
+ * Imprime el carrito
+ * @date 12/11/2023 - 5:55:39 PM
+ * @author Aaron Medina Rodriguez
+ */
+function imprimirCarrito() {
   for (let index = 0; index < carrito.length; index++) {
     const coctel = new Coctel(
       carrito[index]["id"],
       carrito[index]["nombre"],
       carrito[index]["imgUrl"]
     );
-    imprimirCarrito(coctel, ubicacionModal);
+    imprimirCoctel(coctel, ubicacionModal);
   }
-} else {
-  carrito = new Array();
 }
 
 /**
@@ -78,6 +86,10 @@ function imprimirBebida(bebida, ubicacion = document.body) {
   let boton = document.createElement("button");
   boton.append(document.createTextNode("Añadir"));
   boton.addEventListener("click", anadirBebidaCarrito);
+ // boton.addEventListener("click", limpiarCarritoVisual);
+  //boton.addEventListener("click", imprimirCarrito);
+
+  boton.addEventListener("click", modificarCookieCarrito);
   let titulo = document.createElement("div");
   titulo.appendChild(document.createTextNode(bebida["strDrink"]));
 
@@ -93,15 +105,13 @@ function imprimirBebida(bebida, ubicacion = document.body) {
  * @author Aarón Medina Rodríguez
  */
 function anadirBebidaCarrito() {
-  const ubicacionModal = document.getElementsByClassName("containerBebidas")[0];
   const idCoctel = this.parentNode.getAttribute("idDrink");
   const nombreCoctel = this.parentNode.getAttribute("strDrink");
   const imgUrl = this.parentNode.getAttribute("strDrinkThumb");
   const coctel = new Coctel(idCoctel, nombreCoctel, imgUrl);
-  imprimirCarrito(coctel, ubicacionModal);
-  carrito.push(coctel);
 
-  modificarCookieCarrito();
+  carrito.push(coctel);
+  imprimirCoctel(coctel, ubicacionModal);
 }
 
 /**
@@ -122,7 +132,7 @@ function modificarCookieCarrito() {
  * @param {Coctel} coctel
  * @param {HTMLElement} ubicacion
  */
-function imprimirCarrito(coctel, ubicacion) {
+function imprimirCoctel(coctel, ubicacion) {
   const contenedor = document.createElement("div");
   contenedor.setAttribute("idDrink", coctel.getId());
 
@@ -150,6 +160,7 @@ function imprimirCarrito(coctel, ubicacion) {
  * @author Aarón Medina Rodríguez
  */
 function eliminarCoctelCarrito() {
+  
   const idCoctel = this.parentNode.getAttribute("iddrink");
   const containerBebidas = this.parentNode.parentNode;
   containerBebidas.removeChild(this.parentNode);
@@ -162,6 +173,14 @@ function eliminarCoctelCarrito() {
   }
   modificarCookieCarrito();
 }
+
+function limpiarCarritoVisual() {
+ const container= document.getElementsByClassName("containerBebidas")[0];
+  while (container.firstChild) {
+   container.removeChild(container.firstChild)
+  }
+}
+
 document.getElementById("abrirModal").addEventListener("click", () => {
   document.getElementsByClassName("modalCarrito")[0].classList.add("activo");
 });
