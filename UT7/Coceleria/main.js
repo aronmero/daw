@@ -1,3 +1,4 @@
+import { Coctel } from "./modulos/coctel.js";
 const contenedorBebidas = document.getElementById("contBebidas");
 
 /**
@@ -14,7 +15,6 @@ async function procesarDatos() {
   bebidas.forEach((bebida) => {
     imprimirBebida(bebida, contenedorBebidas);
   });
-
 }
 
 /**
@@ -26,7 +26,9 @@ async function procesarDatos() {
  * @returns {unknown}
  */
 async function pedirDatos() {
-  let bebidas = await fetch("https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=Rum")
+  let bebidas = await fetch(
+    "https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=Rum"
+  )
     .then((response) => response.json())
     .then((data) => data.drinks)
     .catch(() => console.warn("Error"));
@@ -45,17 +47,29 @@ async function pedirDatos() {
 function imprimirBebida(bebida, ubicacion = document.body) {
   let carta = document.createElement("div");
   carta.classList.add("cartaBebida");
+  carta.setAttribute("strDrink", bebida["strDrink"]);
+  carta.setAttribute("idDrink", bebida["idDrink"]);
+  carta.setAttribute("strDrinkThumb", bebida["strDrinkThumb"]);
   let imagen = document.createElement("img");
   imagen.setAttribute("src", bebida["strDrinkThumb"]);
-  let boton=document.createElement("button");
-  boton.append(document.createTextNode("Añadir"))
-  let titulo=document.createElement("div");
+  let boton = document.createElement("button");
+  boton.append(document.createTextNode("Añadir"));
+  boton.addEventListener("click", anadirBebidaCarrito);
+  let titulo = document.createElement("div");
   titulo.appendChild(document.createTextNode(bebida["strDrink"]));
 
   carta.appendChild(titulo);
   carta.appendChild(imagen);
   carta.appendChild(boton);
   ubicacion.appendChild(carta);
+}
+
+function anadirBebidaCarrito(params) {
+  const idCoctel = this.parentNode.getAttribute("idDrink");
+  const nombreCoctel = this.parentNode.getAttribute("strDrink");
+  const imgUrl = this.parentNode.getAttribute("strDrinkThumb");
+  const coctel = new Coctel(idCoctel, nombreCoctel, imgUrl);
+  console.log(coctel);
 }
 
 procesarDatos();

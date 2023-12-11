@@ -1,4 +1,4 @@
-export class coctel {
+export class Coctel {
   id;
   nombre;
   imgUrl;
