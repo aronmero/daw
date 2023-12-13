@@ -1047,6 +1047,7 @@
         },
         {
             "name": "laravel/framework",
+<<<<<<< Updated upstream
             "version": "v10.35.0",
             "source": {
                 "type": "git",
@@ -1057,6 +1058,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/laravel/framework/zipball/91ec2d92d2f6007e9084fe06438b99c91845da69",
                 "reference": "91ec2d92d2f6007e9084fe06438b99c91845da69",
+=======
+            "version": "v10.37.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/framework.git",
+                "reference": "d97b5263ccd2f3950fd93f45b1b957259d76d0db"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/d97b5263ccd2f3950fd93f45b1b957259d76d0db",
+                "reference": "d97b5263ccd2f3950fd93f45b1b957259d76d0db",
+>>>>>>> Stashed changes
                 "shasum": ""
             },
             "require": {
@@ -1245,7 +1258,11 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
+<<<<<<< Updated upstream
             "time": "2023-12-05T14:50:33+00:00"
+=======
+            "time": "2023-12-13T14:12:36+00:00"
+>>>>>>> Stashed changes
         },
         {
             "name": "laravel/prompts",
@@ -6704,6 +6721,7 @@
         },
         {
             "name": "phpunit/phpunit",
+<<<<<<< Updated upstream
             "version": "10.5.2",
             "source": {
                 "type": "git",
@@ -6714,6 +6732,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/5aedff46afba98dddecaa12349ec044d9103d4fe",
                 "reference": "5aedff46afba98dddecaa12349ec044d9103d4fe",
+=======
+            "version": "10.5.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sebastianbergmann/phpunit.git",
+                "reference": "6fce887c71076a73f32fd3e0774a6833fc5c7f19"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/6fce887c71076a73f32fd3e0774a6833fc5c7f19",
+                "reference": "6fce887c71076a73f32fd3e0774a6833fc5c7f19",
+>>>>>>> Stashed changes
                 "shasum": ""
             },
             "require": {
@@ -6785,7 +6815,11 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
+<<<<<<< Updated upstream
                 "source": "https://github.com/sebastianbergmann/phpunit/tree/10.5.2"
+=======
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/10.5.3"
+>>>>>>> Stashed changes
             },
             "funding": [
                 {
@@ -6801,7 +6835,11 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< Updated upstream
             "time": "2023-12-05T14:54:33+00:00"
+=======
+            "time": "2023-12-13T07:25:23+00:00"
+>>>>>>> Stashed changes
         },
         {
             "name": "sebastian/cli-parser",

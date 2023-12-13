@@ -1,6 +1,9 @@
 <?php
 
+<<<<<<< Updated upstream
 use App\Http\Controllers\actividadesController;
+=======
+>>>>>>> Stashed changes
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,5 +20,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+<<<<<<< Updated upstream
 
 Route::get('/vista', [ActividadesController::class, 'mostrarActividades']);
+=======
+>>>>>>> Stashed changes
