@@ -161,6 +161,11 @@ function eliminarCoctelCarrito() {
   modificarCookieCarrito();
 }
 
+/**
+ * Limpia el carrito de elementos visuales
+ * @date 12/13/2023 - 5:30:18 PM
+ * @author Aaron Medina Rodriguez
+ */
 function limpiarCarritoVisual() {
   const container = document.getElementsByClassName("containerBebidas")[0];
   while (container.firstChild) {
@@ -168,15 +173,42 @@ function limpiarCarritoVisual() {
   }
 }
 
+/**
+ * Actualiza la factura
+ * @date 12/13/2023 - 5:30:28 PM
+ * @author Aaron Medina Rodriguez
+ */
 function actualizarFactura() {
-  const factura=document.getElementById("contenedorProducto");
-  while(factura.firstChild){
-    factura.removeChild(factura.firstChild)
+  const factura = document.getElementById("contenedorProducto");
+  const afactura = new Array();
+  while (factura.firstChild) {
+    factura.removeChild(factura.firstChild);
   }
-  carrito.forEach(element => {
-   const linea= document.createElement("div")
-   linea.append(document.createTextNode(element.nombre))
-   factura.append(linea);
+
+  carrito.forEach((coctel) => {
+    let isRepetido = false;
+    //FIXME: Funciona parcial
+    for (let index = 0; index < afactura.length; index++) {
+
+      if (coctel.id ==  afactura[index].coctel.id) {
+        afactura.push({ coctel: coctel, cantidad: 1 });
+        const nuevaCantidad = afactura[0].cantidad + 1;
+        afactura[index] = { coctel: coctel, cantidad: nuevaCantidad };
+        isRepetido = true;
+        break;
+      }
+    }
+    if (!isRepetido) {
+      afactura.push({ coctel: coctel, cantidad: 1 });
+
+    }
+  });
+
+  console.log(afactura);
+  afactura.forEach((element) => {
+    const linea = document.createElement("div");
+    linea.append(document.createTextNode(element.nombre));
+    factura.append(linea);
     console.log(element.nombre);
   });
 }
@@ -193,5 +225,5 @@ document.getElementById("realizarPedido").addEventListener("click", () => {
   actualizarFactura();
   convertHTMLtoPDF();
   limpiarCarritoVisual();
-  carrito=[];
+  carrito = [];
 });
