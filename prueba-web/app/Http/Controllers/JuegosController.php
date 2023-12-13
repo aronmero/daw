@@ -55,6 +55,6 @@ class JuegosController extends Controller
         $juego->idCategoria = $datos->idCategoria;
         $juego->activo = $datos->activo;
         $juego->save();
-        return redirect()->route('juegoView', $datos->idJuego);
+        return redirect()->route('vistaJuegos');
     }
 }
