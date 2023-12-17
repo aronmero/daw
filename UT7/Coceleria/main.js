@@ -1,6 +1,10 @@
 import { Coctel } from "./modulos/coctel.js";
 import { convertHTMLtoPDF } from "./modulos/generarPDF.js";
-import { obtenerValorCookie, obtenerCookie, anadirCaducidadCookie } from "./modulos/cookie.js";
+import {
+  obtenerValorCookie,
+  obtenerCookie,
+  anadirCaducidadCookie,
+} from "./modulos/cookie.js";
 const contenedorBebidas = document.getElementById("contBebidas");
 let carrito = new Array();
 const ubicacionModal = document.getElementsByClassName("containerBebidas")[0];
@@ -18,27 +22,14 @@ if (obtenerCookie("carrito") != undefined) {
  */
 function imprimirCarrito() {
   for (let index = 0; index < carrito.length; index++) {
-    const coctel = new Coctel(carrito[index]["id"], carrito[index]["nombre"], carrito[index]["imgUrl"]);
+    const coctel = new Coctel(
+      carrito[index]["id"],
+      carrito[index]["nombre"],
+      carrito[index]["imgUrl"]
+    );
     imprimirCoctel(coctel, ubicacionModal);
   }
 }
-
-/**
- * Obtiene de la API bebidas y las imprime.
- * @date 12/4/2023 - 3:58:01 PM
- * @author Aaron Medina Rodriguez
- *
- * @async
- * @param {*} params
- * @returns {*}
- */
-async function procesarDatos() {
-  let bebidas = await pedirDatos();
-  bebidas.forEach((bebida) => {
-    imprimirBebida(bebida, contenedorBebidas);
-  });
-}
-
 /**
  * Solicitar datos a la API y devolverlos
  * @date 12/4/2023 - 3:57:33 PM
@@ -47,13 +38,15 @@ async function procesarDatos() {
  * @async
  * @returns {unknown}
  */
-async function pedirDatos() {
-  let bebidas = await fetch("https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=Rum")
+function pedirDatos() {
+  fetch("https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=Rum")
     .then((response) => response.json())
-    .then((data) => data.drinks)
+    .then((data) =>
+      data.drinks.forEach((bebida) => {
+        imprimirBebida(bebida, contenedorBebidas);
+      })
+    )
     .catch(() => console.warn("Error"));
-
-  return bebidas;
 }
 
 /**
@@ -189,8 +182,7 @@ function actualizarFactura() {
     let isRepetido = false;
     //FIXME: Funciona parcial
     for (let index = 0; index < afactura.length; index++) {
-
-      if (coctel.id ==  afactura[index].coctel.id) {
+      if (coctel.id == afactura[index].coctel.id) {
         afactura.push({ coctel: coctel, cantidad: 1 });
         const nuevaCantidad = afactura[0].cantidad + 1;
         afactura[index] = { coctel: coctel, cantidad: nuevaCantidad };
@@ -200,7 +192,6 @@ function actualizarFactura() {
     }
     if (!isRepetido) {
       afactura.push({ coctel: coctel, cantidad: 1 });
-
     }
   });
 
@@ -220,7 +211,7 @@ document.getElementById("cerrarModal").addEventListener("click", () => {
   document.getElementsByClassName("modalCarrito")[0].classList.remove("activo");
 });
 
-procesarDatos();
+pedirDatos();
 document.getElementById("realizarPedido").addEventListener("click", () => {
   actualizarFactura();
   convertHTMLtoPDF();
