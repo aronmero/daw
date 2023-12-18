@@ -39,20 +39,20 @@ if (!isset($_SESSION["identificador"])) {
     </form>
     <?php
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $dni = $_POST["dni"];
+        $identificador = $_POST["dni"];
         $contrasena = $_POST["contrasena"];
 
-        $contrasenaDB = obtenerContrasena($dni);
+        $datosUsuario = obtenerContrasena($identificador);
         //Todo: Cambiar metodo a HASH
-        if ($contrasenaDB[0] == $contrasena) {
+        if ($datosUsuario[0] == $contrasena) {
 
-            $datosProfesor = obtenerProfesorDni($dni);
+            $datosProfesor = obtenerProfesorDni($identificador);
             if (isset($datosProfesor[0])) {
                 $_SESSION["tipoUsuario"] = "profesor";
                 $_SESSION["identificador"] = $datosProfesor[0];
                 header('Location: index.php');
             } else {
-                $datosAlumno = obtenerAlumnoDni($dni);
+                $datosAlumno = obtenerAlumnoDni($identificador);
 
                 $_SESSION["tipoUsuario"] = "alumno";
                 $_SESSION["identificador"] = $datosAlumno[0];
