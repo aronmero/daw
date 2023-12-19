@@ -35,6 +35,17 @@ class JuegosController extends Controller
     }
     public function juegosCreate(Request $datos)
     {
+        $datos->validate([
+            'nombreJuego' => 'required|min:3|unique:juegos,nombre',
+            'idCategoria' => 'required|exists:categorias,id',
+        ], [
+            'nombreJuego.required' => 'El nombre del juego es obligatorio.',
+            'nombreJuego.min' => 'El nombre del juego debe tener al menos 3 caracteres.',
+            'nombreJuego.unique' => 'Este nombre de juego ya está registrado.',
+            'idCategoria.required' => 'La categoría del juego es obligatoria.',
+            'idCategoria.exists' => 'La categoría seleccionada no es válida.',
+        ]);
+
         $juego = new Juego();
         $juego->nombre = $datos->nombreJuego;
         $juego->idCategoria = $datos->idCategoria;
@@ -50,11 +61,23 @@ class JuegosController extends Controller
     }
     public function juegosUpdate(Request $datos)
     {
+        $datos->validate([
+            'nombreJuego' => 'required|min:3|unique:juegos,nombre,' . $datos->idJuego,
+            'idCategoria' => 'required|exists:categorias,id',
+        ], [
+            'nombreJuego.required' => 'El nombre del juego es obligatorio.',
+            'nombreJuego.min' => 'El nombre del juego debe tener al menos 3 caracteres.',
+            'nombreJuego.unique' => 'Este nombre de juego ya está registrado.',
+            'idCategoria.required' => 'La categoría del juego es obligatoria.',
+            'idCategoria.exists' => 'La categoría seleccionada no es válida.',
+        ]);
+
         $juego = Juego::find($datos->idJuego);
         $juego->nombre = $datos->nombreJuego;
         $juego->idCategoria = $datos->idCategoria;
         $juego->activo = $datos->activo;
         $juego->save();
-        return redirect()->route('vistaJuegos');
+
+        return redirect()->route('vistaJuego');
     }
 }

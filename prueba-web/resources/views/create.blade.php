@@ -27,6 +27,17 @@
             <input type="submit" value="Enviar">
         </div>
     </form>
+    @if ($errors->any())
+    <br>
+        <div>
+            <strong>¡Ups! Hubo algunos problemas con tu entrada:</strong>
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 </body>
 
 </html>
