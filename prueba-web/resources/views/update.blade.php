@@ -14,7 +14,7 @@
         <table>
             <input type="hidden" name="idJuego" value="{{ $juego->id }}">
             <tr>
-                <td><input type=text name="nombreJuego" value="{{ $juego->nombre }}"></td>
+                <td><input type=text name="nombre" value="{{ $juego->nombre }}"></td>
             </tr>
             <tr>
 
