@@ -217,4 +217,7 @@ document.getElementById("realizarPedido").addEventListener("click", () => {
   convertHTMLtoPDF();
   limpiarCarritoVisual();
   carrito = [];
+  //Eliminar el array de la cookie
+  const json_str = JSON.stringify(carrito);
+  anadirCaducidadCookie("carrito", json_str,-1);
 });
