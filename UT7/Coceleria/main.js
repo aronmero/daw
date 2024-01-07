@@ -1,5 +1,5 @@
 import { Coctel } from "./modulos/coctel.js";
-import { convertHTMLtoPDF } from "./modulos/generarPDF.js";
+import { crearFactura } from "./modulos/generarPDF.js";
 import {
   obtenerValorCookie,
   obtenerCookie,
@@ -195,13 +195,15 @@ function actualizarFactura() {
     }
   });
 
-  console.log(afactura);
+
+
   afactura.forEach((element) => {
     const linea = document.createElement("div");
-    linea.append(document.createTextNode(element.nombre));
+    linea.append(document.createTextNode(element.coctel.nombre));
+    linea.append(document.createTextNode(element.cantidad));
     factura.append(linea);
-    console.log(element.nombre);
   });
+  crearFactura(afactura);
 }
 
 document.getElementById("abrirModal").addEventListener("click", () => {
@@ -214,7 +216,6 @@ document.getElementById("cerrarModal").addEventListener("click", () => {
 pedirDatos();
 document.getElementById("realizarPedido").addEventListener("click", () => {
   actualizarFactura();
-  convertHTMLtoPDF();
   limpiarCarritoVisual();
   carrito = [];
   //Eliminar el array de la cookie
