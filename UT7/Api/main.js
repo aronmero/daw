@@ -7,13 +7,21 @@
  * @returns {unknown}
  */
 function pedirDatos() {
-    fetch("https://random-data-api.com/api/v2/users")
-      .then((response) => response.json())
-      .then((data) =>
-        console.log(data)
-      )
-      .catch(() => console.warn("Error"));
-  }
+  fetch("https://pokeapi.co/api/v2/pokedex/1")
+    .then((response) => response.json())
+    .then((data) =>
+      data.pokemon_entries.forEach((element) => {
+        fetch(`https://pokeapi.co/api/v2/pokemon/${element.pokemon_species.name}`)
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data.name);
+            console.log(data.sprites.front_default);
+          })
+          .catch(() => console.warn("Error"));
+      })
+    )
+    .catch(() => console.warn("Error"));
+}
 
 pedirDatos();
 
