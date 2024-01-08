@@ -1,0 +1,11 @@
+body {
+  display: flex;
+  margin: 0px;
+  min-height: 100vh;
+  flex-direction: column;
+}
+.center {
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+}
