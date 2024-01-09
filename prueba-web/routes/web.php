@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\JuegosController;
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 use App\http\controllers\LoginPruebaController;
 
@@ -37,3 +38,5 @@ Route::get('/juegos/juegosEliminar/{idjuego}', [JuegosController::class, 'juegoE
 Route::post('/juegos/juegosUpdate', [JuegosController::class, 'juegosUpdate'])->name('juegosUpdate');
 
 Route::get('/juegos/{juego}/{categoria}', [JuegosController::class, 'mostrarJuegoCategoria']);
+
+Route::resource('categorias',CategoryController::class);
