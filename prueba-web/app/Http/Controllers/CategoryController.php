@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\Juego;
+use App\Models\Categoria;
 class CategoryController extends Controller
 {
     /**
@@ -13,7 +14,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categorias = Categoria::all();
+
+        return view('categoria', ['categorias' => $categorias]);
     }
 
     /**
@@ -45,7 +48,7 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('categoriaView', ['id' => $id]);
     }
 
     /**
@@ -56,7 +59,7 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+
     }
 
     /**
