@@ -53,6 +53,13 @@ class JuegosController extends Controller
         $categorias = Categoria::all();
         return view('update', ['categorias' => $categorias, 'juego' => $juego]);
     }
+
+    public function juegoEliminar($juegoID)
+    {
+        $juego = Juego::find($juegoID);
+        $juego->delete();
+        return redirect()->route('vistaJuegos');
+    }
     public function juegosUpdate(edit_Juego $datos)
     {
         /*  $juego =*/Juego::find($datos->idJuego)->update($datos->all());

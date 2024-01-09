@@ -52,6 +52,7 @@
                 <td>Estado</td>
                 <td>Fecha Creacion</td>
                 <td></td>
+                <td></td>
             </thead>
             @forelse ($juegoCategoria as $juego)
                 <tr>
@@ -67,6 +68,7 @@
 
                     <td>{{ $juego->created_at }}</td>
                     <td><a href="{{route('juegoView', $juego->id) }}">Editar</a></td>
+                    <td><a href="{{route('juegoEliminar', $juego->id) }}">Eliminar</a></td>
                 </tr>
             @empty
                 <tr>

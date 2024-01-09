@@ -33,6 +33,7 @@ Route::get('/juegos/create', [JuegosController::class, 'create'])->name('create'
 Route::post('/juegos/juegosCreate', [JuegosController::class, 'juegosCreate'])->name('juegosCreate');
 
 Route::get('/juegos/{idjuego}', [JuegosController::class, 'juegoView'])->name('juegoView');
+Route::get('/juegos/juegosEliminar/{idjuego}', [JuegosController::class, 'juegoEliminar'])->name('juegoEliminar');
 Route::post('/juegos/juegosUpdate', [JuegosController::class, 'juegosUpdate'])->name('juegosUpdate');
 
 Route::get('/juegos/{juego}/{categoria}', [JuegosController::class, 'mostrarJuegoCategoria']);
