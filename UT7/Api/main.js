@@ -14,8 +14,7 @@ function pedirDatos() {
         fetch(`https://pokeapi.co/api/v2/pokemon/${element.pokemon_species.name}`)
           .then((response) => response.json())
           .then((data) => {
-            console.log(data.name);
-            console.log(data.sprites.front_default);
+            imprimirDatos(data);
           })
           .catch(() => console.warn("Error"));
       })
@@ -24,6 +23,27 @@ function pedirDatos() {
 }
 
 pedirDatos();
+
+function imprimirDatos(data) {
+  const container = document.getElementById("containerDisplay");
+  const containerIndividual = document.createElement("div");
+
+  const sprite = document.createElement("img");
+
+  if (data.sprites.front_default != null) {
+    sprite.setAttribute("src", data.sprites.front_default);
+  } else {
+    sprite.setAttribute("src", "./media/default.webp");
+  }
+  sprite.classList.add("sprite");
+
+  const texto = data.name;
+  const nombre = document.createTextNode(texto);
+
+  containerIndividual.append(sprite);
+  containerIndividual.append(nombre);
+  container.append(containerIndividual);
+}
 
 /*
 Usa fecth para obtener los datos desde la API.
