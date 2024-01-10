@@ -10,7 +10,6 @@ class CategoryController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
      */
     public function index()
     {
@@ -22,11 +21,10 @@ class CategoryController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        //
+        return view('categoriaCreate');
     }
 
     /**
@@ -37,29 +35,32 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        Categoria::create($request->all());
+        return redirect()->route('categorias.index');
     }
 
     /**
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        return view('categoriaView', ['id' => $id]);
+
     }
 
     /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
 
+        $categoria = Categoria::find($id);
+        $categorias = Categoria::all();
+        return view('categoriaEdit', ['categorias' => $categorias, 'categoria' => $categoria]);
     }
 
     /**
@@ -69,9 +70,10 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $categoria)
     {
-        //
+        Categoria::find($categoria)->update($request->all());
+        return redirect()->route('categorias.index');
     }
 
     /**
@@ -81,7 +83,10 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
-        //
+    { 
+        $categoria = Categoria::find($id);
+        $categoria->delete();
+
+        return redirect()->route('categorias.index');
     }
 }

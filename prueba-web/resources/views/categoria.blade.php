@@ -37,6 +37,7 @@
 </head>
 
 <body>
+   <a href="{{ route('categorias.create') }}">Crear Categoria</a>
 <h1>Listado de categorias</h1>
 <table>
     <thead>
@@ -60,8 +61,14 @@
             @endif
 
             <td>{{ $categoria->created_at }}</td>
-            <td><a href="{{ route('categorias.show',$categoria->$id) }}">Editar</a></td>
-            <td><a href="">Eliminar</a></td>
+            <td><a href="{{ route('categorias.edit',$categoria) }}">Editar</a></td>
+            <td>
+                <form action="{{ route('categorias.destroy',$categoria)}}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                         <input type="submit" name="idCategoria" value="Eliminar">
+                </form>
+            </td>
         </tr>
     @empty
         <tr>
