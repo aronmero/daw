@@ -1,0 +1,15 @@
+#containerDisplay{
+    padding: 50px;
+    display: flex;
+    flex-wrap: wrap;
+}
+#containerDisplay>div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sprite{
+    max-width: 95px;
+    max-height: 95px;
+}
