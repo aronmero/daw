@@ -26,14 +26,14 @@ class JuegosController extends Controller
         //$listaJuegos = Juego::all();
         // dump($juegoCategoria);
         //$listaJuegos = ['Factorio', 'Satisfactory'];
-        return view('juego', ['juegoCategoria' => $juegoCategoria]);
+        return view('juego.juego', ['juegoCategoria' => $juegoCategoria]);
     }
 
 
     public function create()
     {
         $categorias = Categoria::all();
-        return view('create', ['categorias' => $categorias]);
+        return view('juego.create', ['categorias' => $categorias]);
     }
     public function juegosCreate(create_Juego $datos)
     {
@@ -44,14 +44,14 @@ class JuegosController extends Controller
                 $juego->save();
         */
         Juego::create($datos->all());
-        return redirect()->route('create');
+        return redirect()->route('juego.create');
     }
 
     public function juegoView($juegoID)
     {
         $juego = Juego::find($juegoID);
         $categorias = Categoria::all();
-        return view('update', ['categorias' => $categorias, 'juego' => $juego]);
+        return view('juego.update', ['categorias' => $categorias, 'juego' => $juego]);
     }
 
     public function juegoEliminar($juegoID)

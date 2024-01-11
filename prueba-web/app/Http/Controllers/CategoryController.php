@@ -15,7 +15,7 @@ class CategoryController extends Controller
     {
         $categorias = Categoria::all();
 
-        return view('categoria', ['categorias' => $categorias]);
+        return view('categoria.categoria', ['categorias' => $categorias]);
     }
 
     /**
@@ -24,7 +24,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('categoriaCreate');
+        return view('categoria.categoriaCreate');
     }
 
     /**
@@ -60,7 +60,7 @@ class CategoryController extends Controller
 
         $categoria = Categoria::find($id);
         $categorias = Categoria::all();
-        return view('categoriaEdit', ['categorias' => $categorias, 'categoria' => $categoria]);
+        return view('categoria.categoriaEdit', ['categorias' => $categorias, 'categoria' => $categoria]);
     }
 
     /**
