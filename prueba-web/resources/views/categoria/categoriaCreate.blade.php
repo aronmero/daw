@@ -1,15 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.plantilla')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+@section('title', 'Categorias.Create')
 
-</head>
-
-<body>
-    <form action="{{ route('categorias.store')}}" method="POST">
+@section('content')
+    <form action="{{ route('categorias.store') }}" method="POST">
         @csrf
         <div>
             <label>Nombre Categoria</label>
@@ -25,7 +19,7 @@
         </div>
     </form>
     @if ($errors->any())
-    <br>
+        <br>
         <div>
             <strong>¡Ups! Hubo algunos problemas con tu entrada:</strong>
             <ul>
@@ -35,6 +29,4 @@
             </ul>
         </div>
     @endif
-</body>
-
-</html>
+@endsection

@@ -1,13 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.plantilla')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-
-<body>
+@section('title', 'Juegos.Update')
+@section('content')
     <form action="{{ route('juegosUpdate') }}" method="POST">
         @csrf
 
@@ -52,6 +46,4 @@
             </ul>
         </div>
     @endif
-</body>
-
-</html>
+@endsection

@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.plantilla')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+@section('title', 'Categorias.Edit')
+
+@section('style')
     <style>
         thead {
             font-weight: bold;
@@ -34,10 +32,10 @@
             border-spacing: 0px;
         }
     </style>
-</head>
+@endsection
 
-<body>
-    <form action="{{ route('categorias.update',$categoria) }}" method="POST">
+@section('content')
+    <form action="{{ route('categorias.update', $categoria) }}" method="POST">
         @csrf
         @method('PUT')
         <table>
@@ -71,6 +69,4 @@
             </ul>
         </div>
     @endif
-</body>
-
-</html>
+@endsection
