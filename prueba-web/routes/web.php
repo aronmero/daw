@@ -29,14 +29,16 @@ Route::get('/login', [LoginPruebaController::class, 'login']);
 
 Route::get('/login/{usuario}/{apellidos?}', [LoginPruebaController::class, 'usuario']);
 
-Route::get('/juegos', [JuegosController::class, 'mostrarCategoria'])->name('vistaJuegos');;
-Route::get('/juegos/create', [JuegosController::class, 'create'])->name('create');
-Route::post('/juegos/juegosCreate', [JuegosController::class, 'juegosCreate'])->name('juegosCreate');
+Route::controller(JuegosController::class)->group(function () {
+    Route::get('/juegos', 'mostrarCategoria')->name('vistaJuegos');;
+    Route::get('/juegos/create', 'create')->name('create');
+    Route::post('/juegos/juegosCreate', 'juegosCreate')->name('juegosCreate');
 
-Route::get('/juegos/{idjuego}', [JuegosController::class, 'juegoView'])->name('juegoView');
-Route::get('/juegos/juegosEliminar/{idjuego}', [JuegosController::class, 'juegoEliminar'])->name('juegoEliminar');
-Route::post('/juegos/juegosUpdate', [JuegosController::class, 'juegosUpdate'])->name('juegosUpdate');
+    Route::get('/juegos/juegosEliminar/{idjuego}', 'juegoEliminar')->name('juegoEliminar');
+    Route::post('/juegos/juegosUpdate', 'juegosUpdate')->name('juegosUpdate');
 
-Route::get('/juegos/{juego}/{categoria}', [JuegosController::class, 'mostrarJuegoCategoria']);
+    Route::get('/juegos/{idjuego}',  'juegoView')->name('juegoView');
+    Route::get('/juegos/{juego}/{categoria}', 'mostrarJuegoCategoria');
+});
 
-Route::resource('categorias',CategoryController::class);
+Route::resource('categorias', CategoryController::class);
