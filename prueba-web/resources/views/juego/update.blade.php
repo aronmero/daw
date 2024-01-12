@@ -2,7 +2,7 @@
 
 @section('title', 'Juegos.Update')
 @section('content')
-    <form action="{{ route('juegosUpdate') }}" method="POST">
+    <form action="{{ route('juego.update') }}" method="POST">
         @csrf
 
         <table>

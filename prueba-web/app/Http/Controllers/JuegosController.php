@@ -10,13 +10,13 @@ use Illuminate\Http\Request;
 
 class JuegosController extends Controller
 {
-    public function mostrarJuegoCategoria($juego, $categoria)
+    public function test($juego, $categoria)
     {
 
-        return view('juego', ['juego' => $juego, 'categoria' => $categoria]);
+        return view('juego.juego', ['juego' => $juego, 'categoria' => $categoria]);
     }
 
-    public function mostrarCategoria()
+    public function index()
     {
         $juegoCategoria = Juego::join('categorias', 'juegos.idCategoria', '=', 'categorias.id')
             ->select('juegos.id', 'juegos.nombre', 'categorias.nombre as categoria', 'juegos.activo', 'juegos.created_at')
@@ -35,7 +35,7 @@ class JuegosController extends Controller
         $categorias = Categoria::all();
         return view('juego.create', ['categorias' => $categorias]);
     }
-    public function juegosCreate(create_Juego $datos)
+    public function store(create_Juego $datos)
     {
         /*
                 $juego = new Juego();
@@ -44,23 +44,23 @@ class JuegosController extends Controller
                 $juego->save();
         */
         Juego::create($datos->all());
-        return redirect()->route('juego.create');
+        return redirect()->route('juego.index');
     }
 
-    public function juegoView($juegoID)
+    public function edit($juegoID)
     {
         $juego = Juego::find($juegoID);
         $categorias = Categoria::all();
         return view('juego.update', ['categorias' => $categorias, 'juego' => $juego]);
     }
 
-    public function juegoEliminar($juegoID)
+    public function destroy($juegoID)
     {
         $juego = Juego::find($juegoID);
         $juego->delete();
-        return redirect()->route('vistaJuegos');
+        return redirect()->route('juego.index');
     }
-    public function juegosUpdate(edit_Juego $datos)
+    public function update(edit_Juego $datos)
     {
         /*  $juego =*/Juego::find($datos->idJuego)->update($datos->all());
         /* $juego->nombre = $datos->nombre;
@@ -68,6 +68,6 @@ class JuegosController extends Controller
          $juego->activo = $datos->activo;
          $juego->save();*/
 
-        return redirect()->route('vistaJuegos');
+        return redirect()->route('juego.index');
     }
 }

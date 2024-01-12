@@ -41,6 +41,7 @@
     @endif
 
     @if (isset($juegoCategoria))
+        <a href="{{ route('juego.create') }}">Crear Juego</a>
         <h1>Listado de juegos de la categoria</h1>
         <table>
             <thead>
@@ -64,8 +65,8 @@
                     @endif
 
                     <td>{{ $juego->created_at }}</td>
-                    <td><a href="{{ route('juegoView', $juego->id) }}">Editar</a></td>
-                    <td><a href="{{ route('juegoEliminar', $juego->id) }}">Eliminar</a></td>
+                    <td><a href="{{ route('juego.edit', $juego->id) }}">Editar</a></td>
+                    <td><a href="{{ route('juego.destroy', $juego->id) }}">Eliminar</a></td>
                 </tr>
             @empty
                 <tr>
