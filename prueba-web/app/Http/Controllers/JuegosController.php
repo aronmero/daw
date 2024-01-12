@@ -35,7 +35,7 @@ class JuegosController extends Controller
         $categorias = Categoria::all();
         return view('juego.create', ['categorias' => $categorias]);
     }
-    public function store(create_Juego $datos)
+    public function store(Request $request)
     {
         /*
                 $juego = new Juego();
@@ -43,7 +43,7 @@ class JuegosController extends Controller
                 $juego->idCategoria = $datos->idCategoria;
                 $juego->save();
         */
-        Juego::create($datos->all());
+        Juego::create($request->all());
         return redirect()->route('juego.index');
     }
 
