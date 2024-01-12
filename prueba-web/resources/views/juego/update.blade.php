@@ -2,8 +2,9 @@
 
 @section('title', 'Juegos.Update')
 @section('content')
-    <form action="{{ route('juego.update') }}" method="POST">
+    <form action="{{ route('juegos.update', $juego->id) }}" method="POST">
         @csrf
+        @method('put')
 
         <table>
             <input type="hidden" name="idJuego" value="{{ $juego->id }}">

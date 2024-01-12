@@ -41,7 +41,7 @@
     @endif
 
     @if (isset($juegoCategoria))
-        <a href="{{ route('juego.create') }}">Crear Juego</a>
+        <a href="{{ route('juegos.create') }}">Crear Juego</a>
         <h1>Listado de juegos de la categoria</h1>
         <table>
             <thead>
@@ -65,8 +65,12 @@
                     @endif
 
                     <td>{{ $juego->created_at }}</td>
-                    <td><a href="{{ route('juego.edit', $juego->id) }}">Editar</a></td>
-                    <td><a href="{{ route('juego.destroy', $juego->id) }}">Eliminar</a></td>
+                    <td><a href="{{ route('juegos.edit', $juego->id) }}">Editar</a></td>
+                   <td> <form action="{{ route('juegos.destroy', $juego->id) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <input type="submit" name="idCategoria" value="Eliminar"></td>
+                    </form>
                 </tr>
             @empty
                 <tr>

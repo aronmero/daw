@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\create_Juego;
-use App\Http\Requests\edit_Juego;
+use App\Http\Requests\CreateJuego;
+use App\Http\Requests\EditJuego;
 use App\Models\Juego;
 use App\Models\Categoria;
 use Illuminate\Http\Request;
@@ -22,10 +22,6 @@ class JuegosController extends Controller
             ->select('juegos.id', 'juegos.nombre', 'categorias.nombre as categoria', 'juegos.activo', 'juegos.created_at')
             ->orderBy('juegos.id', 'desc')
             ->get();
-        //  $listaCategorias = Categoria::all();
-        //$listaJuegos = Juego::all();
-        // dump($juegoCategoria);
-        //$listaJuegos = ['Factorio', 'Satisfactory'];
         return view('juego.juego', ['juegoCategoria' => $juegoCategoria]);
     }
 
@@ -35,16 +31,10 @@ class JuegosController extends Controller
         $categorias = Categoria::all();
         return view('juego.create', ['categorias' => $categorias]);
     }
-    public function store(Request $request)
+    public function store(CreateJuego $request)
     {
-        /*
-                $juego = new Juego();
-                $juego->nombre = $datos->nombre;
-                $juego->idCategoria = $datos->idCategoria;
-                $juego->save();
-        */
         Juego::create($request->all());
-        return redirect()->route('juego.index');
+        return redirect()->route('juegos.index');
     }
 
     public function edit($juegoID)
@@ -58,16 +48,11 @@ class JuegosController extends Controller
     {
         $juego = Juego::find($juegoID);
         $juego->delete();
-        return redirect()->route('juego.index');
+        return redirect()->route('juegos.index');
     }
-    public function update(edit_Juego $datos)
+    public function update(EditJuego $datos)
     {
-        /*  $juego =*/Juego::find($datos->idJuego)->update($datos->all());
-        /* $juego->nombre = $datos->nombre;
-         $juego->idCategoria = $datos->idCategoria;
-         $juego->activo = $datos->activo;
-         $juego->save();*/
-
-        return redirect()->route('juego.index');
+        Juego::find($datos->idJuego)->update($datos->all());
+        return redirect()->route('juegos.index');
     }
 }

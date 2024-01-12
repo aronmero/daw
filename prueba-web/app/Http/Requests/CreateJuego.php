@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class edit_Juego extends FormRequest
+class CreateJuego extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,15 +24,16 @@ class edit_Juego extends FormRequest
     public function rules()
     {
         return [
-            'nombre' => 'required|min:3'
+            'nombre' => 'required|min:3|unique:juegos,nombre,'
         ];
     }
 
-    public function messages()
-    {
+    public function messages(){
         return [
             'nombre.required' => 'El nombre del juego es obligatorio.',
-            'nombre.min' => 'El nombre del juego debe tener al menos 3 caracteres.'
+            'nombre.min' => 'El nombre del juego debe tener al menos 3 caracteres.',
+            'nombre.unique' => 'Este nombre de juego ya está registrado.'
         ];
     }
+
 }

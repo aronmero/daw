@@ -2,11 +2,11 @@
 
 @section('title', 'Juegos.Create')
 @section('content')
-    <form action="{{ route('juego.store') }}" method="POST">
+    <form action="{{ route('juegos.store') }}" method="POST">
         @csrf
         <div>
             <label>Nombre juego</label>
-            <input type="text" name="nombre" placeholder="Juego">
+            <input type="text" name="nombre" placeholder="Juego" >
         </div>
         <div>
             <label>Categoria juego</label>
