@@ -13,6 +13,9 @@ class AuthController extends Controller
 {
     public function index()
     {
+        if (Auth::viaRemember()) {
+            return view('usuarios.logeado');
+        }
         if (Auth::check()) {
 
             return view('usuarios.logeado');
@@ -35,11 +38,14 @@ class AuthController extends Controller
 
         $credentials = $request->only('email', 'password');
 
-        if (Auth::attempt($credentials)) {
+        if (Auth::attempt($credentials,$request->remember)) {
+            $request->session()->regenerate();
             return redirect("/")->withSuccess('Inicio de sesion correctamente');
         }
 
-        return redirect("/")->withSuccess('Los datos introducidos no son correctos');
+        return back()->withErrors([
+            'email' => 'El correo y/o contraseña no son correctos',
+        ])->onlyInput('email');
     }
 
     public function logeado()

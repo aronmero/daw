@@ -6,7 +6,7 @@
     <form method="POST" action="{{ route('usuarios.loginAuth') }}">
         @csrf
         <div>
-            <input type="text" placeholder="Email" id="email"  name="email" required autofocus>
+            <input type="text" placeholder="Email" id="email"  name="email" required autofocus value="{{ old('email') }}">
             @if ($errors->has('email'))
                 <span >{{ $errors->first('email') }}</span>
             @endif

@@ -1,6 +1,6 @@
 @extends('layouts.plantilla')
 
-@section('title', 'Login')
+@section('title', 'Home')
 
 @section('content')
     <h1>Bienvenido de vuelta, {{ Auth::user()->name }}</h1>
