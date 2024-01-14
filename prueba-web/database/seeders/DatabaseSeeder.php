@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
         $this->call(CategoriasTableSeeder::class);
+        $this->call(UserSeeder::class);
         Juego::factory(100)->create();
     }
 }
