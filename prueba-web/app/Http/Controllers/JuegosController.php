@@ -10,10 +10,12 @@ use Illuminate\Http\Request;
 
 class JuegosController extends Controller
 {
-    public function test($juego, $categoria)
+    public function __construct()
     {
-
-        return view('juego.juego', ['juego' => $juego, 'categoria' => $categoria]);
+        $this->middleware('can:admin.juegos.index')->only('index');
+        $this->middleware('can:admin.juegos.create')->only('create', 'store');
+        $this->middleware('can:admin.juegos.destroy')->only('destroy');
+        $this->middleware('can:admin.juegos.edit')->only('edit', 'update');
     }
 
     public function index()

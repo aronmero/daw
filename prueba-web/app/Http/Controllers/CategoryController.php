@@ -6,7 +6,13 @@ use Illuminate\Http\Request;
 use App\Models\Juego;
 use App\Models\Categoria;
 class CategoryController extends Controller
-{
+{public function __construct()
+    {
+        $this->middleware('can:admin.categorias.index')->only('index');
+        $this->middleware('can:admin.categorias.create')->only('create','store');
+        $this->middleware('can:admin.categorias.destroy')->only('destroy');
+        $this->middleware('can:admin.categorias.edit')->only('edit','update');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -38,16 +44,6 @@ class CategoryController extends Controller
 
         Categoria::create($request->all());
         return redirect()->route('categorias.index');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     */
-    public function show($id)
-    {
-
     }
 
     /**
