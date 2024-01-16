@@ -26,6 +26,10 @@ class AuthController extends Controller
 
     public function login()
     {
+        if (Auth::check()) {
+            return view('usuarios.logeado');
+        }
+        
         return view('usuarios.login');
     }
 
@@ -59,6 +63,10 @@ class AuthController extends Controller
 
     public function create()
     {
+        if (Auth::check()) {
+            return view('usuarios.logeado');
+        }
+
         return view('usuarios.registro');
     }
 
