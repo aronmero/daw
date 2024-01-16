@@ -25,6 +25,6 @@ Route::get('/registro', [AuthController::class, 'create'])->name('usuarios.creat
 Route::Post('/registro', [AuthController::class, 'store'])->name('usuarios.store');
 Route::post('/logout', [AuthController::class, 'logout'])->name('usuarios.logout');
 
-Route::resource('juegos', JuegosController::class);
+Route::resource('juegos', JuegosController::class)->except('show');
 
-Route::resource('categorias', CategoryController::class);
+Route::resource('categorias', CategoryController::class)->except('show');;
