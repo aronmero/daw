@@ -32,4 +32,5 @@
             </ul>
         </div>
     @endif
+    <a href="{{ route('juegos.index') }}">Volver</a>
 @endsection

@@ -69,4 +69,5 @@
             </ul>
         </div>
     @endif
+    <a href="{{ route('categorias.index') }}">Volver</a>
 @endsection

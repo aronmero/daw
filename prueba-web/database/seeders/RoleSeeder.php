@@ -22,15 +22,15 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'admin.usuarios.login']);
         Permission::create(['name' => 'admin.usuarios.create'])->assignRole($role1);
 
-        Permission::create(['name' => 'admin.categorias.index'])->syncRoles([$role1,$role2]);
-        Permission::create(['name' => 'admin.categorias.create'])->assignRole($role1);;
-        Permission::create(['name' => 'admin.categorias.destroy'])->assignRole($role1);;
-        Permission::create(['name' => 'admin.categorias.edit'])->assignRole($role1);;
+        Permission::create(['name' => 'admin.categorias.index'])->syncRoles([$role1, $role2]);
+        Permission::create(['name' => 'admin.categorias.create'])->assignRole($role1);
+        Permission::create(['name' => 'admin.categorias.destroy'])->assignRole($role1);
+        Permission::create(['name' => 'admin.categorias.edit'])->assignRole($role1);
 
-        Permission::create(['name' => 'admin.juegos.index'])->syncRoles([$role1,$role2]);
-        Permission::create(['name' => 'admin.juegos.create'])->assignRole($role1);;
-        Permission::create(['name' => 'admin.juegos.destroy'])->assignRole($role1);;
-        Permission::create(['name' => 'admin.juegos.edit'])->assignRole($role1);;
+        Permission::create(['name' => 'admin.juegos.index'])->syncRoles([$role1, $role2]);
+        Permission::create(['name' => 'admin.juegos.create'])->assignRole($role1);
+        Permission::create(['name' => 'admin.juegos.destroy'])->assignRole($role1);
+        Permission::create(['name' => 'admin.juegos.edit'])->assignRole($role1);
 
     }
 }
