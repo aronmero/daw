@@ -12,4 +12,5 @@ class Actividad extends Model
      asi que seria "Actividads" eso genera un problema si no se cambia el nombre de la tabla aqui o en la migracion
      */
     protected $table = 'actividades';
+    protected $guarded=['token'];
 }

@@ -11,13 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('actividades', function (Blueprint $table) {
-            $table->id();
-            $table->string('lugar');
-            $table->string('descripcion');
-            $table->integer('duracion');
-            $table->date('fecha');
-            $table->timestamps();
+        Schema::create('actividades_profesores', function (Blueprint $table) {
+            $table->foreignId('actividades_id')->references('id')->on('actividades')->onDelete('cascade');
+            $table->foreignId('profesores_id')->references('id')->on('profesores')->onDelete('cascade');
         });
     }
 
@@ -26,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('actividades');
+        Schema::dropIfExists('actividades_profesores');
     }
 };
