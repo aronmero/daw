@@ -28,4 +28,3 @@ Route::controller(AuthController::class)->group(function () {
 Route::resource('juegos', JuegosController::class)->except('show')->names('juegos');
 
 Route::resource('categorias', CategoryController::class)->except('show')->names('categorias');
-;
