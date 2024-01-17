@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('1234')
         ]);
 
-        //Actividad::factory(10)->create();
+        Actividad::factory(10)->create();
 
     }
 }

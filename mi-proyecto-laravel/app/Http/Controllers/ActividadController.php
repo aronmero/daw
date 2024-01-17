@@ -2,16 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Actividad;
 use Illuminate\Http\Request;
 
-class ProfesorController extends Controller
+class ActividadController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $actividades=Actividad::all();
+        return view("actividades.index",['actividades' => $actividades]);
     }
 
     /**
@@ -19,7 +21,7 @@ class ProfesorController extends Controller
      */
     public function create()
     {
-        //
+        return view("actividades.create");
     }
 
     /**
@@ -27,7 +29,8 @@ class ProfesorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Actividad::create($request->all());
+        return redirect()->route('actividades.index');
     }
 
     /**
@@ -43,7 +46,9 @@ class ProfesorController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $actividad = Actividad::find($id);
+        $actividades = Actividad::all();
+        return view('actividades.edit', ['actividades' => $actividades, 'actividad' => $actividad]);
     }
 
     /**
@@ -51,7 +56,8 @@ class ProfesorController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        Actividad::find($id)->update($request->all());
+        return redirect()->route('actividades.index');
     }
 
     /**
@@ -59,6 +65,9 @@ class ProfesorController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $actividades = Actividad::find($id);
+        $actividades->delete();
+
+        return redirect()->route('actividades.index');
     }
 }

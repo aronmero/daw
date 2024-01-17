@@ -1,7 +1,8 @@
 <?php
 
-
-use App\Http\Controllers\ActividadesController;
+use App\Http\Controllers\ProfesorController;
+use App\Http\Controllers\GrupoController;
+use App\Http\Controllers\ActividadController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,5 +27,8 @@ Route::controller(AuthController::class)->group(function () {
 });
 
 
-Route::get('/vista', [ActividadesController::class, 'mostrarActividades']);
+Route::resource('actividades', ActividadController::class)->except('show')->names('actividades');
+
+Route::resource('grupos', GrupoController::class)->except('show')->names('grupos');
+Route::resource('profesores', ProfesorController::class)->except('show')->names('profesores');
 

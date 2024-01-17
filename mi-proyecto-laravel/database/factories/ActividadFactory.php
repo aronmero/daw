@@ -17,8 +17,11 @@ class ActividadFactory extends Factory
     public function definition(): array
     {
         return [
-            'nombre'=>$this->faker->name(),
+            'lugar'=>$this->faker->name(),
             'descripcion'=>$this->faker->paragraph(1),
+            'duracion'=>$this->faker->numberBetween(0,10),
+            'fecha'=>$this->faker->dateTimeBetween('-1 years','now')
+        
         ];
     }
 }

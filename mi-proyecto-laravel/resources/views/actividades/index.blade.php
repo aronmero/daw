@@ -1,11 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.plantilla')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+@section('title', 'Login')
+
+@section('style')
     <style>
         thead {
             font-weight: bold;
@@ -35,25 +32,34 @@
             border-spacing: 0px;
         }
     </style>
-</head>
+@endsection
 
-<body>
+@section('content')
+<a href="{{ route('home') }}">Inicio</a>
+<a href="{{ route('actividades.create') }}">Crear Actividad</a>
     <h1>Listado de actividades</h1>
     <table>
         <thead>
             <td>Nombre</td>
             <td>Categoria</td>
+            <td>Duracion</td>
             <td>Fecha Creacion</td>
+            <td></td>
+            <td></td>
         </thead>
 
         @forelse ($actividades as $actividad)
             <tr>
-                <td>{{ $actividad->nombre }}</td>
-
+                <td>{{ $actividad->lugar }}</td>
                 <td>{{ $actividad->descripcion }}</td>
-
-                <td>{{ $actividad->created_at }}</td>
-
+                <td>{{ $actividad->duracion }}</td>
+                <td>{{ $actividad->fecha }}</td>
+                <td><a href="{{ route('actividades.edit', $actividad) }}">Editar</a></td>
+               <td> <form action="{{ route('actividades.destroy', $actividad) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <input type="submit" name="idCategoria" value="Eliminar">
+                </form></td>
             </tr>
         @empty
             <tr>
@@ -63,6 +69,4 @@
 
     </table>
 
-</body>
-
-</html>
+@endsection
