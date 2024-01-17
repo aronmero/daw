@@ -9,4 +9,6 @@
         @method('POST')
         <input type="submit" value="Cerrar Sesion">
     </form>
+    <a href="{{ route('juegos.index') }}">Juegos</a>
+    <a href="{{ route('categorias.index') }}">Categorias</a>
 @endsection

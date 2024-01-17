@@ -35,13 +35,16 @@
 @endsection
 
 @section('content')
+    <a href="{{ route('home') }}">Inicio</a>
     @if (isset($juego))
         <h1>Listado de juegos</h1>
         <h2>El juego elegido es: {{ $juego }} de la categoria : {{ $categoria }}</h2>
     @endif
 
     @if (isset($juegoCategoria))
-        <a href="{{ route('juegos.create') }}">Crear Juego</a>
+        @can('admin.juegos.create')
+            <a href="{{ route('juegos.create') }}">Crear Juego</a>
+        @endcan
         <h1>Listado de juegos de la categoria</h1>
         <table>
             <thead>
@@ -49,8 +52,12 @@
                 <td>Categoria</td>
                 <td>Estado</td>
                 <td>Fecha Creacion</td>
-                <td></td>
-                <td></td>
+                @can('admin.juegos.edit')
+                    <td></td>
+                @endcan
+                @can('admin.juegos.destroy')
+                    <td></td>
+                @endcan
             </thead>
             @forelse ($juegoCategoria as $juego)
                 <tr>
@@ -65,13 +72,19 @@
                     @endif
 
                     <td>{{ $juego->created_at }}</td>
-                    <td><a href="{{ route('juegos.edit', $juego->id) }}">Editar</a></td>
-                   <td> <form action="{{ route('juegos.destroy', $juego->id) }}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <input type="submit" name="idCategoria" value="Eliminar"></td>
-                    </form>
-                </tr>
+                    @can('admin.categorias.edit')
+                        <td><a href="{{ route('juegos.edit', $juego->id) }}">Editar</a></td>
+                    @endcan
+                    @can('admin.categorias.destroy')
+                        <td>
+                            <form action="{{ route('juegos.destroy', $juego->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <input type="submit" name="idCategoria" value="Eliminar">
+                        </td>
+                        </form>
+                    </tr>
+                @endcan
             @empty
                 <tr>
                     <td>No hay juegos</td>
