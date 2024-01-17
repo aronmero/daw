@@ -6,7 +6,8 @@ use App\Http\Requests\CreateUser;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-
+use App\Mail\UsersMail;
+use Illuminate\Support\Facades\Mail;
 
 
 class AuthController extends Controller
@@ -72,14 +73,16 @@ class AuthController extends Controller
 
     public function store(CreateUser $request)
     {
+       
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
         $user->save();
 
+        $user->assignRole('Usuario');
         Auth::login($user);
-
+        Mail::to($request->email)->send(new UsersMail($request->name));
         return redirect('/')->withSuccess('¡Registro exitoso y sesión iniciada!');;
     }
 
