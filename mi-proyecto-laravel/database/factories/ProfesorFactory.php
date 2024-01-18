@@ -4,7 +4,6 @@ namespace Database\Factories;
 
 use App\Models\Profesor;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 /**
@@ -12,7 +11,7 @@ use Illuminate\Support\Str;
  */
 class ProfesorFactory extends Factory
 {
-    protected static ?string $password;
+
 
     /**
      * Define the model's default state.
@@ -24,7 +23,7 @@ class ProfesorFactory extends Factory
         return [
             'nombre' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
-            'password' => static::$password ??= Hash::make('password'),
+            'password' => bcrypt('1234'), // password
             'remember_token' => Str::random(10),
         ];
     }
