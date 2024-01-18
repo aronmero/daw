@@ -22,8 +22,8 @@ class CreateUser extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|min:3',
-            'email' => 'required|unique:users,email|regex:/^[a-zA-Z0-9._%+-]+@\S*\.\S*$/i',
+            'nombre' => 'required|min:3',
+            'email' => 'required|unique:profesores,email|regex:/^[a-zA-Z0-9._%+-]+@\S*\.\S*$/i',
             'password' => 'required|min:8',
         ];
     }
@@ -32,10 +32,10 @@ class CreateUser extends FormRequest
     {
         return [
             'password' => [
-                'required' => 'La contrañsea es obligatoria.',
-                'min' => 'La contrañsea debe tener al menos 8 caracteres.',
+                'required' => 'La contraseña es obligatoria.',
+                'min' => 'La contraseña debe tener al menos 8 caracteres.',
             ],
-            'name' => [
+            'nombre' => [
                 'required' => 'El nombre de usuario es obligatorio.',
                 'min' => 'El nombre de usuario debe tener al menos 3 caracteres.',
             ],
