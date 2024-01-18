@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Grupo;
 
 class GrupoController extends Controller
 {
@@ -10,16 +11,17 @@ class GrupoController extends Controller
     public function __construct()
     {
         $this->middleware('can:admin.grupo.index')->only('index');
-        $this->middleware('can:admin.grupo.create')->only('create','store');
+        $this->middleware('can:admin.grupo.create')->only('create', 'store');
         $this->middleware('can:admin.grupo.destroy')->only('destroy');
-        $this->middleware('can:admin.grupo.edit')->only('edit','update');
+        $this->middleware('can:admin.grupo.edit')->only('edit', 'update');
     }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $grupos = Grupo::all();
+        return view("grupos.index", ['grupos' => $grupos]);
     }
 
     /**
@@ -27,7 +29,7 @@ class GrupoController extends Controller
      */
     public function create()
     {
-        //
+        return view("grupos.create");
     }
 
     /**
@@ -35,7 +37,8 @@ class GrupoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Grupo::create($request->all());
+        return redirect()->route('grupos.index');
     }
 
     /**
@@ -51,7 +54,8 @@ class GrupoController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $grupo = Grupo::find($id);
+        return view('grupos.edit', ['grupo' => $grupo]);
     }
 
     /**
@@ -59,7 +63,8 @@ class GrupoController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        Grupo::find($id)->update($request->all());
+        return redirect()->route('grupos.index');
     }
 
     /**
@@ -67,6 +72,9 @@ class GrupoController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $grupo = Grupo::find($id);
+        $grupo->delete();
+
+        return redirect()->route('grupos.index');
     }
 }
