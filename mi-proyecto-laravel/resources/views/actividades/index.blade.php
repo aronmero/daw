@@ -35,8 +35,10 @@
 @endsection
 
 @section('content')
-<a href="{{ route('home') }}">Inicio</a>
-<a href="{{ route('actividades.create') }}">Crear Actividad</a>
+    <a href="{{ route('home') }}">Inicio</a>
+    @can('admin.actividades.create')
+        <a href="{{ route('actividades.create') }}">Crear Actividad</a>
+    @endcan
     <h1>Listado de actividades</h1>
     <table>
         <thead>
@@ -44,8 +46,12 @@
             <td>Categoria</td>
             <td>Duracion</td>
             <td>Fecha Creacion</td>
+            @can('admin.actividades.edit')
             <td></td>
+            @endcan
+            @can('admin.actividades.destroy')
             <td></td>
+            @endcan
         </thead>
 
         @forelse ($actividades as $actividad)
@@ -54,12 +60,18 @@
                 <td>{{ $actividad->descripcion }}</td>
                 <td>{{ $actividad->duracion }}</td>
                 <td>{{ $actividad->fecha }}</td>
-                <td><a href="{{ route('actividades.edit', $actividad) }}">Editar</a></td>
-               <td> <form action="{{ route('actividades.destroy', $actividad) }}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <input type="submit" name="idCategoria" value="Eliminar">
-                </form></td>
+                @can('admin.actividades.edit')
+                    <td><a href="{{ route('actividades.edit', $actividad) }}">Editar</a></td>
+                @endcan
+                @can('admin.actividades.destroy')
+                    <td>
+                        <form action="{{ route('actividades.destroy', $actividad) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <input type="submit" name="idCategoria" value="Eliminar">
+                        </form>
+                    </td>
+                @endcan
             </tr>
         @empty
             <tr>

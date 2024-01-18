@@ -3,7 +3,7 @@
 @section('title', 'Actividades.Create')
 
 @section('content')
-    <form action="{{ route('actividades.store') }}" method="POST">
+    <form action="{{ route('grupos.store') }}" method="POST">
         @csrf
         <div>
             <label>Lugar</label>
@@ -36,5 +36,5 @@
             </ul>
         </div>
     @endif
-    <a href="{{ route('actividades.index') }}">Volver</a>
+    <a href="{{ route('grupos.index') }}">Volver</a>
 @endsection

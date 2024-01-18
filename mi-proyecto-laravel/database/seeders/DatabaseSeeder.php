@@ -22,7 +22,13 @@ class DatabaseSeeder extends Seeder
             'nombre' => 'admin',
             'email' => 'admin@example.com',
             'password' => bcrypt('1234')
-        ])->assignRole('Admin');;
+        ])->assignRole('Admin');
+
+        Profesor::factory()->create([
+            'nombre' => 'profesor',
+            'email' => 'profesor@example.com',
+            'password' => bcrypt('1234')
+        ])->assignRole('Usuario');
         Profesor::factory(10)->create();
         
 
