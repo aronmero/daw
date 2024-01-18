@@ -17,11 +17,12 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call(RoleSeeder::class);
+
         Profesor::factory()->create([
             'nombre' => 'admin',
             'email' => 'admin@example.com',
             'password' => bcrypt('1234')
-        ]);
+        ])->assignRole('Admin');;
         Profesor::factory(10)->create();
         
 
