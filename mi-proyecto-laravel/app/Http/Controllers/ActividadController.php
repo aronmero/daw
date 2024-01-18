@@ -47,7 +47,8 @@ class ActividadController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $actividad = Actividad::find($id);
+        return view('actividades.show', [ 'actividad' => $actividad]);
     }
 
     /**
@@ -56,8 +57,7 @@ class ActividadController extends Controller
     public function edit(string $id)
     {
         $actividad = Actividad::find($id);
-        $actividades = Actividad::all();
-        return view('actividades.edit', ['actividades' => $actividades, 'actividad' => $actividad]);
+        return view('actividades.edit', [ 'actividad' => $actividad]);
     }
 
     /**

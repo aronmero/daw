@@ -27,7 +27,7 @@ Route::controller(AuthController::class)->group(function () {
 });
 
 
-Route::resource('actividades', ActividadController::class)->except('show')->names('actividades');
+Route::resource('actividades', ActividadController::class)->names('actividades');
 
 Route::resource('grupos', GrupoController::class)->except('show')->names('grupos');
 Route::resource('profesores', ProfesorController::class)->except('show')->names('profesores');
