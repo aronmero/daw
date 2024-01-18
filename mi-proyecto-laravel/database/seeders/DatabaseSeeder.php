@@ -6,7 +6,6 @@ namespace Database\Seeders;
 
 
 use App\Models\Actividad;
-
 use App\Models\Profesor;
 use Illuminate\Database\Seeder;
 
@@ -23,6 +22,8 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@example.com',
             'password' => bcrypt('1234')
         ]);
+        Profesor::factory(10)->create();
+        
 
         Actividad::factory(10)->create();
 

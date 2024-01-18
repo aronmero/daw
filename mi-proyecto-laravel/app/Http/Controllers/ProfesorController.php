@@ -6,6 +6,14 @@ use Illuminate\Http\Request;
 
 class ProfesorController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('can:admin.usuario.index')->only('index');
+        $this->middleware('can:admin.usuario.create')->only('create','store');
+        $this->middleware('can:admin.usuario.destroy')->only('destroy');
+        $this->middleware('can:admin.usuario.edit')->only('edit','update');
+    }
     /**
      * Display a listing of the resource.
      */

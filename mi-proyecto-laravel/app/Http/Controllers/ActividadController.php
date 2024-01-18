@@ -7,6 +7,15 @@ use Illuminate\Http\Request;
 
 class ActividadController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('can:admin.actividades.index')->only('index');
+        $this->middleware('can:admin.actividades.create')->only('create','store');
+        $this->middleware('can:admin.actividades.destroy')->only('destroy');
+        $this->middleware('can:admin.actividades.edit')->only('edit','update');
+    }
+
     /**
      * Display a listing of the resource.
      */
