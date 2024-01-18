@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Spatie\Permission\Traits\HasRoles;
 
 class Profesor extends Authenticatable
 {
-    use HasFactory;
+    use HasFactory, HasRoles;
     protected $table = 'profesores';
 
     /**
@@ -33,12 +34,4 @@ class Profesor extends Authenticatable
         'password'
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'password' => 'hashed'
-    ];
 }
