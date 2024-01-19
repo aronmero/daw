@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('actividades_grupos', function (Blueprint $table) {
-            $table->foreignId('actividades_id')->references('id')->on('actividades')->onDelete('cascade');
-            $table->foreignId('grupos_id')->references('id')->on('grupos')->onDelete('cascade');
+            $table->foreignId('actividad_id')->references('id')->on('actividades')->onDelete('cascade');
+            $table->foreignId('grupo_id')->references('id')->on('grupos')->onDelete('cascade');
         });
     }
 

@@ -24,8 +24,8 @@ class ActividadesProfesoresSeeder extends Seeder
             $grupoId = $this->obtenerElementoAleatorio($profesoresIds);
 
             ActividadProfesor::insert([
-                'actividades_id' => $actividadId,
-                'profesores_id' => $grupoId,
+                'actividad_id' => $actividadId,
+                'profesor_id' => $grupoId,
             ]);
         }
     }

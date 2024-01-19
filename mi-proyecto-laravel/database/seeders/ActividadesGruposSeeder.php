@@ -23,8 +23,8 @@ class ActividadesGruposSeeder extends Seeder
             $grupoId = $this->obtenerElementoAleatorio($gruposIds);
 
             ActividadGrupo::insert([
-                'actividades_id' => $actividadId,
-                'grupos_id' => $grupoId,
+                'actividad_id' => $actividadId,
+                'grupo_id' => $grupoId,
             ]);
         }
     }
