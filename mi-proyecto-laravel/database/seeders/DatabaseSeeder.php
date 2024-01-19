@@ -18,21 +18,14 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(RoleSeeder::class);
 
-        Profesor::factory()->create([
-            'nombre' => 'admin',
-            'email' => 'admin@example.com',
-            'password' => bcrypt('1234')
-        ])->assignRole('Admin');
+        $this->call(ProfesorSeeder::class);
 
-        Profesor::factory()->create([
-            'nombre' => 'profesor',
-            'email' => 'profesor@example.com',
-            'password' => bcrypt('1234')
-        ])->assignRole('Usuario');
-        Profesor::factory(10)->create();
-        
+        $this->call(GrupoSeeder::class);
 
         Actividad::factory(10)->create();
 
+        $this->call(ActividadesGruposSeeder::class);
+
+        $this->call(ActividadesProfesoresSeeder::class);
     }
 }

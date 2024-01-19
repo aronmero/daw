@@ -19,7 +19,7 @@ class ActividadFactory extends Factory
         return [
             'lugar'=>$this->faker->name(),
             'descripcion'=>$this->faker->paragraph(1),
-            'duracion'=>$this->faker->numberBetween(0,10),
+            'duracion'=>$this->faker->numberBetween(1,10),
             'fecha'=>$this->faker->dateTimeBetween('-1 years','now')
         
         ];
