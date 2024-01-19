@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-
+use App\Models\ActividadProfesor;
 class ActividadesProfesoresSeeder extends Seeder
 {
     /**
@@ -23,7 +23,7 @@ class ActividadesProfesoresSeeder extends Seeder
             $actividadId = $this->obtenerElementoAleatorio($actividadesIds);
             $grupoId = $this->obtenerElementoAleatorio($profesoresIds);
 
-            DB::table('actividades_profesores')->insert([
+            ActividadProfesor::insert([
                 'actividades_id' => $actividadId,
                 'profesores_id' => $grupoId,
             ]);

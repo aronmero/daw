@@ -1,7 +1,7 @@
 <?php
 
 namespace Database\Seeders;
-
+use App\Models\ActividadGrupo;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -22,7 +22,7 @@ class ActividadesGruposSeeder extends Seeder
             $actividadId = $this->obtenerElementoAleatorio($actividadesIds);
             $grupoId = $this->obtenerElementoAleatorio($gruposIds);
 
-            DB::table('actividades_grupos')->insert([
+            ActividadGrupo::insert([
                 'actividades_id' => $actividadId,
                 'grupos_id' => $grupoId,
             ]);
