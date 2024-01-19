@@ -3,7 +3,7 @@
 @section('title', 'Actividades.Create')
 
 @section('content')
-    <form action="{{ route('grupos.store') }}" method="POST">
+    <form action="{{ route('actividades.store') }}" method="POST">
         @csrf
         <div>
             <label>Lugar</label>
@@ -21,6 +21,23 @@
             <label>Fecha</label>
             <input type="date" name="fecha" value="{{ date('Y-m-d') }}">
         </div>
+        <label for="grupos">Grupos:</label>
+        <select name="grupos[]" multiple>
+            @foreach ($grupos as $grupo)
+                <option value="{{ $grupo->id }}">
+                    {{ $grupo->nombre }}
+                </option>
+            @endforeach
+        </select>
+
+        <label for="profesores">Profesores:</label>
+        <select name="profesores[]" multiple>
+            @foreach ($profesores as $profesor)
+                <option value="{{ $profesor->id }}">
+                    {{ $profesor->nombre }}
+                </option>
+            @endforeach
+        </select>
         <div>
             <input type="submit" value="Enviar">
         </div>
@@ -36,5 +53,5 @@
             </ul>
         </div>
     @endif
-    <a href="{{ route('grupos.index') }}">Volver</a>
+    <a href="{{ route('actividades.index') }}">Volver</a>
 @endsection

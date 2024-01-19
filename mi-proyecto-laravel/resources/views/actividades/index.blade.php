@@ -101,12 +101,13 @@
         }
 
         .carta {
-            height: 240px;
+            /*height: 240px;*/
+            display: grid;
             box-sizing: border-box;
             padding: 10px 15px;
             border: 1px solid black;
             border-radius: 5px;
-            width: 200px;
+            width: 240px;
         }
 
         .carta>div {
@@ -158,6 +159,10 @@
             visibility: visible;
             height: 170px;
         }
+        form.eliminar{
+            display: flex;
+            justify-content: center;
+        }
     </style>
 @endsection
 
@@ -174,11 +179,29 @@
                     <div>{{ $actividad->lugar }}</div>
                     <div>{{ $actividad->fecha }}</div>
                     <div>{{ $actividad->duracion }}</div>
-
+                    <div>
+                        Grupos:
+                        @foreach ($actividad->grupos as $grupo)
+                            {{ $grupo->nombre }}
+                        @endforeach
+                    </div>
+                    <div>
+                        Profesores:
+                        @foreach ($actividad->profesores as $profesor)
+                            {{ $profesor->nombre }}
+                        @endforeach
+                    </div>
                     @can('admin.actividades.edit')
                         <div><a href="{{ route('actividades.edit', $actividad) }}">Editar</a></div>
-                    </div>
-                @endcan
+                    @endcan
+                    @can('admin.actividades.destroy')
+                        <div><form class="eliminar" action="{{ route('actividades.destroy', $actividad) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <input type="submit" name="id" value="Eliminar">
+                        </form></div>
+                    @endcan
+                </div>
             @empty
 
                 No hay actividades

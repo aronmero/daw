@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Actividad;
+use App\Models\ActividadGrupo;
+use App\Models\ActividadProfesor;
+use App\Models\Grupo;
+use App\Models\Profesor;
 use Illuminate\Http\Request;
 
 class ActividadController extends Controller
@@ -10,10 +14,10 @@ class ActividadController extends Controller
 
     public function __construct()
     {
-       // $this->middleware('can:admin.actividades.index')->only('index');
-        $this->middleware('can:admin.actividades.create')->only('create','store');
+        // $this->middleware('can:admin.actividades.index')->only('index');
+        $this->middleware('can:admin.actividades.create')->only('create', 'store');
         $this->middleware('can:admin.actividades.destroy')->only('destroy');
-        $this->middleware('can:admin.actividades.edit')->only('edit','update');
+        $this->middleware('can:admin.actividades.edit')->only('edit', 'update');
     }
 
     /**
@@ -21,8 +25,9 @@ class ActividadController extends Controller
      */
     public function index()
     {
-        $actividades=Actividad::all();
-        return view("actividades.index",['actividades' => $actividades]);
+        $actividades = Actividad::with('grupos', 'profesores')->get();
+
+        return view("actividades.index", ['actividades' => $actividades]);
     }
 
     /**
@@ -30,7 +35,10 @@ class ActividadController extends Controller
      */
     public function create()
     {
-        return view("actividades.create");
+        $grupos = Grupo::all();
+        $profesores = Profesor::all()->slice(1);
+
+        return view("actividades.create" ,compact('grupos', 'profesores'));
     }
 
     /**
@@ -38,7 +46,12 @@ class ActividadController extends Controller
      */
     public function store(Request $request)
     {
-        Actividad::create($request->all());
+        $actividad = Actividad::create($request->all());
+
+        $actividad->grupos()->attach($request->input('grupos', []));
+
+        $actividad->profesores()->attach($request->input('profesores', []));
+
         return redirect()->route('actividades.index');
     }
 
@@ -48,7 +61,7 @@ class ActividadController extends Controller
     public function show(string $id)
     {
         $actividad = Actividad::find($id);
-        return view('actividades.show', [ 'actividad' => $actividad]);
+        return view('actividades.show', ['actividad' => $actividad]);
     }
 
     /**
@@ -57,7 +70,10 @@ class ActividadController extends Controller
     public function edit(string $id)
     {
         $actividad = Actividad::find($id);
-        return view('actividades.edit', [ 'actividad' => $actividad]);
+        $grupos = Grupo::all();
+        $profesores = Profesor::all()->slice(1);
+
+        return view('actividades.edit',  compact('actividad', 'grupos', 'profesores'));
     }
 
     /**
@@ -65,8 +81,20 @@ class ActividadController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        Actividad::find($id)->update($request->all());
-        return redirect()->route('actividades.index');
+        $actividad = Actividad::find($id);
+
+        if (!$actividad) {
+            return redirect()->route('actividades.index')->with('error', 'La actividad no existe');
+        }
+
+        $actividad->update($request->all());
+
+        $actividad->grupos()->sync($request->input('grupos', []));
+
+
+        $actividad->profesores()->sync($request->input('profesores', []));
+
+        return redirect()->route('actividades.index')->with('success', 'Actividad actualizada exitosamente');
     }
 
     /**
@@ -74,9 +102,14 @@ class ActividadController extends Controller
      */
     public function destroy(string $id)
     {
-        $actividades = Actividad::find($id);
-        $actividades->delete();
+        $actividad = Actividad::find($id);
 
-        return redirect()->route('actividades.index');
+        if (!$actividad) {
+            return redirect()->route('actividades.index')->with('error', 'La actividad no existe');
+        }
+
+        $actividad->delete();
+
+        return redirect()->route('actividades.index')->with('success', 'Actividad eliminada exitosamente');
     }
 }
