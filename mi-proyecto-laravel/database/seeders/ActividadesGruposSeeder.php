@@ -1,10 +1,12 @@
 <?php
 
 namespace Database\Seeders;
+
 use App\Models\ActividadGrupo;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+
 class ActividadesGruposSeeder extends Seeder
 {
     /**
@@ -15,7 +17,15 @@ class ActividadesGruposSeeder extends Seeder
         $actividadesIds = DB::table('actividades')->pluck('id')->toArray();
         $gruposIds = DB::table('grupos')->pluck('id')->toArray();
 
-        $cantidadRegistros = 20;
+        for ($i = 0; $i < count($actividadesIds); $i++) {
+            $grupoId = $this->obtenerElementoAleatorio($gruposIds);
+            ActividadGrupo::insert([
+                'actividad_id' => $actividadesIds[$i],
+                'grupo_id' => $grupoId,
+            ]);
+        }
+
+        $cantidadRegistros = count($actividadesIds) * 2;
 
         for ($i = 0; $i < $cantidadRegistros; $i++) {
 

@@ -17,19 +17,26 @@ class ActividadesProfesoresSeeder extends Seeder
         $profesoresIds = DB::table('profesores')->pluck('id')->toArray();
 
         //Eliminar admin de la generacion
-        array_shift($actividadesIds);
         array_shift($profesoresIds);
 
-        $cantidadRegistros = 20;
+        for ($i = 0; $i < count($actividadesIds); $i++) {
+            $profesorId = $this->obtenerElementoAleatorio($profesoresIds);
+            ActividadProfesor::insert([
+                'actividad_id' => $actividadesIds[$i],
+                'profesor_id' => $profesorId,
+            ]);
+        }
+
+        $cantidadRegistros = count($actividadesIds)*2;
 
         for ($i = 0; $i < $cantidadRegistros; $i++) {
 
             $actividadId = $this->obtenerElementoAleatorio($actividadesIds);
-            $grupoId = $this->obtenerElementoAleatorio($profesoresIds);
+            $profesorId = $this->obtenerElementoAleatorio($profesoresIds);
 
             ActividadProfesor::insert([
                 'actividad_id' => $actividadId,
-                'profesor_id' => $grupoId,
+                'profesor_id' => $profesorId,
             ]);
         }
     }
