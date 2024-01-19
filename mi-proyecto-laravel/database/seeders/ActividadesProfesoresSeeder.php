@@ -16,6 +16,10 @@ class ActividadesProfesoresSeeder extends Seeder
         $actividadesIds = DB::table('actividades')->pluck('id')->toArray();
         $profesoresIds = DB::table('profesores')->pluck('id')->toArray();
 
+        //Eliminar admin de la generacion
+        array_shift($actividadesIds);
+        array_shift($profesoresIds);
+
         $cantidadRegistros = 20;
 
         for ($i = 0; $i < $cantidadRegistros; $i++) {
