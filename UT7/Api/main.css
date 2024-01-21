@@ -1,12 +1,63 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap");
+
+* {
+  font-family: "Roboto", sans-serif;
+  color: #2b0b03;
+}
+body {
+  background-color: #fff8da;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.red {
+  color: #eb6923;
+}
+button {
+  border: 1px solid #7c675c;
+  border-radius: 8px;
+  padding: 8px 12px;
+  background-color: #f4d15c;
+  font-weight: 600;
+  cursor: pointer;
+}
+label {
+  font-weight: 600;
+}
+input {
+  border: 1.5px solid #7c675c;
+  border-radius: 5px;
+  padding: 5px 8px;
+}
 #containerDisplay {
-  padding: 50px;
+  padding: 0px 50px;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 2s ease-in-out;
 }
-#containerDisplay > div {
+.mostrar {
+  opacity: 1 !important;
+}
+
+.carta {
+  font-weight: 600;
+  cursor: pointer;
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 150px;
+  text-transform: capitalize;
+  padding: 5px;
+  border: 2px solid #7c675c;
+  background-color: #f4d15c;
+  border-radius: 5px;
+  margin: 8px;
+  text-align: center;
 }
 
 .sprite {
@@ -23,10 +74,10 @@
 }
 
 #progressBar {
-    border-radius: 10px;
+  border-radius: 10px;
   height: 20px;
   width: 0;
-  background-color: #4caf50;
+  background-color: #f4d15c;
   transition: width 0.5s; /* Agregar transición para una animación suave */
 }
 
@@ -37,4 +88,52 @@
   z-index: 10;
   width: 95%;
   justify-content: center;
+}
+
+#busqueda {
+  width: 30%;
+  right: 15px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+#busqueda > * {
+  margin: 0px 10px;
+}
+h1 {
+  margin-left: 15px;
+}
+.cabecera {
+  padding: 0px 10px;
+  background-color: #f3df9d;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.botonesInteraccion {
+  display: flex;
+  padding: 25px;
+  justify-content: center;
+}
+
+.botonesInteraccion > * {
+  margin: 0px 8px;
+}
+
+footer {
+  box-sizing: border-box;
+  width: 100%;
+  text-align: center;
+  margin-top: 30px;
+  padding: 50px;
+  background-color: #f3df9d;
+}
+
+section{
+  min-height: 75vh;
+}
+
+.tip{
+  margin-top: 0px;
+  text-align: center;
 }

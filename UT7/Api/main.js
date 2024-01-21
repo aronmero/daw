@@ -1,27 +1,109 @@
 let pokedex = new Array();
 let pokedexFiltrada = [];
 let numPokemon = 0;
-
+let llamadasAPI = 0;
+const numTiposPokemon = 18;
+let tiposPokemon = new Array();
 const numPokemonTotal = 1302;
 
+obtenerTiposAPI();
 ocultarProgreso();
+
+if (sessionStorage.getItem("tiposPokemon") != undefined) {
+  const json_str = sessionStorage.getItem("tiposPokemon");
+  tiposPokemon = JSON.parse(json_str);
+
+  if (tiposPokemon.length < numTiposPokemon) {
+    obtenerTiposAPI();
+  }
+} else {
+  obtenerTiposAPI();
+}
 
 if (sessionStorage.getItem("pokedex") != undefined) {
   reasignarPokedex();
+  reasignarTipos();
+  sessionStorage.setItem("pokedex", JSON.stringify(pokedex));
   if (numPokemon < numPokemonTotal) {
     inicio();
   }
 } else {
-  pokedex = inicio();
+  inicio();
 }
 
+document
+  .getElementById("busquedaPokemon")
+  .addEventListener("input", filtrarPokemon);
+
+//Imprime de la pokedex
+document
+  .getElementById("refrescarDatos")
+  .addEventListener(
+    "click",
+    () => (
+      ((numPokemon = 0),
+      (document.getElementById("containerDisplay").innerHTML = "")),
+      imprimirPokedex()
+    )
+  );
+
+//Llama a la API y imprime la pokedex
+document.getElementById("refrescarApi").addEventListener("click", () => {
+  if (numPokemon < numPokemonTotal) {
+    numPokemon = 0;
+    document.getElementById("containerDisplay").innerHTML = "";
+    inicio();
+  }
+});
 
 /**
- * Llama a la API
+ * Llama a la api de tipos y guarda los valores en un array
+ * @date 1/21/2024 - 9:39:19 PM
+ * @author Aarón Medina Rodríguez
+ */
+function obtenerTiposAPI() {
+  fetch("https://pokeapi.co/api/v2/type")
+    .then((response) => response.json())
+    .then((tipos) => {
+      tipos.results.forEach((tipo) => {
+        fetch(`${tipo.url}`)
+          .then((response) => response.json())
+          .then((data) => {
+            let tipoTemp;
+
+            if (data.names[5].language.name == "es") {
+              tipoTemp = {
+                id: tipo.url,
+                nombre: data.names[5].name,
+              };
+            } else {
+              tipoTemp = {
+                id: tipo.url,
+                nombre: tipo.name,
+              };
+            }
+            const tipoRepetido = tiposPokemon.some((p) => p.id === tipoTemp.id);
+
+            if (!tipoRepetido) {
+              tiposPokemon.push(tipoTemp);
+              sessionStorage.setItem(
+                "tiposPokemon",
+                JSON.stringify(tiposPokemon)
+              );
+            }
+          })
+          .catch(() => console.warn("Error al obtener detalles del tipo"));
+      });
+    })
+    .catch(() => console.warn("Error al obtener la lista de tipos"));
+}
+
+/**
+ * Llama a la API principal de pokemon y guarda los valores en un array
  * @date 1/21/2024 - 8:15:25 PM
  * @author Aarón Medina Rodríguez
  */
-function pedirDatos() {
+function obtenerPokedexAPI() {
   const pokedex = JSON.parse(sessionStorage.getItem("pokedex")) || new Array();
   fetch("https://pokeapi.co/api/v2/pokemon/?offset=00&limit=15000")
     .then((response) => response.json())
@@ -51,58 +133,41 @@ function pedirDatos() {
  */
 function inicio() {
   mostrarProgreso();
-  pedirDatos();
+  obtenerPokedexAPI();
   setTimeout(reasignarPokedex, 1000);
 
   if (pokedex.length < numPokemonTotal) {
     actualizarProgreso();
-    const intervalId = setInterval(() => {
-      pedirDatos();
-
-      setTimeout(reasignarPokedex(), 1000);
+    const tiempoInicial = performance.now();
+    const intervaloApi = setInterval(() => {
+      obtenerPokedexAPI();
+      setTimeout(reasignarPokedex, 1000);
       actualizarProgreso();
 
       if (pokedex.length >= numPokemonTotal - 5) {
-        clearInterval(intervalId);
-        setTimeout(ocultarProgreso, 500);
-        imprimirPokedex();
+        clearInterval(intervaloApi);
+        finalizarProgreso();
+        setTimeout(ocultarProgreso, 250);
+        setTimeout(imprimirPokedex,250);
+      }
+      const tiempoActual = performance.now();
+      const tiempoTranscurrido = tiempoActual - tiempoInicial;
+
+      // Detener el intervalo después de 30000 ms (30 segundos)
+      if (tiempoTranscurrido >= 30000) {
+        clearInterval(intervaloApi);
+        finalizarProgreso();
+        setTimeout(ocultarProgreso, 250);
+        setTimeout(imprimirPokedex,250);
+        console.error("Se ha superado el tiempo limite de 30 segundos");
       }
     }, 1500);
   } else {
     ocultarProgreso();
     imprimirPokedex();
   }
-}
-
-/**
- * Actualiza la barra de porgreso
- * @date 1/21/2024 - 7:40:42 PM
- * @author Aarón Medina Rodríguez
- */
-function actualizarProgreso() {
-  const progressBar = document.getElementById("progressBar");
-  const progressPercentage = (pokedex.length / numPokemonTotal) * 100;
-  progressBar.style.width = `${progressPercentage}%`;
-}
-
-/**
- * Oculta la barra de progreso
- * @date 1/21/2024 - 7:40:24 PM
- * @author Aarón Medina Rodríguez
- */
-function ocultarProgreso() {
-  const progressBar = document.getElementById("progressBar");
-  progressBar.hidden = true;
-}
-
-/**
- * Muestra la barra de progreso
- * @date 1/21/2024 - 7:40:24 PM
- * @author Aarón Medina Rodríguez
- */
-function mostrarProgreso() {
-  const progressBar = document.getElementById("progressBar");
-  progressBar.hidden = false;
+  reasignarTipos();
+  sessionStorage.setItem("pokedex", JSON.stringify(pokedex));
 }
 
 /**
@@ -115,6 +180,8 @@ function imprimirPokedex() {
   pokedex.forEach((pokemon) => {
     imprimirPokemon(pokemon);
   });
+
+  document.getElementById("containerDisplay").classList.add("mostrar");
 }
 
 /**
@@ -146,6 +213,7 @@ function imprimirPokemon(pokemon) {
   carta.append(sprite);
   carta.append(nombre);
   carta.addEventListener("click", mostrarInfo);
+  carta.classList.add("carta");
   container.append(carta);
   numPokemon++;
 }
@@ -166,6 +234,32 @@ function extraerDatos(pokemon) {
     tipos: pokemon.types,
   };
   return pokemonTemp;
+}
+
+/**
+ * Reasigna los tipos a Español
+ * @date 1/21/2024 - 10:19:02 PM
+ * @author Aarón Medina Rodríguez
+ */
+function reasignarTipos() {
+  pokedex.forEach((pokemon) => {
+    const tipos = [];
+    pokemon.tipos.forEach((tipo) => {
+      tiposPokemon.forEach((tipoEspanol) => {
+        if (tipo.type.url == tipoEspanol.id) {
+          const tipoTemp = {
+            slot: tipo.slot,
+            type: {
+              name: tipoEspanol.nombre,
+              url: tipo.type.url,
+            },
+          };
+          tipos.push(tipoTemp);
+        }
+      });
+    });
+    pokemon.tipos = tipos;
+  });
 }
 
 /**
@@ -239,44 +333,55 @@ function mostrarInfo() {
   const info = pokedex.filter((elemento) => elemento.nombre == nombrePokemon);
 
   const nombre = info[0].nombre;
+  const id = info[0].id;
+
   let tipos = "";
-  console.log(info[0].tipos);
   info[0].tipos.forEach((element) => {
     tipos = tipos + element.type.name + " ";
   });
 
   const mensaje =
-    "El nombre es " +
+    "El ID en la pokedex es: " +
+    id +
+    "\nEl nombre del pokemon es " +
     nombre +
     "\nLos tipos son " +
-    tipos 
+    tipos;
   alert(mensaje);
 }
 
-document
-  .getElementById("busquedaPokemon")
-  .addEventListener("input", filtrarPokemon);
+/**
+ * Actualiza la barra de porgreso
+ * @date 1/21/2024 - 7:40:42 PM
+ * @author Aarón Medina Rodríguez
+ */
+function actualizarProgreso() {
+  const progressBar = document.getElementById("progressBar");
+  const progressPercentage = (pokedex.length / numPokemonTotal) * 100;
+  progressBar.style.width = `${progressPercentage}%`;
+}
 
-//Imprime de la pokedex
-document
-  .getElementById("refrescarDatos")
-  .addEventListener(
-    "click",
-    () => (
-      ((numPokemon = 0),
-      (document.getElementById("containerDisplay").innerHTML = "")),
-      imprimirPokedex()
-    )
-  );
+function finalizarProgreso() {
+  const progressBar = document.getElementById("progressBar");
+  progressBar.style.width = "100%";
+}
 
-//Llama a la API y imprime la pokedex
-document
-  .getElementById("refrescarApi")
-  .addEventListener(
-    "click",
-    () => (
-      ((numPokemon = 0),
-      (document.getElementById("containerDisplay").innerHTML = "")),
-      inicio()
-    )
-  );
+/**
+ * Oculta la barra de progreso
+ * @date 1/21/2024 - 7:40:24 PM
+ * @author Aarón Medina Rodríguez
+ */
+function ocultarProgreso() {
+  const progressBar = document.getElementById("progressBar");
+  progressBar.hidden = true;
+}
+
+/**
+ * Muestra la barra de progreso
+ * @date 1/21/2024 - 7:40:24 PM
+ * @author Aarón Medina Rodríguez
+ */
+function mostrarProgreso() {
+  const progressBar = document.getElementById("progressBar");
+  progressBar.hidden = false;
+}
