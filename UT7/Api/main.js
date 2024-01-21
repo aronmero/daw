@@ -2,9 +2,10 @@ let pokedex = new Array();
 let pokedexFiltrada = [];
 let numPokemon = 0;
 const numPokemonTotal = 1302;
+ocultarProgreso();
+
 if (sessionStorage.getItem("pokedex") != undefined) {
   reasignarPokedex();
-
   pokedex.forEach((pokemon) => {
     imprimirPokemon(pokemon);
   });
@@ -41,28 +42,44 @@ function pedirDatos() {
 }
 
 function inicio() {
+  mostrarProgreso();
   pedirDatos();
   setTimeout(reasignarPokedex, 1000);
+  
   if (pokedex.length < numPokemonTotal) {
+    actualizarProgreso();
     const intervalId = setInterval(() => {
       pedirDatos();
 
       setTimeout(reasignarPokedex(), 1000);
-      console.log(pokedex.length + "length");
+      actualizarProgreso();
+
       if (pokedex.length >= numPokemonTotal - 5) {
         clearInterval(intervalId);
+        setTimeout(ocultarProgreso,500);
         imprimirPokedex();
-        if (numPokemon < numPokemonTotal) {
-          const error = document.createElement("span");
-          error.append(
-            document.createTextNode(" *Se recomienda refrescar la api")
-          );
-          error.classList.add("error");
-          document.getElementById("numPokedex").appendChild(error);
-        }
       }
     }, 1500);
+  } else {
+    ocultarProgreso();
+    imprimirPokedex();
   }
+}
+
+function actualizarProgreso() {
+  const progressBar = document.getElementById("progressBar");
+  const progressPercentage = (pokedex.length / numPokemonTotal) * 100;
+  progressBar.style.width = `${progressPercentage}%`;
+}
+
+function ocultarProgreso() {
+  const progressBar = document.getElementById("progressBar");
+  progressBar.hidden = true;
+}
+
+function mostrarProgreso() {
+  const progressBar = document.getElementById("progressBar");
+  progressBar.hidden = false;
 }
 
 function imprimirPokedex() {

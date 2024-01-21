@@ -1,18 +1,29 @@
-#containerDisplay{
-    padding: 50px;
-    display: flex;
-    flex-wrap: wrap;
+#containerDisplay {
+  padding: 50px;
+  display: flex;
+  flex-wrap: wrap;
 }
-#containerDisplay>div{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+#containerDisplay > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.sprite{
-    max-width: 95px;
-    max-height: 95px;
+.sprite {
+  max-width: 95px;
+  max-height: 95px;
 }
-.error{
-    color: red;
+.error {
+  color: red;
+}
+#progressBarContainer {
+  width: 100%;
+  background-color: #ddd;
+}
+
+#progressBar {
+  height: 20px;
+  width: 0;
+  background-color: #4caf50;
+  transition: width 0.5s; /* Agregar transición para una animación suave */
 }
