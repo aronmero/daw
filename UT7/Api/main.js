@@ -41,15 +41,6 @@ function pedirDatos() {
     .catch(() => console.warn("Error al obtener la lista de pokemon"));
 }
 
-function extraerDatos(pokemon) {
-  const pokemonTemp = {
-    id: pokemon.id,
-    sprite: pokemon.sprites.front_default,
-    nombre: pokemon.name,
-    tipos: pokemon.types,
-  };
-  return pokemonTemp;
-}
 
 function inicio() {
   pedirDatos();
@@ -66,21 +57,22 @@ function inicio() {
   return pokedex;
 }
 
-function reasignarPokedex() {
-  const json_str = sessionStorage.getItem("pokedex");
-  pokedex = JSON.parse(json_str);
-  pokedex.sort((a, b) => a.id - b.id);
-  sessionStorage.setItem("pokedex", JSON.stringify(pokedex));
-}
 
-function imprimirDatos(data) {
+/**
+ * Imrpime en HTML un pokemon
+ * @date 1/21/2024 - 6:27:27 PM
+ * @author Aarón Medina Rodríguez
+ *
+ * @param {*} pokemon
+ */
+function imprimirDatos(pokemon) {
   const container = document.getElementById("containerDisplay");
-  const pokemon = document.createElement("div");
+  const carta = document.createElement("div");
 
   const sprite = document.createElement("img");
 
-  if (data.sprite != null) {
-    sprite.setAttribute("src", data.sprite);
+  if (pokemon.sprite != null) {
+    sprite.setAttribute("src", pokemon.sprite);
     sprite.onerror = function () {
       sprite.setAttribute("src", "./media/default.webp");
     };
@@ -89,16 +81,47 @@ function imprimirDatos(data) {
   }
   sprite.classList.add("sprite");
 
-  const texto = data.nombre;
+  const texto = pokemon.nombre;
   const nombre = document.createTextNode(texto);
 
-  pokemon.append(sprite);
-  pokemon.append(nombre);
-  pokemon.addEventListener("click", mostrarInfo);
-  container.append(pokemon);
+  carta.append(sprite);
+  carta.append(nombre);
+  carta.addEventListener("click", mostrarInfo);
+  container.append(carta);
   numPokemon++;
   document.getElementById("numPokedex").innerHTML =
     "Numero de pokemon cargdos " + numPokemon + " de " + numPokemonTotal;
+}
+
+
+/**
+ * Extrae datos en un formato
+ * @date 1/21/2024 - 6:27:02 PM
+ * @author Aarón Medina Rodríguez
+ *
+ * @param {*} pokemon
+ * @returns {{ id: any; sprite: any; nombre: any; tipos: any; }}
+ */
+function extraerDatos(pokemon) {
+  const pokemonTemp = {
+    id: pokemon.id,
+    sprite: pokemon.sprites.front_default,
+    nombre: pokemon.name,
+    tipos: pokemon.types,
+  };
+  return pokemonTemp;
+}
+
+/**
+ * Ordena la pokedex por id
+ * @date 1/21/2024 - 6:26:51 PM
+ * @author Aarón Medina Rodríguez
+ */
+function reasignarPokedex() {
+  const json_str = sessionStorage.getItem("pokedex");
+  pokedex = JSON.parse(json_str);
+  pokedex.sort((a, b) => a.id - b.id);
+  sessionStorage.setItem("pokedex", JSON.stringify(pokedex));
 }
 
 /**
