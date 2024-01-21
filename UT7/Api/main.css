@@ -17,13 +17,24 @@
   color: red;
 }
 #progressBarContainer {
-  width: 100%;
+  border-radius: 10px;
+  width: 50%;
   background-color: #ddd;
 }
 
 #progressBar {
+    border-radius: 10px;
   height: 20px;
   width: 0;
   background-color: #4caf50;
   transition: width 0.5s; /* Agregar transición para una animación suave */
+}
+
+.progressContainer {
+  display: flex;
+  position: absolute;
+  top: 45%;
+  z-index: 10;
+  width: 95%;
+  justify-content: center;
 }

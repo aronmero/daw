@@ -6,14 +6,8 @@ ocultarProgreso();
 
 if (sessionStorage.getItem("pokedex") != undefined) {
   reasignarPokedex();
-  pokedex.forEach((pokemon) => {
-    imprimirPokemon(pokemon);
-  });
   if (numPokemon < numPokemonTotal) {
-    const error = document.createElement("span");
-    error.append(document.createTextNode(" *Se recomienda refrescar la api"));
-    error.classList.add("error");
-    document.getElementById("numPokedex").appendChild(error);
+    inicio()
   }
 } else {
   pokedex = inicio();
@@ -120,8 +114,6 @@ function imprimirPokemon(pokemon) {
   carta.addEventListener("click", mostrarInfo);
   container.append(carta);
   numPokemon++;
-  document.getElementById("numPokedex").innerHTML =
-    "Numero de pokemon cargdos " + numPokemon + " de " + numPokemonTotal;
 }
 
 /**
