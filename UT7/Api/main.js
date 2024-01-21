@@ -1,17 +1,20 @@
 let pokedex = new Array();
 let pokedexFiltrada = [];
 let numPokemon = 0;
+
 const numPokemonTotal = 1302;
+
 ocultarProgreso();
 
 if (sessionStorage.getItem("pokedex") != undefined) {
   reasignarPokedex();
   if (numPokemon < numPokemonTotal) {
-    inicio()
+    inicio();
   }
 } else {
   pokedex = inicio();
 }
+
 function pedirDatos() {
   const pokedex = JSON.parse(sessionStorage.getItem("pokedex")) || new Array();
   fetch("https://pokeapi.co/api/v2/pokemon/?offset=00&limit=15000")
@@ -23,7 +26,7 @@ function pedirDatos() {
           .then((data) => {
             const pokemon = extraerDatos(data);
             const pokemonRepetido = pokedex.some((p) => p.id === pokemon.id);
-
+            console.log(data)
             if (!pokemonRepetido) {
               pokedex.push(pokemon);
               sessionStorage.setItem("pokedex", JSON.stringify(pokedex));
@@ -35,11 +38,16 @@ function pedirDatos() {
     .catch(() => console.warn("Error al obtener la lista de pokemon"));
 }
 
+/**
+ * Realiza llamadas a la API hasta obtener todos los pokemon.
+ * @date 1/21/2024 - 7:44:44 PM
+ * @author Aarón Medina Rodríguez
+ */
 function inicio() {
   mostrarProgreso();
   pedirDatos();
   setTimeout(reasignarPokedex, 1000);
-  
+
   if (pokedex.length < numPokemonTotal) {
     actualizarProgreso();
     const intervalId = setInterval(() => {
@@ -50,7 +58,7 @@ function inicio() {
 
       if (pokedex.length >= numPokemonTotal - 5) {
         clearInterval(intervalId);
-        setTimeout(ocultarProgreso,500);
+        setTimeout(ocultarProgreso, 500);
         imprimirPokedex();
       }
     }, 1500);
@@ -60,22 +68,42 @@ function inicio() {
   }
 }
 
+/**
+ * Actualiza la barra de porgreso
+ * @date 1/21/2024 - 7:40:42 PM
+ * @author Aarón Medina Rodríguez
+ */
 function actualizarProgreso() {
   const progressBar = document.getElementById("progressBar");
   const progressPercentage = (pokedex.length / numPokemonTotal) * 100;
   progressBar.style.width = `${progressPercentage}%`;
 }
 
+/**
+ * Oculta la barra de progreso
+ * @date 1/21/2024 - 7:40:24 PM
+ * @author Aarón Medina Rodríguez
+ */
 function ocultarProgreso() {
   const progressBar = document.getElementById("progressBar");
   progressBar.hidden = true;
 }
 
+/**
+ * Muestra la barra de progreso
+ * @date 1/21/2024 - 7:40:24 PM
+ * @author Aarón Medina Rodríguez
+ */
 function mostrarProgreso() {
   const progressBar = document.getElementById("progressBar");
   progressBar.hidden = false;
 }
 
+/**
+ * Imprime la pokedex ordenada
+ * @date 1/21/2024 - 7:41:03 PM
+ * @author Aarón Medina Rodríguez
+ */
 function imprimirPokedex() {
   reasignarPokedex();
   pokedex.forEach((pokemon) => {
@@ -210,20 +238,20 @@ function mostrarInfo() {
   info[0].tipos.forEach((element) => {
     tipos = tipos + element.type.name + " ";
   });
-  const sprite = info[0].sprite;
+
   const mensaje =
     "El nombre es " +
     nombre +
     "\nLos tipos son " +
-    tipos +
-    "\n sprite:" +
-    sprite;
+    tipos 
   alert(mensaje);
 }
 
 document
   .getElementById("busquedaPokemon")
   .addEventListener("input", filtrarPokemon);
+
+//Imprime de la pokedex
 document
   .getElementById("refrescarDatos")
   .addEventListener(
@@ -235,6 +263,7 @@ document
     )
   );
 
+//Llama a la API y imprime la pokedex
 document
   .getElementById("refrescarApi")
   .addEventListener(

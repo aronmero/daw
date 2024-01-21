@@ -39,4 +39,6 @@ Filtro por nombre del pokemon.
 
 Se guardan los datos en un sessionStorage para evitar llamadas repetidas a la api en la misma sesion.
 
-Opcion para refrescar la api por si hubiera problemas al obtener los datos y mostrarlos.
+Opcion para reimprimir los datos por si no cargaran las imagenes y opcion para llamar a la api de nuevo.
+
+Al realizar las llamadas a la API se realizan cada 1 segundo para asegurar que puedan cargar todos los pokemon en la web, si no se hace este procedimiento pueden no guardarse en la web todos los pokemon de la api.
