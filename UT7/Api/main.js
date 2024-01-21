@@ -15,6 +15,12 @@ if (sessionStorage.getItem("pokedex") != undefined) {
   pokedex = inicio();
 }
 
+
+/**
+ * Llama a la API
+ * @date 1/21/2024 - 8:15:25 PM
+ * @author Aarón Medina Rodríguez
+ */
 function pedirDatos() {
   const pokedex = JSON.parse(sessionStorage.getItem("pokedex")) || new Array();
   fetch("https://pokeapi.co/api/v2/pokemon/?offset=00&limit=15000")
@@ -26,7 +32,7 @@ function pedirDatos() {
           .then((data) => {
             const pokemon = extraerDatos(data);
             const pokemonRepetido = pokedex.some((p) => p.id === pokemon.id);
-            console.log(data)
+
             if (!pokemonRepetido) {
               pokedex.push(pokemon);
               sessionStorage.setItem("pokedex", JSON.stringify(pokedex));
