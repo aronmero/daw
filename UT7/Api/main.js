@@ -1,12 +1,12 @@
 let pokedex = new Array();
 let pokedexFiltrada = [];
 let numPokemon = 0;
-let numPokemonTotal = 1302;
+const numPokemonTotal = 1302;
 if (sessionStorage.getItem("pokedex") != undefined) {
   reasignarPokedex();
 
   pokedex.forEach((pokemon) => {
-    imprimirDatos(pokemon);
+    imprimirPokemon(pokemon);
   });
   if (numPokemon < numPokemonTotal) {
     const error = document.createElement("span");
@@ -17,7 +17,6 @@ if (sessionStorage.getItem("pokedex") != undefined) {
 } else {
   pokedex = inicio();
 }
-
 function pedirDatos() {
   const pokedex = JSON.parse(sessionStorage.getItem("pokedex")) || new Array();
   fetch("https://pokeapi.co/api/v2/pokemon/?offset=00&limit=15000")
@@ -41,22 +40,37 @@ function pedirDatos() {
     .catch(() => console.warn("Error al obtener la lista de pokemon"));
 }
 
-
 function inicio() {
   pedirDatos();
-  reasignarPokedex();
-  pokedex.forEach((pokemon) => {
-    imprimirDatos(pokemon);
-  });
-  if (numPokemon < numPokemonTotal) {
-    const error = document.createElement("span");
-    error.append(document.createTextNode(" *Se recomienda refrescar la api"));
-    error.classList.add("error");
-    document.getElementById("numPokedex").appendChild(error);
+  setTimeout(reasignarPokedex, 1000);
+  if (pokedex.length < numPokemonTotal) {
+    const intervalId = setInterval(() => {
+      pedirDatos();
+
+      setTimeout(reasignarPokedex(), 1000);
+      console.log(pokedex.length + "length");
+      if (pokedex.length >= numPokemonTotal - 5) {
+        clearInterval(intervalId);
+        imprimirPokedex();
+        if (numPokemon < numPokemonTotal) {
+          const error = document.createElement("span");
+          error.append(
+            document.createTextNode(" *Se recomienda refrescar la api")
+          );
+          error.classList.add("error");
+          document.getElementById("numPokedex").appendChild(error);
+        }
+      }
+    }, 1500);
   }
-  return pokedex;
 }
 
+function imprimirPokedex() {
+  reasignarPokedex();
+  pokedex.forEach((pokemon) => {
+    imprimirPokemon(pokemon);
+  });
+}
 
 /**
  * Imrpime en HTML un pokemon
@@ -65,7 +79,7 @@ function inicio() {
  *
  * @param {*} pokemon
  */
-function imprimirDatos(pokemon) {
+function imprimirPokemon(pokemon) {
   const container = document.getElementById("containerDisplay");
   const carta = document.createElement("div");
 
@@ -92,7 +106,6 @@ function imprimirDatos(pokemon) {
   document.getElementById("numPokedex").innerHTML =
     "Numero de pokemon cargdos " + numPokemon + " de " + numPokemonTotal;
 }
-
 
 /**
  * Extrae datos en un formato
@@ -202,6 +215,17 @@ function mostrarInfo() {
 document
   .getElementById("busquedaPokemon")
   .addEventListener("input", filtrarPokemon);
+document
+  .getElementById("refrescarDatos")
+  .addEventListener(
+    "click",
+    () => (
+      ((numPokemon = 0),
+      (document.getElementById("containerDisplay").innerHTML = "")),
+      imprimirPokedex()
+    )
+  );
+
 document
   .getElementById("refrescarApi")
   .addEventListener(
