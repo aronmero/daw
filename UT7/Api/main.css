@@ -13,3 +13,6 @@
     max-width: 95px;
     max-height: 95px;
 }
+.error{
+    color: red;
+}
