@@ -1,6 +1,8 @@
 # Aarón Medina Rodríguez
 
-2024
+2º DAW - Desarrollo Web en entorno cliente - DEW
+
+2024 Q1
 
 # Enunciado
 
@@ -48,24 +50,24 @@ Los datos que obtenemos de esta API los guardamos de la siguietne manera. Basica
 }
 ```
 
-Durante la llamada a la API se muestra en el html una barra de carga respecto a los pokemon obtenidos de la api con respecto a los que se esperaban.
+Durante la **llamada a la API** se muestra en el html una barra de carga respecto a los pokemon obtenidos de la api con respecto a los que se esperaban.
 
-Antes de imprimir los elementos se ordenan por id y se les cambian los tipos a su version en español
+Antes de **imprimir** los elementos se ordenan por id y se les cambian los tipos a su version en español
 
-Imprimimos cada elemento de la api individualmente en el HTML. Si no tienen una imagen definida en la API o ocurre un problema al cargar la imagan se aplicara una default.
+**Imprimimos** cada elemento de la api individualmente en el HTML. Si no tienen una imagen definida en la API o ocurre un problema al cargar la imagan se aplicara una default.
 
-Filtro por nombre del pokemon.
+**Filtro** por nombre del pokemon.
 
-Se guardan los datos en un sessionStorage para evitar llamadas repetidas a la api en la misma sesion.
+Se guardan los datos en un **sessionStorage** para evitar llamadas repetidas a la api en la misma sesion.
 
-Opcion para reimprimir los datos por si no cargaran las imagenes y opcion para llamar a la api de nuevo, si ya se cargaron correctamente todos los datos de la API en nuestro array este boton no tendra efecto alguno.
+**Opcion para reimprimir** los datos por si no cargaran las imagenes y opcion para llamar a la api de nuevo, si ya se cargaron correctamente todos los datos de la API en nuestro array este boton no tendra efecto alguno.
 
-Al realizar las llamadas a la API principal de la pokedex se realizan cada 1.5 segundos para asegurar que puedan cargar todos los pokemon en la web, si no se hace este procedimiento pueden no guardarse en la web todos los pokemon de la api. Ademas si superan mas de 30 segundos de realizando dichas llamadas a la api se finaliza dicha ejecucion antes de tiempo, para evitar esperas elevadas y evitar posibles errores el en las condiciones de finalizacion de la llamada a la api.
+Al realizar las **llamadas a la API** principal de la pokedex se realizan cada 1.5 segundos para asegurar que puedan cargar todos los pokemon en la web, si no se hace este procedimiento pueden no guardarse en la web todos los pokemon de la api. Ademas si superan mas de 30 segundos de realizando dichas llamadas a la api se finaliza dicha ejecucion antes de tiempo, para evitar esperas elevadas y evitar posibles errores el en las condiciones de finalizacion de la llamada a la api.
 
-Al pulsar en un pokemon salta un mensaje con la info basica del pokemon, su id, nombre y tipos.
+Al **pulsar** en un pokemon salta un mensaje con la info basica del pokemon, su id, nombre y tipos.
 
 Como se solicita en los requerimientos los el manejo de datos se hace principalmente con **DOM** el uso de **innerHTML** es para exclusivamente para los botones de recargar datos para limpiar rapidamente el contenedor de la pokedex.
 
-Aunque no fuera solicitado explicitamente en los requisimos se realizo una hoja de estilos basica para la interfaz
-
 Tambien se añadio una flecha de navegacion para volver al principio de la pagina mejorando la usabilidad de la pagina.
+
+Aunque no fuera solicitado explicitamente en los requisimos se realizo una hoja de estilos basica para la interfaz.
