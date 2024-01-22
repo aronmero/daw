@@ -1,13 +1,70 @@
-import { http, HttpResponse } from 'msw'
- 
+import { http, HttpResponse } from "msw";
+
 export const handlers = [
-  http.post('/auth', () => {
+  http.get("https://www.nico.com/auth", () => {
     // Note that you DON'T have to stringify the JSON!
     return HttpResponse.json({
       user: {
-        id: 'abc-123',
-        name: 'John Maverick',
+        id: "abc-123",
+        name: "John Maverick",
       },
-    })
+    });
   }),
-]
+  http.get("https://www.nico.com/eventos", () => {
+    // Note that you DON'T have to stringify the JSON!
+    return HttpResponse.json({
+      eventos: [
+        {
+          lugar: "Roque",
+          fecha: "23-11-2023",
+          descripcion: "Visita al roque",
+          grupos: ["1ºESO", "2ºESO"],
+          profesores: ["Nico", "Luis"]
+        },
+        {
+          lugar: "Puntagorda",
+          fecha: "8-12-2023",
+          descripcion: "Visita a puntagorda",
+          grupos: ["1ºESO", "2ºESO"],
+          profesores: ["Paco", "Luz", "Estela"]
+        },
+        {
+          lugar: "Salinas",
+          fecha: "18-12-2023",
+          descripcion: "Visita a las salinas",
+          grupos: ["4ºESO"],
+          profesores: ["Nico"]
+        },
+        {
+          lugar: "Time",
+          fecha: "7-12-2023",
+          descripcion: "Visita al time",
+          grupos: ["1ºESO", "2ºESO"],
+          profesores: ["Nico", "Luis"]
+        },
+        {
+          lugar: "Pueblo",
+          fecha: "02-02-2024",
+          descripcion: "Excursión cultural",
+          grupos: ["2ºESO", "3ºESO"],
+          profesores: ["Carlos", "Elena"]
+        },
+        {
+          lugar: "Montaña",
+          fecha: "10-03-2024",
+          descripcion: "Senderismo en la montaña",
+          grupos: ["1ºBACH", "2ºBACH"],
+          profesores: ["Mario", "Laura"]
+        },
+        {
+          lugar: "Museo",
+          fecha: "05-04-2024",
+          descripcion: "Visita al museo de historia",
+          grupos: ["1ºBACH", "2ºBACH"],
+          profesores: ["Sara", "Pedro"]
+        }
+        
+      ]
+    });
+  }),
+];
