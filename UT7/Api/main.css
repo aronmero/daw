@@ -129,11 +129,21 @@ footer {
   background-color: #f3df9d;
 }
 
-section{
-  min-height: 75vh;
+section {
+  min-height: 80vh;
 }
 
-.tip{
+.tip {
   margin-top: 0px;
   text-align: center;
+}
+#inicio {
+  position: fixed;
+  right: 15px;
+  bottom: 35px;
+  cursor: pointer;
+}
+#inicio img {
+  width: 40px;
+  height: 40px;
 }

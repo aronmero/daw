@@ -56,6 +56,10 @@ document.getElementById("refrescarApi").addEventListener("click", () => {
   }
 });
 
+document.getElementById("inicio").addEventListener("click", () => {
+  document.getElementById('cabecera').scrollIntoView({ behavior: "smooth"});
+});
+
 /**
  * Llama a la api de tipos y guarda los valores en un array
  * @date 1/21/2024 - 9:39:19 PM
@@ -147,6 +151,7 @@ function inicio() {
       if (pokedex.length >= numPokemonTotal - 5) {
         clearInterval(intervaloApi);
         finalizarProgreso();
+        reasignarTipos();
         setTimeout(ocultarProgreso, 250);
         setTimeout(imprimirPokedex,250);
       }
@@ -157,6 +162,7 @@ function inicio() {
       if (tiempoTranscurrido >= 30000) {
         clearInterval(intervaloApi);
         finalizarProgreso();
+        reasignarTipos();
         setTimeout(ocultarProgreso, 250);
         setTimeout(imprimirPokedex,250);
         console.error("Se ha superado el tiempo limite de 30 segundos");
@@ -341,7 +347,7 @@ function mostrarInfo() {
   });
 
   const mensaje =
-    "El ID en la pokedex es: " +
+    "El ID en la pokedex es " +
     id +
     "\nEl nombre del pokemon es " +
     nombre +

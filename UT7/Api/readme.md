@@ -67,3 +67,5 @@ Al pulsar en un pokemon salta un mensaje con la info basica del pokemon, su id, 
 Como se solicita en los requerimientos los el manejo de datos se hace principalmente con **DOM** el uso de **innerHTML** es para exclusivamente para los botones de recargar datos para limpiar rapidamente el contenedor de la pokedex.
 
 Aunque no fuera solicitado explicitamente en los requisimos se realizo una hoja de estilos basica para la interfaz
+
+Tambien se añadio una flecha de navegacion para volver al principio de la pagina mejorando la usabilidad de la pagina.
