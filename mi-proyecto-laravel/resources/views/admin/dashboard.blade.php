@@ -9,7 +9,7 @@
     <div>
         <a href="{{ route('profesores.create') }}">Añadir Usuario</a>
     </div>
-
+   //TODO: que aparezca el boton de editar y eliminar para usuarios no ADMIN, y que tampoco se pueda eliminar a uno mismo.
     <div>
         <table>
             <thead>

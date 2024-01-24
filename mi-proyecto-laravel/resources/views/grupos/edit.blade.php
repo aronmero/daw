@@ -1,6 +1,6 @@
 @extends('layouts.plantilla')
 
-@section('title', 'Actividades.Edit')
+@section('title', 'Editar grupo')
 
 @section('style')
     <style>
