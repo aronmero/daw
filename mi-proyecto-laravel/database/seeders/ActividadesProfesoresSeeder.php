@@ -6,6 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use App\Models\ActividadProfesor;
+use Illuminate\Support\Arr;
 class ActividadesProfesoresSeeder extends Seeder
 {
     /**
@@ -27,17 +28,21 @@ class ActividadesProfesoresSeeder extends Seeder
             ]);
         }
 
-        $cantidadRegistros = count($actividadesIds)*2;
+        $cantidadRegistros = count($actividadesIds) * 2;
 
         for ($i = 0; $i < $cantidadRegistros; $i++) {
 
             $actividadId = $this->obtenerElementoAleatorio($actividadesIds);
             $profesorId = $this->obtenerElementoAleatorio($profesoresIds);
 
-            ActividadProfesor::insert([
-                'actividad_id' => $actividadId,
-                'profesor_id' => $profesorId,
-            ]);
+            $idOcupada = DB::table("actividades_profesores")->where("actividad_id", "=", $actividadId)->where("profesor_id", "=", $profesorId)->pluck('profesor_id')->toArray();
+            if (empty($idOcupada)) {
+
+                ActividadProfesor::insert([
+                    'actividad_id' => $actividadId,
+                    'profesor_id' => $profesorId,
+                ]);
+            }
         }
     }
 

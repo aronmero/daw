@@ -22,6 +22,8 @@ class ProfesorFactory extends Factory
     {
         return [
             'nombre' => fake()->name(),
+            'primerApellido' => fake()->lastName(),
+            'segundoApellido' => fake()->lastName(),
             'email' => fake()->unique()->safeEmail(),
             'password' => bcrypt('1234'), // password
             'remember_token' => Str::random(10),
