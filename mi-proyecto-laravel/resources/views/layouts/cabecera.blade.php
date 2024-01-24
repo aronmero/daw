@@ -1,13 +1,5 @@
 @extends('layouts.plantilla')
 
-<style>
-    .cabecera {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-</style>
-
 @section('head')
     <div class="cabecera">
         <h1>Bienvenido de vuelta, {{ Auth::user()->nombre }}</h1>

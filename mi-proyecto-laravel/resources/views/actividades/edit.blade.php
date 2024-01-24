@@ -1,38 +1,6 @@
-@extends('layouts.plantilla')
+@extends('layouts.cabecera')
 
 @section('title', 'Actividades.Edit')
-
-@section('style')
-    <style>
-        thead {
-            font-weight: bold;
-
-        }
-
-        thead>tr {
-            background-color: rgb(235 233 233) !important;
-        }
-
-        td {
-            padding: 5px;
-            min-width: 200px;
-
-        }
-
-        tr:nth-child(odd) {
-            background-color: rgb(180, 180, 180);
-        }
-
-        tr:nth-child(even) {
-            background-color: rgb(211, 211, 211);
-        }
-
-        table {
-            border: 1px solid black;
-            border-spacing: 0px;
-        }
-    </style>
-@endsection
 
 @section('content')
     <form action="{{ route('actividades.update', $actividad) }}" method="POST">

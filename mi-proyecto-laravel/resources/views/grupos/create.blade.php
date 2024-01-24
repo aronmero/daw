@@ -1,4 +1,4 @@
-@extends('layouts.plantilla')
+@extends('layouts.cabecera')
 
 @section('title', 'Crear Grupo')
 

@@ -81,9 +81,9 @@ class AuthController extends Controller
         $profesor->save();
 
         $profesor->assignRole('Usuario');
-        Auth::login($profesor);
+       // Auth::login($profesor);
 
-        return redirect('/')->withSuccess('¡Registro exitoso y sesión iniciada!');;
+        return redirect('/')->withSuccess('¡Registro exitoso');;
     }
 
     public function logout(Request $request)

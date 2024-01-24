@@ -9,7 +9,6 @@
     <div>
         <a href="{{ route('profesores.create') }}">Añadir Usuario</a>
     </div>
-   //TODO: que aparezca el boton de editar y eliminar para usuarios no ADMIN, y que tampoco se pueda eliminar a uno mismo.
     <div>
         <table>
             <thead>
@@ -34,15 +33,17 @@
                     @can('admin.usuario.edit')
                         <td><a href="{{ route('profesores.edit', $profesor) }}">Editar</a></td>
                     @endcan
-                    @can('admin.usuario.destroy')
-                        <td>
-                            <form action="{{ route('profesores.destroy', $profesor) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <input type="submit" name="id" value="Eliminar">
-                            </form>
-                        </td>
-                    @endcan
+                    <td>
+                        @can('admin.usuario.destroy')
+                            @if (Auth::user()->id !== $profesor->id || !$profesor->getRoleNames()->contains('Admin'))
+                                <form action="{{ route('profesores.destroy', $profesor) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <input type="submit" name="id" value="Eliminar">
+                                </form>
+                            @endif
+                        @endcan
+                    </td>
                 </tr>
             @empty
                 <tr>
