@@ -32,10 +32,17 @@ class ActividadesGruposSeeder extends Seeder
             $actividadId = $this->obtenerElementoAleatorio($actividadesIds);
             $grupoId = $this->obtenerElementoAleatorio($gruposIds);
 
-            ActividadGrupo::insert([
-                'actividad_id' => $actividadId,
-                'grupo_id' => $grupoId,
-            ]);
+            $idOcupada = DB::table("actividades_grupos")
+                ->where("actividad_id", "=", $actividadId)
+                ->where("grupo_id", "=", $grupoId)
+                ->pluck('grupo_id')->toArray();
+
+            if (empty($idOcupada)) {
+                ActividadGrupo::insert([
+                    'actividad_id' => $actividadId,
+                    'grupo_id' => $grupoId,
+                ]);
+            }
         }
     }
 
