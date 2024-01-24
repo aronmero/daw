@@ -30,8 +30,8 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'admin.usuario.destroy'])->assignRole('Admin');
 
         Permission::create(['name' => 'admin.grupo.index'])->syncRoles([$admin, $profesor]);
-        Permission::create(['name' => 'admin.grupo.create'])->syncRoles([$admin, $profesor]);
-        Permission::create(['name' => 'admin.grupo.edit'])->syncRoles([$admin, $profesor]);
-        Permission::create(['name' => 'admin.grupo.destroy'])->syncRoles([$admin, $profesor]);
+        Permission::create(['name' => 'admin.grupo.create'])->syncRoles([$admin]);
+        Permission::create(['name' => 'admin.grupo.edit'])->syncRoles([$admin]);
+        Permission::create(['name' => 'admin.grupo.destroy'])->syncRoles([$admin]);
     }
 }

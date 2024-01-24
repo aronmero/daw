@@ -17,13 +17,13 @@
                 <span >{{ $errors->first('password') }}</span>
             @endif
         </div>
-        <div>
+       <!-- <div>
             <div class="checkbox">
                 <label>
                     <input type="checkbox" name="remember"> Recuerdame
                 </label>
             </div>
-        </div>
+        </div>-->
         <div>
             <button type="submit">Enviar</button>
         </div>
