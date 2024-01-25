@@ -1,5 +1,4 @@
 <script setup>
-import { ref } from 'vue'
 
 defineProps({
     lugar: String,
@@ -9,7 +8,6 @@ defineProps({
     profesores: Array,
 })
 
-const count = ref(0)
 </script>
 
 <template>
@@ -33,9 +31,11 @@ const count = ref(0)
 .read-the-docs {
     color: #888;
 }
-h2{
+
+h2 {
     font-size: xx-large;
 }
+
 .profesores,
 .grupos {
     display: flex;
@@ -48,4 +48,5 @@ h2{
     margin: 15px;
     padding: 25px;
     width: 300px;
-}</style>
+}
+</style>
