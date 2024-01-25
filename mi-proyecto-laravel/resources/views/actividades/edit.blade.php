@@ -3,6 +3,7 @@
 @section('title', 'Actividades.Edit')
 
 @section('content')
+<div class="actividades">
     <form action="{{ route('actividades.update', $actividad) }}" method="POST">
         @csrf
         @method('PUT')
@@ -27,26 +28,30 @@
             </textarea>
         </div>
 
-        <label for="grupos">Grupos:</label>
-        <select name="grupos[]" multiple>
+        <h3><label for="grupos">Grupos:</label></h3>
+        <div class="checkboxs">
             @foreach ($grupos as $grupo)
-                <option value="{{ $grupo->id }}" {{ $actividad->grupos->contains($grupo) ? 'selected' : '' }}>
-                    {{ $grupo->nombre }}
-                </option>
+                <div>
+                    <label for="grupos">{{ $grupo->nombre }}</label>
+                    <input type="checkbox" name="grupos[]" value="{{ $grupo->id }}" {{ $actividad->grupos->contains($grupo) ? 'checked' : '' }}>
+                </div>
             @endforeach
-        </select>
+        </div>
 
-        <label for="profesores">Profesores:</label>
-        <select name="profesores[]" multiple>
+        <h3><label for="profesores">Profesores:</label></h3>
+        <div class="checkboxs">
             @foreach ($profesores as $profesor)
-                <option value="{{ $profesor->id }}" {{ $actividad->profesores->contains($profesor) ? 'selected' : '' }}>
-                    {{ $profesor->nombre }}
-                </option>
+                <div>
+                    <label for="profesores">{{ $profesor->nombre }}</label>
+                    <input type="checkbox" name="profesores[]" value="{{ $profesor->id }}"  {{ $actividad->profesores->contains($profesor) ? 'checked' : '' }}>
+                </div>
             @endforeach
-        </select>
+        </div>
+        <br>
         <div>
             <input type="submit" value="Enviar">
         </div>
+        <br>
     </form>
     @if ($errors->any())
         <br>
@@ -67,4 +72,5 @@
         </form>
     @endcan
     <a href="{{ route('actividades.index') }}">Volver</a>
+</div>
 @endsection

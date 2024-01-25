@@ -55,7 +55,7 @@ button {
 
 button.seleccionado {
     font-weight: 600;
-    background-color: rgb(228, 183, 86);
+    background-color: #e4b756;
 }
 
 .encabezado {
@@ -156,13 +156,20 @@ form.eliminar {
     justify-content: center;
 }
 
-.navegacion{
+.navegacion {
     margin: 0px 5px;
     display: flex;
     align-items: center;
-}
-.navegacion a{
-    margin: 0px 5px;
+    a {
+        margin: 0px 5px;
+    }
+    a:hover {
+        font-weight: bold;
+    }
+    a.activo {
+        font-weight: bold;
+        color: #f7b57c;
+    }
 }
 .cabecera {
     display: flex;
@@ -175,11 +182,36 @@ form.eliminar {
         padding: 3px 7px;
         border-radius: 5px;
     }
-    a{
+    a {
         text-decoration: none;
         color: black;
     }
-    .enlaces{
+    .enlaces {
         display: flex;
+    }
+}
+
+.actividades {
+    form {
+        .checkboxs {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            input {
+                width: auto;
+                border: 1px solid grey;
+                border-radius: 10px;
+                transform: scale(2);
+            }
+            div {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                border: 1px solid grey;
+                padding: 10px 17px;
+                border-radius: 10px;
+                width: 150px;
+            }
+        }
     }
 }

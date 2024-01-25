@@ -37,7 +37,7 @@ class ActividadController extends Controller
     {
         $grupos = Grupo::all();
         $profesores = Profesor::all()->slice(1);
-
+        //Profesor::where('id','!=','1')->get()
         return view("actividades.create" ,compact('grupos', 'profesores'));
     }
 
