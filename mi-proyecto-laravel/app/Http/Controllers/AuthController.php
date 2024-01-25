@@ -22,7 +22,7 @@ class AuthController extends Controller
             return view('usuarios.logeado');
         }
 
-        return view('default');
+        return redirect()->route('actividades.index');
     }
 
     public function login()

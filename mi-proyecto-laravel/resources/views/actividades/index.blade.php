@@ -3,7 +3,9 @@
 @section('title', 'Actividades')
 
 @section('content')
-    <a href="{{ route('home') }}">Inicio</a>
+    @if (Auth::user() != null)
+        <a href="{{ route('home') }}">Inicio</a>
+    @endif
     @can('admin.actividades.create')
         <a href="{{ route('actividades.create') }}">Crear Actividad</a>
     @endcan
@@ -31,11 +33,13 @@
                         <div><a href="{{ route('actividades.edit', $actividad) }}">Editar</a></div>
                     @endcan
                     @can('admin.actividades.destroy')
-                        <div><form class="eliminar" action="{{ route('actividades.destroy', $actividad) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <input type="submit" name="id" value="Eliminar">
-                        </form></div>
+                        <div>
+                            <form class="eliminar" action="{{ route('actividades.destroy', $actividad) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <input type="submit" name="id" value="Eliminar">
+                            </form>
+                        </div>
                     @endcan
                 </div>
             @empty
