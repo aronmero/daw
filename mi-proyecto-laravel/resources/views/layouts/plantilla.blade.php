@@ -9,7 +9,8 @@
 </head>
 
 <body>
-    @yield('head')
+    @include('layouts.cabecera')
+ 
     @yield('content')
 </body>
 
