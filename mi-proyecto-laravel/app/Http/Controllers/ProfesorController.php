@@ -22,7 +22,6 @@ class ProfesorController extends Controller
     public function index()
     {
         $profesores = Profesor::all();
-        //TODO: que aparezca el boton de editar y eliminar para usuarios no ADMIN, y que tampoco se pueda eliminar a uno mismo.
 
         return view('admin.dashboard', ['profesores' => $profesores]);
     }

@@ -3,11 +3,10 @@
 @section('title', 'Grupos')
 
 @section('content')
-    <a href="{{ route('home') }}">Inicio</a>
+    <h1>Listado de grupos</h1>
     @can('admin.grupo.create')
         <a href="{{ route('grupos.create') }}">Crear Grupo</a>
     @endcan
-    <h1>Listado de actividades</h1>
     <table>
         <thead>
             <td>Nombre</td>

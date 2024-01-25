@@ -9,9 +9,12 @@
 </head>
 
 <body>
-    @include('layouts.cabecera')
- 
-    @yield('content')
+    <div class="all">
+        @include('layouts.cabecera')
+
+        <div class="contenido"> @yield('content')</div>
+
+    </div>
 </body>
 
 </html>

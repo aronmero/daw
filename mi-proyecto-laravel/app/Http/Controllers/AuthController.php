@@ -4,23 +4,24 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateUser;
 use App\Models\Profesor;
-use App\Models\User;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use App\Mail\UsersMail;
+
 
 
 class AuthController extends Controller
 {
     public function index()
     {
+        /*
         if (Auth::viaRemember()) {
             return view('usuarios.logeado');
         }
         if (Auth::check()) {
 
             return view('usuarios.logeado');
-        }
+        }*/
 
         return redirect()->route('actividades.index');
     }

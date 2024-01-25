@@ -3,11 +3,7 @@
 * {
     font-family: "Poppins", sans-serif;
 }
-.cabecera {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+
 .contenedor {
     display: flex;
     justify-content: center;
@@ -142,7 +138,6 @@ button.seleccionado {
 }
 
 input {
-    margin-top: 5px;
     width: 150px;
     border: 1px solid grey;
     padding: 3px 7px;
@@ -159,4 +154,32 @@ input {
 form.eliminar {
     display: flex;
     justify-content: center;
+}
+
+.navegacion{
+    margin: 0px 5px;
+    display: flex;
+    align-items: center;
+}
+.navegacion a{
+    margin: 0px 5px;
+}
+.cabecera {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .input {
+        width: 150px;
+        border: 1px solid grey;
+        padding: 3px 7px;
+        border-radius: 5px;
+    }
+    a{
+        text-decoration: none;
+        color: black;
+    }
+    .enlaces{
+        display: flex;
+    }
 }

@@ -3,13 +3,10 @@
 @section('title', 'Actividades')
 
 @section('content')
-    @if (Auth::user() != null)
-        <a href="{{ route('home') }}">Inicio</a>
-    @endif
+    <h1>Listado de actividades</h1>
     @can('admin.actividades.create')
         <a href="{{ route('actividades.create') }}">Crear Actividad</a>
     @endcan
-    <h1>Listado de actividades</h1>
     <div class="contenedor">
         <div class="contenedorCartas">
             @forelse ($actividades as $actividad)

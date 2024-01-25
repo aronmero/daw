@@ -4,8 +4,9 @@
             {{ Auth::user()->nombre }}
         @endif
     </h1>
-    <div>
+    <div class="enlaces">
         @if (Auth::user() != null)
+            @include('layouts.navegacion')
             <form action="{{ route('usuarios.logout') }}" method="POST">
                 @csrf
                 @method('POST')

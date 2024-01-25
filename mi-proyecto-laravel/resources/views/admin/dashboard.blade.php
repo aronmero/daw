@@ -3,9 +3,8 @@
 @section('title', 'Home')
 
 @section('content')
-    <div>
-        <a href="{{ route('home') }}">Inicio</a>
-    </div>
+
+    <h1>Listado de profesores</h1>
     <div>
         <a href="{{ route('profesores.create') }}">Añadir Usuario</a>
     </div>
