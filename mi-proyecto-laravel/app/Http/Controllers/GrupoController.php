@@ -42,13 +42,6 @@ class GrupoController extends Controller
         return redirect()->route('grupos.index');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.

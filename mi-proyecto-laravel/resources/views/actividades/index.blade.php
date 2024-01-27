@@ -33,15 +33,16 @@
                             @can('admin.actividades.edit')
                                 <div><a class="accion" href="{{ route('actividades.edit', $actividad) }}">Editar</a></div>
                             @endcan
-                            @can('admin.actividades.destroy')
-                                <div>
-                                    <form class="eliminar" action="{{ route('actividades.destroy', $actividad) }}" method="POST">
+                            <div>
+                                @can('admin.actividades.destroy')
+                                    <form class="eliminar" action="{{ route('actividades.destroy', $actividad) }}" method="POST"
+                                        onsubmit="return confirm('¿Estás seguro de que deseas eliminar esta actividad?');">
                                         @csrf
                                         @method('DELETE')
                                         <input class="accion" type="submit" name="id" value="Eliminar">
                                     </form>
-                                </div>
-                            @endcan
+                                @endcan
+                            </div>
                         </div>
                     </div>
                 @empty
@@ -50,4 +51,4 @@
             </div>
         </div>
     </div>
-    @endsection
+@endsection

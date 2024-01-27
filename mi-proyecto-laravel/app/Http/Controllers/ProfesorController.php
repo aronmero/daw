@@ -43,13 +43,6 @@ class ProfesorController extends Controller
         return redirect()->route('profesores.index');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.

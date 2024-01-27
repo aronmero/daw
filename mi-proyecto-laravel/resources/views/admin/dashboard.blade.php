@@ -32,7 +32,8 @@
                     <td>
                         @can('admin.usuario.destroy')
                             @if (Auth::user()->id !== $profesor->id || !$profesor->getRoleNames()->contains('Admin'))
-                                <form action="{{ route('profesores.destroy', $profesor) }}" method="POST">
+                                <form action="{{ route('profesores.destroy', $profesor) }}" method="POST"
+                                    onsubmit="return confirm('¿Estás seguro de que deseas eliminar este profesor?');">
                                     @csrf
                                     @method('DELETE')
                                     <input class="accion" type="submit" name="id" value="Eliminar">

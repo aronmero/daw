@@ -26,7 +26,8 @@
                 @endcan
                 @can('admin.grupo.destroy')
                     <td>
-                        <form action="{{ route('grupos.destroy', $grupo) }}" method="POST">
+                        <form action="{{ route('grupos.destroy', $grupo) }}" method="POST"
+                            onsubmit="return confirm('¿Estás seguro de que deseas eliminar este grupo?');">
                             @csrf
                             @method('DELETE')
                             <input class="accion" type="submit" name="idCategoria" value="Eliminar">

@@ -21,7 +21,8 @@
                 </div>
                 <div>
                     <label>Duracion en horas:</label>
-                    <input type=number name="duracion" value="{{ $actividad->duracion }}" required min="1" max="8">
+                    <input type=number name="duracion" value="{{ $actividad->duracion }}" required min="1"
+                        max="8">
                 </div>
                 <div>
                     <label>Hora Inicio:</label>
@@ -74,7 +75,8 @@
             </div>
         @endif
         @can('admin.actividades.destroy')
-            <form action="{{ route('actividades.destroy', $actividad) }}" method="POST">
+            <form action="{{ route('actividades.destroy', $actividad) }}" method="POST"
+                onsubmit="return confirm('¿Estás seguro de que deseas eliminar esta actividad?');">
                 @csrf
                 @method('DELETE')
                 <input class="accion" type="submit" name="id" value="Eliminar">
