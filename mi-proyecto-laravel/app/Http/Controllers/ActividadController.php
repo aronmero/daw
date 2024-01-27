@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Actividad;
-use App\Models\ActividadGrupo;
-use App\Models\ActividadProfesor;
 use App\Models\Grupo;
 use App\Models\Profesor;
 use Illuminate\Http\Request;
@@ -25,7 +23,13 @@ class ActividadController extends Controller
      */
     public function index()
     {
-        $actividades = Actividad::with('grupos', 'profesores')->get();
+        $actividades = Actividad::with('grupos', 'profesores')->orderBy('fecha')->get();
+
+        $actividades->transform(function ($actividad) {
+            $actividad->grupos = $actividad->grupos->sortBy('id');
+            $actividad->profesores = $actividad->profesores->sortBy('id');
+            return $actividad;
+        });
 
         return view("actividades.index", ['actividades' => $actividades]);
     }

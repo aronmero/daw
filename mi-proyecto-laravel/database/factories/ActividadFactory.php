@@ -16,12 +16,22 @@ class ActividadFactory extends Factory
      */
     public function definition(): array
     {
+        $dateTime = $this->faker->dateTimeBetween('now', '+3 months');
+
+        $duracion=$this->faker->numberBetween(1, 8);
+
+        $hour = $this->faker->numberBetween(13, 20);
+        $minutes = $this->faker->numberBetween(0, 3) * 15; 
+
+        // Establecer los segundos a 0
+        $dateTime->setTime($hour-$duracion, $minutes, 0);
+
         return [
-            'lugar'=>$this->faker->name(),
-            'descripcion'=>$this->faker->paragraph(1),
-            'duracion'=>$this->faker->numberBetween(1,10),
-            'fecha'=>$this->faker->dateTimeBetween('-1 years','now')
-        
+            'lugar' => $this->faker->city(),
+            'descripcion' => $this->faker->paragraph(1),
+            'duracion' => $duracion,
+            'fecha' => $dateTime,
+            'horaInicio' => $dateTime->format('H:i'),
         ];
     }
 }

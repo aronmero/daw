@@ -13,15 +13,17 @@
                 <div class="carta">
                     <div>{{ $actividad->lugar }}</div>
                     <div>{{ $actividad->fecha }}</div>
-                    <div>{{ $actividad->duracion }}</div>
+                    <div><b>Inicio a las </b> {{ \Carbon\Carbon::parse($actividad->horaInicio)->format('H:i') }}</div>
+                    <div><b>Duracion:</b> {{ $actividad->duracion }} {{ $actividad->duracion > 1? 'horas': 'hora' }} 
+                    </div>
                     <div>
-                        Grupos:
+                        <b> Grupos:</b>
                         @foreach ($actividad->grupos as $grupo)
                             {{ $grupo->nombre }}
                         @endforeach
                     </div>
                     <div>
-                        Profesores:
+                        <b>Profesores:</b>
                         @foreach ($actividad->profesores as $profesor)
                             {{ $profesor->nombre }}
                         @endforeach
