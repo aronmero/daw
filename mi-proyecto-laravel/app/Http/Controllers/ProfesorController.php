@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProfesorEditRequest;
 use App\Http\Requests\ProfesorRequest;
 use App\Models\Profesor;
 use Illuminate\Http\Request;
@@ -56,7 +57,7 @@ class ProfesorController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(ProfesorRequest $request, string $id)
+    public function update(ProfesorEditRequest $request, string $id)
     {
         Profesor::find($id)->update($request->all());
         return redirect()->route('profesores.index');
