@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateGrupo;
 use Illuminate\Http\Request;
 use App\Models\Grupo;
 
@@ -35,7 +36,7 @@ class GrupoController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CreateGrupo $request)
     {
         Grupo::create($request->all());
         return redirect()->route('grupos.index');
@@ -61,7 +62,7 @@ class GrupoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(CreateGrupo $request, string $id)
     {
         Grupo::find($id)->update($request->all());
         return redirect()->route('grupos.index');
