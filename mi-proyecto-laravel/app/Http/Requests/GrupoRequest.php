@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateUser extends FormRequest
+class GrupoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,29 +22,18 @@ class CreateUser extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|min:3',
-            'email' => 'required|unique:users,email|regex:/^[a-zA-Z0-9._%+-]+@\S*\.\S*$/i',
-            'password' => 'required|min:8',
+            'nombre' => 'required|min:3|unique:grupos,nombre'
         ];
     }
 
     public function messages()
     {
         return [
-            'password' => [
-                'required' => 'La contrañsea es obligatoria.',
-                'min' => 'La contrañsea debe tener al menos 8 caracteres.',
-            ],
-            'name' => [
+            'nombre' => [
                 'required' => 'El nombre de usuario es obligatorio.',
                 'min' => 'El nombre de usuario debe tener al menos 3 caracteres.',
-            ],
-            'email' => [
-                'required' => 'El correo es obligatorio.',
-                'unique' => 'Este correo ya está registrado.',
-                'regex'=>'Utilice un correo correcto'
-            ],
-
+                'unique' => 'Este grupo ya está registrado.',
+            ]
         ];
     }
 }

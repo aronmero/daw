@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CreateUser;
+use App\Http\Requests\ProfesorRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -71,7 +71,7 @@ class AuthController extends Controller
         return view('usuarios.registro');
     }
 
-    public function store(CreateUser $request)
+    public function store(ProfesorRequest $request)
     {
        
         $user = new User();

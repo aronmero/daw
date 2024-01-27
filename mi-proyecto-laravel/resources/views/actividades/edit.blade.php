@@ -26,7 +26,7 @@
                 <div>
                     <label>Hora Inicio:</label>
                     <input type="time" name="horaInicio" min="08:00" max="20:00"
-                        value="{{ $actividad->horaInicio }}" required>
+                        value="{{ substr($actividad->horaInicio, 0, 5) }}" required>
                 </div>
             </div>
             <div>

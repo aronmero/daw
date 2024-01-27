@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateUser extends FormRequest
+class ProfesorRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,8 +22,8 @@ class CreateUser extends FormRequest
     public function rules(): array
     {
         return [
-            'nombre' => 'required|min:3',
-            'email' => 'required|unique:profesores,email|regex:/^[a-zA-Z0-9._%+-]+@\S*\.\S*$/i',
+            'name' => 'required|min:3',
+            'email' => 'required|unique:users,email|regex:/^[a-zA-Z0-9._%+-]+@\S*\.\S*$/i',
             'password' => 'required|min:8',
         ];
     }
@@ -32,17 +32,17 @@ class CreateUser extends FormRequest
     {
         return [
             'password' => [
-                'required' => 'La contraseña es obligatoria.',
-                'min' => 'La contraseña debe tener al menos 8 caracteres.',
+                'required' => 'La contrañsea es obligatoria.',
+                'min' => 'La contrañsea debe tener al menos 8 caracteres.',
             ],
-            'nombre' => [
+            'name' => [
                 'required' => 'El nombre de usuario es obligatorio.',
                 'min' => 'El nombre de usuario debe tener al menos 3 caracteres.',
             ],
             'email' => [
                 'required' => 'El correo es obligatorio.',
                 'unique' => 'Este correo ya está registrado.',
-                'regex' => 'Utilice un correo correcto'
+                'regex'=>'Utilice un correo correcto'
             ],
 
         ];

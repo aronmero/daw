@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ActividadRequest;
 use App\Models\Actividad;
 use App\Models\Grupo;
 use App\Models\Profesor;
@@ -48,7 +49,7 @@ class ActividadController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ActividadRequest $request)
     {
         $actividad = Actividad::create($request->all());
 
@@ -83,7 +84,7 @@ class ActividadController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(ActividadRequest $request, string $id)
     {
         $actividad = Actividad::find($id);
 

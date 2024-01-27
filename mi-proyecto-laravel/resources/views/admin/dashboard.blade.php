@@ -12,15 +12,12 @@
         <table>
             <thead>
                 <td>Nombre</td>
-                <td>primerApellido</td>
-                <td>segundoApellido</td>
-                <td>email</td>
-                @can('admin.actividades.edit')
-                    <td></td>
-                @endcan
-                @can('admin.actividades.destroy')
-                    <td></td>
-                @endcan
+                <td>Primer Apellido</td>
+                <td>Segundo Apellido</td>
+                <td>Email</td>
+                @canany(['admin.actividades.edit', 'admin.actividades.destroy'])
+                    <td colspan="2">Acciones</td>
+                @endcanany
             </thead>
 
             @forelse ($profesores as $profesor)

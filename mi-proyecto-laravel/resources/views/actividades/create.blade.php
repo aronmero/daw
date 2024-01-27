@@ -9,20 +9,22 @@
             <div class="datos">
                 <div>
                     <label>Fecha:</label>
-                    <input type="date" name="fecha" value="{{ date('Y-m-d') }}" required min="{{ date('Y-m-d') }}">
+                    <input type="date" name="fecha" value={{ old('fecha') ?? date('Y-m-d') }} required
+                        min="{{ date('Y-m-d') }}">
                 </div>
                 <div>
                     <label>Lugar:</label>
-                    <input type="text" name="lugar" placeholder="Lugar" required>
+                    <input type="text" name="lugar" placeholder="Lugar" required value="{{ old('lugar') }}">
                 </div>
                 <div>
                     <label>Duracion:</label>
-                    <input type="number" name="duracion" placeholder="1" required min="1" max="8">
+                    <input type="number" name="duracion" placeholder="1" required min="1" max="8"
+                        value="{{ old('duracion') }}">
                 </div>
                 <div>
                     <label>Hora Inicio:</label>
-                    <input type="time" name="horaInicio" min="08:00" max="20:00" value="{{ date('H:i') }}"
-                        required>
+                    <input type="time" name="horaInicio" min="08:00" max="20:00"
+                        value={{ old('horaInicio') ?? date('H:i') }} required>
                 </div>
             </div>
             <div>
@@ -32,20 +34,22 @@
             <h3><label for="grupos">Grupos:</label></h3>
             <div class="checkboxs">
                 @foreach ($grupos as $grupo)
-                    <div>
-                        <label for="grupos">{{ $grupo->nombre }}</label>
-                        <input type="checkbox" name="grupos[]" value="{{ $grupo->id }}">
-                    </div>
+                <div>
+                    <label for="grupos">{{ $grupo->nombre }}</label>
+                    <input type="checkbox" name="grupos[]" value="{{ $grupo->id }}"
+                        {{ collect(old('grupos'))->contains($grupo->id) ? 'checked' : '' }}>
+                </div>
                 @endforeach
             </div>
 
             <h3><label for="profesores">Profesores:</label></h3>
             <div class="checkboxs">
                 @foreach ($profesores as $profesor)
-                    <div>
-                        <label for="profesores">{{ $profesor->nombre }}</label>
-                        <input type="checkbox" name="profesores[]" value="{{ $profesor->id }}">
-                    </div>
+                <div>
+                    <label for="profesores">{{ $profesor->nombre }}</label>
+                    <input type="checkbox" name="profesores[]" value="{{ $profesor->id }}"
+                        {{ collect(old('profesores'))->contains($profesor->id) ? 'checked' : '' }}>
+                </div>
                 @endforeach
             </div>
             <br>

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CreateUser;
+use App\Http\Requests\ProfesorRequest;
 use App\Models\Profesor;
 use Illuminate\Http\Request;
 
@@ -37,7 +37,7 @@ class ProfesorController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CreateUser $request)
+    public function store(ProfesorRequest $request)
     {
         Profesor::create($request->all());
         return redirect()->route('profesores.index');
@@ -63,10 +63,9 @@ class ProfesorController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(ProfesorRequest $request, string $id)
     {
-        //FIXME: Sin terminar
-        //Profesor::find($id)->update($request->all());
+        Profesor::find($id)->update($request->all());
         return redirect()->route('profesores.index');
     }
 

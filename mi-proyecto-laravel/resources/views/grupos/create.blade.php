@@ -10,7 +10,7 @@
             <input type="text" name="nombre" placeholder="Nombre">
         </div>
         <div>
-            <input class="accion" type="submit" value="Enviar">
+            <input type="submit" value="Enviar">
         </div>
     </form>
     @if ($errors->any())
