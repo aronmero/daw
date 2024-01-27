@@ -5,16 +5,16 @@
 @section('content')
     <h1>Listado de grupos</h1>
     @can('admin.grupo.create')
-        <a href="{{ route('grupos.create') }}">Crear Grupo</a>
+        <a class="accion" href="{{ route('grupos.create') }}">Crear Grupo</a>
     @endcan
     <table>
         <thead>
             <td>Nombre</td>
             @can('admin.grupo.edit')
-            <td></td>
+                <td></td>
             @endcan
             @can('admin.grupo.destroy')
-            <td></td>
+                <td></td>
             @endcan
         </thead>
 
@@ -22,14 +22,14 @@
             <tr>
                 <td>{{ $grupo->nombre }}</td>
                 @can('admin.grupo.edit')
-                    <td><a href="{{ route('grupos.edit', $grupo) }}">Editar</a></td>
+                    <td><a class="accion" href="{{ route('grupos.edit', $grupo) }}">Editar</a></td>
                 @endcan
                 @can('admin.grupo.destroy')
                     <td>
                         <form action="{{ route('grupos.destroy', $grupo) }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <input type="submit" name="idCategoria" value="Eliminar">
+                            <input class="accion" type="submit" name="idCategoria" value="Eliminar">
                         </form>
                     </td>
                 @endcan

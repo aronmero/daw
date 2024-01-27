@@ -6,7 +6,7 @@
 
     <h1>Listado de profesores</h1>
     <div>
-        <a href="{{ route('profesores.create') }}">Añadir Usuario</a>
+        <a class="accion" href="{{ route('profesores.create') }}">Añadir Usuario</a>
     </div>
     <div>
         <table>
@@ -30,7 +30,7 @@
                     <td>{{ $profesor->segundoApellido }}</td>
                     <td>{{ $profesor->email }}</td>
                     @can('admin.usuario.edit')
-                        <td><a href="{{ route('profesores.edit', $profesor) }}">Editar</a></td>
+                        <td><a class="accion" href="{{ route('profesores.edit', $profesor) }}">Editar</a></td>
                     @endcan
                     <td>
                         @can('admin.usuario.destroy')
@@ -38,7 +38,7 @@
                                 <form action="{{ route('profesores.destroy', $profesor) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <input type="submit" name="id" value="Eliminar">
+                                    <input class="accion" type="submit" name="id" value="Eliminar">
                                 </form>
                             @endif
                         @endcan

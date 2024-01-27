@@ -11,12 +11,9 @@
             <tr>
                 <td><input type=text name="nombre" value="{{ $grupo->nombre }}"></td>
             </tr>
-
-            
-            
         </table>
         <div>
-            <input type="submit" value="Enviar">
+            <input class="accion" type="submit" value="Enviar">
         </div>
     </form>
     @if ($errors->any())
@@ -30,5 +27,5 @@
             </ul>
         </div>
     @endif
-    <a href="{{ route('grupos.index') }}">Volver</a>
+    <a class="accion" href="{{ route('grupos.index') }}">Volver</a>
 @endsection

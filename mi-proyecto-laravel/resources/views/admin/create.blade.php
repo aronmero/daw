@@ -26,7 +26,7 @@
             <input type="password" name="password" required>
         </div>
         <div>
-            <input type="submit" value="Enviar">
+            <input class="accion" type="submit" value="Enviar">
         </div>
     </form>
     @if ($errors->any())
@@ -40,5 +40,5 @@
             </ul>
         </div>
     @endif
-    <a href="{{ route('profesores.index') }}">Volver</a>
+    <a class="accion" href="{{ route('profesores.index') }}">Volver</a>
 @endsection

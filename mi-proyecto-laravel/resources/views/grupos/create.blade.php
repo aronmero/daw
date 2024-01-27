@@ -10,7 +10,7 @@
             <input type="text" name="nombre" placeholder="Nombre">
         </div>
         <div>
-            <input type="submit" value="Enviar">
+            <input class="accion" type="submit" value="Enviar">
         </div>
     </form>
     @if ($errors->any())
@@ -24,5 +24,5 @@
             </ul>
         </div>
     @endif
-    <a href="{{ route('actividades.index') }}">Volver</a>
+    <a class="accion" href="{{ route('grupos.index') }}">Volver</a>
 @endsection
