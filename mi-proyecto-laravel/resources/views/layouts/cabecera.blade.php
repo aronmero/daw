@@ -10,7 +10,7 @@
             <form action="{{ route('usuarios.logout') }}" method="POST">
                 @csrf
                 @method('POST')
-                <input type="submit" value="Cerrar Sesion">
+                <button type="submit">Cerrar Sesion</button>
             </form>
         @else
             <div><a href="{{ route('usuarios.login') }}">Iniciar Sesion</a></div>

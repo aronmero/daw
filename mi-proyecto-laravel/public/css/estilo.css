@@ -44,20 +44,6 @@ table {
     width: 1100px;
 }
 
-button {
-    font-size: 16px;
-    border: 1px solid black;
-    border-radius: 10px;
-    padding: 8px 15px;
-    background-color: rgb(201, 201, 201);
-    cursor: pointer;
-}
-
-button.seleccionado {
-    font-weight: 600;
-    background-color: #e4b756;
-}
-
 .encabezado {
     display: flex;
     flex-direction: column;
@@ -189,6 +175,16 @@ form.eliminar {
     }
     .enlaces {
         display: flex;
+        button{
+            padding: 0px;
+            border: none;
+            font-size: 16px;
+            background-color: transparent;
+            cursor: pointer;
+        }
+        button:hover {
+            font-weight: bold;
+        }
     }
 }
 
@@ -217,6 +213,67 @@ form.eliminar {
     }
 }
 
-.contenido{
+.contenido {
     padding: 0px 15px;
+}
+.login {
+    display: flex;
+    height: 95vh;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        label {
+            margin-left: 5px;
+            margin-bottom: 5px;
+            font-weight: bold;
+            align-self: flex-start;
+        }
+
+        > div {
+            margin: 5px;
+            padding: 5px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        input,
+        button {
+            box-sizing: border-box;
+            padding: 15px 12px;
+            width: 320px;
+            border: 1px solid grey;
+            border-radius: 12px;
+            font-size: 15px;
+        }
+
+        div:has(button[type="submit"]) {
+            margin-top: 20px;
+
+            button {
+                font-weight: 600;
+                border-radius: 20px;
+                background-color: #f1bc27;
+                cursor: pointer;
+                border-color: #f1bc27;
+            }
+        }
+    }
+    .boton {
+        box-sizing: border-box;
+        padding: 15px 12px;
+        width: 320px;
+        border: 1px solid grey;
+        border-radius: 12px;
+        font-size: 15px;
+        text-align: center;
+        font-weight: 600;
+        text-decoration: none;
+        color: black;
+    }
 }
