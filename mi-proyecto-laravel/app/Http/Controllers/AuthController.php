@@ -63,30 +63,6 @@ class AuthController extends Controller
         return redirect("/")->withSuccess('No tienes acceso, por favor inicia sesión');
     }
 
-    public function create()
-    {
-        if (Auth::check()) {
-            return view('usuarios.logeado');
-        }
-
-        return view('usuarios.registro');
-    }
-
-    public function store(ProfesorRequest $request)
-    {
-       
-        $profesor = new Profesor();
-        $profesor->name = $request->name;
-        $profesor->email = $request->email;
-        $profesor->password = bcrypt($request->password);
-        $profesor->save();
-
-        $profesor->assignRole('Usuario');
-       // Auth::login($profesor);
-
-        return redirect('/')->withSuccess('¡Registro exitoso');;
-    }
-
     public function logout(Request $request)
     {
         Auth::logout();
