@@ -16,11 +16,11 @@ class AuthController extends Controller
     {
         /*
         if (Auth::viaRemember()) {
-            return view('usuarios.logeado');
+            return redirect()->route('actividades.index');
         }
         if (Auth::check()) {
 
-            return view('usuarios.logeado');
+             return redirect()->route('actividades.index');
         }*/
 
         return redirect()->route('actividades.index');
@@ -29,7 +29,7 @@ class AuthController extends Controller
     public function login()
     {
         if (Auth::check()) {
-            return view('usuarios.logeado');
+             return redirect()->route('actividades.index');
         }
         
         return view('usuarios.login');
@@ -52,15 +52,6 @@ class AuthController extends Controller
         return back()->withErrors([
             'email' => 'El correo y/o contraseña no son correctos',
         ])->onlyInput('email');
-    }
-
-    public function logeado()
-    {
-        if (Auth::check()) {
-            return view('usuarios.logeado');
-        }
-
-        return redirect("/")->withSuccess('No tienes acceso, por favor inicia sesión');
     }
 
     public function logout(Request $request)
