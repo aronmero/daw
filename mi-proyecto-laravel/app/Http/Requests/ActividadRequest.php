@@ -25,7 +25,7 @@ class ActividadRequest extends FormRequest
             'lugar' => 'required|min:3',
             'duracion' => 'required|integer|between:1,720',
             'fecha' => 'required|date|after:yesterday',
-            'horaInicio' => 'required|date_format:H:i|after_or_equal:08:00|before_or_equal:20:00',
+            'horaInicio' => 'required|date_format:H:i|after_or_equal:06:00|before_or_equal:22:00',
             'profesores' => 'required|array|min:1',
             'grupos' => 'required|array|min:1',
         ];
@@ -50,8 +50,8 @@ class ActividadRequest extends FormRequest
             ],
             'horaInicio' => [
                 'required' => 'La hora de inicio es obligatoria.',
-                'after_or_equal' => 'La hora de inicio debe estar después o igual a las 08:00.',
-                'before_or_equal' => 'La hora de inicio debe estar antes o igual a las 20:00.',
+                'after_or_equal' => 'La hora de inicio debe estar después o igual a las 06:00.',
+                'before_or_equal' => 'La hora de inicio debe estar antes o igual a las 22:00.',
             ], 
             'profesores.required' => 'Debe seleccionar al menos un profesor.',
             'grupos.required' => 'Debe seleccionar al menos un grupo.',
