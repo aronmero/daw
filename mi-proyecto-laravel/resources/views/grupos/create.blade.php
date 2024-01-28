@@ -8,7 +8,7 @@
         @csrf
         <div>
             <label>Nombre del grupo</label>
-            <input type="text" name="nombre" placeholder="Nombre">
+            <input type="text" name="nombre" placeholder="Nombre" value={{ old('nombre') }}>
         </div>
         <div>
             <input class="accion" type="submit" value="Enviar">
