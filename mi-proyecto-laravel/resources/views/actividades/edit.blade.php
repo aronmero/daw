@@ -22,7 +22,7 @@
                 <div>
                     <label>Duracion en horas:</label>
                     <input type=number name="duracion" value={{ old('duracion') ?? $actividad->duracion }} required min="1"
-                        max="8">
+                        max="720">
                 </div>
                 <div>
                     <label>Hora Inicio:</label>

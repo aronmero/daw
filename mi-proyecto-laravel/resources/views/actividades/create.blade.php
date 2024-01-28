@@ -18,7 +18,7 @@
                 </div>
                 <div>
                     <label>Duracion:</label>
-                    <input type="number" name="duracion" placeholder="1" required min="1" max="8"
+                    <input type="number" name="duracion" placeholder="1" required min="1" max="720"
                         value="{{ old('duracion') }}">
                 </div>
                 <div>

@@ -23,7 +23,7 @@ class ActividadRequest extends FormRequest
     {
         return [
             'lugar' => 'required|min:3',
-            'duracion' => 'required|integer',
+            'duracion' => 'required|integer|between:1,720',
             'fecha' => 'required|date|after:yesterday',
             'horaInicio' => 'required|date_format:H:i|after_or_equal:08:00|before_or_equal:20:00',
             'profesores' => 'required|array|min:1',
@@ -41,6 +41,7 @@ class ActividadRequest extends FormRequest
             'duracion' => [
                 'required' => 'La duración es obligatoria.',
                 'integer' => 'La duración debe ser un número entero.',
+                'between' => 'La duracion debe ser mayor a 0 y menor o igual a 720'
             ],
             'fecha' => [
                 'required' => 'La fecha es obligatoria.',
