@@ -10,20 +10,20 @@
             <input type="hidden" name="id" value="{{ $profesor->id }}">
             <tr>
                 <td> <label>nombre</label></td>
-                <td><input type=text name="nombre" value="{{ $profesor->nombre }}"></td>
+                <td><input type=text name="nombre" value={{ old('nombre') ?? $profesor->nombre }}></td>
             </tr>
             <tr>
                 <td><label>primerApellido</label></td>
-                <td><input type=text name="primerApellido" value="{{ $profesor->primerApellido }}"></td>
+                <td><input type=text name="primerApellido" value={{ old('primerApellido') ?? $profesor->primerApellido }}></td>
             </tr>
             <tr>
                 <td> <label>segundoApellido</label></td>
-                <td><input type=text name="segundoApellido" value="{{ $profesor->segundoApellido }}"></td>
+                <td><input type=text name="segundoApellido" value={{ old('segundoApellido') ?? $profesor->segundoApellido }}></td>
             </tr>
 
             <tr>
                 <td> <label>email</label></td>
-                <td><input type=email name="email" value="{{ $profesor->email }}"></td>
+                <td><input type=email name="email" value={{ old('email') ?? $profesor->email }}></td>
             </tr>
 
         </table>

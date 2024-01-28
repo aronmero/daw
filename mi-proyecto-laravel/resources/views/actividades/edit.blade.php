@@ -13,26 +13,26 @@
                 </div>
                 <div>
                     <label>Fecha:</label>
-                    <input type=date name="fecha" value="{{ $actividad->fecha }}" min="{{ date('Y-m-d') }}" required>
+                    <input type=date name="fecha" value={{ old('fecha') ?? $actividad->fecha }} min="{{ date('Y-m-d') }}" required>
                 </div>
                 <div>
                     <label>Lugar:</label>
-                    <input type=text name="lugar" value="{{ $actividad->lugar }}" required>
+                    <input type=text name="lugar" value={{ old('lugar') ?? $actividad->lugar }} required>
                 </div>
                 <div>
                     <label>Duracion en horas:</label>
-                    <input type=number name="duracion" value="{{ $actividad->duracion }}" required min="1"
+                    <input type=number name="duracion" value={{ old('duracion') ?? $actividad->duracion }} required min="1"
                         max="8">
                 </div>
                 <div>
                     <label>Hora Inicio:</label>
                     <input type="time" name="horaInicio" min="08:00" max="20:00"
-                        value="{{ substr($actividad->horaInicio, 0, 5) }}" required>
+                        value={{  old('horaInicio') ?? substr($actividad->horaInicio, 0, 5) }} required>
                 </div>
             </div>
             <div>
                 <label>Descripcion:</label>
-                <textarea name="descripcion">{{ $actividad->descripcion }}</textarea>
+                <textarea name="descripcion">{{  old('descripcion') ??$actividad->descripcion }}</textarea>
             </div>
 
 
