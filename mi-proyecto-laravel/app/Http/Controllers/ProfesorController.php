@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfesorEditRequest;
+use App\Http\Requests\ProfesorPasswordRequest;
 use App\Http\Requests\ProfesorRequest;
 use App\Models\Profesor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class ProfesorController extends Controller
 {
@@ -62,6 +64,22 @@ class ProfesorController extends Controller
     {
         Profesor::find($id)->update($request->all());
         return redirect()->route('profesores.index');
+    }
+
+    public function updatePassword(ProfesorPasswordRequest $request, string $id)
+    {
+        $profesor = Profesor::find($id);
+
+        // Verifica la contraseña actual
+        if (!Hash::check($request->input('password_actual'), $profesor->password)) {
+            return redirect()->back()->withErrors(['password_actual' => 'La contraseña actual es incorrecta.']);
+        }
+
+        $profesor->update([
+            'password' => bcrypt($request->input('password')),
+        ]);
+
+        return redirect()->back()->with('success', 'Contraseña actualizada correctamente.');
     }
 
     

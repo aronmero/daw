@@ -14,12 +14,15 @@ div:has(> table) {
     justify-content: center;
     padding: 15px;
 }
-.profesores{
-    form div{
+.profesores {
+    form div {
         display: flex;
         width: 350px;
         justify-content: space-between;
         margin: 7px 0px;
+    }
+    .passwordForm div {
+        width: 450px;
     }
 }
 
@@ -313,7 +316,7 @@ input {
         display: flex;
         width: 320px;
         flex-direction: row;
-        label{
+        label {
             margin-bottom: 0px;
         }
         div {

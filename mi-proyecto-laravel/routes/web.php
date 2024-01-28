@@ -28,5 +28,6 @@ Route::controller(AuthController::class)->group(function () {
 Route::resource('actividades', ActividadController::class)->parameters(['actividades' => 'actividad'])->names('actividades');
 
 Route::resource('grupos', GrupoController::class)->names('grupos');
+Route::put('profesores/{profesor}/update-password', [ProfesorController::class, 'updatePassword'])->name('profesores.updatePassword');
 Route::resource('profesores', ProfesorController::class)->parameters(['profesores' => 'profesor'])->names('profesores');
 
