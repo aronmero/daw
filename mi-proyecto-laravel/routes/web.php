@@ -25,8 +25,8 @@ Route::controller(AuthController::class)->group(function () {
 });
 
 
-Route::resource('actividades', ActividadController::class)->names('actividades');
+Route::resource('actividades', ActividadController::class)->parameters(['actividades' => 'actividad'])->names('actividades');
 
 Route::resource('grupos', GrupoController::class)->names('grupos');
-Route::resource('profesores', ProfesorController::class)->names('profesores');
+Route::resource('profesores', ProfesorController::class)->parameters(['profesores' => 'profesor'])->names('profesores');
 

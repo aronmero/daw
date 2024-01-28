@@ -29,8 +29,8 @@ class ProfesorEditRequest extends FormRequest
             ],
         ];
 
-        // Agregar regla unique si el correo es diferente del correo actual
-        $profesor = $this->route('profesore');
+        // Agrega regla unique si el correo es diferente del correo actual
+        $profesor = $this->route('profesor');
    
         if ($profesor) {
             $rules['email'][] = 'unique:profesores,email,' . $profesor;
