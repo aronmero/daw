@@ -3,23 +3,25 @@
 @section('title', 'Registro usuario')
 
 @section('content')
+<h2>Crear profesor</h2>
+<div class="profesores">
     <form action="{{ route('profesores.store') }}" method="POST">
         @csrf
         <div>
             <label>Nombre</label>
-            <input type="text" name="nombre" placeholder="nombre" required value="{{ old('nombre') }}">
+            <input type="text" name="nombre" placeholder="Nombre" required value="{{ old('nombre') }}">
         </div>
         <div>
             <label>Primer Apellido</label>
-            <input type="text" name="primerApellido" placeholder="primer apellido" value="{{ old('primerApellido') }}">
+            <input type="text" name="primerApellido" placeholder="Primer apellido" value="{{ old('primerApellido') }}">
         </div>
         <div>
             <label>Segundo Apellido</label>
-            <input type="text" name="segundoApellido" placeholder="segundo apellido" value="{{ old('segundoApellido') }}">
+            <input type="text" name="segundoApellido" placeholder="Segundo apellido" value="{{ old('segundoApellido') }}">
         </div>
         <div>
-            <label>email</label>
-            <input type="email" name="email" value="{{ old('email') }}">
+            <label>Email</label>
+            <input type="email" name="email" value="{{ old('email') }}" placeholder="email@email.com">
         </div>
         <div>
             <label>Contraseña</label>
@@ -40,5 +42,6 @@
             </ul>
         </div>
     @endif
+</div>
     <a class="accion" href="{{ route('profesores.index') }}">Volver</a>
 @endsection

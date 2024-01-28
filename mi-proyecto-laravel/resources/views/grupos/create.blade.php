@@ -3,14 +3,15 @@
 @section('title', 'Crear Grupo')
 
 @section('content')
+<h2>Crear grupo</h2>
     <form action="{{ route('grupos.store') }}" method="POST">
         @csrf
         <div>
-            <label>Nombre</label>
+            <label>Nombre del grupo</label>
             <input type="text" name="nombre" placeholder="Nombre">
         </div>
         <div>
-            <input type="submit" value="Enviar">
+            <input class="accion" type="submit" value="Enviar">
         </div>
     </form>
     @if ($errors->any())

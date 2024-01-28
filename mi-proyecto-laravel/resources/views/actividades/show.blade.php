@@ -4,10 +4,9 @@
 
 
 @section('content')
+<h2>Ver actividad</h2>
     <div class="actividades">
-        @can('admin.actividades.edit')
-            <div> <a class="accion" href="{{ route('actividades.edit', $actividad) }}">Editar</a></div>
-        @endcan
+        
 
         <div>
             <div><b>Lugar:</b> {{ $actividad->lugar }}</div>
@@ -29,6 +28,9 @@
             </div>
             <div><b>Descripcion:</b> {{ $actividad->descripcion }}</div>
         </div>
+        @can('admin.actividades.edit')
+            <div> <a class="accion" href="{{ route('actividades.edit', $actividad) }}">Editar</a></div>
+        @endcan
     </div>
     <a class="accion" href="{{ route('actividades.index') }}">Volver</a>
 @endsection

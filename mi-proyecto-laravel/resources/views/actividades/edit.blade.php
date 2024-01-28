@@ -3,6 +3,7 @@
 @section('title', 'Actividades.Edit')
 
 @section('content')
+<h2>Editar actividad</h2>
     <div class="actividades">
         <form action="{{ route('actividades.update', $actividad) }}" method="POST">
             @csrf

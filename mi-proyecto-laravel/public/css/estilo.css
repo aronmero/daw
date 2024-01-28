@@ -14,6 +14,14 @@ div:has(> table) {
     justify-content: center;
     padding: 15px;
 }
+.profesores{
+    form div{
+        display: flex;
+        width: 350px;
+        justify-content: space-between;
+        margin: 7px 0px;
+    }
+}
 
 table {
     padding: 10px;

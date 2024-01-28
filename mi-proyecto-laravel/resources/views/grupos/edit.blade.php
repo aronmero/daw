@@ -3,12 +3,13 @@
 @section('title', 'Editar grupo')
 
 @section('content')
+<h2>Editar grupo</h2>
     <form action="{{ route('grupos.update', $grupo) }}" method="POST">
         @csrf
         @method('PUT')
         <table>
             <input type="hidden" name="id" value="{{ $grupo->id }}">
-            <tr>
+            <tr><td><label>Nombre del grupo</label></td>
                 <td><input type=text name="nombre" value={{ old('nombre') ?? $grupo->nombre }}></td>
             </tr>
         </table>

@@ -3,6 +3,7 @@
 @section('title', 'Actividades.Create')
 
 @section('content')
+<h2>Crear actividad</h2>
     <div class="actividades">
         <form action="{{ route('actividades.store') }}" method="POST">
             @csrf
