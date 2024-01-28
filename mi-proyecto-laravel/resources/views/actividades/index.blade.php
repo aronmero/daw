@@ -30,19 +30,25 @@
                             @endforeach
                         </div>
                         <div>
+                            @can('admin.actividades.show')
+                                <td><a class="accion" href="{{ route('actividades.show', $actividad) }}">Ver</a></td>
+                            @endcan
                             @can('admin.actividades.edit')
                                 <div><a class="accion" href="{{ route('actividades.edit', $actividad) }}">Editar</a></div>
                             @endcan
-                            <div>
-                                @can('admin.actividades.destroy')
-                                    <form class="eliminar" action="{{ route('actividades.destroy', $actividad) }}" method="POST"
+
+                            @can('admin.actividades.destroy')
+                                <div>
+                                    <form class="eliminar" action="{{ route('actividades.destroy', $actividad) }}"
+                                        method="POST"
                                         onsubmit="return confirm('¿Estás seguro de que deseas eliminar esta actividad?');">
                                         @csrf
                                         @method('DELETE')
                                         <input class="accion" type="submit" name="id" value="Eliminar">
                                     </form>
-                                @endcan
-                            </div>
+                                </div>
+                            @endcan
+
                         </div>
                     </div>
                 @empty

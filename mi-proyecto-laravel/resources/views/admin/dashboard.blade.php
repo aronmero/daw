@@ -4,7 +4,8 @@
 
 @section('content')
 
-    <h1>Listado de profesores</h1>
+    <h1>
+        Listado de profesores</h1>
     <div>
         <a class="accion" href="{{ route('profesores.create') }}">Añadir Usuario</a>
     </div>
@@ -15,8 +16,8 @@
                 <td>Primer Apellido</td>
                 <td>Segundo Apellido</td>
                 <td>Email</td>
-                @canany(['admin.actividades.edit', 'admin.actividades.destroy'])
-                    <td colspan="2">Acciones</td>
+                @canany(['admin.actividades.edit', 'admin.actividades.destroy', 'admin.actividades.show'])
+                    <td colspan="3">Acciones</td>
                 @endcanany
             </thead>
 
@@ -26,11 +27,15 @@
                     <td>{{ $profesor->primerApellido }}</td>
                     <td>{{ $profesor->segundoApellido }}</td>
                     <td>{{ $profesor->email }}</td>
+                    @can('admin.usuario.show')
+                        <td><a class="accion" href="{{ route('profesores.show', $profesor) }}">Ver</a></td>
+                    @endcan
                     @can('admin.usuario.edit')
                         <td><a class="accion" href="{{ route('profesores.edit', $profesor) }}">Editar</a></td>
                     @endcan
-                    <td>
-                        @can('admin.usuario.destroy')
+
+                    @can('admin.usuario.destroy')
+                        <td>
                             @if (Auth::user()->id !== $profesor->id || !$profesor->getRoleNames()->contains('Admin'))
                                 <form action="{{ route('profesores.destroy', $profesor) }}" method="POST"
                                     onsubmit="return confirm('¿Estás seguro de que deseas eliminar este profesor?');">
@@ -39,8 +44,9 @@
                                     <input class="accion" type="submit" name="id" value="Eliminar">
                                 </form>
                             @endif
-                        @endcan
-                    </td>
+                        </td>
+                    @endcan
+
                 </tr>
             @empty
                 <tr>

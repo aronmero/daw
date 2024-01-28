@@ -10,17 +10,17 @@
     <table>
         <thead>
             <td>Nombre</td>
-            @can('admin.grupo.edit')
-                <td></td>
-            @endcan
-            @can('admin.grupo.destroy')
-                <td></td>
-            @endcan
+            @canany(['admin.grupo.edit', 'admin.grupo.destroy', 'admin.grupo.show'])
+                <td colspan="3">Acciones</td>
+            @endcanany
         </thead>
 
         @forelse ($grupos as $grupo)
             <tr>
                 <td>{{ $grupo->nombre }}</td>
+                @can('admin.grupo.show')
+                    <td><a class="accion" href="{{ route('grupos.show', $grupo) }}">Ver</a></td>
+                @endcan
                 @can('admin.grupo.edit')
                     <td><a class="accion" href="{{ route('grupos.edit', $grupo) }}">Editar</a></td>
                 @endcan
