@@ -14,6 +14,7 @@ class GrupoController extends Controller
         $this->middleware('can:admin.grupo.index')->only('index');
         $this->middleware('can:admin.grupo.create')->only('create', 'store');
         $this->middleware('can:admin.grupo.destroy')->only('destroy');
+        $this->middleware('can:admin.grupo.show')->only('show');
         $this->middleware('can:admin.grupo.edit')->only('edit', 'update');
     }
     /**
@@ -42,6 +43,14 @@ class GrupoController extends Controller
         return redirect()->route('grupos.index');
     }
 
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        $grupo = Grupo::find($id);
+        return view('grupos.show', ['grupo' => $grupo]);
+    }
 
     /**
      * Show the form for editing the specified resource.

@@ -15,6 +15,7 @@ class ProfesorController extends Controller
         $this->middleware('can:admin.usuario.index')->only('index');
         $this->middleware('can:admin.usuario.create')->only('create', 'store');
         $this->middleware('can:admin.usuario.destroy')->only('destroy');
+        $this->middleware('can:admin.usuario.show')->only('show');
         $this->middleware('can:admin.usuario.edit')->only('edit', 'update');
     }
     /**
@@ -61,6 +62,16 @@ class ProfesorController extends Controller
     {
         Profesor::find($id)->update($request->all());
         return redirect()->route('profesores.index');
+    }
+
+    
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        $profesor = Profesor::find($id);
+        return view('admin.show', ['profesor' => $profesor]);
     }
 
     /**
