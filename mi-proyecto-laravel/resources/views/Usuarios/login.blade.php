@@ -19,6 +19,9 @@
                 <span >{{ $errors->first('password') }}</span>
             @endif
         </div>
+        <div class="remember">
+            <label for="remember">Recuérdame</label><div><input type="checkbox" id="remember" name="remember" {{ old('remember') ? 'checked' : '' }}></div>
+        </div>
         <div>
             <button type="submit">Enviar</button>
         </div>

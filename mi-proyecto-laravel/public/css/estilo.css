@@ -301,4 +301,21 @@ input {
         text-decoration: none;
         color: black;
     }
+    .remember {
+        display: flex;
+        width: 320px;
+        flex-direction: row;
+        label{
+            margin-bottom: 0px;
+        }
+        div {
+            display: flex;
+            width: inherit;
+            justify-content: center;
+        }
+        input {
+            width: auto;
+            transform: scale(2);
+        }
+    }
 }
