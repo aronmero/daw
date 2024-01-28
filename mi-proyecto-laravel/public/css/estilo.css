@@ -9,14 +9,18 @@
     justify-content: center;
     padding: 30px;
 }
+div:has(> table) {
+    display: flex;
+    justify-content: center;
+    padding: 15px;
+}
 
 table {
-    
     padding: 10px;
     border: 1px solid black;
     border-radius: 15px;
     border-spacing: 10px;
-    width: 1100px;
+    width: 95vw;
 
     tr:nth-child(odd),
     .carta:nth-child(odd) {
@@ -31,8 +35,13 @@ table {
     tr td:nth-child(1) {
         font-size: 16px;
     }
+    thead td {
+        font-weight: 600;
+        font-size: 18px !important;
+    }
 
     td {
+        width: auto;
         font-size: 14px;
         padding: 10px 15px;
         border: 1px solid black;
