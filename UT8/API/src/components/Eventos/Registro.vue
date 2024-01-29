@@ -1,17 +1,25 @@
 <script setup>
 import { ref } from 'vue';
-//TODO:API FALSA HACIA PROFESORES
 
-let profesores = ref("api");
-let consulta = async () => {
-    return await fetch('https://www.nico.com/profesores')
+let datosProfesores = ref("api");
+let consultaProfesores = async () => {
+    return await fetch('api/v1/profesores')
         .then((response) => response.json())
-        .then(response => datos.value = response);
+        .then(response => datosProfesores.value = response);
 }
-consulta();
+consultaProfesores();
+
+let datosGrupos = ref("api");
+let consultaGrupos = async () => {
+    return await fetch('api/v1/grupos')
+        .then((response) => response.json())
+        .then(response => datosGrupos.value = response);
+}
+consultaGrupos();
 </script>
 <template>
     <div>
+        <h2>Crear actividad</h2>
         <form method="post" onsubmit="return false">
             <div><label>Lugar</label>
                 <input type="text" name="lugar" placeholder="">
@@ -23,19 +31,31 @@ consulta();
                 <input type="text" name="descripcion" placeholder="">
             </div>
 
-            <div class="profesores">
-                <div v-for="profesor in profesores">{{ profesor }}</div>
+            <div class="checkboxes">
+                <h4>Profesores</h4>
+                <div>
+                    <div v-for="profesor in datosProfesores.profesores">
+                        <label for="profesores[]">{{ profesor.name }}</label>
+                        <input type="checkbox" name="profesores[]" :value=profesor.id>
+                    </div>
+                </div>
             </div>
+
+            <div class="checkboxes">
+                <h4>Grupos</h4>
+                <div>
+                    <div v-for="grupo in datosGrupos.grupos">
+                        <label for="grupos[]">{{ grupo.name }}</label>
+                        <input type="checkbox" name="grupos[]" :value=grupo.id>
+                    </div>
+                </div>
+            </div>
+            
+            <div><input type="submit"></div>
         </form>
     </div>
 </template>
 <style scoped>
-.profesores,
-.grupos {
-    display: flex;
-    justify-content: space-around;
-}
-
 form {
     display: flex;
     flex-direction: column;
@@ -77,6 +97,25 @@ form {
             background-color: #f1bc27;
             cursor: pointer;
             border-color: #f1bc27;
+        }
+    }
+}
+
+.checkboxes {
+    input {
+        width: 15px;
+        transform: scale(2);
+        margin-left: 15px;
+    }
+
+    >div {
+        display: flex;
+        flex-direction: row;
+
+        div {
+            display: flex;
+            flex-direction: row;
+            margin-right: 10px;
         }
     }
 }
