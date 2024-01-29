@@ -1,19 +1,30 @@
 import { createApp } from "vue";
+import { createRouter, createWebHashHistory } from "vue-router";
 import "./style.css";
+import Eventos from "./components/views/Eventos.vue";
+import Login from "./components/views/Login.vue";
 import App from "./App.vue";
 
 async function enableMocking() {
   if (process.env.NODE_ENV !== "development") {
     return;
   }
-
   const { worker } = await import("./mocks/browser");
 
-  // `worker.start()` returns a Promise that resolves
-  // once the Service Worker is up and ready to intercept requests.
   return worker.start();
 }
 
+const routes = [
+  { path: "/", component: Eventos },
+  { path: "/login", component: Login },
+];
+const router = createRouter({
+  history: createWebHashHistory(),
+  routes,
+});
+
 enableMocking().then(() => {
-  createApp(App).mount("#app");
+  const app = createApp(App);
+  app.use(router);
+  app.mount("#app");
 });

@@ -1,36 +1,11 @@
 <script setup>
-import { ref } from 'vue';
-import Evento from './components/Eventos/Evento.vue'
-import RegistroEvento from './components/Eventos/Registro.vue'
-import AuthUsuario from './components/AuthUsuario.vue'
 
-let datos = ref("api");
-let consulta = async () => {
-  return await fetch('api/v1/eventos')
-    .then((response) => response.json())
-    .then(response => datos.value = response);
-}
-consulta();
+let usuario;
 </script>
 
 <template>
-  <div>
-    <h1>Eventos</h1>
-    <div class="container">
-      <Evento v-for="evento in datos.eventos" :lugar="evento.lugar" :fecha="evento.fecha"
-        :descripcion="evento.descripcion" :profesores="evento.profesores" :grupos="evento.grupos" />
-    </div>
-  </div>
-  <AuthUsuario titulo="Iniciar sesion" />
-  <RegistroEvento/>
-
-  
+  <template v-if="$route.path != '/login'">
+    <router-link to="/login">Login</router-link>
+  </template>
+  <router-view></router-view>
 </template>
-
-<style scoped>
-.container {
-  
-  display: flex;
-  flex-wrap: wrap;
-}
-</style>
