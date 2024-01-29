@@ -7,6 +7,25 @@ defineProps({
     profesores: Array,
 });
 
+const intentarLogin = defineEmits({
+    // No validation
+    click: null,
+
+    // Validate submit event
+    submit: ({ email, password }) => {
+        if (email && password) {
+            const user={
+                email: email,
+                password: password,
+            }
+            return user
+        } else {
+            console.warn('Invalid submit event payload!')
+            return false
+        }
+    }
+})
+
 </script>
 
 <template>
@@ -19,7 +38,7 @@ defineProps({
             <div><label>Contraseña</label>
                 <input type="password" name="password" placeholder="Tu contraseña">
             </div>
-            <div><input type="submit" ></div>
+            <div><input type="submit" @click="intentarLogin"></div>
         </form>
     </div>
 </template>
@@ -57,7 +76,7 @@ form {
 
     div:has(input[type=submit]) {
         margin-top: 20px;
-       
+
 
         input {
             font-weight: 600;
