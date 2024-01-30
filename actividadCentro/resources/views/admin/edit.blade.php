@@ -12,24 +12,24 @@
                 <input type="hidden" name="id" value="{{ $profesor->id }}">
                 <tr>
                     <td> <label>Nombre</label></td>
-                    <td><input type=text name="nombre" value={{ old('nombre') ?? $profesor->nombre }}></td>
+                    <td><input type=text name="nombre" value="{{ old('nombre') ?? $profesor->nombre }}"></td>
                 </tr>
                 <tr>
                     <td><label>Primer Apellido</label></td>
                     <td><input type=text name="primerApellido"
-                            value={{ old('primerApellido') ?? $profesor->primerApellido }}>
+                            value="{{ old('primerApellido') ?? $profesor->primerApellido }}">
                     </td>
                 </tr>
                 <tr>
                     <td> <label>Segundo Apellido</label></td>
                     <td><input type=text name="segundoApellido"
-                            value={{ old('segundoApellido') ?? $profesor->segundoApellido }}>
+                            value="{{ old('segundoApellido') ?? $profesor->segundoApellido }}">
                     </td>
                 </tr>
 
                 <tr>
                     <td> <label>Email</label></td>
-                    <td><input type=email name="email" value={{ old('email') ?? $profesor->email }}></td>
+                    <td><input type=email name="email" value="{{ old('email') ?? $profesor->email }}"></td>
                 </tr>
                 <tr>
                     <td colspan="2"> <input class="accion" type="submit" value="Actualizar profesor"></td>

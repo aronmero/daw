@@ -60,9 +60,9 @@ class ActividadRequest extends FormRequest
                 'min' => 'Debe seleccionar al menos un profesor.',
             ],
             'grupos' => [
-                'required' => 'Debe seleccionar al menos un profesor.',
-                'array' => 'Debe seleccionar al menos un profesor.',
-                'min' => 'Debe seleccionar al menos un profesor.',
+                'required' => 'Debe seleccionar al menos un grupo.',
+                'array' => 'Debe seleccionar al menos un grupo.',
+                'min' => 'Debe seleccionar al menos un grupo.',
             ],
 
         ];

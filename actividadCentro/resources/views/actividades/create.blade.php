@@ -10,7 +10,7 @@
             <div class="datos">
                 <div>
                     <label>Fecha:</label>
-                    <input type="date" name="fecha" value={{ old('fecha') ?? date('Y-m-d') }} required
+                    <input type="date" name="fecha" value="{{ old('fecha') ?? date('Y-m-d') }}" required
                         min="{{ date('Y-m-d') }}">
                 </div>
                 <div>
@@ -25,12 +25,12 @@
                 <div>
                     <label>Hora Inicio:</label>
                     <input type="time" name="horaInicio" min="08:00" max="20:00"
-                        value={{ old('horaInicio') ?? date('H:i') }} required>
+                        value="{{ old('horaInicio') ?? date('H:i') }}" required>
                 </div>
             </div>
             <div>
                 <label>Descripcion:</label>
-                <textarea name="descripcion"></textarea>
+                <textarea name="descripcion">{{ old('descripcion') }}</textarea>
             </div>
             <h3><label for="grupos">Grupos:</label></h3>
             <div class="checkboxs">

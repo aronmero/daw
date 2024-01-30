@@ -10,7 +10,7 @@
         <table>
             <input type="hidden" name="id" value="{{ $grupo->id }}">
             <tr><td><label>Nombre del grupo</label></td>
-                <td><input type=text name="nombre" value={{ old('nombre') ?? $grupo->nombre }}></td>
+                <td><input type=text name="nombre" value="{{ old('nombre') ?? $grupo->nombre }}"></td>
             </tr>
         </table>
         <div>
