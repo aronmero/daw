@@ -9,13 +9,13 @@ const asignarUsuario = (usuarioVerificado) => {
 </script>
 
 <template>
-  <template v-if="$route.path != '/login'">
+  <template v-if="$route.path != '/login' && usuario == null">
     <router-link to="/login">Login</router-link>
   </template>
   <template v-if="$route.path === '/login'">
     <router-view @usuario-verificado="asignarUsuario" />
   </template>
   <template v-else>
-    <router-view />
+    <router-view :usuario="usuario"/>
   </template>
 </template>

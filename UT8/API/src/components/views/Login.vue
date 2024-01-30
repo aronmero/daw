@@ -24,7 +24,7 @@ const tryAuthUser = async (userData) => {
         errorMsg.value = "Email o contraseña incorrectos.";
       }
     } catch (error) {
-      errorMsg.value = "Error al obtener usuarios de la API.";
+      errorMsg.value = "Error";
     }
   }
 };

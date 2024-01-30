@@ -2,6 +2,10 @@
 import { ref } from 'vue';
 import Evento from '../Eventos/Evento.vue'
 import RegistroEvento from '../Eventos/Registro.vue'
+
+defineProps({
+    usuario: Object,
+})
 let datos = ref("api");
 let consulta = async () => {
     return await fetch('api/v1/eventos')
@@ -18,12 +22,14 @@ consulta();
                 :descripcion="evento.descripcion" :profesores="evento.profesores" :grupos="evento.grupos" />
         </div>
     </div>
-    <RegistroEvento/>
+    <template v-if="usuario != null">
+        <RegistroEvento />
+    </template>
 </template>
 <style scoped>
 .container {
 
-  display: flex;
-  flex-wrap: wrap;
+    display: flex;
+    flex-wrap: wrap;
 }
 </style>
