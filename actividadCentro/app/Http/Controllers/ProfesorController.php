@@ -43,7 +43,13 @@ class ProfesorController extends Controller
      */
     public function store(ProfesorRequest $request)
     {
-        Profesor::create($request->all());
+        Profesor::create([
+            'nombre' => $request->input('nombre'),
+            'email' => $request->input('email'),
+            'primerApellido' => $request->input('primerApellido'),
+            'segundoApellido' => $request->input('segundoApellido'),
+            'password' => bcrypt($request->input('password'), )
+        ])->assignRole('Usuario');
         return redirect()->route('profesores.index');
     }
 
@@ -82,7 +88,7 @@ class ProfesorController extends Controller
         return redirect()->back()->with('success', 'Contraseña actualizada correctamente.');
     }
 
-    
+
     /**
      * Display the specified resource.
      */
