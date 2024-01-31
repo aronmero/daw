@@ -1,5 +1,5 @@
 import { createApp } from "vue";
-import { createRouter, createWebHashHistory } from "vue-router";
+import { createRouter, createWebHistory } from "vue-router";
 import "./style.css";
 import Eventos from "./components/views/Eventos.vue";
 import Login from "./components/views/Login.vue";
@@ -19,7 +19,7 @@ const routes = [
   { path: "/login", component: Login },
 ];
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory(),
   routes,
 });
 
