@@ -1,36 +1,53 @@
 <script setup>
-import { ref } from 'vue';
-import Evento from '../Eventos/Evento.vue'
-import RegistroEvento from '../Eventos/Registro.vue'
+import { ref } from "vue";
+import Evento from "../Eventos/Evento.vue";
+import RegistroEvento from "../Eventos/Registro.vue";
 
 defineProps({
-    usuario: Object,
-})
+  usuario: Object,
+});
+
 let datos = ref("api");
+let mostrarRegistro = ref(false);
+
 let consulta = async () => {
-    return await fetch('api/v1/eventos')
-        .then((response) => response.json())
-        .then(response => datos.value = response);
-}
+  return await fetch("api/v1/eventos")
+    .then((response) => response.json())
+    .then((response) => (datos.value = response));
+};
 consulta();
+
+let toggleRegistro = () => {
+  mostrarRegistro.value = !mostrarRegistro.value;
+};
 </script>
 <template>
-    <div>
-        <h1>Eventos</h1>
-        <div class="container">
-            <Evento v-for="evento in datos.eventos" :lugar="evento.lugar" :fecha="evento.fecha"
-                :descripcion="evento.descripcion" :profesores="evento.profesores" :grupos="evento.grupos" />
-        </div>
+  <div>
+    <h1>Eventos</h1>
+    <div class="container">
+      <Evento
+        v-for="evento in datos.eventos"
+        :lugar="evento.lugar"
+        :fecha="evento.fecha"
+        :descripcion="evento.descripcion"
+        :profesores="evento.profesores"
+        :grupos="evento.grupos"
+      />
     </div>
-    <template v-if="usuario != null">
-        <hr>
-        <RegistroEvento />
-    </template>
+  </div>
+  <template v-if="usuario != null">
+    <hr />
+
+    <button @click="toggleRegistro">Registrar evento</button>
+    <RegistroEvento v-if="mostrarRegistro" />
+  </template>
 </template>
 <style scoped>
 .container {
-
-    display: flex;
-    flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
+}
+hr{
+    margin: 50px;
 }
 </style>
