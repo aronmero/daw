@@ -1,7 +1,9 @@
 <script setup>
 import AuthUsuario from "../AuthUsuario.vue";
 import { ref } from "vue";
+import { useRouter } from "vue-router";
 
+const router = useRouter();
 const emit = defineEmits(["usuario-verificado"]);
 let errorMsg = ref(null);
 const tryAuthUser = async (userData) => {
@@ -20,6 +22,7 @@ const tryAuthUser = async (userData) => {
         console.log("Usuario verificado:", usuarioEncontrado);
         emit("usuario-verificado", usuarioEncontrado);
         errorMsg.value = "";
+        router.push('/');
       } else {
         errorMsg.value = "Email o contraseña incorrectos.";
       }
