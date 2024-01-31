@@ -4,12 +4,11 @@ const usuario = ref(null);
 
 const asignarUsuario = (usuarioVerificado) => {
   usuario.value = usuarioVerificado;
-  console.log(usuario.value);
 };
 </script>
 
 <template>
-  <template v-if="$route.path != '/login' && usuario == null">
+  <template v-if="$route.path != '/login' && usuario === null">
     <router-link to="/login">Login</router-link>
   </template>
   <template v-if="$route.path === '/login'">

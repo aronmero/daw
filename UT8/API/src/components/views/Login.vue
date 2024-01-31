@@ -19,10 +19,13 @@ const tryAuthUser = async (userData) => {
       );
 
       if (usuarioEncontrado) {
-        console.log("Usuario verificado:", usuarioEncontrado);
-        emit("usuario-verificado", usuarioEncontrado);
+        const userData = {
+          id: usuarioEncontrado.id,
+          email: usuarioEncontrado.email,
+        };
+        emit("usuario-verificado", userData);
         errorMsg.value = "";
-        router.push('/');
+        router.push("/");
       } else {
         errorMsg.value = "Email o contraseña incorrectos.";
       }

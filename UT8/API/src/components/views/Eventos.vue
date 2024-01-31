@@ -23,6 +23,7 @@ consulta();
         </div>
     </div>
     <template v-if="usuario != null">
+        <hr>
         <RegistroEvento />
     </template>
 </template>
