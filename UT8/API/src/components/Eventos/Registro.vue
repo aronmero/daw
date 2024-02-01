@@ -1,6 +1,13 @@
 <script setup>
 import { ref } from 'vue';
 
+const lugar = ref("");
+const fecha = ref("");
+const profesores = ref([]);
+const grupos = ref([]);
+const descripcion = ref("");
+
+
 let datosProfesores = ref("api");
 let consultaProfesores = async () => {
     return await fetch('api/v1/profesores')
@@ -16,19 +23,27 @@ let consultaGrupos = async () => {
         .then(response => datosGrupos.value = response);
 }
 consultaGrupos();
+const emit = defineEmits(["submit"]);
+function crearEvento() {
+    if (lugar.value && fecha.value && profesores.value.length>0 && grupos.value.length>0) {
+        emit("submit", { lugar: lugar.value, fecha: fecha.value, descripcion: descripcion.value, profesores: profesores.value, grupos: grupos.value, });
+    } else {
+        console.warn("Invalido");
+    }
+}
 </script>
 <template>
     <div>
         <h2>Crear actividad</h2>
-        <form method="post" onsubmit="return false">
+        <form method="post" @submit.prevent="crearEvento">
             <div><label>Lugar</label>
-                <input type="text" name="lugar" placeholder="">
+                <input type="text" name="lugar" placeholder="" v-model="lugar">
             </div>
             <div><label>Fecha</label>
-                <input type="date" name="fecha" placeholder="">
+                <input type="date" name="fecha" placeholder="" v-model="fecha">
             </div>
             <div><label>Descripcion</label>
-                <input type="text" name="descripcion" placeholder="">
+                <input type="text" name="descripcion" placeholder="" v-model="descripcion">
             </div>
 
             <div class="checkboxes">
@@ -36,7 +51,7 @@ consultaGrupos();
                 <div>
                     <div v-for="profesor in datosProfesores.profesores">
                         <label for="profesores[]">{{ profesor.name }}</label>
-                        <input type="checkbox" name="profesores[]" :value=profesor.id>
+                        <input type="checkbox" name="profesores[]" :value=profesor.id v-model="profesores">
                     </div>
                 </div>
             </div>
@@ -46,11 +61,11 @@ consultaGrupos();
                 <div>
                     <div v-for="grupo in datosGrupos.grupos">
                         <label for="grupos[]">{{ grupo.name }}</label>
-                        <input type="checkbox" name="grupos[]" :value=grupo.id>
+                        <input type="checkbox" name="grupos[]" :value=grupo.id v-model="grupos">
                     </div>
                 </div>
             </div>
-            
+
             <div><input type="submit"></div>
         </form>
     </div>

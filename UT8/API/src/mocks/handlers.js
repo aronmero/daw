@@ -65,54 +65,55 @@ let grupos = [
 let eventos = [
   {
     lugar: "Roque",
-    fecha: "23-11-2023",
+    fecha: "2023-11-23",
     descripcion: "Visita al roque",
     grupos: ["1ºESO", "2ºESO"],
     profesores: ["Nico", "Luis"],
   },
   {
     lugar: "Puntagorda",
-    fecha: "8-12-2023",
+    fecha: "2023-12-08",
     descripcion: "Visita a puntagorda",
     grupos: ["1ºESO", "2ºESO"],
     profesores: ["Paco", "Luz", "Estela"],
   },
   {
     lugar: "Salinas",
-    fecha: "18-12-2023",
+    fecha: "2023-12-18",
     descripcion: "Visita a las salinas",
     grupos: ["4ºESO"],
     profesores: ["Nico"],
   },
   {
     lugar: "Time",
-    fecha: "7-12-2023",
+    fecha: "2023-12-07",
     descripcion: "Visita al time",
     grupos: ["1ºESO", "2ºESO"],
     profesores: ["Nico", "Luis"],
   },
   {
     lugar: "Pueblo",
-    fecha: "02-02-2024",
+    fecha: "2024-02-02",
     descripcion: "Excursión cultural",
     grupos: ["2ºESO", "3ºESO"],
     profesores: ["Carlos", "Elena"],
   },
   {
     lugar: "Montaña",
-    fecha: "10-03-2024",
+    fecha: "2024-03-10",
     descripcion: "Senderismo en la montaña",
     grupos: ["1ºBACH", "2ºBACH"],
     profesores: ["Mario", "Laura"],
   },
   {
     lugar: "Museo",
-    fecha: "05-04-2024",
+    fecha: "2024-04-05",
     descripcion: "Visita al museo de historia",
     grupos: ["1ºBACH", "2ºBACH"],
     profesores: ["Sara", "Pedro"],
   },
 ];
+
 let usuarios = [
   {
     id: "1",
