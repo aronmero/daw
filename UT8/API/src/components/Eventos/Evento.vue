@@ -43,7 +43,8 @@ h2 {
 }
 
 .evento {
-    border: 1px solid black;
+    background-color:#CFBF9E;
+    box-shadow: 0px 0px 5px 2px #a59d94;
     border-radius: 25px;
     margin: 15px;
     padding: 25px;

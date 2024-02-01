@@ -77,9 +77,9 @@ form {
     box-sizing: border-box;
     padding: 15px 12px;
     width: 320px;
-    border: 1px solid grey;
     border-radius: 12px;
     font-size: 15px;
+    border: 1px solid #CFBF9E;
   }
 
   div:has(input[type="submit"]) {
@@ -88,9 +88,9 @@ form {
     input {
       font-weight: 600;
       border-radius: 20px;
-      background-color: #f1bc27;
+      background-color: #CEA647;
       cursor: pointer;
-      border-color: #f1bc27;
+      border-color: #CEA647;
     }
   }
 }

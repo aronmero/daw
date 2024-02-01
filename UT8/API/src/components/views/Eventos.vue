@@ -89,4 +89,7 @@ const anadirEvento = async (actividad) => {
 hr {
   margin: 50px;
 }
+button{
+  background-color: #CEA647;
+}
 </style>
