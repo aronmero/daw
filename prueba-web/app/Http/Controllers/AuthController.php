@@ -30,7 +30,7 @@ class AuthController extends Controller
         if (Auth::check()) {
             return view('usuarios.logeado');
         }
-        
+
         return view('usuarios.login');
     }
 
@@ -41,16 +41,32 @@ class AuthController extends Controller
             'password' => 'required',
         ]);
 
+
         $credentials = $request->only('email', 'password');
 
-        if (Auth::attempt($credentials,$request->remember)) {
-            $request->session()->regenerate();
-            return redirect("/")->withSuccess('Inicio de sesion correctamente');
-        }
+        if (Auth::attempt($credentials, $request->remember)) {
+            $user = User::where('email', $request->email)->first();
 
-        return back()->withErrors([
-            'email' => 'El correo y/o contraseña no son correctos',
-        ])->onlyInput('email');
+            $token = $user->createToken('my-app-token')->plainTextToken;
+
+            $response = [
+                'token' => $token
+            ];
+
+            return response($response, 201);
+
+
+            //$request->session()->regenerate();
+            //return redirect("/")->withSuccess('Inicio de sesion correctamente');
+        } else {
+            return response([
+                'message' => ['These credentials do not match our records.']
+            ], 404);
+        }
+        /*
+                return back()->withErrors([
+                    'email' => 'El correo y/o contraseña no son correctos',
+                ])->onlyInput('email');*/
     }
 
     public function logeado()
@@ -73,7 +89,7 @@ class AuthController extends Controller
 
     public function store(ProfesorRequest $request)
     {
-       
+
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
@@ -83,7 +99,8 @@ class AuthController extends Controller
         $user->assignRole('Usuario');
         Auth::login($user);
         Mail::to($request->email)->send(new UsersMail($request->name));
-        return redirect('/')->withSuccess('¡Registro exitoso y sesión iniciada!');;
+        return redirect('/')->withSuccess('¡Registro exitoso y sesión iniciada!');
+        ;
     }
 
     public function logout(Request $request)

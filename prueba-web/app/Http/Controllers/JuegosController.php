@@ -38,16 +38,25 @@ class JuegosController extends Controller
         $categorias = Categoria::all();
         return view('juego.create', ['categorias' => $categorias]);
     }
+    public function show()
+    {
+
+    }
     public function store(CreateJuego $request)
     {
         Juego::create($request->all());
-        return redirect()->route('juegos.index');
+        return response()->json([
+            'status' => true,
+            'message'=>'todo correcto'
+        ],200);
+        //return redirect()->route('juegos.index');
     }
 
     public function edit($juegoID)
     {
         $juego = Juego::find($juegoID);
         $categorias = Categoria::all();
+        
         return view('juego.update', ['categorias' => $categorias, 'juego' => $juego]);
     }
 
@@ -57,9 +66,13 @@ class JuegosController extends Controller
         $juego->delete();
         return redirect()->route('juegos.index');
     }
-    public function update(EditJuego $datos)
+    public function update(EditJuego $request)
     {
-        Juego::find($datos->idJuego)->update($datos->all());
-        return redirect()->route('juegos.index');
+        Juego::find($request->idJuego)->update($request->all());
+        return response()->json([
+            'status' => true,
+            'message'=>'todo correcto'
+        ],200);
+       // return redirect()->route('juegos.index');
     }
 }
