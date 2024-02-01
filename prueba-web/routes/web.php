@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+/*
 Route::controller(AuthController::class)->group(function () {
     Route::get('/', 'index')->name('home');
     Route::get('/login', 'login')->name('usuarios.login');
@@ -28,3 +29,4 @@ Route::controller(AuthController::class)->group(function () {
 Route::resource('juegos', JuegosController::class)->except('show')->names('juegos');
 
 Route::resource('categorias', CategoryController::class)->except('show')->names('categorias');
+*/

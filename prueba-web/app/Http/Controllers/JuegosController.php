@@ -10,13 +10,14 @@ use Illuminate\Http\Request;
 
 class JuegosController extends Controller
 {
+    /*
     public function __construct()
     {
         $this->middleware('can:admin.juegos.index')->only('index');
         $this->middleware('can:admin.juegos.create')->only('create', 'store');
         $this->middleware('can:admin.juegos.destroy')->only('destroy');
         $this->middleware('can:admin.juegos.edit')->only('edit', 'update');
-    }
+    }*/
 
     public function index()
     {
@@ -24,7 +25,11 @@ class JuegosController extends Controller
             ->select('juegos.id', 'juegos.nombre', 'categorias.nombre as categoria', 'juegos.activo', 'juegos.created_at')
             ->orderBy('juegos.id', 'desc')
             ->get();
-        return view('juego.juego', ['juegoCategoria' => $juegoCategoria]);
+        return response()->json([
+            'status' => true,
+            'products' => $juegoCategoria
+        ],200);
+        //return view('juego.juego', ['juegoCategoria' => $juegoCategoria]);
     }
 
 
