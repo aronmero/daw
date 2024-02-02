@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\ApiActividadController;
+use App\Http\Controllers\ApiAuthController;
+use App\Http\Controllers\ApiGrupoController;
+use App\Http\Controllers\ApiProfesorController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -13,7 +17,14 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+/*
+Route::group(['middleware' => 'auth:sanctum'], function () {
+    Route::apiResource('juegos', ApiActividadController::class);
 });
+*/
+Route::group(['middleware' => 'auth:sanctum'], function () {
+    Route::apiResource('actividades', ApiActividadController::class)->parameters(['actividades' => 'actividad']);
+    Route::apiResource('grupos', ApiGrupoController::class);
+    Route::apiResource('profesores', ApiProfesorController::class)->parameters(['profesores' => 'profesor']);
+});
+Route::post("login", [ApiAuthController::class, 'index']);
