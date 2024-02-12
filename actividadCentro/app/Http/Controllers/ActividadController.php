@@ -24,13 +24,13 @@ class ActividadController extends Controller
      */
     public function index()
     {
-        $actividades = Actividad::with('grupos', 'profesores')->orderBy('fecha')->get();
+        $actividades = Actividad::with(['grupos' => function ($query) {
+            $query->orderBy('id');
+        }, 'profesores' => function ($query) {
+            $query->select('id', 'nombre', 'primerApellido', 'segundoApellido', 'email');
+            $query->orderBy('id');
+        }])->orderBy('fecha')->get();
 
-        $actividades->transform(function ($actividad) {
-            $actividad->grupos = $actividad->grupos->sortBy('id');
-            $actividad->profesores = $actividad->profesores->sortBy('id');
-            return $actividad;
-        });
 
         return view("actividades.index", ['actividades' => $actividades]);
     }

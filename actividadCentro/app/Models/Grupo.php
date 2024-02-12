@@ -9,4 +9,5 @@ class Grupo extends Model
 {
     use HasFactory;
     protected $guarded=['token'];
+    protected $hidden = ['created_at', 'updated_at'];
 }

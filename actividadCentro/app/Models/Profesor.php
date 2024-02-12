@@ -9,7 +9,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 class Profesor extends Authenticatable
 {
-    use HasFactory, HasRoles,HasApiTokens;
+    use HasFactory, HasRoles, HasApiTokens;
     protected $table = 'profesores';
 
     /**
@@ -24,7 +24,7 @@ class Profesor extends Authenticatable
         'email',
         'password',
     ];
-   
+
 
     /**
      * The attributes that should be hidden for serialization.
@@ -32,7 +32,6 @@ class Profesor extends Authenticatable
      * @var array<int, string>
      */
     protected $hidden = [
-        'password'
+        'password', 'created_at', 'updated_at','remember_token'
     ];
-
 }

@@ -25,6 +25,12 @@ class ApiGrupoController extends Controller
     public function index()
     {
         $grupos = Grupo::all();
+        if (!$grupos) {
+            return response()->json([
+                'status' => false,
+                'message' => "Los grupos no ha sido encontrados.",
+            ], 404);
+        }
         return response()->json([
             'status' => true,
             'actividades' => $grupos
@@ -39,8 +45,8 @@ class ApiGrupoController extends Controller
         Grupo::create($request->all());
         return response()->json([
             'status' => true,
-            'message' => "Grupo creado satisfactoriamente",
-        ], 200);
+            'message' => "Grupo creado satisfactoriamente.",
+        ], 201);
     }
 
     /**
@@ -49,6 +55,12 @@ class ApiGrupoController extends Controller
     public function show(string $id)
     {
         $grupo = Grupo::find($id);
+        if (!$grupo) {
+            return response()->json([
+                'status' => false,
+                'message' => "El grupo no ha sido encontrado.",
+            ], 404);
+        }
         return response()->json([
             'status' => true,
             'actividad' => $grupo
@@ -58,12 +70,21 @@ class ApiGrupoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(GrupoRequest $request, string $id)
     {
-        Grupo::find($id)->update($request->all());
+        $grupo = Grupo::find($id);
+        if (!$grupo) {
+            return response()->json([
+                'status' => false,
+                'message' => "El grupo no ha sido encontrado.",
+            ], 404);
+        }
+
+        $grupo->update($request->all());
+
         return response()->json([
             'status' => true,
-            'message' => "Grupo actualizado satisfactoriamente",
+            'message' => "Grupo actualizado satisfactoriamente.",
         ], 200);
     }
 
@@ -73,11 +94,18 @@ class ApiGrupoController extends Controller
     public function destroy(string $id)
     {
         $grupo = Grupo::find($id);
-        $grupo->delete();
 
+
+        if (!$grupo) {
+            return response()->json([
+                'status' => false,
+                'message' => "El grupo no ha sido encontrado.",
+            ], 404);
+        }
+        $grupo->delete();
         return response()->json([
             'status' => true,
-            'message' => "Grupo eliminado satisfactoriamente",
-        ], 200);
+            'message' => "Grupo eliminado satisfactoriamente.",
+        ], 204);
     }
 }

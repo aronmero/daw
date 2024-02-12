@@ -26,6 +26,12 @@ class ApiProfesorController extends Controller
     public function index()
     {
         $profesores = Profesor::all();
+        if (!$profesores) {
+            return response()->json([
+                'status' => false,
+                'message' => "Los profesores no ha sido encontrados.",
+            ], 404);
+        }
         return response()->json([
             'status' => true,
             'profesores' => $profesores
@@ -35,19 +41,19 @@ class ApiProfesorController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ProfesorRequest $request)
     {
         Profesor::create([
             'nombre' => $request->input('nombre'),
             'email' => $request->input('email'),
             'primerApellido' => $request->input('primerApellido'),
             'segundoApellido' => $request->input('segundoApellido'),
-            'password' => bcrypt($request->input('password'), )
+            'password' => bcrypt($request->input('password'),)
         ])->assignRole('Usuario');
         return response()->json([
             'status' => true,
-            'message' => "Profesor creado satisfactoriamente",
-        ], 200);
+            'message' => "Profesor creado satisfactoriamente.",
+        ], 201);
     }
 
     /**
@@ -56,6 +62,12 @@ class ApiProfesorController extends Controller
     public function show(string $id)
     {
         $profesor = Profesor::find($id);
+        if (!$profesor) {
+            return response()->json([
+                'status' => false,
+                'message' => "El profesor no ha sido encontrado.",
+            ], 404);
+        }
         return response()->json([
             'status' => true,
             'profesor' => $profesor
@@ -65,12 +77,19 @@ class ApiProfesorController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(ProfesorEditRequest $request, string $id)
     {
-        Profesor::find($id)->update($request->all());
+        $profesor = Profesor::find($id);
+        if (!$profesor) {
+            return response()->json([
+                'status' => false,
+                'message' => "El profesor no ha sido encontrado.",
+            ], 404);
+        }
+        $profesor->update($request->all());
         return response()->json([
             'status' => true,
-            'message' => "Profesor actualizado satisfactoriamente",
+            'message' => "Profesor actualizado satisfactoriamente.",
         ], 200);
     }
 
@@ -79,11 +98,17 @@ class ApiProfesorController extends Controller
      */
     public function destroy(string $id)
     {
-        $profesores = Profesor::find($id);
-        $profesores->delete();
+        $profesor = Profesor::find($id);
+        if (!$profesor) {
+            return response()->json([
+                'status' => false,
+                'message' => "El profesor no ha sido encontrado.",
+            ], 404);
+        }
+        $profesor->delete();
         return response()->json([
             'status' => true,
-            'message' => "Profesor eliminado satisfactoriamente",
-        ], 200);
+            'message' => "Profesor eliminado satisfactoriamente.",
+        ], 204);
     }
 }

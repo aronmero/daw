@@ -27,16 +27,21 @@ class ApiActividadController extends Controller
         $actividades = Actividad::with(['grupos' => function ($query) {
             $query->orderBy('id');
         }, 'profesores' => function ($query) {
-            $query->select('id', 'nombre', 'primerApellido', 'segundoApellido', 'email');
+            $query->select('id', 'nombre', 'primerApellido', 'segundoApellido');
             $query->orderBy('id');
         }])->orderBy('fecha')->get();
 
-        /*
         $actividades->transform(function ($actividad) {
-            $actividad->grupos = $actividad->grupos->sortBy('id');
-            $actividad->profesores = $actividad->profesores->sortBy('id');
+            $actividad->grupos = $actividad->getGruposForApiAttribute();
+            $actividad->profesores = $actividad->getProfesoresForApiAttribute();
             return $actividad;
-        });*/
+        });
+        if (!$actividades) {
+            return response()->json([
+                'status' => false,
+                'message' => "Los actividades no ha sido encontradas.",
+            ], 404);
+        }
 
         return response()->json([
             'status' => true,
@@ -57,8 +62,8 @@ class ApiActividadController extends Controller
 
         return response()->json([
             'status' => true,
-            'message' => "Actividad creada satisfactoriamente",
-        ], 200);
+            'message' => "Actividad creada satisfactoriamente.",
+        ], 201);
     }
 
     /**
@@ -67,6 +72,14 @@ class ApiActividadController extends Controller
     public function show(string $id)
     {
         $actividad = Actividad::find($id);
+
+        if (!$actividad) {
+            return response()->json([
+                'status' => false,
+                'message' => "La actividad no ha sido encontrada.",
+            ], 404);
+        }
+
         return response()->json([
             'status' => true,
             'actividad' => $actividad
@@ -81,7 +94,10 @@ class ApiActividadController extends Controller
         $actividad = Actividad::find($id);
 
         if (!$actividad) {
-            return redirect()->route('actividades.index')->with('error', 'La actividad no existe');
+            return response()->json([
+                'status' => false,
+                'message' => "La actividad no ha sido encontrada.",
+            ], 404);
         }
 
         $actividad->update($request->all());
@@ -91,7 +107,7 @@ class ApiActividadController extends Controller
         $actividad->profesores()->sync($request->input('profesores', []));
         return response()->json([
             'status' => true,
-            'message' => "Actividad actualizada satisfactoriamente",
+            'message' => "Actividad actualizada satisfactoriamente.",
         ], 200);
     }
 
@@ -103,13 +119,16 @@ class ApiActividadController extends Controller
         $actividad = Actividad::find($id);
 
         if (!$actividad) {
-            return redirect()->route('actividades.index')->with('error', 'La actividad no existe');
+            return response()->json([
+                'status' => false,
+                'message' => "La actividad no ha sido encontrada.",
+            ], 404);
         }
 
         $actividad->delete();
         return response()->json([
             'status' => true,
-            'message' => "Actividad eliminada satisfactoriamente",
-        ], 200);
+            'message' => "Actividad eliminada satisfactoriamente.",
+        ], 204);
     }
 }
