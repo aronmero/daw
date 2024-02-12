@@ -1,0 +1,1035 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "API Actividades Centro",
+    "description": "Esta api permite manejar informacion de actividades, grupos y profesores en el centro.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://127.0.0.1:8000/"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Actividades",
+      "description": "CRUD actividades"
+    },
+    {
+      "name": "Grupos",
+      "description": "CRUD grupos"
+    },
+    {
+      "name": "Profesores",
+      "description": "CRUD profesores"
+    },
+    {
+      "name": "Auth",
+      "description": "Autenticación de usuarios"
+    }
+  ],
+  "paths": {
+    "/grupo": {
+      "get": {
+        "tags": [
+          "Grupos"
+        ],
+        "summary": "Obtener todos los grupos",
+        "description": "Retorna todos los grupos disponibles.",
+        "responses": {
+          "200": {
+            "description": "Lista de grupos",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GruposResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Grupos no encontrados",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Grupos"
+        ],
+        "summary": "Crear un nuevo grupo",
+        "description": "Crea un nuevo grupo con los datos proporcionados.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GrupoRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Grupo creado satisfactoriamente",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/grupo/{id}": {
+      "get": {
+        "tags": [
+          "Grupos"
+        ],
+        "summary": "Obtener detalles de un grupo por ID",
+        "description": "Retorna los detalles de un grupo específico según el ID proporcionado.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID del grupo a buscar",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Detalles del grupo encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GrupoResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Grupo no encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Grupos"
+        ],
+        "summary": "Actualizar un grupo existente",
+        "description": "Actualiza los detalles de un grupo existente según el ID proporcionado.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID del grupo a actualizar",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GrupoRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Grupo actualizado satisfactoriamente",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Grupo no encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Grupos"
+        ],
+        "summary": "Eliminar un grupo",
+        "description": "Elimina un grupo existente según el ID proporcionado.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID del grupo a eliminar",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Grupo eliminado satisfactoriamente"
+          },
+          "404": {
+            "description": "Grupo no encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/profesor": {
+      "get": {
+        "tags": [
+          "Profesores"
+        ],
+        "summary": "Obtener todos los profesores",
+        "description": "Retorna todos los profesores disponibles.",
+        "responses": {
+          "200": {
+            "description": "Lista de profesores",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProfesoresResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Profesores no encontrados",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Profesores"
+        ],
+        "summary": "Crear un nuevo profesor",
+        "description": "Crea un nuevo profesor con los datos proporcionados.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProfesorRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Profesor creado satisfactoriamente",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/profesor/{id}": {
+      "get": {
+        "tags": [
+          "Profesores"
+        ],
+        "summary": "Obtener detalles de un profesor por ID",
+        "description": "Retorna los detalles de un profesor específico según el ID proporcionado.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID del profesor a buscar",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Detalles del profesor encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProfesorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Profesor no encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Profesores"
+        ],
+        "summary": "Actualizar un profesor existente",
+        "description": "Actualiza los detalles de un profesor existente según el ID proporcionado.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID del profesor a actualizar",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProfesorEditRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Profesor actualizado satisfactoriamente",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Profesor no encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Profesores"
+        ],
+        "summary": "Eliminar un profesor",
+        "description": "Elimina un profesor existente según el ID proporcionado.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID del profesor a eliminar",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Profesor eliminado satisfactoriamente"
+          },
+          "404": {
+            "description": "Profesor no encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/actividad": {
+      "get": {
+        "tags": [
+          "Actividades"
+        ],
+        "summary": "Obtener todas las actividades",
+        "description": "Retorna todas las actividades disponibles.",
+        "responses": {
+          "200": {
+            "description": "Lista de actividades",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActividadesResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Actividades no encontradas",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Actividades"
+        ],
+        "summary": "Crear una nueva actividad",
+        "description": "Crea una nueva actividad con los datos proporcionados. Se requiere autenticación con un token de acceso válido y permisos de administrador para crear actividades.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ActividadRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Actividad creada satisfactoriamente",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/actividad/{id}": {
+      "get": {
+        "tags": [
+          "Actividades"
+        ],
+        "summary": "Obtener detalles de una actividad por ID",
+        "description": "Retorna los detalles de una actividad específica según el ID proporcionado. Se requiere autenticación con un token de acceso válido.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID de la actividad a buscar",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Detalles de la actividad encontrada",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActividadResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Actividad no encontrada",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Actividades"
+        ],
+        "summary": "Actualizar una actividad existente",
+        "description": "Actualiza los detalles de una actividad existente según el ID proporcionado. Se requiere autenticación con un token de acceso válido y permisos de administrador para editar actividades.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID de la actividad a actualizar",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ActividadRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Actividad actualizada satisfactoriamente",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Actividad no encontrada",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Actividades"
+        ],
+        "summary": "Eliminar una actividad",
+        "description": "Elimina una actividad existente según el ID proporcionado. Se requiere autenticación con un token de acceso válido y permisos de administrador para eliminar actividades.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID de la actividad a eliminar",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Actividad eliminada satisfactoriamente"
+          },
+          "404": {
+            "description": "Actividad no encontrada",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/auth": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Iniciar sesión",
+        "description": "Inicia sesión utilizando las credenciales proporcionadas y devuelve un token de acceso Bearer.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "format": "email",
+                    "description": "Correo electrónico del profesor"
+                  },
+                  "password": {
+                    "type": "string",
+                    "format": "password",
+                    "description": "Contraseña del profesor"
+                  },
+                  "remember": {
+                    "type": "boolean",
+                    "description": "Indica si se debe recordar la sesión del usuario"
+                  }
+                },
+                "required": [
+                  "email",
+                  "password"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Sesión iniciada satisfactoriamente",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "token": {
+                      "type": "string",
+                      "description": "Token de acceso Bearer generado para la sesión"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Credenciales inválidas",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "description": "Mensaje indicando que las credenciales no coinciden con los registros"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    },
+    "schemas": {
+      "Grupo": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "ID único del grupo"
+          },
+          "nombre": {
+            "type": "string",
+            "description": "Nombre del grupo"
+          }
+        }
+      },
+      "GrupoRequest": {
+        "type": "object",
+        "properties": {
+          "nombre": {
+            "type": "string",
+            "description": "Nombre del grupo"
+          },
+          "descripcion": {
+            "type": "string",
+            "description": "Descripción del grupo"
+          }
+        },
+        "required": [
+          "nombre",
+          "descripcion"
+        ]
+      },
+      "GrupoResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "boolean",
+            "description": "Indica el estado de la solicitud"
+          },
+          "actividad": {
+            "$ref": "#/components/schemas/Grupo"
+          }
+        }
+      },
+      "GruposResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "boolean",
+            "description": "Indica el estado de la solicitud"
+          },
+          "actividades": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Grupo"
+            }
+          }
+        }
+      },
+      "Profesor": {
+        "type": "object",
+        "properties": {
+          "nombre": {
+            "type": "string",
+            "description": "Nombre del profesor"
+          },
+          "email": {
+            "type": "string",
+            "description": "Correo electrónico del profesor"
+          },
+          "primerApellido": {
+            "type": "string",
+            "description": "Primer apellido del profesor"
+          },
+          "segundoApellido": {
+            "type": "string",
+            "description": "Segundo apellido del profesor"
+          },
+          "password": {
+            "type": "string",
+            "format": "password",
+            "description": "Contraseña del profesor"
+          }
+        }
+      },
+      "ProfesorRequest": {
+        "type": "object",
+        "properties": {
+          "nombre": {
+            "type": "string",
+            "description": "Nombre del profesor"
+          },
+          "email": {
+            "type": "string",
+            "description": "Correo electrónico del profesor"
+          },
+          "primerApellido": {
+            "type": "string",
+            "description": "Primer apellido del profesor"
+          },
+          "segundoApellido": {
+            "type": "string",
+            "description": "Segundo apellido del profesor"
+          },
+          "password": {
+            "type": "string",
+            "format": "password",
+            "description": "Contraseña del profesor"
+          }
+        },
+        "required": [
+          "nombre",
+          "email",
+          "primerApellido",
+          "segundoApellido",
+          "password"
+        ]
+      },
+      "ProfesorEditRequest": {
+        "type": "object",
+        "properties": {
+          "nombre": {
+            "type": "string",
+            "description": "Nuevo nombre del profesor"
+          },
+          "email": {
+            "type": "string",
+            "description": "Nuevo correo electrónico del profesor"
+          },
+          "primerApellido": {
+            "type": "string",
+            "description": "Nuevo primer apellido del profesor"
+          },
+          "segundoApellido": {
+            "type": "string",
+            "description": "Nuevo segundo apellido del profesor"
+          }
+        }
+      },
+      "ProfesorResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "boolean",
+            "description": "Indica el estado de la solicitud"
+          },
+          "profesor": {
+            "$ref": "#/components/schemas/Profesor"
+          }
+        }
+      },
+      "ProfesoresResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "boolean",
+            "description": "Indica el estado de la solicitud"
+          },
+          "profesores": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Profesor"
+            }
+          }
+        }
+      },
+      "Actividad": {
+        "type": "object",
+        "properties": {
+          "nombre": {
+            "type": "string",
+            "description": "Nombre de la actividad"
+          },
+          "descripcion": {
+            "type": "string",
+            "description": "Descripción de la actividad"
+          },
+          "fecha": {
+            "type": "string",
+            "format": "date",
+            "description": "Fecha de la actividad"
+          },
+          "grupos": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "description": "Lista de IDs de grupos asociados a la actividad"
+          },
+          "profesores": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "description": "Lista de IDs de profesores asociados a la actividad"
+          }
+        }
+      },
+      "ActividadRequest": {
+        "type": "object",
+        "properties": {
+          "nombre": {
+            "type": "string",
+            "description": "Nombre de la actividad"
+          },
+          "descripcion": {
+            "type": "string",
+            "description": "Descripción de la actividad"
+          },
+          "fecha": {
+            "type": "string",
+            "format": "date",
+            "description": "Fecha de la actividad"
+          },
+          "grupos": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "description": "Lista de IDs de grupos asociados a la actividad"
+          },
+          "profesores": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "description": "Lista de IDs de profesores asociados a la actividad"
+          }
+        },
+        "required": [
+          "nombre",
+          "descripcion",
+          "fecha"
+        ]
+      },
+      "ActividadResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "boolean",
+            "description": "Indica el estado de la solicitud"
+          },
+          "actividad": {
+            "$ref": "#/components/schemas/Actividad"
+          }
+        }
+      },
+      "ActividadesResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "boolean",
+            "description": "Indica el estado de la solicitud"
+          },
+          "actividades": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Actividad"
+            }
+          }
+        }
+      },
+      "SuccessResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "boolean",
+            "description": "Indica el estado de la solicitud"
+          },
+          "message": {
+            "type": "string",
+            "description": "Mensaje de éxito"
+          }
+        }
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "boolean",
+            "description": "Indica el estado de la solicitud"
+          },
+          "message": {
+            "type": "string",
+            "description": "Mensaje de error"
+          }
+        }
+      }
+    }
+  }
+}
