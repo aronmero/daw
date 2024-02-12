@@ -10,18 +10,33 @@ use Illuminate\Http\Request;
 
 class ApiActividadController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum')->except('index');
+        $this->middleware('can:admin.actividades.create')->only('store');
+        $this->middleware('can:admin.actividades.destroy')->only('destroy');
+        $this->middleware('can:admin.actividades.edit')->only('update');
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $actividades = Actividad::with('grupos', 'profesores')->orderBy('fecha')->get();
+        $actividades = Actividad::with(['grupos' => function ($query) {
+            $query->orderBy('id');
+        }, 'profesores' => function ($query) {
+            $query->select('id', 'nombre', 'primerApellido', 'segundoApellido', 'email');
+            $query->orderBy('id');
+        }])->orderBy('fecha')->get();
 
+        /*
         $actividades->transform(function ($actividad) {
             $actividad->grupos = $actividad->grupos->sortBy('id');
             $actividad->profesores = $actividad->profesores->sortBy('id');
             return $actividad;
-        });
+        });*/
 
         return response()->json([
             'status' => true,

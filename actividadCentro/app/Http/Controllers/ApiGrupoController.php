@@ -8,6 +8,17 @@ use App\Models\Grupo;
 
 class ApiGrupoController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum');
+        $this->middleware('can:admin.grupo.index')->only('index');
+        $this->middleware('can:admin.grupo.create')->only('store');
+        $this->middleware('can:admin.grupo.destroy')->only('destroy');
+        $this->middleware('can:admin.grupo.show')->only('show');
+        $this->middleware('can:admin.grupo.edit')->only('update');
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -18,7 +29,6 @@ class ApiGrupoController extends Controller
             'status' => true,
             'actividades' => $grupos
         ], 200);
-    
     }
 
     /**

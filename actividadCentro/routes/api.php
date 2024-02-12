@@ -22,9 +22,10 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::apiResource('juegos', ApiActividadController::class);
 });
 */
-Route::group(['middleware' => 'auth:sanctum'], function () {
-    Route::apiResource('actividades', ApiActividadController::class)->parameters(['actividades' => 'actividad']);
-    Route::apiResource('grupos', ApiGrupoController::class);
-    Route::apiResource('profesores', ApiProfesorController::class)->parameters(['profesores' => 'profesor']);
-});
+
+Route::apiResource('actividades', ApiActividadController::class)->parameters(['actividades' => 'actividad']);
+
+Route::apiResource('grupos', ApiGrupoController::class);
+Route::apiResource('profesores', ApiProfesorController::class)->parameters(['profesores' => 'profesor']);
+
 Route::post("login", [ApiAuthController::class, 'index']);

@@ -16,7 +16,8 @@ class Actividad extends Model
 
     public function grupos()
     {
-        return $this->belongsToMany(Grupo::class, 'actividades_grupos', 'actividad_id', 'grupo_id');
+        return $this->belongsToMany(Grupo::class, 'actividades_grupos', 'actividad_id', 'grupo_id')
+        ->select(['id', 'nombre']);
     }
 
     public function profesores()
@@ -31,4 +32,17 @@ class Actividad extends Model
             $actividad->profesores()->detach();
         });
     }
+
+    protected $hidden = ['created_at', 'updated_at'];
+    public function getGruposAttribute($value)
+    {
+        if ($value) {
+            return $value->map(function ($grupo) {
+                unset($grupo['pivot']);
+                return $grupo;
+            });
+        }
+        return $value;
+    }
+    
 }

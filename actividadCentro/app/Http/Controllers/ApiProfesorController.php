@@ -11,6 +11,15 @@ use Illuminate\Support\Facades\Hash;
 
 class ApiProfesorController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum');
+        $this->middleware('can:admin.usuario.index')->only('index');
+        $this->middleware('can:admin.usuario.create')->only('store');
+        $this->middleware('can:admin.usuario.destroy')->only('destroy');
+        $this->middleware('can:admin.usuario.show')->only('show');
+        $this->middleware('can:admin.usuario.edit')->only('update');
+    }
     /**
      * Display a listing of the resource.
      */
