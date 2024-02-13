@@ -1,6 +1,6 @@
 <script setup>
 import AuthUsuario from "@/components/Auth/AuthUsuario.vue";
-import { useUsuarioStore } from "../stores/usuario";
+import { useUsuarioStore } from "@/stores/usuario";
 import { ref } from "vue";
 const store = useUsuarioStore();
 
@@ -21,6 +21,7 @@ const tryAuthUser = async (userData) => {
         const userData = {
           id: usuarioEncontrado.id,
           email: usuarioEncontrado.email,
+          nombre: usuarioEncontrado.nombre,
         };
 
         store.login(userData)
