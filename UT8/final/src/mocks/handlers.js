@@ -18,5 +18,5 @@ export const handlers = [
     return HttpResponse.json({
       usuarios,
     });
-  }),
+  })
 ];
