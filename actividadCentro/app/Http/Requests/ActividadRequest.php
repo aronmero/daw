@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-
+use Illuminate\Validation\Rule;
 class ActividadRequest extends FormRequest
 {
     /**
@@ -26,8 +26,15 @@ class ActividadRequest extends FormRequest
             'duracion' => 'required|integer|between:1,720',
             'fecha' => 'required|date|after:yesterday',
             'horaInicio' => 'required|date_format:H:i|after_or_equal:06:00|before_or_equal:22:00',
-            'profesores' => 'required|array|min:1',
-            'grupos' => 'required|array|min:1',
+            'profesores' => [
+                'required',
+                'array',
+                'min:1',
+                Rule::exists('profesores', 'id')->where(function ($query) {
+                    $query->where('id', '>', 1);
+                }),
+            ],
+            'grupos' => 'required|array|min:1|exists:grupos,id',
         ];
     }
 
@@ -58,11 +65,13 @@ class ActividadRequest extends FormRequest
                 'required' => 'Debe seleccionar al menos un profesor.',
                 'array' => 'Debe seleccionar al menos un profesor.',
                 'min' => 'Debe seleccionar al menos un profesor.',
+                'exists'=> 'Uno o más de los profesores seleccionados no son válidos.'
             ],
             'grupos' => [
                 'required' => 'Debe seleccionar al menos un grupo.',
                 'array' => 'Debe seleccionar al menos un grupo.',
                 'min' => 'Debe seleccionar al menos un grupo.',
+                'exists'=> 'Uno o más de los grupos seleccionados no son válidos.'
             ],
 
         ];
