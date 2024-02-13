@@ -1,8 +1,9 @@
 import { createApp } from "vue";
-import "./style.css";
-import "./styles/style.scss";
+import { createPinia } from 'pinia'
 import router from "@/router/index.js";
 import App from "./App.vue";
+import "./style.css";
+import "./styles/style.scss";
 
 async function enableMocking() {
   if (process.env.NODE_ENV !== "development") {
@@ -14,7 +15,9 @@ async function enableMocking() {
 }
 
 enableMocking().then(() => {
+  const pinia = createPinia()
   const app = createApp(App);
   app.use(router);
+  app.use(pinia)
   app.mount("#app");
 });
