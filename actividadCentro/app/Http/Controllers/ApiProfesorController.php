@@ -27,15 +27,9 @@ class ApiProfesorController extends Controller
     {
         $profesores = Profesor::all();
         if (!$profesores) {
-            return response()->json([
-                'status' => false,
-                'message' => "Los profesores no ha sido encontrados.",
-            ], 404);
+            return   parent::respuestaHTTP("Los profesores no ha sido encontrados.", 404);
         }
-        return response()->json([
-            'status' => true,
-            'profesores' => $profesores
-        ], 200);
+        return parent::respuestaHTTP($profesores, 200, true);
     }
 
     /**
@@ -50,10 +44,7 @@ class ApiProfesorController extends Controller
             'segundoApellido' => $request->input('segundoApellido'),
             'password' => bcrypt($request->input('password'),)
         ])->assignRole('Usuario');
-        return response()->json([
-            'status' => true,
-            'message' => "Profesor creado satisfactoriamente.",
-        ], 201);
+        return  parent::respuestaHTTP("Profesor creado satisfactoriamente.", 201, true);
     }
 
     /**
@@ -63,15 +54,9 @@ class ApiProfesorController extends Controller
     {
         $profesor = Profesor::find($id);
         if (!$profesor) {
-            return response()->json([
-                'status' => false,
-                'message' => "El profesor no ha sido encontrado.",
-            ], 404);
+            return   parent::respuestaHTTP("El profesor no ha sido encontrado.", 404);
         }
-        return response()->json([
-            'status' => true,
-            'profesor' => $profesor
-        ], 200);
+        return parent::respuestaHTTP($profesor, 200, true);
     }
 
     /**
@@ -81,16 +66,10 @@ class ApiProfesorController extends Controller
     {
         $profesor = Profesor::find($id);
         if (!$profesor) {
-            return response()->json([
-                'status' => false,
-                'message' => "El profesor no ha sido encontrado.",
-            ], 404);
+            return  parent::respuestaHTTP("El profesor no ha sido encontrado.", 404);
         }
         $profesor->update($request->all());
-        return response()->json([
-            'status' => true,
-            'message' => "Profesor actualizado satisfactoriamente.",
-        ], 200);
+        return  parent::respuestaHTTP("Profesor actualizado satisfactoriamente.", 200, true);
     }
 
     /**
@@ -100,15 +79,10 @@ class ApiProfesorController extends Controller
     {
         $profesor = Profesor::find($id);
         if (!$profesor) {
-            return response()->json([
-                'status' => false,
-                'message' => "El profesor no ha sido encontrado.",
-            ], 404);
+            return    parent::respuestaHTTP("El profesor no ha sido encontrado.", 404);
         }
         $profesor->delete();
-        return response()->json([
-            'status' => true,
-            'message' => "Profesor eliminado satisfactoriamente.",
-        ], 204);
+
+        return parent::respuestaHTTP("Profesor eliminado satisfactoriamente.", 204, true);
     }
 }

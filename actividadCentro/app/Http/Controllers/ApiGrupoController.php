@@ -26,15 +26,9 @@ class ApiGrupoController extends Controller
     {
         $grupos = Grupo::all();
         if (!$grupos) {
-            return response()->json([
-                'status' => false,
-                'message' => "Los grupos no ha sido encontrados.",
-            ], 404);
+            return  parent::respuestaHTTP("Los grupos no ha sido encontrados.", 404);
         }
-        return response()->json([
-            'status' => true,
-            'actividades' => $grupos
-        ], 200);
+        return  parent::respuestaHTTP($grupos, 200, true);
     }
 
     /**
@@ -43,10 +37,7 @@ class ApiGrupoController extends Controller
     public function store(GrupoRequest $request)
     {
         Grupo::create($request->all());
-        return response()->json([
-            'status' => true,
-            'message' => "Grupo creado satisfactoriamente.",
-        ], 201);
+        return  parent::respuestaHTTP("Grupo creado satisfactoriamente.", 201, true);
     }
 
     /**
@@ -56,15 +47,10 @@ class ApiGrupoController extends Controller
     {
         $grupo = Grupo::find($id);
         if (!$grupo) {
-            return response()->json([
-                'status' => false,
-                'message' => "El grupo no ha sido encontrado.",
-            ], 404);
+            return   parent::respuestaHTTP("El grupo no ha sido encontrado.", 404);
         }
-        return response()->json([
-            'status' => true,
-            'actividad' => $grupo
-        ], 200);
+
+        return parent::respuestaHTTP($grupo, 200, true);
     }
 
     /**
@@ -74,18 +60,12 @@ class ApiGrupoController extends Controller
     {
         $grupo = Grupo::find($id);
         if (!$grupo) {
-            return response()->json([
-                'status' => false,
-                'message' => "El grupo no ha sido encontrado.",
-            ], 404);
+            return   parent::respuestaHTTP("El grupo no ha sido encontrado.", 404);
         }
 
         $grupo->update($request->all());
 
-        return response()->json([
-            'status' => true,
-            'message' => "Grupo actualizado satisfactoriamente.",
-        ], 200);
+        return parent::respuestaHTTP("Grupo actualizado satisfactoriamente.", 200, true);
     }
 
     /**
@@ -95,17 +75,11 @@ class ApiGrupoController extends Controller
     {
         $grupo = Grupo::find($id);
 
-
         if (!$grupo) {
-            return response()->json([
-                'status' => false,
-                'message' => "El grupo no ha sido encontrado.",
-            ], 404);
+            return  parent::respuestaHTTP("El grupo no ha sido encontrado.", 404);
         }
         $grupo->delete();
-        return response()->json([
-            'status' => true,
-            'message' => "Grupo eliminado satisfactoriamente.",
-        ], 204);
+
+        return parent::respuestaHTTP("Grupo eliminado satisfactoriamente.", 204, true);
     }
 }

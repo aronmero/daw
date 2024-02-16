@@ -37,16 +37,10 @@ class ApiActividadController extends Controller
             return $actividad;
         });
         if (!$actividades) {
-            return response()->json([
-                'status' => false,
-                'message' => "Los actividades no ha sido encontradas.",
-            ], 404);
+            return   parent::respuestaHTTP("Las actividades no ha sido encontradas.", 404);
         }
 
-        return response()->json([
-            'status' => true,
-            'actividades' => $actividades
-        ], 200);
+        return parent::respuestaHTTP($actividades, 200, true);
     }
 
     /**
@@ -60,10 +54,7 @@ class ApiActividadController extends Controller
 
         $actividad->profesores()->attach($request->input('profesores', []));
 
-        return response()->json([
-            'status' => true,
-            'message' => "Actividad creada satisfactoriamente.",
-        ], 201);
+        return  parent::respuestaHTTP("Actividad creada satisfactoriamente.", 201, true);
     }
 
     /**
@@ -74,16 +65,10 @@ class ApiActividadController extends Controller
         $actividad = Actividad::find($id);
 
         if (!$actividad) {
-            return response()->json([
-                'status' => false,
-                'message' => "La actividad no ha sido encontrada.",
-            ], 404);
+            return   parent::respuestaHTTP("La actividad no ha sido encontrada.", 404);
         }
 
-        return response()->json([
-            'status' => true,
-            'actividad' => $actividad
-        ], 200);
+        return parent::respuestaHTTP($actividad, 200, true);
     }
 
     /**
@@ -94,10 +79,7 @@ class ApiActividadController extends Controller
         $actividad = Actividad::find($id);
 
         if (!$actividad) {
-            return response()->json([
-                'status' => false,
-                'message' => "La actividad no ha sido encontrada.",
-            ], 404);
+            return  parent::respuestaHTTP("La actividad no ha sido encontrada.", 404);
         }
 
         $actividad->update($request->all());
@@ -105,10 +87,8 @@ class ApiActividadController extends Controller
         $actividad->grupos()->sync($request->input('grupos', []));
 
         $actividad->profesores()->sync($request->input('profesores', []));
-        return response()->json([
-            'status' => true,
-            'message' => "Actividad actualizada satisfactoriamente.",
-        ], 200);
+
+        return  parent::respuestaHTTP("Actividad actualizada satisfactoriamente.", 200, true);
     }
 
     /**
@@ -119,16 +99,11 @@ class ApiActividadController extends Controller
         $actividad = Actividad::find($id);
 
         if (!$actividad) {
-            return response()->json([
-                'status' => false,
-                'message' => "La actividad no ha sido encontrada.",
-            ], 404);
+            return    parent::respuestaHTTP("La actividad no ha sido encontrada.", 404);
         }
 
         $actividad->delete();
-        return response()->json([
-            'status' => true,
-            'message' => "Actividad eliminada satisfactoriamente.",
-        ], 204);
+
+        return parent::respuestaHTTP("Actividad eliminada satisfactoriamente.", 204, true);
     }
 }

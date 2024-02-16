@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Profesor;
 use Illuminate\Support\Facades\Auth;
+
 class ApiAuthController extends Controller
 {
     /**
@@ -22,14 +23,9 @@ class ApiAuthController extends Controller
             $response = [
                 'token' => $token
             ];
-
-            return response($response, 201);
-
+            return parent::respuestaHTTP($response, 201, true);
         } else {
-            return response([
-                'message' => ['Estas credenciales no coinciden con nuestros registros.']
-            ], 404);
+            return parent::respuestaHTTP('Estas credenciales no coinciden con nuestros registros.', 404);
         }
     }
-
 }
