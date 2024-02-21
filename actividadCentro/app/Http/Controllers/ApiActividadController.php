@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ActividadRequest;
+use App\Http\Requests\ActividadRequestUpdate;
 use App\Models\Actividad;
 use App\Models\Grupo;
 use App\Models\Profesor;
@@ -24,12 +25,15 @@ class ApiActividadController extends Controller
      */
     public function index()
     {
-        $actividades = Actividad::with(['grupos' => function ($query) {
-            $query->orderBy('id');
-        }, 'profesores' => function ($query) {
-            $query->select('id', 'nombre', 'primerApellido', 'segundoApellido');
-            $query->orderBy('id');
-        }])->orderBy('fecha')->get();
+        $actividades = Actividad::with([
+            'grupos' => function ($query) {
+                $query->orderBy('id');
+            },
+            'profesores' => function ($query) {
+                $query->select('id', 'nombre', 'primerApellido', 'segundoApellido');
+                $query->orderBy('id');
+            }
+        ])->orderBy('fecha')->get();
 
         $actividades->transform(function ($actividad) {
             $actividad->grupos = $actividad->getGruposForApiAttribute();
@@ -37,7 +41,7 @@ class ApiActividadController extends Controller
             return $actividad;
         });
         if (!$actividades) {
-            return   parent::respuestaHTTP("Las actividades no ha sido encontradas.", 404);
+            return parent::respuestaHTTP("Las actividades no ha sido encontradas.", 404);
         }
 
         return parent::respuestaHTTP($actividades, 200, true);
@@ -54,7 +58,7 @@ class ApiActividadController extends Controller
 
         $actividad->profesores()->attach($request->input('profesores', []));
 
-        return  parent::respuestaHTTP("Actividad creada satisfactoriamente.", 201, true);
+        return parent::respuestaHTTP("Actividad creada satisfactoriamente.", 201, true);
     }
 
     /**
@@ -65,7 +69,7 @@ class ApiActividadController extends Controller
         $actividad = Actividad::find($id);
 
         if (!$actividad) {
-            return   parent::respuestaHTTP("La actividad no ha sido encontrada.", 404);
+            return parent::respuestaHTTP("La actividad no ha sido encontrada.", 404);
         }
 
         return parent::respuestaHTTP($actividad, 200, true);
@@ -74,21 +78,29 @@ class ApiActividadController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(ActividadRequest $request, string $id)
+    public function update(ActividadRequestUpdate $request, string $id)
     {
         $actividad = Actividad::find($id);
 
         if (!$actividad) {
-            return  parent::respuestaHTTP("La actividad no ha sido encontrada.", 404);
+            return parent::respuestaHTTP("La actividad no ha sido encontrada.", 404);
         }
 
-        $actividad->update($request->all());
+        $data = $request->all();
 
-        $actividad->grupos()->sync($request->input('grupos', []));
+        $actividad->update($data);
 
-        $actividad->profesores()->sync($request->input('profesores', []));
+      
+        if (isset($data['grupos'])) {
+            $actividad->grupos()->sync($data['grupos']);
+        }
 
-        return  parent::respuestaHTTP("Actividad actualizada satisfactoriamente.", 200, true);
+        
+        if (isset($data['profesores'])) {
+            $actividad->profesores()->sync($data['profesores']);
+        }
+
+        return parent::respuestaHTTP("Actividad actualizada satisfactoriamente.", 200, true);
     }
 
     /**
@@ -99,7 +111,7 @@ class ApiActividadController extends Controller
         $actividad = Actividad::find($id);
 
         if (!$actividad) {
-            return    parent::respuestaHTTP("La actividad no ha sido encontrada.", 404);
+            return parent::respuestaHTTP("La actividad no ha sido encontrada.", 404);
         }
 
         $actividad->delete();

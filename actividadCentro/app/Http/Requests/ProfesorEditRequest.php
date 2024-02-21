@@ -22,9 +22,8 @@ class ProfesorEditRequest extends FormRequest
     public function rules(): array
     {
         $rules = [
-            'nombre' => 'required|min:3',
+            'nombre' => 'min:3',
             'email' => [
-                'required',
                 'regex:/^[a-zA-Z0-9._%+-]+@\S*\.\S*$/i',
             ],
         ];
@@ -43,11 +42,9 @@ class ProfesorEditRequest extends FormRequest
     {
         return [
             'nombre' => [
-                'required' => 'El nombre de usuario es obligatorio.',
                 'min' => 'El nombre de usuario debe tener al menos 3 caracteres.',
             ],
             'email' => [
-                'required' => 'El correo es obligatorio.',
                 'unique' => 'Este correo ya está registrado.',
                 'regex' => 'Utilice un correo correcto'
             ],
