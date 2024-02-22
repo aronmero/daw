@@ -1,7 +1,9 @@
 <script setup>
 import AuthUsuario from "@/components/Auth/AuthUsuario.vue";
+import { useRouter } from "vue-router";
 import { useUsuarioStore } from "@/stores/usuario";
 import { ref } from "vue";
+const router = useRouter();
 const store = useUsuarioStore();
 
 let errorMsg = ref(null);
@@ -26,7 +28,7 @@ const tryAuthUser = async (userData) => {
 
         store.login(userData)
         errorMsg.value = "";
-
+        router.push("/home");
       } else {
         errorMsg.value = "Email o contraseña incorrectos.";
       }
@@ -37,9 +39,5 @@ const tryAuthUser = async (userData) => {
 };
 </script>
 <template>
-  <AuthUsuario
-    titulo="Iniciar sesion"
-    @submit="tryAuthUser"
-    :error="errorMsg"
-  />
+  <AuthUsuario titulo="Iniciar sesion" @submit="tryAuthUser" :error="errorMsg" />
 </template>

@@ -2,19 +2,28 @@
 
 defineProps({
     img_id: String,
-    alt_text:String,
+    alt_text: String,
     tituloObra: String,
     autor: String,
-    fechaInicio: Number,
-    fechaFin: Number,
+    fecha: Number,
     descripcion: String
 });
 
 </script>
 <template>
-    <img :src="`https://www.artic.edu/iiif/2/${img_id}/full/200,/0/default.jpg`" :alt="alt_text" :title="alt_text">
-    <div>{{ tituloObra }} </div>
-    <div>{{ autor }}</div>
-    <div> {{ fechaInicio }}- {{ fechaFin }}</div>
-    <div>{{ descripcion }}</div>
+    <div class="card">
+        <img :src="`https://www.artic.edu/iiif/2/${img_id}/full/200,/0/default.jpg`" :alt="alt_text" :title="alt_text">
+        <div>{{ tituloObra }} </div>
+        <div>{{ autor }}</div>
+        <div> {{ fecha }}</div>
+        <div>{{ descripcion }}</div>
+    </div>
 </template>
+<style scoped>
+.card {
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    height: 400px;
+}
+</style>

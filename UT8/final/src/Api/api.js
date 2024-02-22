@@ -38,14 +38,23 @@ export async function apiArtworks(id = "") {
  *
  * @export
  * @async
- * @param {string} [url="https://api.artic.edu/api/v1/artworks?page=2&limit=20"] - La URL de la API que se utilizará para obtener los datos (opcional).
+ * @param {string} [url="https://api.artic.edu/api/v1/artworks?fields=id,title,artist_title,date_display,image_id,thumbnail&page=1&limit=20"] - La URL de la API que se utilizará para obtener los datos (opcional).
  * @returns {Promise<Object>} Una promesa que se resolverá con un objeto que contiene información paginada sobre todas las piezas de arte.
  */
-
-export async function apiArtworksPaginated(url = "https://api.artic.edu/api/v1/artworks?page=2&limit=20") {
+export async function apiArtworksPaginated(
+  url = "https://api.artic.edu/api/v1/artworks/search?q=ClaudeMonet&fields=id,title,artist_title,date_display,image_id,thumbnail&limit=20"
+) {
   try {
     const response = await fetch(url);
-    return response.json();
+    const data = await response.json();
+
+    const filteredData = {
+      artist: data.data[0].artist_title,
+      data: data.data.filter((artwork) => artwork.image_id !== null),
+    };
+
+    console.log(filteredData);
+    return filteredData;
   } catch (error) {
     console.error(error);
   }
