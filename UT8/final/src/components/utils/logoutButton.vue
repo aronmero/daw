@@ -1,7 +1,9 @@
 <script setup>
 import { useUsuarioStore } from "@/stores/usuario";
+import { RouterLink } from "vue-router";
 const store = useUsuarioStore();
+
 </script>
 <template>
-  <button @click="store.logout()" class="logoutButton">Cerrar Sesion</button>
+  <router-link @click="store.logout()" class="logoutButton" to="/">Cerrar Sesion</router-link>
 </template>

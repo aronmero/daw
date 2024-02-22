@@ -7,5 +7,4 @@ redirectLogin();
     <Header />
 </template>
 <style scoped>
-
 </style>
