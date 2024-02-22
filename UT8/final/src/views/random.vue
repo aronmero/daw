@@ -3,7 +3,7 @@ import { useArtworkStore } from "@/stores/artwork";
 import { ref, onMounted } from "vue";
 import Header from "@/components/header.vue"
 import Card from "@/components/card.vue";
-import { apiArtworks, apiArtworksRandom } from "@/Api/api.js";
+import { apiArtworks,apiArtworksRandom2 } from "@/Api/api.js";
 
 const store = useArtworkStore();
 
@@ -11,7 +11,7 @@ const dataArtworks = ref([])
 
 
 onMounted(async () => {
-    dataArtworks.value = await apiArtworksRandom();
+    dataArtworks.value = await apiArtworksRandom2();
 })
 
 import { redirectLogin } from "@/utils/utils";
