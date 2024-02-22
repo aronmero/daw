@@ -24,6 +24,5 @@ defineProps({
     display: flex;
     flex-direction: column;
     width: 200px;
-    height: 400px;
 }
 </style>

@@ -1,34 +1,37 @@
 <script setup>
-import { useUsuarioStore } from "@/stores/usuario";
+import { useArtworkStore } from "@/stores/artwork";
 import { ref, onMounted } from "vue";
 import Header from "@/components/header.vue"
 import Card from "@/components/card.vue";
 import { apiArtworks, apiArtworksPaginated } from "@/Api/api.js";
 
-
-//const artworks=apiArtworks();
-const store = useUsuarioStore();
+const store = useArtworkStore();
 
 const dataArtworks = ref([])
-
-onMounted(async () => {
-  dataArtworks.value = await apiArtworksPaginated();
-})
+/*
+if (store.isVacio) {
+  onMounted(async () => {
+    dataArtworks.value = await apiArtworksPaginated();
+    console.log(dataArtworks.value);
+    store.anadir(dataArtworks.value);
+  })
+} else {
+  dataArtworks.value = store.data;
+}*/
 
 import { redirectLogin } from "@/utils/utils";
 redirectLogin();
 </script>
 <template>
-
-    <Header />
-    <section>
-      <h1>Obras de {{dataArtworks.artist}}</h1>
-      <div class="card_container">
-        <Card v-for="artwork in dataArtworks.data" :img_id="artwork.image_id" :alt_text="artwork.thumbnail"
-          :tituloObra="artwork.title" :autor="artwork.artist_title" :fecha="artwork.date_display"></Card>
-      </div>
-    </section>
-
+  <Header />
+  <section v-if="dataArtworks.data !== undefined">
+    <h1>Obras de </h1>
+    <!--
+    <div class="card_container">
+      <Card v-for="artwork in dataArtworks.data" :img_id="artwork.image_id" :alt_text="artwork.thumbnail"
+        :tituloObra="artwork.title" :autor="artwork.artist_title" :fecha="artwork.date_display"></Card>
+    </div>-->
+  </section>
 </template>
 <style scoped>
 .card_container {
