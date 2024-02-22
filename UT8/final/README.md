@@ -29,3 +29,5 @@ Se utilizo [pinia](https://pinia.vuejs.org/) para almacenar variables globales. 
 Se utilizo [Vue router](https://router.vuejs.org/) para para tener varias rutas.
 
 - Una ruta principal en `/` que muestra un inicio de sesion si no hay usuario activo.
+
+La api seleccionada ha sido la [API publica del Art Institute of Chicago](https://api.artic.edu/docs/) 
