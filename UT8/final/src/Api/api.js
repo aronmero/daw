@@ -81,7 +81,7 @@ export async function apiArtworksRandom2(
       artist: data.data[0].artist_title,
       data: data.data.filter((artwork) => artwork.image_id !== null),
     };
-    console.log(filteredData);
+   // console.log(filteredData);
 
     return filteredData;
   } catch (error) {
@@ -105,7 +105,6 @@ export async function apiArtworksRandom() {
 
         if (data.data && data.data.id && data.data.image_id) {
           validArtwork = data.data;
-          console.log(validArtwork);
         }
       } 
     } catch (error) {

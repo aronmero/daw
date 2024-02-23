@@ -1,21 +1,23 @@
 <script setup>
-import { useArtworkStore } from "@/stores/artwork";
+import { useMonetStore } from "@/stores/artwork";
 import { ref, onMounted } from "vue";
 import Header from "@/components/header.vue"
 import Card from "@/components/card.vue";
 import { apiArtworks,apiArtworksRandom2 } from "@/Api/api.js";
-
-const store = useArtworkStore();
-
-const dataArtworks = ref([])
-
-
-onMounted(async () => {
-    dataArtworks.value = await apiArtworksRandom2();
-})
-
 import { redirectLogin } from "@/utils/utils";
 redirectLogin();
+const store = useMonetStore();
+
+const dataArtworks = ref([])
+if (store.isVacio) {
+  onMounted(async () => {
+    dataArtworks.value = await apiArtworksRandom2();
+    store.anadir(dataArtworks.value);
+  })
+} else {
+  dataArtworks.value = store.data;
+}
+
 </script>
 <template>
     <Header />

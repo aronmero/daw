@@ -19,11 +19,11 @@ export const useArtworkStore = defineStore("artwork", () => {
 
 export const useMonetStore = defineStore("monet", () => {
   const isVacio = ref(true);
-  const data = [];
+  const data =  ref({});
 
   function anadir(artworks) {
     this.isVacio = false;
-    this.data.push(artworks.data);
+    this.data=artworks;
   }
 
   function clean() {
