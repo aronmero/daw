@@ -1,25 +1,11 @@
 /**
- * Arreglo que contiene formatos comunes para la URL de las imágenes.
- * @date 2/22/2024 - 3:27:48 PM
- * @author Aaron Medina Rodriguez
- *
- */
-const formatosComunes = [
-  "/full/843,/0/default.jpg",
-  "/full/200,/0/default.jpg",
-  "/full/400,/0/default.jpg",
-  "/full/600,/0/default.jpg",
-  "/full/1686,/0/default.jpg",
-];
-
-/**
  * Realiza una llamada a la API de Art Institute of Chicago para obtener información sobre todas las piezas de arte.
  * @date 2/22/2024 - 3:13:34 PM
  * @author Aaron Medina Rodriguez
  *
  * @export
  * @async
- * @returns {Promise<Object>} Una promesa que se resolverá con un objeto que contiene información sobre todas las piezas de arte.
+ * @returns {Object} Un objeto que contiene información sobre todas las piezas de arte.
  */
 export async function apiArtworks() {
   try {
@@ -36,7 +22,10 @@ export async function apiArtworks() {
     });
 
     const artistNames = Array.from(artistNamesSet);
-    const filteredData = { artist: artistNames, data: data.data.filter((artwork) => artwork.image_id !== null) };
+    const filteredData = {
+      artist: artistNames,
+      data: data.data.filter((artwork) => artwork.image_id !== null),
+    };
     console.log(filteredData);
     return filteredData;
   } catch (error) {
@@ -51,8 +40,8 @@ export async function apiArtworks() {
  *
  * @export
  * @async
- * @param {string} [url="https://api.artic.edu/api/v1/artworks?fields=id,title,artist_title,date_display,image_id,thumbnail&page=1&limit=20"] - La URL de la API que se utilizará para obtener los datos (opcional).
- * @returns {Promise<Object>} Una promesa que se resolverá con un objeto que contiene información paginada sobre todas las piezas de arte.
+ * @param {string} [url="https://api.artic.edu/api/v1/artworks/search?q=ClaudeMonet&fields=id,title,artist_title,date_display,image_id,thumbnail&limit=20"] - La URL de la API que se utilizará para obtener los datos (opcional).
+ * @returns {Object} Un objeto que contiene información sobre todas las piezas de arte de un artista.
  */
 export async function apiArtworksArtist(
   url = "https://api.artic.edu/api/v1/artworks/search?q=ClaudeMonet&fields=id,title,artist_title,date_display,image_id,thumbnail&limit=20"
@@ -72,6 +61,15 @@ export async function apiArtworksArtist(
   }
 }
 
+/**
+ * Realiza una llamada a la API de Art Institute of Chicago para obtener información sobre una pieza de arte aleatoria.
+ * @date 2/22/2024 - 3:13:34 PM
+ * @author Aaron Medina Rodriguez
+ *
+ * @exports
+ * @async
+ * @returns {Object} Un objeto que contiene información sobre todas las piezas de arte aleatoria.
+ */
 export async function apiArtworksRandom() {
   let validArtwork = null;
 
