@@ -6,7 +6,7 @@ import LogoutButton from "@/components/utils/logoutButton.vue";
     <div class="enlaces">
       <router-link to="/home" class="link">Home</router-link>
       <router-link to="/random" class="link">Random</router-link>
-      <router-link to="/artwork" class="link">Guardados</router-link>
+      <router-link to="/artwork" class="link">Monet</router-link>
     </div>
     <div>
       <LogoutButton />
@@ -31,5 +31,6 @@ header {
 .enlaces {
   display: flex;
   flex-direction: row;
+  gap: 20px;
 }
 </style>

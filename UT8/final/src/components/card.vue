@@ -2,6 +2,7 @@
 
 defineProps({
     img_id: String,
+    img_size: { type: String, default: 200 },
     alt_text: String,
     tituloObra: String,
     autor: String,
@@ -12,7 +13,8 @@ defineProps({
 </script>
 <template>
     <div class="card">
-        <img :src="`https://www.artic.edu/iiif/2/${img_id}/full/200,/0/default.jpg`" :alt="alt_text" :title="alt_text">
+        <img :src="`https://www.artic.edu/iiif/2/${img_id}/full/${img_size},/0/default.jpg`" :alt="alt_text"
+            :title="alt_text">
         <div>{{ tituloObra }} </div>
         <div>{{ autor }}</div>
         <div> {{ fecha }}</div>
