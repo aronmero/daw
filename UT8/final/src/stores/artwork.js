@@ -16,3 +16,20 @@ export const useArtworkStore = defineStore("artwork", () => {
 
   return { isVacio, data, anadir, clean };
 });
+
+export const useMonetStore = defineStore("monet", () => {
+  const isVacio = ref(true);
+  const data = [];
+
+  function anadir(artworks) {
+    this.isVacio = false;
+    this.data.push(artworks.data);
+  }
+
+  function clean() {
+    this.isVacio = true;
+    this.data = {};
+  }
+
+  return { isVacio, data, anadir, clean };
+});

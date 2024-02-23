@@ -4,7 +4,7 @@ const routes = [
   { path: "/", component: () => import("@/views/login.vue") },
   { path: "/home", component: () => import("@/views/home.vue") },
   { path: "/random", component: () => import("@/views/random.vue") },
-  { path: "/artwork", component: () => import("@/views/artwork.vue") },
+  { path: "/monet", component: () => import("@/views/artwork.vue") },
 ];
 const router = createRouter({
   history: createWebHistory(),
