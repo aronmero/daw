@@ -54,35 +54,6 @@ export async function apiArtworks() {
  * @param {string} [url="https://api.artic.edu/api/v1/artworks?fields=id,title,artist_title,date_display,image_id,thumbnail&page=1&limit=20"] - La URL de la API que se utilizará para obtener los datos (opcional).
  * @returns {Promise<Object>} Una promesa que se resolverá con un objeto que contiene información paginada sobre todas las piezas de arte.
  */
-export async function apiArtworksPaginated(
-  url = "https://api.artic.edu/api/v1/artworks?fields=id,title,artist_title,date_display,image_id,thumbnail&limit=20"
-) {
-  try {
-    const response = await fetch(url);
-    const data = await response.json();
-
-    const filteredData = {
-      artist: data.data[0].artist_title,
-      data: data.data.filter((artwork) => artwork.image_id !== null),
-    };
-    console.log(filteredData);
-
-    return filteredData;
-  } catch (error) {
-    console.error(error);
-  }
-}
-
-/**
- * Realiza una llamada a la API de Art Institute of Chicago para obtener información paginada sobre todas las piezas de arte.
- * @date 2/22/2024 - 3:13:34 PM
- * @author Aaron Medina Rodriguez
- *
- * @export
- * @async
- * @param {string} [url="https://api.artic.edu/api/v1/artworks?fields=id,title,artist_title,date_display,image_id,thumbnail&page=1&limit=20"] - La URL de la API que se utilizará para obtener los datos (opcional).
- * @returns {Promise<Object>} Una promesa que se resolverá con un objeto que contiene información paginada sobre todas las piezas de arte.
- */
 export async function apiArtworksArtist(
   url = "https://api.artic.edu/api/v1/artworks/search?q=ClaudeMonet&fields=id,title,artist_title,date_display,image_id,thumbnail&limit=20"
 ) {
