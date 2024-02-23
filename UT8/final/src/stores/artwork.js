@@ -2,19 +2,15 @@ import { defineStore } from "pinia";
 import { ref } from "vue";
 export const useArtworkStore = defineStore("artwork", () => {
   const isVacio = ref(true);
-  const data = [];
+  const data = ref({});
 
   function anadir(artworks) {
     this.isVacio = false;
-    this.data.push(artworks.data);
+    this.data=artworks;
   }
 
-  function clean() {
-    this.isVacio = true;
-    this.data = {};
-  }
 
-  return { isVacio, data, anadir, clean };
+  return { isVacio, data, anadir };
 });
 
 export const useMonetStore = defineStore("monet", () => {
@@ -26,10 +22,5 @@ export const useMonetStore = defineStore("monet", () => {
     this.data=artworks;
   }
 
-  function clean() {
-    this.isVacio = true;
-    this.data = {};
-  }
-
-  return { isVacio, data, anadir, clean };
+  return { isVacio, data, anadir };
 });

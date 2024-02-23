@@ -3,7 +3,7 @@ import { useMonetStore } from "@/stores/artwork";
 import { ref, onMounted } from "vue";
 import Header from "@/components/header.vue"
 import Card from "@/components/card.vue";
-import { apiArtworks,apiArtworksRandom2 } from "@/Api/api.js";
+import { apiArtworks, apiArtworksArtist } from "@/Api/api.js";
 import { redirectLogin } from "@/utils/utils";
 redirectLogin();
 const store = useMonetStore();
@@ -11,7 +11,7 @@ const store = useMonetStore();
 const dataArtworks = ref([])
 if (store.isVacio) {
   onMounted(async () => {
-    dataArtworks.value = await apiArtworksRandom2();
+    dataArtworks.value = await apiArtworksArtist();
     store.anadir(dataArtworks.value);
   })
 } else {

@@ -6,5 +6,7 @@ export function redirectLogin() {
   const store = useUsuarioStore();
   if (!store.isActivo) {
     router.push("/");
+    return true;
   }
+  return false;
 }

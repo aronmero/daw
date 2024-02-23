@@ -19,13 +19,28 @@ const formatosComunes = [
  *
  * @export
  * @async
- * @param {string} [id=""] - El ID opcional de la obra de arte que se desea obtener información (por defecto vacío).
  * @returns {Promise<Object>} Una promesa que se resolverá con un objeto que contiene información sobre todas las piezas de arte.
  */
-export async function apiArtworks(id = "") {
+export async function apiArtworks() {
   try {
-    const response = await fetch(`https://api.artic.edu/api/v1/artworks/${id}`);
-    return response.json();
+    const response = await fetch(
+      `https://api.artic.edu/api/v1/artworks?fields=id,title,artist_title,date_display,image_id,thumbnail&limit=100`
+    );
+    const data = await response.json();
+
+    const artistNamesSet = new Set();
+    data.data.forEach((artwork) => {
+      if (artwork.artist_title) {
+        artistNamesSet.add(artwork.artist_title);
+      }
+    });
+
+    const artistNames = Array.from(artistNamesSet);
+    const filteredData = {
+      artist: artistNames,
+      data: data.data.filter((artwork) => artwork.image_id !== null),
+    };
+    return filteredData;
   } catch (error) {
     console.error(error);
   }
@@ -70,7 +85,7 @@ export async function apiArtworksPaginated(
  * @param {string} [url="https://api.artic.edu/api/v1/artworks?fields=id,title,artist_title,date_display,image_id,thumbnail&page=1&limit=20"] - La URL de la API que se utilizará para obtener los datos (opcional).
  * @returns {Promise<Object>} Una promesa que se resolverá con un objeto que contiene información paginada sobre todas las piezas de arte.
  */
-export async function apiArtworksRandom2(
+export async function apiArtworksArtist(
   url = "https://api.artic.edu/api/v1/artworks/search?q=ClaudeMonet&fields=id,title,artist_title,date_display,image_id,thumbnail&limit=20"
 ) {
   try {
@@ -81,7 +96,6 @@ export async function apiArtworksRandom2(
       artist: data.data[0].artist_title,
       data: data.data.filter((artwork) => artwork.image_id !== null),
     };
-   // console.log(filteredData);
 
     return filteredData;
   } catch (error) {
@@ -93,7 +107,7 @@ export async function apiArtworksRandom() {
   let validArtwork = null;
 
   while (!validArtwork) {
-    const number =  Math.round(Math.random() * 130000);
+    const number = Math.round(Math.random() * 130000);
     console.log(number);
     const url = `https://api.artic.edu/api/v1/artworks/${number}?fields=id,title,artist_title,date_display,image_id,thumbnail&limit=20`;
 
@@ -106,38 +120,15 @@ export async function apiArtworksRandom() {
         if (data.data && data.data.id && data.data.image_id) {
           validArtwork = data.data;
         }
-      } 
+      }
     } catch (error) {
       //console.error(error);
     }
 
     if (!validArtwork) {
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 100));
     }
   }
 
   return validArtwork;
-}
-
-
-
-
-/**
- * Realiza una llamada a la API de Art Institute of Chicago para obtener una imagen en formato jpg.
- * @date 2/22/2024 - 3:12:44 PM
- * @author Aaron Medina Rodriguez
- *
- * @export
- * @async
- * @param {string} image_id - El ID de la imagen que se desea obtener.
- * @param {number} [formato=0] - El índice del formato de la imagen a utilizar (opcional).
- * @returns {Promise<File>}  Una promesa que se resolverá con la imagen en formato jpg.
- */
-export async function apiArtwork(image_id, formato = 0) {
-  try {
-    const response = await fetch(`https://www.artic.edu/iiif/2/${image_id}${formatosComunes[formato]}`);
-    return response.json();
-  } catch (error) {
-    console.error(error);
-  }
 }
