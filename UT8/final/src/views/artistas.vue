@@ -11,11 +11,9 @@ const store = useArtworkStore();
 const dataArtworks = ref([])
 
 if (!redirectLogin()) {
-
   if (store.isVacio) {
     onMounted(async () => {
       dataArtworks.value = await apiArtworks();
-      console.log(dataArtworks.value);
       store.anadir(dataArtworks.value);
     })
   } else {

@@ -24,7 +24,7 @@ const formatosComunes = [
 export async function apiArtworks() {
   try {
     const response = await fetch(
-      `https://api.artic.edu/api/v1/artworks?fields=id,title,artist_title,date_display,image_id,thumbnail&limit=100`
+      `https://api.artic.edu/api/v1/artworks?fields=id,title,artist_title,date_display,image_id,thumbnail&limit=20`
     );
     const data = await response.json();
 
@@ -36,10 +36,8 @@ export async function apiArtworks() {
     });
 
     const artistNames = Array.from(artistNamesSet);
-    const filteredData = {
-      artist: artistNames,
-      data: data.data.filter((artwork) => artwork.image_id !== null),
-    };
+    const filteredData = { artist: artistNames, data: data.data.filter((artwork) => artwork.image_id !== null) };
+    console.log(filteredData);
     return filteredData;
   } catch (error) {
     console.error(error);

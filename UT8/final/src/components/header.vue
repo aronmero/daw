@@ -5,6 +5,7 @@ import LogoutButton from "@/components/utils/logoutButton.vue";
   <header>
     <div class="enlaces">
       <router-link to="/home" class="link">Home</router-link>
+      <router-link to="/artistas" class="link">Artistas</router-link>
       <router-link to="/random" class="link">Random</router-link>
       <router-link to="/monet" class="link">Monet</router-link>
     </div>
