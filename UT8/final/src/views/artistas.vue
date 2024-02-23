@@ -23,6 +23,7 @@ if (!redirectLogin()) {
   }
 }
 
+//Obras de arte agrupadas por artista
 const groupedArtworks = computed(() => {
   const grouped = {};
   dataArtworks.value.data.forEach((artwork) => {
@@ -35,6 +36,7 @@ const groupedArtworks = computed(() => {
   return grouped;
 });
 
+//Obras de arte filtradas
 const filteredArtworks = computed(() => {
   const filtered = {};
   Object.keys(groupedArtworks.value).forEach((artist) => {
@@ -50,6 +52,7 @@ const filteredArtworks = computed(() => {
   return filtered;
 });
 
+//Artistas ordenados por numero de obras
 const sortedArtists = Object.keys(groupedArtworks.value).sort((a, b) => {
   return groupedArtworks.value[b].length - groupedArtworks.value[a].length;
 });

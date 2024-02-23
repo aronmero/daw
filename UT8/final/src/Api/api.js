@@ -40,13 +40,12 @@ export async function apiArtworks() {
  *
  * @export
  * @async
- * @param {string} [url="https://api.artic.edu/api/v1/artworks/search?q=ClaudeMonet&fields=id,title,artist_title,date_display,image_id,thumbnail&limit=20"] - La URL de la API que se utilizará para obtener los datos (opcional).
  * @returns {Object} Un objeto que contiene información sobre todas las piezas de arte de un artista.
  */
-export async function apiArtworksArtist(
-  url = "https://api.artic.edu/api/v1/artworks/search?q=ClaudeMonet&fields=id,title,artist_title,date_display,image_id,thumbnail&limit=20"
-) {
+export async function apiArtworksArtist() {
   try {
+    const url =
+      "https://api.artic.edu/api/v1/artworks/search?q=ClaudeMonet&fields=id,title,artist_title,date_display,image_id,thumbnail&limit=20";
     const response = await fetch(url);
     const data = await response.json();
 

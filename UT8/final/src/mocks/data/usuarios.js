@@ -1,3 +1,9 @@
+/**
+ * Array de datos de ejemplo para el login
+ * @date 2/23/2024 - 4:11:06 PM
+ * @author Aaron Medina Rodriguez
+ *
+ */
 const usuarios = [
   {
     id: "1",
