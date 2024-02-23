@@ -90,24 +90,38 @@ export async function apiArtworksRandom2(
 }
 
 export async function apiArtworksRandom() {
-  const number = 1;
-  const url = `https://api.artic.edu/api/v1/artworks/${number}?fields=id,title,artist_title,date_display,image_id,thumbnail&limit=20`;
+  let validArtwork = null;
 
-  try {
-    const response = await fetch(url);
-    const data = await response.json();
+  while (!validArtwork) {
+    const number =  Math.round(Math.random() * 130000);
+    console.log(number);
+    const url = `https://api.artic.edu/api/v1/artworks/${number}?fields=id,title,artist_title,date_display,image_id,thumbnail&limit=20`;
 
-    const filteredData = {
-      artist: data.data[0].artist_title,
-      data: data.data.filter((artwork) => artwork.image_id !== null),
-    };
-    console.log(filteredData);
+    try {
+      const response = await fetch(url);
 
-    return filteredData;
-  } catch (error) {
-    console.error(error);
+      if (response.ok) {
+        const data = await response.json();
+
+        if (data.data && data.data.id && data.data.image_id) {
+          validArtwork = data.data;
+          console.log(validArtwork);
+        }
+      } 
+    } catch (error) {
+      //console.error(error);
+    }
+
+    if (!validArtwork) {
+      await new Promise(resolve => setTimeout(resolve, 100));
+    }
   }
+
+  return validArtwork;
 }
+
+
+
 
 /**
  * Realiza una llamada a la API de Art Institute of Chicago para obtener una imagen en formato jpg.
