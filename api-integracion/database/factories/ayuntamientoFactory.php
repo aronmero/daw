@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\ayuntamiento;
 use App\Models\token;
 use App\Models\usuario;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -25,5 +26,14 @@ class ayuntamientoFactory extends Factory
             'direccion' => fake()->postcode(),
             'tokenVerification' => $token->id
         ];
+    }
+    public function configure()
+    {
+        return $this->afterCreating(function (ayuntamiento $ayuntamiento) {
+            $usuario = Usuario::find($ayuntamiento->usuario_id);
+            if ($usuario) {
+                $usuario->assignRole('Ayuntamiento');
+            }
+        });
     }
 }
