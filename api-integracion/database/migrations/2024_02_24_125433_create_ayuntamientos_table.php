@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('ayuntamientos', function (Blueprint $table) {
             $table->foreignId('usuario_id')->references('id')->on('usuarios');
-            $table->string('nombre',150);
             $table->string('direccion');
             $table->foreignId('tokenVerification')->references('id')->on('token');
         });

@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('particulares', function (Blueprint $table) {
             $table->foreignId('usuario_id')->references('id')->on('usuarios');
-            $table->string('nombre',50);
             $table->string('primer_apellido',50);
             $table->string('segundo_apellido',50);
             $table->char('sexo');

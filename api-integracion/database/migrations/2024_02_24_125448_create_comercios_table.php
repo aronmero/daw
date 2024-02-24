@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('comercios', function (Blueprint $table) {
             $table->foreignId('usuario_id')->references('id')->on('usuarios');
-            $table->string('nombre',150);
             $table->foreignId('categoria_id')->references('id')->on('categorias');
             $table->string('direccion');
+            $table->string('descripcion',300);
         });
     }
 
