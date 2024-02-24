@@ -25,6 +25,7 @@ class comercioFactory extends Factory
             'usuario_id' => $usuario->id,
             'categoria_id' => $categoria->id,
             'direccion' =>  fake()->postcode(),
+            'verificado'=>fake()->boolean(80),
             'descripcion' => fake()->text()
         ];
     }

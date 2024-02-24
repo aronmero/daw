@@ -41,4 +41,12 @@ class usuario extends Authenticatable
     protected $casts = [
         'password' => 'hashed'
     ];
+
+    /**
+     * Define la relación de pertenencia a un municipio.
+     */
+    public function municipio()
+    {
+        return $this->belongsTo(Municipio::class, 'municipio_id');
+    }
 }

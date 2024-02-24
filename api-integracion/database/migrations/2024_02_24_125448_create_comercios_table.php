@@ -15,6 +15,7 @@ return new class extends Migration
             $table->foreignId('usuario_id')->references('id')->on('usuarios');
             $table->foreignId('categoria_id')->references('id')->on('categorias');
             $table->string('direccion');
+            $table->boolean('verificado');
             $table->string('descripcion',300);
         });
     }
