@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('password', 255);
             $table->foreignId('municipio_id')->references('id')->on('municipios');
             $table->string('telefono', 9);
-            $table->string('avatar', 50);
+            $table->string('avatar');
             $table->rememberToken();
         });
     }

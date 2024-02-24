@@ -20,7 +20,6 @@ class DatabaseSeeder extends Seeder
         $this->call(EtiquetaSeeder::class);
 
         $this->call(ParticularSeeder::class);
-        $this->call(TokenSeeder::class);
         $this->call(AyuntamientoSeeder::class);
         $this->call(CategoriaSeeder::class);
         $this->call(ComercioSeeder::class);
@@ -30,5 +29,9 @@ class DatabaseSeeder extends Seeder
         $this->call(PublicacionSeeder::class);
 
         $this->call(SeguidosSeeder::class);
+
+        $this->call(etiqueta_comercio::class);
+        $this->call(etiqueta_publicacion::class);
+        $this->call(comercio_publicacion::class);
     }
 }

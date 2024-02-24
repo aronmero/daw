@@ -9,4 +9,5 @@ class publicacion extends Model
 {
     use HasFactory;
     protected $table = 'publicaciones';
+    public $timestamps = false;
 }

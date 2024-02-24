@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class comercio extends Model
 {
     use HasFactory;
+    public $timestamps = false;
 }

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('publicaciones', function (Blueprint $table) {
             $table->id('id');
-            $table->string('imagen',50);
+            $table->string('imagen');
             $table->string('titulo',30);
             $table->string('descripcion',150);
             $table->foreignId('tipo_id')->references('id')->on('tipo_publicaciones');
