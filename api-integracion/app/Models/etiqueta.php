@@ -9,13 +9,15 @@ class etiqueta extends Model
 {
     use HasFactory;
     public $timestamps = false;
-    protected $hidden = ['pivot'];
+    protected $fillable = [
+        'nombre'
+    ];
     /**
      * Define la relación muchos a muchos con comercios.
      */
     public function comercios()
     {
-        return $this->belongsToMany(Etiqueta::class, 'etiqueta_comercio', 'usuario_id', 'etiqueta_id');
+        return $this->belongsToMany(Comercio::class, 'etiqueta_comercio', 'etiqueta_id', 'usuario_id');
     }
 
     /**
@@ -23,7 +25,7 @@ class etiqueta extends Model
      */
     public function publicaciones()
     {
-        return $this->belongsToMany(Publicacion::class, 'comercio_publicacion', 'usuario_id', 'publicacion_id');
+        return $this->belongsToMany(Publicacion::class, 'etiqueta_publicacion', 'etiqueta_id', 'publicacion_id');
     }
 
     protected static function booted()

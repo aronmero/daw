@@ -22,7 +22,7 @@ class comercio extends Model
     protected $attributes = [
         'verificado' => false,
     ];
-    protected $hidden = ['pivot'];
+    protected $hidden = ['pivot','categoria_id'];
 
 
     /**
@@ -54,13 +54,14 @@ class comercio extends Model
      */
     public function publicaciones()
     {
-        return $this->belongsToMany(Publicacion::class, 'comercio_publicacion', 'publicacion_id', 'usuario_id');
+        return $this->belongsToMany(Publicacion::class, 'comercio_publicacion', 'usuario_id', 'publicacion_id');
     }
     protected static function boot()
     {
         parent::boot();
 
         static::deleting(function ($comercio) {
+            
             $comercio->etiquetas()->detach();
 
             $comercio->publicaciones()->detach();

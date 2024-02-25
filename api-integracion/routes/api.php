@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ApiAyuntamientoController;
 use App\Http\Controllers\ApiComercioController;
+use App\Http\Controllers\ApiEtiquetaController;
 use App\Http\Controllers\ApiParticularController;
 use App\Http\Controllers\ApiPublicacionController;
 use App\Http\Controllers\ApiUsuarioController;
@@ -18,6 +19,8 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+
+Route::get('/comercios/publicaciones/{comercio}', [ApiComercioController::class, 'showPublicaciones']);
 Route::patch('/ayuntamientos/verificar-comercio', [ApiAyuntamientoController::class, 'verificarComercio']);
 
 Route::apiResource('usuarios', ApiUsuarioController::class)->parameters(['usuarios' => 'usuario'])->except(['update','store','destroy']);
@@ -26,3 +29,4 @@ Route::apiResource('comercios', ApiComercioController::class)->parameters(['come
 Route::apiResource('ayuntamientos', ApiAyuntamientoController::class)->parameters(['ayuntamientos' => 'ayuntamiento']);
 
 Route::apiResource('publicaciones', ApiPublicacionController::class)->parameters(['publicaciones' => 'publicacion']);
+Route::apiResource('etiquetas', ApiEtiquetaController::class)->parameters(['etiquetas' => 'etiqueta']);

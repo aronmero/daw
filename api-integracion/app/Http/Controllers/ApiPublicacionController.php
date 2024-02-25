@@ -15,7 +15,7 @@ class ApiPublicacionController extends Controller
     public function index()
     {
         $publicaciones = Publicacion::with(['tipo','comercios.usuario','etiquetas'])->get();
-        return response()->json($publicaciones);
+        return $this->respuestaHTTP($publicaciones, 200, true);
     }
 
     /**

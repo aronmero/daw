@@ -19,8 +19,18 @@ class ApiComercioController extends Controller
      */
     public function index()
     {
-        $comercios = Comercio::with('usuario.municipio')->get();
+        $comercios = Comercio::with(['usuario.municipio','categoria'])->get();
         return $this->respuestaHTTP($comercios, 200, true);
+    }
+
+    public function showPublicaciones(string $usuario_id)
+    {
+        try {
+            $comercio = Comercio::with('usuario.municipio','publicaciones')->where('usuario_id', $usuario_id)->firstOrFail();
+            return $this->respuestaHTTP($comercio, 200, true);
+        } catch (ModelNotFoundException $exception) {
+            return $this->respuestaHTTP('Comercio no encontrado', 404, false);
+        }
     }
 
     /**

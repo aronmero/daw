@@ -24,8 +24,8 @@ class publicacion extends Model
         'activo' => true,
     ];
     protected $hidden = [
-        'tipo_id'
-    ];
+        'tipo_id','pivot'
+    ]; 
 
     protected static function booted()
     {
