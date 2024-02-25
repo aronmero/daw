@@ -4,12 +4,10 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AyuntamientoRequest extends FormRequest
+class ayuntamientoUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
-     *
-     * @return bool
      */
     public function authorize()
     {
@@ -24,8 +22,7 @@ class AyuntamientoRequest extends FormRequest
     public function rules()
     {
         return [
-            'direccion' => 'required|string',
-            'tokenVerification' => 'required|exists:tokens,valor',
+            'direccion' => 'string',
         ];
     }
 
@@ -37,10 +34,8 @@ class AyuntamientoRequest extends FormRequest
     public function messages()
     {
         return [
-            'direccion.required' => 'La dirección es obligatoria.',
-            'direccion.string' => 'La dirección debe ser una cadena de caracteres.',
-            'tokenVerification.required' => 'El token de verificación es obligatorio.',
-            'tokenVerification.exists' => 'El token de verificación seleccionado no es válido.',
+            'direccion.' => 'La dirección es obligatoria.',
+            'direccion.string' => 'La dirección debe ser una cadena de caracteres.'
         ];
     }
 }

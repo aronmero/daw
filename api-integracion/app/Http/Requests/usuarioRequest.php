@@ -24,12 +24,12 @@ class UsuarioRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => 'required|string|email|max:255|unique:usuarios,email',
-            'nombre' => 'required|string|max:150',
-            'password' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:usuarios,email|regex:/^[a-zA-Z0-9._%+-]+@\S*\.\S*$/i',
+            'nombre' => 'required|string|max:150|min:3',
+            'password' => 'required|string|max:255|min:8',
             'municipio_id' => 'required|exists:municipios,id',
-            'telefono' => 'required|string|max:9',
-            'avatar' => 'required|string',
+            'telefono' => 'required|string|max:9|min:9',
+            'avatar' => 'nullable|string',
             'remember_token' => 'nullable|string',
         ];
     }

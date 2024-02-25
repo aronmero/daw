@@ -17,6 +17,7 @@ class AyuntamientoSeeder extends Seeder
         $usuario = usuario::factory()->create([
             'nombre' => 'ayuntamiento',
             'email' => 'ayuntamiento@example.com',
+            'municipio_id'=>1,
             'password' => bcrypt('1234')
         ]);
 

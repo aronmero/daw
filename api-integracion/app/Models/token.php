@@ -8,6 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class token extends Model
 {
     use HasFactory;
-    protected $table = 'token';
     public $timestamps = false;
 }

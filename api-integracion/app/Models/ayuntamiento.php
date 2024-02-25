@@ -9,7 +9,16 @@ class ayuntamiento extends Model
 {
     use HasFactory;
     public $timestamps = false;
+    protected $primaryKey = 'usuario_id';
 
+    protected $fillable = [
+        'usuario_id',
+        'direccion',
+        'tokenVerification',
+    ];
+    protected $hidden = [
+        'tokenVerification'
+    ];
     /**
      *  Define la relación de pertenencia a un tipo deusuarios.
      */

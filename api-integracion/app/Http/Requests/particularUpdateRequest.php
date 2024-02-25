@@ -4,12 +4,10 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ParticularRequest extends FormRequest
+class particularUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
-     *
-     * @return bool
      */
     public function authorize()
     {
@@ -24,10 +22,10 @@ class ParticularRequest extends FormRequest
     public function rules()
     {
         return [
-            'primer_apellido' => 'required|string|max:50',
-            'segundo_apellido' => 'required|string|max:50',
-            'sexo' => 'required|string|in:m,h',
-            'fecha_nacimiento' => 'required|date',
+            'primer_apellido' => 'string|max:50',
+            'segundo_apellido' => 'string|max:50',
+            'sexo' => 'string|in:m,h',
+            'fecha_nacimiento' => 'date',
         ];
     }
 
@@ -39,16 +37,15 @@ class ParticularRequest extends FormRequest
     public function messages()
     {
         return [
-            'primer_apellido.required' => 'El primer apellido es obligatorio.',
+
             'primer_apellido.string' => 'El primer apellido debe ser una cadena de caracteres.',
             'primer_apellido.max' => 'El primer apellido no puede tener más de :max caracteres.',
-            'segundo_apellido.required' => 'El segundo apellido es obligatorio.',
+
             'segundo_apellido.string' => 'El segundo apellido debe ser una cadena de caracteres.',
             'segundo_apellido.max' => 'El segundo apellido no puede tener más de :max caracteres.',
-            'sexo.required' => 'El campo sexo es obligatorio.',
+
             'sexo.string' => 'El sexo debe ser una cadena de caracteres.',
             'sexo.in' => 'El sexo debe ser "m" o "h".',
-            'fecha_nacimiento.required' => 'La fecha de nacimiento es obligatoria.',
             'fecha_nacimiento.date' => 'La fecha de nacimiento debe ser una fecha válida.',
         ];
     }

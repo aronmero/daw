@@ -18,10 +18,15 @@ class usuario extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
         'email',
+        'nombre',
         'password',
+        'municipio_id',
+        'telefono',
+        'avatar',
+        'remember_token',
     ];
+    
 
     /**
      * The attributes that should be hidden for serialization.
@@ -29,8 +34,9 @@ class usuario extends Authenticatable
      * @var array<int, string>
      */
     protected $hidden = [
+        'id',
         'password',
-        'remember_token',
+        'remember_token','municipio_id'
     ];
 
     /**
@@ -48,5 +54,31 @@ class usuario extends Authenticatable
     public function municipio()
     {
         return $this->belongsTo(Municipio::class, 'municipio_id');
+    }
+
+    public function particular()
+    {
+        return $this->hasOne(Particular::class);
+    }
+
+    public function comercio()
+    {
+        return $this->hasOne(Comercio::class);
+    }
+
+    public function ayuntamiento()
+    {
+        return $this->hasOne(Ayuntamiento::class);
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($usuario) {
+            $usuario->particular()->delete();
+            $usuario->comercio()->delete();
+            $usuario->ayuntamiento()->delete();
+        });
     }
 }

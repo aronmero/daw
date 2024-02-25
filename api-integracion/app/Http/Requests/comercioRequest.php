@@ -24,7 +24,6 @@ class ComercioRequest extends FormRequest
     public function rules()
     {
         return [
-            'usuario_id' => 'required|exists:usuarios,id',
             'categoria_id' => 'required|exists:categorias,id',
             'direccion' => 'required|string',
             'descripcion' => 'required|string|max:300',
@@ -39,8 +38,6 @@ class ComercioRequest extends FormRequest
     public function messages()
     {
         return [
-            'usuario_id.required' => 'El ID de usuario es obligatorio.',
-            'usuario_id.exists' => 'El ID de usuario seleccionado no es válido.',
             'categoria_id.required' => 'El ID de categoría es obligatorio.',
             'categoria_id.exists' => 'El ID de categoría seleccionado no es válido.',
             'direccion.required' => 'La dirección es obligatoria.',
