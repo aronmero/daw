@@ -13,7 +13,8 @@ class ApiUsuarioController extends Controller
      */
     public function index()
     {
-        //
+        $usuarios = Usuario::with('municipio')->get();
+        return $this->respuestaHTTP($usuarios, 200, true);
     }
 
     /**
@@ -29,7 +30,12 @@ class ApiUsuarioController extends Controller
      */
     public function show(string $id)
     {
-        //
+        try { 
+            $usuario = Usuario::with('municipio')->findOrFail($id);
+            return $this->respuestaHTTP($usuario, 200, true);
+        } catch (ModelNotFoundException $exception) {
+            return $this->respuestaHTTP('Usuario no encontrado', 404, false);
+        }
     }
 
     /**

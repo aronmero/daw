@@ -22,7 +22,8 @@ class comercio extends Model
     protected $attributes = [
         'verificado' => false,
     ];
-    
+    protected $hidden = ['pivot'];
+
 
     /**
      *  Define la relación de pertenencia a un tipo de usuarios.
@@ -39,5 +40,32 @@ class comercio extends Model
     {
         return $this->belongsTo(Categoria::class, 'categoria_id');
     }
-    
+
+    /**
+     * Define la relación muchos a muchos con etiquetas.
+     */
+    public function etiquetas()
+    {
+        return $this->belongsToMany(Etiqueta::class, 'etiqueta_comercio', 'usuario_id', 'etiqueta_id');
+    }
+
+    /**
+     * Define la relación muchos a muchos con comercios.
+     */
+    public function publicaciones()
+    {
+        return $this->belongsToMany(Publicacion::class, 'comercio_publicacion', 'publicacion_id', 'usuario_id');
+    }
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($comercio) {
+            $comercio->etiquetas()->detach();
+
+            $comercio->publicaciones()->detach();
+        });
+    }
+
+   
 }

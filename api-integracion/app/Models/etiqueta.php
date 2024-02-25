@@ -9,7 +9,7 @@ class etiqueta extends Model
 {
     use HasFactory;
     public $timestamps = false;
-
+    protected $hidden = ['pivot'];
     /**
      * Define la relación muchos a muchos con comercios.
      */

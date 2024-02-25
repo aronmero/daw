@@ -3,6 +3,8 @@
 use App\Http\Controllers\ApiAyuntamientoController;
 use App\Http\Controllers\ApiComercioController;
 use App\Http\Controllers\ApiParticularController;
+use App\Http\Controllers\ApiPublicacionController;
+use App\Http\Controllers\ApiUsuarioController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -18,6 +20,9 @@ use Illuminate\Support\Facades\Route;
 */
 Route::patch('/ayuntamientos/verificar-comercio', [ApiAyuntamientoController::class, 'verificarComercio']);
 
+Route::apiResource('usuarios', ApiUsuarioController::class)->parameters(['usuarios' => 'usuario'])->except(['update','store','destroy']);
 Route::apiResource('particulares', ApiParticularController::class)->parameters(['particulares' => 'particular']);
 Route::apiResource('comercios', ApiComercioController::class)->parameters(['comercios' => 'comercio']);
 Route::apiResource('ayuntamientos', ApiAyuntamientoController::class)->parameters(['ayuntamientos' => 'ayuntamiento']);
+
+Route::apiResource('publicaciones', ApiPublicacionController::class)->parameters(['publicaciones' => 'publicacion']);

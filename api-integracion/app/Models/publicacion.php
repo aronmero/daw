@@ -11,6 +11,22 @@ class publicacion extends Model
     protected $table = 'publicaciones';
     public $timestamps = false;
 
+    protected $fillable = [
+        'imagen',
+        'titulo',
+        'descripcion',
+        'tipo_id',
+        'fecha_publicacion',
+        'fecha_inicio',
+        'fecha_fin'
+    ];
+    protected $attributes = [
+        'activo' => true,
+    ];
+    protected $hidden = [
+        'tipo_id'
+    ];
+
     protected static function booted()
     {
         static::deleting(function ($publicacion) {
@@ -24,8 +40,7 @@ class publicacion extends Model
      */
     public function etiquetas()
     {
-        return $this->belongsToMany(Etiqueta::class, 'etiqueta_publicacion', 'publicacion_id', 'etiqueta_id')
-            ->withTimestamps();
+        return $this->belongsToMany(Etiqueta::class, 'etiqueta_publicacion', 'publicacion_id', 'etiqueta_id');
     }
 
     /**
@@ -33,8 +48,7 @@ class publicacion extends Model
      */
     public function comercios()
     {
-        return $this->belongsToMany(Comercio::class, 'comercio_publicacion', 'publicacion_id', 'usuario_id')
-            ->withTimestamps();
+        return $this->belongsToMany(Comercio::class, 'comercio_publicacion', 'publicacion_id', 'usuario_id');
     }
 
     /**

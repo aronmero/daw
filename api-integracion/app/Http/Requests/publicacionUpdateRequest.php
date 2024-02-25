@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class publicacionRequest extends FormRequest
+class publicacionUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,14 +22,15 @@ class publicacionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'imagen' => 'required|string',
-            'titulo' => 'required|string|max:30',
-            'descripcion' => 'required|string|max:150',
-            'tipo_id' => 'required|exists:tipo_publicaciones,id',
-            'fecha_publicacion' => 'required|date',
-            'fecha_inicio' => 'required|date',
-            'fecha_fin' => 'required|date',
-            'comercios' => 'required|array|min:1|exists:comercios,usuario_id',
+            'imagen' => 'string',
+            'titulo' => 'string|max:30',
+            'descripcion' => 'string|max:150',
+            'tipo_id' => 'exists:tipo_publicaciones,id',
+            'fecha_publicacion' => 'date',
+            'fecha_inicio' => 'date',
+            'fecha_fin' => 'date',
+            'activo' => 'boolean',
+            'comercios' => 'array|min:1|exists:comercios,usuario_id',
         ];
     }
 
@@ -41,35 +42,28 @@ class publicacionRequest extends FormRequest
     public function messages()
     {
         return [
-            'imagen' => [
-                'required' => 'La imagen es obligatoria.',
-            ],
             'titulo' => [
-                'required' => 'El título es obligatorio.',
                 'max' => 'El título no puede tener más de :max caracteres.',
             ],
             'descripcion' => [
-                'required' => 'La descripción es obligatoria.',
                 'max' => 'La descripción no puede tener más de :max caracteres.',
             ],
             'tipo_id' => [
-                'required' => 'El tipo de publicación es obligatorio.',
                 'exists' => 'El tipo de publicación seleccionado no es válido.',
             ],
             'fecha_publicacion' => [
-                'required' => 'La fecha de publicación es obligatoria.',
                 'date' => 'La fecha de publicación debe ser una fecha válida.',
             ],
             'fecha_inicio' => [
-                'required' => 'La fecha de inicio es obligatoria.',
                 'date' => 'La fecha de inicio debe ser una fecha válida.',
             ],
             'fecha_fin' => [
-                'required' => 'La fecha de fin es obligatoria.',
                 'date' => 'La fecha de fin debe ser una fecha válida.',
             ],
+            'activo' => [
+                'boolean' => 'El campo activo debe ser verdadero o falso.',
+            ],
             'comercios' => [
-                'required' => 'Debe seleccionar al menos un comercio.',
                 'array' => 'Debe seleccionar al menos un comercio.',
                 'min' => 'Debe seleccionar al menos un comercio.',
                 'exists'=> 'Uno o más de los comercios seleccionados no son válidos.'
