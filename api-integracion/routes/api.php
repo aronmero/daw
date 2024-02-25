@@ -5,6 +5,7 @@ use App\Http\Controllers\ApiComercioController;
 use App\Http\Controllers\ApiEtiquetaController;
 use App\Http\Controllers\ApiParticularController;
 use App\Http\Controllers\ApiPublicacionController;
+use App\Http\Controllers\ApiSeguidoController;
 use App\Http\Controllers\ApiUsuarioController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -30,3 +31,5 @@ Route::apiResource('ayuntamientos', ApiAyuntamientoController::class)->parameter
 
 Route::apiResource('publicaciones', ApiPublicacionController::class)->parameters(['publicaciones' => 'publicacion']);
 Route::apiResource('etiquetas', ApiEtiquetaController::class)->parameters(['etiquetas' => 'etiqueta']);
+Route::get('/seguidos/info', [ApiSeguidoController::class, 'info']);
+Route::apiResource('seguidos', ApiSeguidoController::class)->parameters(['seguidos' => 'seguido'])->except(['update']);

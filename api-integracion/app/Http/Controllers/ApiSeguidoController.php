@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\seguidoRequest;
+use App\Models\seguido;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 
 class ApiSeguidoController extends Controller
@@ -11,15 +14,24 @@ class ApiSeguidoController extends Controller
      */
     public function index()
     {
-        //
+        $seguidos = seguido::all();
+        return $this->respuestaHTTP($seguidos, 200, true);
+    }
+
+    public function info()
+    {
+        $seguidos = seguido::with(['seguidor','seguido.municipio'])->get();
+        return $this->respuestaHTTP($seguidos, 200, true);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(seguidoRequest $request)
     {
-        //
+        $seguido = seguido::create($request->all());
+
+        return parent::respuestaHTTP("Seguido creado satisfactoriamente. ID: ".$seguido->id, 201, true);
     }
 
     /**
@@ -27,15 +39,12 @@ class ApiSeguidoController extends Controller
      */
     public function show(string $id)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
+        try { 
+            $seguido = seguido::with(['seguidor','seguido.municipio'])->findOrFail($id);
+            return $this->respuestaHTTP($seguido, 200, true);
+        } catch (ModelNotFoundException $exception) {
+            return $this->respuestaHTTP('Seguido no encontrado.', 404, false);
+        }
     }
 
     /**
@@ -43,6 +52,14 @@ class ApiSeguidoController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try {
+            $seguidos = Seguido::findOrFail($id);
+
+            $seguidos->delete();
+
+            return response()->json(['message' => 'Seguido eliminado correctamente'], 204);
+        } catch (ModelNotFoundException $exception) {
+            return response()->json(['message' => 'Seguido no encontrada'], 404);
+        }
     }
 }

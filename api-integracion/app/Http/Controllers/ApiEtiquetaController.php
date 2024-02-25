@@ -34,8 +34,8 @@ class ApiEtiquetaController extends Controller
     public function show(string $id)
     {
         try { 
-            $publicacion = etiqueta::with(['comercios.usuario','publicaciones'])->findOrFail($id);
-            return $this->respuestaHTTP($publicacion, 200, true);
+            $etiqueta = etiqueta::with(['comercios.usuario','publicaciones'])->findOrFail($id);
+            return $this->respuestaHTTP($etiqueta, 200, true);
         } catch (ModelNotFoundException $exception) {
             return $this->respuestaHTTP('Etiqueta no encontrada.', 404, false);
         }

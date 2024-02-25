@@ -39,7 +39,7 @@ class comercioUpdateRequest extends FormRequest
             'categoria_id.exists' => 'El ID de categoría seleccionado no es válido.',
             'direccion.string' => 'La dirección debe ser una cadena de caracteres.',
             'descripcion.string' => 'La descripción debe ser una cadena de caracteres.',
-            'descripcion.max' => 'La descripción no puede tener más de :max caracteres.',
+            'descripcion.max' => 'La descripción no puede tener más de 300 caracteres.',
         ];
     }
 }

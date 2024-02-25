@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('seguidor_id')->references('id')->on('usuarios')->onDelete('cascade');
             $table->foreignId('seguido_id')->references('id')->on('usuarios')->onDelete('cascade');
+            $table->unique(['seguidor_id', 'seguido_id']);
         });
     }
 

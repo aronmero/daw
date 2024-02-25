@@ -44,7 +44,7 @@ class ComercioRequest extends FormRequest
             'direccion.string' => 'La dirección debe ser una cadena de caracteres.',
             'descripcion.required' => 'La descripción es obligatoria.',
             'descripcion.string' => 'La descripción debe ser una cadena de caracteres.',
-            'descripcion.max' => 'La descripción no puede tener más de :max caracteres.',
+            'descripcion.max' => 'La descripción no puede tener más de 300 caracteres.',
         ];
     }
 }

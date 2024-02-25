@@ -9,6 +9,9 @@ class seguido extends Model
 {
     use HasFactory;
     public $timestamps = false;
+    protected $fillable = [
+        'seguidor_id', 'seguido_id'
+    ];
 
     public function seguidor()
     {

@@ -39,10 +39,10 @@ class particularUpdateRequest extends FormRequest
         return [
 
             'primer_apellido.string' => 'El primer apellido debe ser una cadena de caracteres.',
-            'primer_apellido.max' => 'El primer apellido no puede tener más de :max caracteres.',
+            'primer_apellido.max' => 'El primer apellido no puede tener más de 50 caracteres.',
 
             'segundo_apellido.string' => 'El segundo apellido debe ser una cadena de caracteres.',
-            'segundo_apellido.max' => 'El segundo apellido no puede tener más de :max caracteres.',
+            'segundo_apellido.max' => 'El segundo apellido no puede tener más de 50 caracteres.',
 
             'sexo.string' => 'El sexo debe ser una cadena de caracteres.',
             'sexo.in' => 'El sexo debe ser "m" o "h".',

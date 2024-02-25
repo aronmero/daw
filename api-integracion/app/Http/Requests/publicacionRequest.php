@@ -46,11 +46,11 @@ class publicacionRequest extends FormRequest
             ],
             'titulo' => [
                 'required' => 'El título es obligatorio.',
-                'max' => 'El título no puede tener más de :max caracteres.',
+                'max' => 'El título no puede tener más de 30 caracteres.',
             ],
             'descripcion' => [
                 'required' => 'La descripción es obligatoria.',
-                'max' => 'La descripción no puede tener más de :max caracteres.',
+                'max' => 'La descripción no puede tener más de 150 caracteres.',
             ],
             'tipo_id' => [
                 'required' => 'El tipo de publicación es obligatorio.',

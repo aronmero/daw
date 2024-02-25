@@ -43,10 +43,10 @@ class publicacionUpdateRequest extends FormRequest
     {
         return [
             'titulo' => [
-                'max' => 'El título no puede tener más de :max caracteres.',
+                'max' => 'El título no puede tener más de 30 caracteres.',
             ],
             'descripcion' => [
-                'max' => 'La descripción no puede tener más de :max caracteres.',
+                'max' => 'La descripción no puede tener más de 150 caracteres.',
             ],
             'tipo_id' => [
                 'exists' => 'El tipo de publicación seleccionado no es válido.',
