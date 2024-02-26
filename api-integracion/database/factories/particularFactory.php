@@ -18,7 +18,7 @@ class particularFactory extends Factory
      */
     public function definition(): array
     {
-        $usuario = Usuario::factory()->create();
+        $usuario = Usuario::factory()->create()->assignRole('Particular');;
         $fechaMinima = fake()->dateTimeThisCentury('-16 years');
         return [
             'usuario_id' => $usuario->id,
@@ -29,13 +29,4 @@ class particularFactory extends Factory
         ];
     }
 
-    public function configure()
-    {
-        return $this->afterCreating(function (particular $particular) {
-            $usuario = Usuario::find($particular->usuario_id);
-            if ($usuario) {
-                $usuario->assignRole('Particular');
-            }
-        });
-    }
 }

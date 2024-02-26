@@ -19,7 +19,7 @@ class ParticularSeeder extends Seeder
             'nombre' => 'particular',
             'email' => 'particular@example.com',
             'password' => bcrypt('1234')
-        ]);
+        ])->assignRole('Particular');;
         particular::factory()->create(['usuario_id' => $usuario->id,]);
 
         particular::factory(10)->create();

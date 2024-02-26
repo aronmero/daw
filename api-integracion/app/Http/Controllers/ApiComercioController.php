@@ -14,19 +14,29 @@ use Illuminate\Http\Request;
 
 class ApiComercioController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum');
+        $this->middleware('can:admin.comercio.index')->only('index');
+        $this->middleware('can:admin.comercio.store')->only('store');
+        $this->middleware('can:admin.comercio.destroy')->only('destroy');
+        $this->middleware('can:admin.comercio.show')->only('show');
+        $this->middleware('can:admin.comercio.update')->only('update');
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $comercios = Comercio::with(['usuario.municipio','categoria'])->get();
+        $comercios = Comercio::with(['usuario.municipio', 'categoria'])->get();
         return $this->respuestaHTTP($comercios, 200, true);
     }
 
     public function showPublicaciones(string $usuario_id)
     {
         try {
-            $comercio = Comercio::with('usuario.municipio','publicaciones')->where('usuario_id', $usuario_id)->firstOrFail();
+            $comercio = Comercio::with('usuario.municipio', 'publicaciones')->where('usuario_id', $usuario_id)->firstOrFail();
             return $this->respuestaHTTP($comercio, 200, true);
         } catch (ModelNotFoundException $exception) {
             return $this->respuestaHTTP('Comercio no encontrado', 404, false);
@@ -42,13 +52,12 @@ class ApiComercioController extends Controller
         $comercioData = $comercioRequest->validated();
 
         $usuario = Usuario::create($usuarioData);
-
+        $usuario->assignRole('Comercio');
         $comercioData['usuario_id'] = $usuario->id;
 
-        $comercio = Comercio::create($comercioData);
-
+        $usuario->comercio()->create($comercioData);
         return response()->json([
-            'Id del usuario' => $comercio->usuario_id
+            'Id del usuario' => $usuario->id
         ], 201);
     }
 
@@ -77,7 +86,7 @@ class ApiComercioController extends Controller
         }
 
         try {
-            $comercio = Usuario::findOrFail($usuario_id);
+            $comercio = comercio::findOrFail($usuario_id);
         } catch (ModelNotFoundException $exception) {
             return $this->respuestaHTTP('Comercio no encontrado', 404, false);
         }
@@ -104,6 +113,6 @@ class ApiComercioController extends Controller
     public function destroy(string $usuario_id)
     {
         $usuarioController = new ApiUsuarioController();
-        return $usuarioController->destroy($usuario_id,'comercio');
+        return $usuarioController->destroy($usuario_id, 'comercio');
     }
 }

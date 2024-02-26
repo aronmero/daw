@@ -13,6 +13,16 @@ use Illuminate\Http\Request;
 
 class ApiParticularController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum');
+        $this->middleware('can:admin.particular.index')->only('index');
+        $this->middleware('can:admin.particular.store')->only('store');
+        $this->middleware('can:admin.particular.destroy')->only('destroy');
+        $this->middleware('can:admin.particular.show')->only('show');
+        $this->middleware('can:admin.particular.update')->only('update');
+    }
     /**
      * Muestra una lista de los recursos.
      */
@@ -32,12 +42,14 @@ class ApiParticularController extends Controller
 
 
         $usuario = Usuario::create($usuarioData);
+        $usuario->assignRole('Particular');
         $particularData['usuario_id'] = $usuario->id;
 
-        $particular = Particular::create($particularData);
+        $usuario->particular()->create($particularData);
+
 
         return response()->json([
-            'Id del usuario' => $particular->usuario_id
+            'Id del usuario' => $usuario->id
         ], 201);
     }
 
@@ -66,7 +78,7 @@ class ApiParticularController extends Controller
         }
 
         try {
-            $particular = Usuario::findOrFail($usuario_id);
+            $particular = Particular::findOrFail($usuario_id);
         } catch (ModelNotFoundException $exception) {
             return $this->respuestaHTTP('Particular no encontrado', 404, false);
         }
@@ -94,6 +106,6 @@ class ApiParticularController extends Controller
     public function destroy(string $usuario_id)
     {
         $usuarioController = new ApiUsuarioController();
-        return $usuarioController->destroy($usuario_id,'particular');
+        return $usuarioController->destroy($usuario_id, 'particular');
     }
 }

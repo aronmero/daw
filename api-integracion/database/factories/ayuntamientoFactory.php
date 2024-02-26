@@ -20,20 +20,11 @@ class ayuntamientoFactory extends Factory
     public function definition(): array
     {
         $token = token::factory()->create();
-        $usuario = usuario::factory()->create();
+        $usuario = usuario::factory()->create()->assignRole('Ayuntamiento');
         return [
             'usuario_id' => $usuario->id,
             'direccion' => fake()->postcode(),
             'tokenVerification' => $token->id
         ];
-    }
-    public function configure()
-    {
-        return $this->afterCreating(function (ayuntamiento $ayuntamiento) {
-            $usuario = Usuario::find($ayuntamiento->usuario_id);
-            if ($usuario) {
-                $usuario->assignRole('Ayuntamiento');
-            }
-        });
     }
 }

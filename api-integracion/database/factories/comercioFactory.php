@@ -20,7 +20,7 @@ class comercioFactory extends Factory
     public function definition(): array
     {
         $categoria = categoria::inRandomOrder()->first(); // Obtener un municipio aleatorio
-        $usuario = Usuario::factory()->create();
+        $usuario = Usuario::factory()->create()->assignRole('Comercio');
         return [
             'usuario_id' => $usuario->id,
             'categoria_id' => $categoria->id,
@@ -29,13 +29,5 @@ class comercioFactory extends Factory
             'descripcion' => fake()->text()
         ];
     }
-    public function configure()
-    {
-        return $this->afterCreating(function (comercio $comercio) {
-            $usuario = Usuario::find($comercio->usuario_id);
-            if ($usuario) {
-                $usuario->assignRole('Comercio');
-            }
-        });
-    }
+
 }

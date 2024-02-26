@@ -9,6 +9,16 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 class ApiEtiquetaController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum');
+        $this->middleware('can:admin.etiquetas.index')->only('index');
+        $this->middleware('can:admin.etiquetas.store')->only('store');
+        $this->middleware('can:admin.etiquetas.destroy')->only('destroy');
+        $this->middleware('can:admin.etiquetas.show')->only('show');
+        $this->middleware('can:admin.etiquetas.update')->only('update');
+    }
     /**
      * Display a listing of the resource.
      */

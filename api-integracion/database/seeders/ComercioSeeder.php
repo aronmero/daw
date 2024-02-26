@@ -19,7 +19,7 @@ class ComercioSeeder extends Seeder
             'email' => 'comercio@example.com',
             'municipio_id'=>1,
             'password' => bcrypt('1234')
-        ]);
+        ])->assignRole('Comercio');;
 
         comercio::factory()->create(['usuario_id' => $usuario->id,'verificado'=>false]);
 

@@ -19,7 +19,7 @@ class AyuntamientoSeeder extends Seeder
             'email' => 'ayuntamiento@example.com',
             'municipio_id'=>1,
             'password' => bcrypt('1234')
-        ]);
+        ])->assignRole('Ayuntamiento');;
 
         ayuntamiento::factory()->create(['usuario_id' => $usuario->id,]);
 

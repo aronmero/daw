@@ -9,6 +9,16 @@ use Illuminate\Http\Request;
 use App\Models\Publicacion;
 class ApiPublicacionController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum');
+        $this->middleware('can:admin.publicacion.index')->only('index');
+        $this->middleware('can:admin.publicacion.store')->only('store');
+        $this->middleware('can:admin.publicacion.destroy')->only('destroy');
+        $this->middleware('can:admin.publicacion.show')->only('show');
+        $this->middleware('can:admin.publicacion.update')->only('update');
+    }
     /**
      * Display a listing of the resource.
      */

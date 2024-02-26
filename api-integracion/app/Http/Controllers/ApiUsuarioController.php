@@ -8,6 +8,13 @@ use Illuminate\Http\Request;
 
 class ApiUsuarioController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum');
+        $this->middleware('can:admin.usuarios.index')->only('index');
+        $this->middleware('can:admin.usuarios.show')->only('show');
+        $this->middleware('can:admin.usuarios.destroy')->only('destroy');
+    }
     /**
      * Display a listing of the resource.
      */
@@ -16,14 +23,6 @@ class ApiUsuarioController extends Controller
         $usuarios = Usuario::with('municipio')->get();
         $usuarios->makeVisible(['id']);
         return $this->respuestaHTTP($usuarios, 200, true);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
     }
 
     /**
@@ -41,17 +40,9 @@ class ApiUsuarioController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $usuario_id,string $tipoUsario)
+    public function destroy(string $usuario_id,string $tipoUsario = 'usuario')
     {
         try {
             // Buscar el usuario

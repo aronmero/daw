@@ -15,6 +15,17 @@ use Illuminate\Http\Request;
 
 class ApiAyuntamientoController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum');
+        $this->middleware('can:admin.ayuntamiento.index')->only('index');
+        $this->middleware('can:admin.ayuntamiento.store')->only('store');
+        $this->middleware('can:admin.ayuntamiento.destroy')->only('destroy');
+        $this->middleware('can:admin.ayuntamiento.show')->only('show');
+        $this->middleware('can:admin.ayuntamiento.update')->only('update');
+        $this->middleware('can:admin.ayuntamiento.verify')->only('verificarComercio');
+    }
     /**
      * Display a listing of the resource.
      */
@@ -40,13 +51,15 @@ class ApiAyuntamientoController extends Controller
         }
 
         $usuario = usuario::create($usuarioData);
+        $usuario->assignRole('Ayuntamiento');
         $ayuntamientoData['usuario_id'] = $usuario->id;
         $ayuntamientoData['tokenVerification'] = $token->id;
 
-        $ayuntamiento = Ayuntamiento::create($ayuntamientoData);
+        $usuario->ayuntamiento()->create($ayuntamientoData);
+        
 
         return response()->json([
-            'Id del usuario' => $ayuntamiento->usuario_id
+            'Id del usuario' => $usuario->id
         ], 201);
     }
 
@@ -75,7 +88,7 @@ class ApiAyuntamientoController extends Controller
         }
 
         try {
-            $ayuntamiento = Usuario::findOrFail($usuario_id);
+            $ayuntamiento = ayuntamiento::findOrFail($usuario_id);
         } catch (ModelNotFoundException $exception) {
             return $this->respuestaHTTP('Ayuntamiento no encontrado', 404, false);
         }
@@ -102,7 +115,7 @@ class ApiAyuntamientoController extends Controller
     public function destroy(string $usuario_id)
     {
         $usuarioController = new ApiUsuarioController();
-        return $usuarioController->destroy($usuario_id,'ayuntamiento');
+        return $usuarioController->destroy($usuario_id, 'ayuntamiento');
     }
     public function verificarComercio(Request $request)
     {
@@ -115,7 +128,7 @@ class ApiAyuntamientoController extends Controller
             $ayuntamiento = Ayuntamiento::where('usuario_id', $request->ayuntamiento_id)->firstOrFail();
             $comercio = comercio::where('usuario_id', $request->comercio_id)->firstOrFail();
 
-            
+
             if ($comercio->verificado) {
                 return response()->json(['message' => 'El comercio ya ha sido verificado previamente'], 400);
             }

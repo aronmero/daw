@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApiAuthController;
 use App\Http\Controllers\ApiAyuntamientoController;
 use App\Http\Controllers\ApiComercioController;
 use App\Http\Controllers\ApiEtiquetaController;
@@ -21,10 +22,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/comercios/publicaciones/{comercio}', [ApiComercioController::class, 'showPublicaciones']);
-Route::patch('/ayuntamientos/verificar-comercio', [ApiAyuntamientoController::class, 'verificarComercio']);
+Route::get('/comercios/publicaciones/{comercio}', [ApiComercioController::class, 'showPublicaciones'])->name('comercios.publicaciones');
+Route::patch('/ayuntamientos/verificar-comercio', [ApiAyuntamientoController::class, 'verificarComercio'])->name('ayuntamientos.verify');
 
-Route::apiResource('usuarios', ApiUsuarioController::class)->parameters(['usuarios' => 'usuario'])->except(['update','store','destroy']);
+Route::apiResource('usuarios', ApiUsuarioController::class)->parameters(['usuarios' => 'usuario'])->except(['update','store']);
 Route::apiResource('particulares', ApiParticularController::class)->parameters(['particulares' => 'particular']);
 Route::apiResource('comercios', ApiComercioController::class)->parameters(['comercios' => 'comercio']);
 Route::apiResource('ayuntamientos', ApiAyuntamientoController::class)->parameters(['ayuntamientos' => 'ayuntamiento']);
@@ -33,3 +34,5 @@ Route::apiResource('publicaciones', ApiPublicacionController::class)->parameters
 Route::apiResource('etiquetas', ApiEtiquetaController::class)->parameters(['etiquetas' => 'etiqueta']);
 Route::get('/seguidos/info', [ApiSeguidoController::class, 'info']);
 Route::apiResource('seguidos', ApiSeguidoController::class)->parameters(['seguidos' => 'seguido'])->except(['update']);
+
+Route::post("login", [ApiAuthController::class, 'index']);

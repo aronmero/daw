@@ -9,6 +9,15 @@ use Illuminate\Http\Request;
 
 class ApiSeguidoController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum');
+        $this->middleware('can:admin.seguidos.index')->only('index');
+        $this->middleware('can:admin.seguidos.info')->only('info');
+        $this->middleware('can:admin.seguidos.store')->only('store');
+        $this->middleware('can:admin.seguidos.destroy')->only('destroy');
+        $this->middleware('can:admin.seguidos.show')->only('show');
+    }
     /**
      * Display a listing of the resource.
      */

@@ -19,24 +19,45 @@ class RoleSeeder extends Seeder
         $comercio = Role::create(['name' => 'Comercio']);
         $particular = Role::create(['name' => 'Particular']);
 
-        Permission::create(['name' => 'admin.home'])->syncRoles([$admin]);
+        Permission::create(['name' => 'admin.usuarios.index'])->syncRoles([$admin]);
+        Permission::create(['name' => 'admin.usuarios.show'])->syncRoles([$admin]);
+        Permission::create(['name' => 'admin.usuarios.destroy'])->syncRoles([$admin]);
 
-        Permission::create(['name' => 'admin.actividades.index'])->syncRoles([$admin]);
-        Permission::create(['name' => 'admin.actividades.create'])->syncRoles([$admin]);
-        Permission::create(['name' => 'admin.actividades.show'])->syncRoles([$admin]);
-        Permission::create(['name' => 'admin.actividades.edit'])->syncRoles([$admin]);
-        Permission::create(['name' => 'admin.actividades.destroy'])->syncRoles([$admin]);
+        Permission::create(['name' => 'admin.ayuntamiento.index'])->syncRoles([$admin, $ayuntamiento, $comercio, $ayuntamiento]);
+        Permission::create(['name' => 'admin.ayuntamiento.store'])->syncRoles([$admin]);
+        Permission::create(['name' => 'admin.ayuntamiento.show'])->syncRoles([$admin, $ayuntamiento, $comercio, $ayuntamiento]);
+        Permission::create(['name' => 'admin.ayuntamiento.update'])->syncRoles([$admin, $ayuntamiento]);
+        Permission::create(['name' => 'admin.ayuntamiento.destroy'])->syncRoles([$admin]);
+        Permission::create(['name' => 'admin.ayuntamiento.verify'])->syncRoles([$admin, $ayuntamiento]);
 
-        Permission::create(['name' => 'admin.usuario.index'])->syncRoles([$admin]);
-        Permission::create(['name' => 'admin.usuario.create'])->syncRoles([$admin]);
-        Permission::create(['name' => 'admin.usuario.show'])->syncRoles([$admin]);
-        Permission::create(['name' => 'admin.usuario.edit'])->syncRoles([$admin]);
-        Permission::create(['name' => 'admin.usuario.destroy'])->syncRoles([$admin]);
+        Permission::create(['name' => 'admin.comercio.index'])->syncRoles([$admin, $comercio, $particular, $ayuntamiento]);
+        Permission::create(['name' => 'admin.comercio.store'])->syncRoles([$admin]);
+        Permission::create(['name' => 'admin.comercio.show'])->syncRoles([$admin, $comercio, $particular, $ayuntamiento]);
+        Permission::create(['name' => 'admin.comercio.update'])->syncRoles([$admin, $comercio]);
+        Permission::create(['name' => 'admin.comercio.destroy'])->syncRoles([$admin]);
 
-        Permission::create(['name' => 'admin.grupo.index'])->syncRoles([$admin]);
-        Permission::create(['name' => 'admin.grupo.create'])->syncRoles([$admin]);
-        Permission::create(['name' => 'admin.grupo.show'])->syncRoles([$admin]);
-        Permission::create(['name' => 'admin.grupo.edit'])->syncRoles([$admin]);
-        Permission::create(['name' => 'admin.grupo.destroy'])->syncRoles([$admin]);
+        Permission::create(['name' => 'admin.particular.index'])->syncRoles([$admin]);
+        Permission::create(['name' => 'admin.particular.store'])->syncRoles([$admin]);
+        Permission::create(['name' => 'admin.particular.show'])->syncRoles([$admin, $particular]);
+        Permission::create(['name' => 'admin.particular.update'])->syncRoles([$admin, $particular]);
+        Permission::create(['name' => 'admin.particular.destroy'])->syncRoles([$admin]);
+
+        Permission::create(['name' => 'admin.seguidos.index'])->syncRoles([$admin]);
+        Permission::create(['name' => 'admin.seguidos.info'])->syncRoles([$admin]);
+        Permission::create(['name' => 'admin.seguidos.store'])->syncRoles([$admin, $particular]);
+        Permission::create(['name' => 'admin.seguidos.show'])->syncRoles([$admin, $particular]);
+        Permission::create(['name' => 'admin.seguidos.destroy'])->syncRoles([$admin, $particular]);
+
+        Permission::create(['name' => 'admin.publicacion.index'])->syncRoles([$admin, $comercio, $particular, $ayuntamiento]);
+        Permission::create(['name' => 'admin.publicacion.store'])->syncRoles([$admin, $comercio]);
+        Permission::create(['name' => 'admin.publicacion.show'])->syncRoles([$admin, $comercio, $particular, $ayuntamiento]);
+        Permission::create(['name' => 'admin.publicacion.update'])->syncRoles([$admin, $comercio]);
+        Permission::create(['name' => 'admin.publicacion.destroy'])->syncRoles([$admin, $comercio]);
+
+        Permission::create(['name' => 'admin.etiquetas.index'])->syncRoles([$admin, $comercio, $particular, $ayuntamiento]);
+        Permission::create(['name' => 'admin.etiquetas.store'])->syncRoles([$admin, $comercio]);
+        Permission::create(['name' => 'admin.etiquetas.show'])->syncRoles([$admin, $comercio, $particular, $ayuntamiento]);
+        Permission::create(['name' => 'admin.etiquetas.update'])->syncRoles([$admin]);
+        Permission::create(['name' => 'admin.etiquetas.destroy'])->syncRoles([$admin]);
     }
 }
