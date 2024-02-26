@@ -23,8 +23,8 @@ class publicacionRequest extends FormRequest
     {
         return [
             'imagen' => 'required|string',
-            'titulo' => 'required|string|max:30',
-            'descripcion' => 'required|string|max:150',
+            'titulo' => 'required|string|max:30|min:3',
+            'descripcion' => 'required|string|max:150|min:3',
             'tipo_id' => 'required|exists:tipo_publicaciones,id',
             'fecha_publicacion' => 'required|date',
             'fecha_inicio' => 'required|date',
@@ -47,10 +47,12 @@ class publicacionRequest extends FormRequest
             'titulo' => [
                 'required' => 'El título es obligatorio.',
                 'max' => 'El título no puede tener más de 30 caracteres.',
+                'min' => 'El titulo debe tener al menos 3 caracteres.',
             ],
             'descripcion' => [
                 'required' => 'La descripción es obligatoria.',
                 'max' => 'La descripción no puede tener más de 150 caracteres.',
+                'min' => 'La descripcion debe tener al menos 3 caracteres.',
             ],
             'tipo_id' => [
                 'required' => 'El tipo de publicación es obligatorio.',

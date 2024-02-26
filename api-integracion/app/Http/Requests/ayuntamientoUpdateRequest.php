@@ -22,7 +22,7 @@ class ayuntamientoUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'direccion' => 'string',
+            'direccion' => 'string|min:3|max:255',
         ];
     }
 
@@ -35,7 +35,9 @@ class ayuntamientoUpdateRequest extends FormRequest
     {
         return [
             'direccion.' => 'La dirección es obligatoria.',
-            'direccion.string' => 'La dirección debe ser una cadena de caracteres.'
+            'direccion.string' => 'La dirección debe ser una cadena de caracteres.',
+            'direccion.max' => 'La dirección no puede tener más de 255 caracteres.',
+            'direccion.min' => 'La dirección debe tener al menos 3 caracteres.',
         ];
     }
 }

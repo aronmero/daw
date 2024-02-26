@@ -22,7 +22,7 @@ class etiquetaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nombre' => 'required|string|max:255|unique:etiquetas,nombre',
+            'nombre' => 'required|string|max:255|unique:etiquetas,nombre|min:3',
 
         ];
     }
@@ -39,6 +39,7 @@ class etiquetaRequest extends FormRequest
             'nombre.required' => 'El nombre es obligatorio.',
             'nombre.string' => 'El nombre debe ser una cadena de texto.',
             'nombre.max' => 'El nombre no puede tener más de 255 caracteres.',
+            'nombre.min' => 'El nombre debe tener al menos 3 caracteres.',
         ];
         
     }

@@ -23,8 +23,8 @@ class publicacionUpdateRequest extends FormRequest
     {
         return [
             'imagen' => 'string',
-            'titulo' => 'string|max:30',
-            'descripcion' => 'string|max:150',
+            'titulo' => 'string|max:30|min:3',
+            'descripcion' => 'string|max:150|min:3',
             'tipo_id' => 'exists:tipo_publicaciones,id',
             'fecha_publicacion' => 'date',
             'fecha_inicio' => 'date',
@@ -44,9 +44,11 @@ class publicacionUpdateRequest extends FormRequest
         return [
             'titulo' => [
                 'max' => 'El título no puede tener más de 30 caracteres.',
+                'min' => 'El titulo debe tener al menos 3 caracteres.',
             ],
             'descripcion' => [
                 'max' => 'La descripción no puede tener más de 150 caracteres.',
+                'min' => 'La descripcion debe tener al menos 3 caracteres.',
             ],
             'tipo_id' => [
                 'exists' => 'El tipo de publicación seleccionado no es válido.',
