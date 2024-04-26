@@ -1,0 +1,55 @@
+body{
+    background-color:rgb(243, 111, 107);
+}
+#divAgenda{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#datosAgenda div {
+    display: flex;
+    justify-content: space-between;
+    width: 400px;
+    color: blue;
+    padding: 10px;
+}
+fieldset{
+    border: 1px groove rgb(159, 223, 235);
+    width: 700px;
+
+    padding: 10px;
+    margin: 10px;
+}
+form div{
+    width: 300px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+form input{
+    border-radius: 5px;
+    border: 1px solid rgb(189, 97, 97);
+    padding: 5px;
+}
+
+form #enviarDatos{
+    margin-top: 15px;
+    color: blue;
+    padding: 5px 20px 5px 20px;
+}
+form #limpiarDatos{
+    color: rgb(6, 150, 18);
+    padding: 5px 20px 5px 20px;
+}
+
+form #vaciarDatos{
+    color: rgb(180, 18, 18);
+    padding: 5px 20px 5px 20px;
+}
+form label{
+    color: blue;
+    font-size: large;
+    font-weight: bold;
+}
+
