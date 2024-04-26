@@ -1,3 +1,5 @@
+**En esta instancia solo esta mi parte del proyecto realizado, que es la vista home**
+
 # Proyecto final dor
 
 Tras clonar el proyecto se debe utilizar el comando `npm run install`.
