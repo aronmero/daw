@@ -1,0 +1,63 @@
+/**
+* {
+  border: 1px red dashed;
+}
+/**/
+
+.tarjetas {
+  display: grid;
+  grid-template-rows: repeat(3, 30%);
+  grid-template-columns: repeat(4, 21.2%);
+  gap: 5%;
+  margin-bottom: 40px;
+}
+
+.tarjetas p {
+  display: none;
+}
+
+.tarjeta{
+    border-radius: 10px;
+    background-color: rgb(255,255,255);
+    vertical-align: middle;
+    text-align: center;
+    width: 240px;
+    height: 250px;
+    max-width: 250px;
+    max-height: 250px;
+}
+.tarjeta img{
+    height: 240px;
+    aspect-ratio: 7/9;
+    display: none;
+
+
+}
+.tarjeta.revelada img{
+    display: inline;
+}
+
+.tarjeta.revelada{ 
+    background-color: rgb(230, 208, 100)
+}
+
+.tarjeta.acertada{
+    background-color: rgb(248,219,39) !important;
+}
+button{
+    background-color: transparent;
+    border: none;
+    width: 99%;
+    height: 99%;
+}
+h1{
+    color:  rgb(248,219,39);
+}
+
+body {
+    display: flex;
+    min-height: 940px;
+    align-items: center;
+    flex-direction: column;
+    background-color: rgb(108 147 232);
+}

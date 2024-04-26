@@ -1,0 +1,54 @@
+{
+  "eventos": [
+    {
+      "lugar": "Roque",
+      "fecha": "23-11-2023",
+      "descripcion": "Visita al roque",
+      "grupos": ["1ºESO", "2ºESO"],
+      "profesores": ["Nico", "Luis"]
+    },
+    {
+      "lugar": "Puntagorda",
+      "fecha": "8-12-2023",
+      "descripcion": "Visita a puntagorda",
+      "grupos": ["1ºESO", "2ºESO"],
+      "profesores": ["Paco", "Luz", "Estela"]
+    },
+    {
+      "lugar": "Salinas",
+      "fecha": "18-12-2023",
+      "descripcion": "Visita a las salinas",
+      "grupos": ["4ºESO"],
+      "profesores": ["Nico"]
+    },
+    {
+      "lugar": "Time",
+      "fecha": "7-12-2023",
+      "descripcion": "Visita al time",
+      "grupos": ["1ºESO", "2ºESO"],
+      "profesores": ["Nico", "Luis"]
+    },
+    {
+      "lugar": "Pueblo",
+      "fecha": "02-02-2024",
+      "descripcion": "Excursión cultural",
+      "grupos": ["2ºESO", "3ºESO"],
+      "profesores": ["Carlos", "Elena"]
+    },
+    {
+      "lugar": "Montaña",
+      "fecha": "10-03-2024",
+      "descripcion": "Senderismo en la montaña",
+      "grupos": ["1ºBACH", "2ºBACH"],
+      "profesores": ["Mario", "Laura"]
+    },
+    {
+      "lugar": "Museo",
+      "fecha": "05-04-2024",
+      "descripcion": "Visita al museo de historia",
+      "grupos": ["1ºBACH", "2ºBACH"],
+      "profesores": ["Sara", "Pedro"]
+    }
+    
+  ]
+}

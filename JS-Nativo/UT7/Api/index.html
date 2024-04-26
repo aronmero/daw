@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>DAW</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+  <script type="module" src="main.js"></script>
+</head>
+
+<body>
+  <div class="cabecera" id="cabecera">
+
+    <h1><span class="red">Poke</span>dex</h1>
+    <div id="busqueda">
+      <label>Buscar por pokemon: </label>
+      <input type="text" placeholder="Pikachu" id="busquedaPokemon" name="busquedaPokemon">
+    </div>
+  </div>
+  <section>
+    <div class="botonesInteraccion"><button id="refrescarDatos">Recargar Datos</button>
+      <button id="refrescarApi">Recargar Api</button>
+    </div>
+    <div class="progressContainer">
+      <div id="progressBarContainer">
+        <div id="progressBar" hidden></div>
+      </div>
+    </div>
+    <p class="tip">En caso de que no cargen las imagenes recarga la pagina o pulsa en "Recargar Datos"</p>
+    <div id="containerDisplay"></div>
+    <div id="inicio"><img src="./media/flecha.webp"></div>
+  </section>
+
+  <footer>Aarón Medina Rodríguez - 2024</footer>
+  </div>
+</body>
+
+</html>

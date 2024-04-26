@@ -1,0 +1,102 @@
+.divResultadoError {
+  margin: 20px;
+  display: flex;
+  justify-content: center;
+}
+.divResultadoError p {
+  font-size: xx-large;
+}
+
+.resultadoDiv {
+  margin: 20px;
+  display: flex;
+  justify-content: center;
+}
+.resultadoDiv p {
+  background-color: rgb(141, 176, 206);
+  text-align: center;
+  border: 1px solid black;
+  width: 200px;
+  height: 140px;
+  padding: 50px 40px;
+  border-radius: 10px;
+  line-height: 50px;
+  font-size: 30px;
+  word-spacing: 10px;
+}
+.preguntaSinResponder {
+  background-color: rgb(234, 123, 123) !important;
+}
+.pregunta {
+  display: flex;
+  flex-direction: row;
+  width: 75vw;
+  min-height: 250px;
+  border: 1px solid black;
+  border-radius: 10px;
+  background-color: rgb(141, 176, 206);
+  padding: 10px;
+  margin: 30px;
+}
+.pregunta div {
+  padding: 10px;
+}
+.pregunta div:nth-child(1) {
+  width: 20%;
+}
+
+.pregunta div:nth-child(2) {
+  width: 80%;
+}
+
+.formulario {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.formulario div input {
+  margin-right: 20px;
+}
+label {
+  margin-bottom: 20px;
+}
+input {
+  margin-bottom: 20px;
+}
+
+input[type="submit"] {
+  border-radius: 10px;
+  padding: 10px 15px;
+}
+.test {
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+#botonEnvio {
+  border-radius: 10px;
+  border: 1px solid black;
+  padding: 10px 20px;
+}
+
+.espacioCheck {
+  display: block;
+  width: 20px;
+  margin-left: -20px;
+  font-size: larger;
+}
+.espacioCheckVerde {
+  color: lime;
+}
+
+.espacioCheckRojo {
+  color: #dd0000;
+}
+.divRespuesta {
+  display: flex;
+  align-items: center;
+}

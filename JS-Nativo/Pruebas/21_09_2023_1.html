@@ -1,0 +1,37 @@
+<form>
+    <label for="lang-switch">
+        <span lang="es">언어</span>
+        <span lang="en">Language</span>
+    </label>
+    <select id="lang-switch">
+        <option value="en" selected>English</option>
+        <option value="es">ES</option>
+    </select>
+</form>
+
+<p>
+    <span lang="es">한국어 텍스트</span>
+    <span lang="en">Text in English</span>
+</p>
+
+<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+<script>
+$('[lang]').hide(); // hide all lang attributes on start.
+$('[lang="en"]').show(); // show just esrean text (you can change it)
+$('#lang-switch').change(function () { // put onchange event when user select option from select
+    var lang = $(this).val(); // decide which language to display using switch case. The rest is obvious (i think)
+    switch (lang) {
+        case 'en':
+            $('[lang]').hide();
+            $('[lang="en"]').show();
+        break;
+        case 'es':
+            $('[lang]').hide();
+            $('[lang="es"]').show();
+        break;
+        default:
+            $('[lang]').hide();
+            $('[lang="es"]').show();
+        }
+});
+</script>

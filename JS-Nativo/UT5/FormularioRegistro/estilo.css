@@ -1,0 +1,76 @@
+body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+form{
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.info,.info p{
+    width: 500px;
+    text-align: center;
+}
+form>div{
+    width: 800px;
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: repeat(3, 1fr);;
+    gap: 8px;
+    margin-bottom: 10px;
+    align-items: center;
+}
+
+form>div:last-child{
+    margin-top: 20px;
+    display: flex;
+    margin-left: 400px;
+
+}
+form>div:last-child p{
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid black;
+    background-color: rgb(238, 182, 79);
+}
+input{
+    width: 240px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid black;
+}
+
+select{
+    width: 262px;
+    padding: 5px;
+    border: 1px solid black;
+}
+#selectorGrupos{
+display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  width: 265px;
+}
+#selectorGrupos p{
+    margin: 0px;
+}
+#selectorGrupos>div{
+    display: flex;
+    align-items: center;
+}
+
+input[type=checkbox]{
+    width: 15px;
+}
+
+p{
+    margin: 0px;
+    margin-left: 10px;
+}
+
+.error{
+    color: red;
+}
