@@ -1,0 +1,332 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap");
+
+* {
+    font-family: "Poppins", sans-serif;
+}
+
+.contenedor {
+    display: flex;
+    justify-content: center;
+    padding: 30px;
+}
+div:has(> table) {
+    display: flex;
+    justify-content: center;
+    padding: 15px;
+}
+.profesores {
+    form div {
+        display: flex;
+        width: 350px;
+        justify-content: space-between;
+        margin: 7px 0px;
+    }
+    .passwordForm div {
+        width: 450px;
+    }
+}
+
+table {
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 15px;
+    border-spacing: 10px;
+    width: 95vw;
+
+    tr:nth-child(odd),
+    .carta:nth-child(odd) {
+        background-color: #ffd7b3;
+    }
+
+    tr:nth-child(even),
+    .carta:nth-child(even) {
+        background-color: #f7b57c;
+    }
+
+    tr td:nth-child(1) {
+        font-size: 16px;
+    }
+    thead td {
+        font-weight: 600;
+        font-size: 18px !important;
+    }
+
+    td {
+        width: auto;
+        font-size: 14px;
+        padding: 10px 15px;
+        border: 1px solid black;
+        border-radius: 5px;
+    }
+    th {
+        padding-left: 10px;
+        text-align: start;
+    }
+    .accion:hover {
+        color: #522b0a;
+    }
+}
+.encabezado {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    > div {
+        width: 100%;
+        max-width: 1000px;
+        display: flex;
+        > :nth-child(1) {
+            display: flex;
+            justify-content: space-evenly;
+            width: 90%;
+        }
+    }
+}
+
+.contenedorCartas {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    max-width: 1600px;
+
+    .carta {
+        /*height: 240px;*/
+        display: grid;
+        box-sizing: border-box;
+        padding: 10px 15px;
+        border: 1px solid black;
+        border-radius: 5px;
+        width: 240px;
+
+        > div {
+            padding: 3px;
+        }
+
+        .lugar {
+            font-weight: 700;
+        }
+
+        div:has(.accion) {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+        .accion:hover {
+            color: #522b0a;
+        }
+    }
+    > :nth-child(odd) {
+        background-color: #ffd7b3;
+    }
+
+    > .carta:nth-child(even) {
+        background-color: #f7b57c;
+    }
+}
+
+input {
+    width: 150px;
+    border: 1px solid grey;
+    padding: 3px 7px;
+    border-radius: 5px;
+}
+
+.navegacion {
+    margin: 0px 5px;
+    display: flex;
+    align-items: center;
+    a {
+        margin: 0px 5px;
+    }
+    a:hover {
+        font-weight: bold;
+    }
+    a.activo {
+        font-weight: bold;
+        color: #f7b57c;
+    }
+}
+.cabecera {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 15px;
+
+    .input {
+        width: 150px;
+        border: 1px solid grey;
+        padding: 3px 7px;
+        border-radius: 5px;
+    }
+    a {
+        text-decoration: none;
+        color: black;
+    }
+    .enlaces {
+        display: flex;
+        button {
+            padding: 0px;
+            border: none;
+            font-size: 16px;
+            background-color: transparent;
+            cursor: pointer;
+        }
+        button:hover {
+            font-weight: bold;
+        }
+    }
+    h1 {
+        margin-bottom: 0px;
+    }
+}
+
+.actividades {
+    form {
+        label {
+            margin: 3px;
+        }
+        .datos {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+
+            > div:has(input[type="hidden"]) {
+                display: none;
+            }
+            div {
+                display: flex;
+                margin: 5px 0px;
+                margin: 5px 0px;
+                padding-right: 5px;
+            }
+        }
+
+        > div:has(textarea) {
+            display: flex;
+            margin: 5px 0px;
+            flex-direction: column;
+        }
+        textarea {
+            width: 500px;
+            height: 150px;
+            resize: none;
+        }
+
+        .checkboxs {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            input {
+                width: auto;
+                border: 1px solid grey;
+                border-radius: 10px;
+                transform: scale(2);
+            }
+            div {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                border: 1px solid grey;
+                padding: 10px 17px;
+                border-radius: 10px;
+                width: 150px;
+            }
+        }
+    }
+}
+
+.accion {
+    text-decoration: none;
+    color: #522b0a;
+    font-weight: bold;
+    padding: 0px;
+    border: none;
+    font-size: 18px;
+    background-color: transparent;
+    cursor: pointer;
+    width: auto;
+}
+.accion:hover {
+    color: #f1bc27;
+}
+
+.contenido {
+    padding: 0px 15px;
+}
+.login {
+    display: flex;
+    height: 95vh;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        label {
+            margin-left: 5px;
+            margin-bottom: 5px;
+            font-weight: bold;
+            align-self: flex-start;
+        }
+
+        > div {
+            margin: 5px;
+            padding: 5px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        input,
+        button {
+            box-sizing: border-box;
+            padding: 15px 12px;
+            width: 320px;
+            border: 1px solid grey;
+            border-radius: 12px;
+            font-size: 15px;
+        }
+
+        div:has(button[type="submit"]) {
+            margin-top: 20px;
+
+            button {
+                font-weight: 600;
+                border-radius: 20px;
+                background-color: #f1bc27;
+                cursor: pointer;
+                border-color: #f1bc27;
+            }
+        }
+    }
+    .boton {
+        box-sizing: border-box;
+        padding: 15px 12px;
+        width: 320px;
+        border: 1px solid grey;
+        border-radius: 12px;
+        font-size: 15px;
+        text-align: center;
+        font-weight: 600;
+        text-decoration: none;
+        color: black;
+    }
+    .remember {
+        display: flex;
+        width: 320px;
+        flex-direction: row;
+        label {
+            margin-bottom: 0px;
+        }
+        div {
+            display: flex;
+            width: inherit;
+            justify-content: center;
+        }
+        input {
+            width: auto;
+            transform: scale(2);
+        }
+    }
+}

@@ -1,0 +1,2230 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "API Integracion",
+    "description": "Esta API permite gestionar usuarios del tipo particular, comercio y ayuntamiento ademas de publicaciones, etiquetas y seguidos",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://127.0.0.1:8000/"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Auth",
+      "description": "Autenticación de usuarios"
+    },
+    {
+      "name": "Usuarios",
+      "description": "Manejo de usuarios"
+    },
+    {
+      "name": "Particulares",
+      "description": "CRUD de particulares"
+    },
+    {
+      "name": "Ayuntamientos",
+      "description": "CRUD de ayuntamientos"
+    },
+    {
+      "name": "Comercios",
+      "description": "CRUD de comercios"
+    },
+    {
+      "name": "Publicaciones",
+      "description": "CRUD de publicaciones"
+    },
+    {
+      "name": "Etiquetas",
+      "description": "CRUD de etiquetas"
+    },
+    {
+      "name": "Seguidos",
+      "description": "CRUD de seguidos"
+    }
+  ],
+  "paths": {
+    "/api/login": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Iniciar sesión",
+        "description": "Inicia sesión utilizando las credenciales proporcionadas y devuelve un token de acceso Bearer.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "format": "email",
+                    "description": "Correo electrónico del usuario"
+                  },
+                  "password": {
+                    "type": "string",
+                    "format": "password",
+                    "description": "Contraseña del usuario"
+                  }
+                },
+                "required": [
+                  "email",
+                  "password"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Sesión iniciada satisfactoriamente",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "token": {
+                      "type": "string",
+                      "description": "Token de acceso Bearer generado para la sesión"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Credenciales inválidas",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "description": "Mensaje indicando que las credenciales no coinciden con los registros"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/usuarios": {
+      "get": {
+        "summary": "Obtiene todos los usuarios",
+        "tags": [
+          "Usuarios"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de usuarios obtenida exitosamente",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Usuario"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/usuarios/{id}": {
+      "get": {
+        "summary": "Obtiene un usuario por su ID",
+        "tags": [
+          "Usuarios"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "ID del usuario a obtener",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Detalles del usuario obtenidos exitosamente",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Usuario"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Usuario no encontrado"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Elimina un usuario existente",
+        "tags": [
+          "Usuarios"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "ID del usuario a eliminar",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Usuario eliminado correctamente"
+          },
+          "404": {
+            "description": "Usuario no encontrado"
+          }
+        }
+      }
+    },
+    "/api/particulares": {
+      "get": {
+        "tags": [
+          "Particulares"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "summary": "Lista de particulares",
+        "description": "Obtiene una lista de todos los particulares",
+        "responses": {
+          "200": {
+            "description": "Lista de particulares",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Particular"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Particulares"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "summary": "Crear particular",
+        "description": "Crea un nuevo particular",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ParticularRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Id del usuario creado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "usuario_id": {
+                      "type": "integer",
+                      "description": "Id del usuario creado"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/particulares/{usuario_id}": {
+      "get": {
+        "tags": [
+          "Particulares"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "summary": "Detalles del particular",
+        "description": "Obtiene los detalles de un particular por su ID de usuario",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "usuario_id",
+            "required": true,
+            "description": "ID del usuario particular",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Detalles del particular",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Particular"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Particular no encontrado"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Particulares"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "summary": "Actualizar particular",
+        "description": "Actualiza los detalles de un particular por su ID de usuario",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "usuario_id",
+            "required": true,
+            "description": "ID del usuario particular",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ParticularUpdateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Particular actualizado exitosamente"
+          },
+          "404": {
+            "description": "Particular no encontrado"
+          },
+          "422": {
+            "description": "El correo electrónico ya está en uso"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Particulares"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "summary": "Eliminar particular",
+        "description": "Elimina un particular por su ID de usuario",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "usuario_id",
+            "required": true,
+            "description": "ID del usuario particular",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Particular eliminado exitosamente"
+          },
+          "404": {
+            "description": "Particular no encontrado"
+          }
+        }
+      }
+    },
+    "/api/ayuntamiento": {
+      "get": {
+        "tags": [
+          "Ayuntamientos"
+        ],
+        "summary": "Obtener todos los ayuntamientos",
+        "description": "Retorna todos los ayuntamientos disponibles.",
+        "responses": {
+          "200": {
+            "description": "Lista de ayuntamientos",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AyuntamientosResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ayuntamientos no encontrados",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Ayuntamientos"
+        ],
+        "summary": "Crear un nuevo ayuntamiento",
+        "description": "Crea un nuevo ayuntamiento con los datos proporcionados. Se requiere autenticación con un token de acceso válido y permisos de administrador para crear ayuntamientos.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AyuntamientoCreateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Ayuntamiento creado satisfactoriamente",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/ayuntamiento/{usuario_id}/verificar-comercio": {
+      "patch": {
+        "tags": [
+          "Ayuntamientos"
+        ],
+        "summary": "Verificar comercio",
+        "description": "Verifica un comercio asociado a un ayuntamiento. Se requiere autenticación con un token de acceso válido y permisos de administrador para realizar esta acción.",
+        "parameters": [
+          {
+            "name": "usuario_id",
+            "in": "path",
+            "description": "ID de usuario del ayuntamiento",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "ayuntamiento_id": {
+                    "type": "integer",
+                    "description": "ID del ayuntamiento"
+                  },
+                  "comercio_id": {
+                    "type": "integer",
+                    "description": "ID del comercio a verificar"
+                  }
+                },
+                "required": [
+                  "ayuntamiento_id",
+                  "comercio_id"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Comercio verificado satisfactoriamente",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ayuntamiento o comercio no encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/ayuntamiento/{usuario_id}": {
+      "get": {
+        "tags": [
+          "Ayuntamientos"
+        ],
+        "summary": "Obtener detalles de un ayuntamiento por ID de usuario",
+        "description": "Retorna los detalles de un ayuntamiento específico según el ID de usuario proporcionado. Se requiere autenticación con un token de acceso válido.",
+        "parameters": [
+          {
+            "name": "usuario_id",
+            "in": "path",
+            "description": "ID de usuario del ayuntamiento a buscar",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Detalles del ayuntamiento encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AyuntamientoResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ayuntamiento no encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Ayuntamientos"
+        ],
+        "summary": "Actualizar un ayuntamiento existente",
+        "description": "Actualiza los detalles de un ayuntamiento existente según el ID de usuario proporcionado. Se requiere autenticación con un token de acceso válido y permisos de administrador para editar ayuntamientos.",
+        "parameters": [
+          {
+            "name": "usuario_id",
+            "in": "path",
+            "description": "ID de usuario del ayuntamiento a actualizar",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AyuntamientoUpdateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Ayuntamiento actualizado satisfactoriamente",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ayuntamiento no encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Ayuntamientos"
+        ],
+        "summary": "Eliminar un ayuntamiento",
+        "description": "Elimina un ayuntamiento existente según el ID de usuario proporcionado. Se requiere autenticación con un token de acceso válido y permisos de administrador para eliminar ayuntamientos.",
+        "parameters": [
+          {
+            "name": "usuario_id",
+            "in": "path",
+            "description": "ID de usuario del ayuntamiento a eliminar",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Ayuntamiento eliminado satisfactoriamente"
+          },
+          "404": {
+            "description": "Ayuntamiento no encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/comercio": {
+      "get": {
+        "tags": [
+          "Comercios"
+        ],
+        "summary": "Obtener todos los comercios",
+        "description": "Retorna todos los comercios disponibles.",
+        "responses": {
+          "200": {
+            "description": "Lista de comercios",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ComerciosResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Comercios no encontrados",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Comercios"
+        ],
+        "summary": "Crear un nuevo comercio",
+        "description": "Crea un nuevo comercio con los datos proporcionados. Se requiere autenticación con un token de acceso válido y permisos de administrador para crear comercios.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ComercioCreateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Comercio creado satisfactoriamente",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/comercio/publicaciones/{usuario_id}": {
+      "get": {
+        "tags": [
+          "Comercios"
+        ],
+        "summary": "Obtener detalles de un comercio por ID de usuario",
+        "description": "Retorna las publicaciones de un comercio",
+        "parameters": [
+          {
+            "name": "usuario_id",
+            "in": "path",
+            "description": "ID de usuario del comercio a buscar",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Detalles del comercio encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "object",
+                      "properties": {
+                        "usuario_id": {
+                          "type": "integer"
+                        },
+                        "direccion": {
+                          "type": "string"
+                        },
+                        "verificado": {
+                          "type": "integer"
+                        },
+                        "descripcion": {
+                          "type": "string"
+                        },
+                        "usuario": {
+                          "type": "object",
+                          "properties": {
+                            "email": {
+                              "type": "string"
+                            },
+                            "nombre": {
+                              "type": "string"
+                            },
+                            "telefono": {
+                              "type": "string"
+                            },
+                            "avatar": {
+                              "type": "string"
+                            },
+                            "municipio": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "integer"
+                                },
+                                "nombre": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "publicaciones": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "integer"
+                              },
+                              "imagen": {
+                                "type": "string"
+                              },
+                              "titulo": {
+                                "type": "string"
+                              },
+                              "descripcion": {
+                                "type": "string"
+                              },
+                              "fecha_publicacion": {
+                                "type": "string"
+                              },
+                              "fecha_inicio": {
+                                "type": "string"
+                              },
+                              "fecha_fin": {
+                                "type": "string"
+                              },
+                              "activo": {
+                                "type": "integer"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Comercio no encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/comercio/{usuario_id}": {
+      "get": {
+        "tags": [
+          "Comercios"
+        ],
+        "summary": "Obtener detalles de un comercio por ID de usuario",
+        "description": "Retorna los detalles de un comercio específico según el ID de usuario proporcionado. Se requiere autenticación con un token de acceso válido.",
+        "parameters": [
+          {
+            "name": "usuario_id",
+            "in": "path",
+            "description": "ID de usuario del comercio a buscar",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Detalles del comercio encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ComercioResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Comercio no encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Comercios"
+        ],
+        "summary": "Actualizar un comercio existente",
+        "description": "Actualiza los detalles de un comercio existente según el ID de usuario proporcionado. Se requiere autenticación con un token de acceso válido y permisos de administrador para editar comercios.",
+        "parameters": [
+          {
+            "name": "usuario_id",
+            "in": "path",
+            "description": "ID de usuario del comercio a actualizar",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ComercioUpdateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Comercio actualizado satisfactoriamente",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Comercio no encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Comercios"
+        ],
+        "summary": "Eliminar un comercio",
+        "description": "Elimina un comercio existente según el ID de usuario proporcionado. Se requiere autenticación con un token de acceso válido y permisos de administrador para eliminar comercios.",
+        "parameters": [
+          {
+            "name": "usuario_id",
+            "in": "path",
+            "description": "ID de usuario del comercio a eliminar",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Comercio eliminado satisfactoriamente"
+          },
+          "404": {
+            "description": "Comercio no encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "El correo electrónico ya está en uso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/etiquetas": {
+      "get": {
+        "tags": [
+          "Etiquetas"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "summary": "Listar etiquetas",
+        "description": "Retorna una lista de todas las etiquetas.",
+        "responses": {
+          "200": {
+            "description": "Lista de etiquetas",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EtiquetasResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Etiquetas"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "summary": "Crear una etiqueta nueva",
+        "description": "Crea una nueva etiqueta.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EtiquetaRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Etiqueta creada satisfactoriamente",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/etiquetas/{id}": {
+      "get": {
+        "tags": [
+          "Etiquetas"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "summary": "Obtener detalles de una etiqueta",
+        "description": "Retorna los detalles de una etiqueta específica.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "ID de la etiqueta a obtener",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Detalles de la etiqueta",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EtiquetaDetalleResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Etiqueta no encontrada",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Etiquetas"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "summary": "Actualizar una etiqueta",
+        "description": "Actualiza los datos de una etiqueta existente.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "ID de la etiqueta a actualizar",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EtiquetaRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Etiqueta actualizada satisfactoriamente",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Etiqueta no encontrada",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Etiquetas"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "summary": "Eliminar una etiqueta",
+        "description": "Elimina una etiqueta existente.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "ID de la etiqueta a eliminar",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Etiqueta eliminada correctamente"
+          },
+          "404": {
+            "description": "Etiqueta no encontrada",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/seguidos": {
+      "get": {
+        "tags": [
+          "Seguidos"
+        ],
+        "summary": "Obtener todos los seguidos",
+        "description": "Retorna todos los seguidos disponibles.",
+        "responses": {
+          "200": {
+            "description": "Lista de seguidos",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SeguidosResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Seguidos no encontrados",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Seguidos"
+        ],
+        "summary": "Crear un nuevo seguido",
+        "description": "Crea un nuevo seguido.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SeguidoRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Seguido creado satisfactoriamente",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SeguidoResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error de solicitud",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/api/seguidos/info": {
+      "get": {
+        "tags": [
+          "Seguidos"
+        ],
+        "summary": "Obtener información detallada de los seguidos",
+        "description": "Retorna información detallada de todos los seguidos, incluyendo detalles del seguidor y del seguido.",
+        "responses": {
+          "200": {
+            "description": "Información detallada de los seguidos",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SeguidosInfoResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Seguidos no encontrados",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/seguidos/{id}": {
+      "get": {
+        "tags": [
+          "Seguidos"
+        ],
+        "summary": "Obtener detalles de un seguido por ID",
+        "description": "Retorna los detalles de un seguido específico según el ID proporcionado.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID del seguido a buscar",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Detalles del seguido encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SeguidoResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Seguido no encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Seguidos"
+        ],
+        "summary": "Eliminar un seguido",
+        "description": "Elimina un seguido según el ID proporcionado.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID del seguido a eliminar",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Seguido eliminado satisfactoriamente"
+          },
+          "404": {
+            "description": "Seguido no encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/publicaciones": {
+      "get": {
+        "summary": "Obtiene todas las publicaciones",
+        "tags": [
+          "Publicaciones"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de publicaciones obtenida exitosamente",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Publicacion"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Crea una nueva publicación",
+        "tags": [
+          "Publicaciones"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "ID del usuario particular"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Publicación creada satisfactoriamente"
+          },
+          "423": {
+            "description": "Error en la solicitud"
+          }
+        }
+      }
+    },
+    "/api/publicaciones/{id}": {
+      "get": {
+        "summary": "Obtiene una publicación por su ID",
+        "tags": [
+          "Publicaciones"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "ID de la publicación a obtener",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Detalles de la publicación obtenidos exitosamente",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Publicacion"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Publicación no encontrada"
+          }
+        }
+      },
+      "put": {
+        "summary": "Actualiza una publicación existente",
+        "tags": [
+          "Publicaciones"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "ID de la publicación a actualizar",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Publicación actualizada satisfactoriamente"
+          },
+          "404": {
+            "description": "Publicación no encontrada"
+          },
+          "423": {
+            "description": "Error en la solicitud"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Elimina una publicación existente",
+        "tags": [
+          "Publicaciones"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "ID de la publicación a eliminar",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Publicación eliminada correctamente"
+          },
+          "404": {
+            "description": "Publicación no encontrada"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "schemas": {
+      "Usuario": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "email": {
+            "type": "string"
+          },
+          "nombre": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "telefono": {
+            "type": "string"
+          },
+          "avatar": {
+            "type": "string"
+          },
+          "remember_token": {
+            "type": "string"
+          },
+          "municipio": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "format": "int64"
+              },
+              "nombre": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "required": [
+          "email",
+          "nombre",
+          "password",
+          "municipio_id",
+          "telefono",
+          "avatar"
+        ]
+      },
+      "Particular": {
+        "type": "object",
+        "properties": {
+          "usuario_id": {
+            "type": "integer",
+            "description": "ID del usuario particular"
+          },
+          "primer_apellido": {
+            "type": "string",
+            "description": "Primer apellido del particular"
+          },
+          "segundo_apellido": {
+            "type": "string",
+            "description": "Segundo apellido del particular"
+          },
+          "sexo": {
+            "type": "string",
+            "description": "Sexo del particular",
+            "enum": [
+              "m",
+              "h"
+            ]
+          },
+          "fecha_nacimiento": {
+            "type": "string",
+            "format": "date",
+            "description": "Fecha de nacimiento del particular"
+          },
+          "usuario": {
+            "type": "object",
+            "properties": {
+              "email": {
+                "type": "string",
+                "description": "Correo electrónico del usuario"
+              },
+              "nombre": {
+                "type": "string",
+                "description": "Nombre del usuario"
+              },
+              "telefono": {
+                "type": "string",
+                "description": "Teléfono del usuario"
+              },
+              "avatar": {
+                "type": "string",
+                "description": "URL del avatar del usuario"
+              },
+              "municipio": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "description": "ID del municipio"
+                  },
+                  "nombre": {
+                    "type": "string",
+                    "description": "Nombre del municipio"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "ParticularRequest": {
+        "type": "object",
+        "properties": {
+          "primer_apellido": {
+            "type": "string",
+            "description": "Primer apellido del particular"
+          },
+          "segundo_apellido": {
+            "type": "string",
+            "description": "Segundo apellido del particular"
+          },
+          "sexo": {
+            "type": "string",
+            "description": "Sexo del particular",
+            "enum": [
+              "m",
+              "h"
+            ]
+          },
+          "fecha_nacimiento": {
+            "type": "string",
+            "format": "date",
+            "description": "Fecha de nacimiento del particular"
+          }
+        }
+      },
+      "ParticularUpdateRequest": {
+        "type": "object",
+        "properties": {
+          "primer_apellido": {
+            "type": "string",
+            "description": "Primer apellido del particular"
+          },
+          "segundo_apellido": {
+            "type": "string",
+            "description": "Segundo apellido del particular"
+          },
+          "sexo": {
+            "type": "string",
+            "description": "Sexo del particular",
+            "enum": [
+              "m",
+              "h"
+            ]
+          },
+          "fecha_nacimiento": {
+            "type": "string",
+            "format": "date",
+            "description": "Fecha de nacimiento del particular"
+          }
+        }
+      },
+      "AyuntamientoCreateRequest": {
+        "type": "object",
+        "properties": {
+          "nombre": {
+            "type": "string",
+            "description": "Nombre del usuario"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "description": "Correo electrónico del usuario"
+          },
+          "password": {
+            "type": "string",
+            "format": "password",
+            "description": "Contraseña del usuario"
+          },
+          "direccion": {
+            "type": "string",
+            "description": "Dirección del ayuntamiento"
+          },
+          "tokenVerification": {
+            "type": "string",
+            "description": "Token de verificación"
+          }
+        }
+      },
+      "AyuntamientoUpdateRequest": {
+        "type": "object",
+        "properties": {
+          "nombre": {
+            "type": "string",
+            "description": "Nuevo nombre del usuario"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "description": "Nuevo correo electrónico del usuario"
+          },
+          "password": {
+            "type": "string",
+            "format": "password",
+            "description": "Nueva contraseña del usuario"
+          },
+          "direccion": {
+            "type": "string",
+            "description": "Nueva dirección del ayuntamiento"
+          }
+        }
+      },
+      "AyuntamientoResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "boolean",
+            "description": "Indica el estado de la solicitud"
+          },
+          "ayuntamiento": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "description": "ID único del ayuntamiento"
+              },
+              "direccion": {
+                "type": "string",
+                "description": "Dirección del ayuntamiento"
+              },
+              "usuario": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "description": "ID único del usuario"
+                  },
+                  "nombre": {
+                    "type": "string",
+                    "description": "Nombre del usuario"
+                  },
+                  "email": {
+                    "type": "string",
+                    "description": "Correo electrónico del usuario"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "AyuntamientosResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "boolean",
+            "description": "Indica el estado de la solicitud"
+          },
+          "ayuntamientos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AyuntamientoResponse"
+            }
+          }
+        }
+      },
+      "SuccessResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "boolean",
+            "description": "Indica el estado de la solicitud"
+          },
+          "message": {
+            "type": "string",
+            "description": "Mensaje de éxito"
+          }
+        }
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "boolean",
+            "description": "Indica el estado de la solicitud"
+          },
+          "message": {
+            "type": "string",
+            "description": "Mensaje de error"
+          }
+        }
+      },
+      "ComercioCreateRequest": {
+        "type": "object",
+        "properties": {
+          "nombre": {
+            "type": "string",
+            "description": "Nombre del usuario"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "description": "Correo electrónico del usuario"
+          },
+          "password": {
+            "type": "string",
+            "format": "password",
+            "description": "Contraseña del usuario"
+          },
+          "usuario_id": {
+            "type": "integer",
+            "description": "ID del usuario propietario del comercio"
+          },
+          "categoria_id": {
+            "type": "integer",
+            "description": "ID de la categoría del comercio"
+          },
+          "direccion": {
+            "type": "string",
+            "description": "Dirección del comercio"
+          },
+          "descripcion": {
+            "type": "string",
+            "description": "Descripción del comercio"
+          }
+        }
+      },
+      "ComercioUpdateRequest": {
+        "type": "object",
+        "properties": {
+          "nombre": {
+            "type": "string",
+            "description": "Nombre del usuario"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "description": "Correo electrónico del usuario"
+          },
+          "password": {
+            "type": "string",
+            "format": "password",
+            "description": "Contraseña del usuario"
+          },
+          "usuario_id": {
+            "type": "integer",
+            "description": "ID del usuario propietario del comercio"
+          },
+          "categoria_id": {
+            "type": "integer",
+            "description": "ID de la categoría del comercio"
+          },
+          "direccion": {
+            "type": "string",
+            "description": "Dirección del comercio"
+          },
+          "descripcion": {
+            "type": "string",
+            "description": "Descripción del comercio"
+          }
+        }
+      },
+      "ComercioResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "boolean",
+            "description": "Indica el estado de la solicitud"
+          },
+          "comercio": {
+            "type": "object",
+            "properties": {
+              "direccion": {
+                "type": "string",
+                "description": "Dirección del comercio"
+              },
+              "descripcion": {
+                "type": "string",
+                "description": "Descripción del comercio"
+              },
+              "verificado": {
+                "type": "boolean",
+                "description": "Indica si el comercio está verificado"
+              },
+              "categoria": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "id de la categoria"
+                  },
+                  "nombre": {
+                    "type": "string",
+                    "description": "Nombre de la categoria"
+                  }
+                }
+              },
+              "usuario": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "description": "Correo electrónico del usuario"
+                  },
+                  "nombre": {
+                    "type": "string",
+                    "description": "Nombre del usuario"
+                  },
+                  "telefono": {
+                    "type": "string",
+                    "description": "Teléfono del usuario"
+                  },
+                  "avatar": {
+                    "type": "string",
+                    "description": "URL del avatar del usuario"
+                  },
+                  "municipio": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "description": "ID del municipio"
+                      },
+                      "nombre": {
+                        "type": "string",
+                        "description": "Nombre del municipio"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "ComerciosResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "boolean",
+            "description": "Indica el estado de la solicitud"
+          },
+          "comercios": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ComercioResponse"
+            }
+          }
+        }
+      },
+      "SeguidosResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "boolean",
+            "description": "Indica el estado de la solicitud"
+          },
+          "seguidos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SeguidoResponse"
+            }
+          }
+        }
+      },
+      "SeguidoRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "ID único"
+          }
+        }
+      },
+      "SeguidosInfoResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "ID único del seguido"
+          }
+        }
+      },
+      "SeguidoResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "ID único del seguido"
+          }
+        }
+      },
+      "EtiquetaRequest": {
+        "type": "object",
+        "properties": {
+          "nombre": {
+            "type": "string",
+            "maxLength": 255
+          }
+        },
+        "required": [
+          "nombre"
+        ]
+      },
+      "Etiqueta": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Identificador único de la etiqueta"
+          },
+          "nombre": {
+            "type": "string",
+            "maxLength": 255,
+            "description": "Nombre de la etiqueta"
+          }
+        },
+        "required": [
+          "nombre"
+        ]
+      },
+      "EtiquetasResponse": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/Etiqueta"
+        },
+        "description": "Respuesta que devuelve una lista de etiquetas"
+      },
+      "EtiquetaDetalleResponse": {
+        "$ref": "#/components/schemas/Etiqueta",
+        "description": "Esquema de respuesta para los detalles de una etiqueta"
+      },
+      "Publicacion": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "imagen": {
+            "type": "string"
+          },
+          "titulo": {
+            "type": "string",
+            "maxLength": 30
+          },
+          "descripcion": {
+            "type": "string",
+            "maxLength": 150
+          },
+          "tipo_id": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Id del tipo"
+              },
+              "nombre": {
+                "type": "string",
+                "description": "Nombre del tipo"
+              }
+            }
+          },
+          "fecha_publicacion": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "fecha_inicio": {
+            "type": "string",
+            "format": "date"
+          },
+          "fecha_fin": {
+            "type": "string",
+            "format": "date"
+          },
+          "activo": {
+            "type": "boolean"
+          },
+          "comercio": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ComercioResponse"
+            }
+          },
+          "etiqueta": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Etiqueta"
+            }
+          }
+        },
+        "required": [
+          "imagen",
+          "titulo",
+          "descripcion",
+          "tipo_id",
+          "fecha_publicacion",
+          "fecha_inicio",
+          "fecha_fin"
+        ]
+      }
+    }
+  }
+}
