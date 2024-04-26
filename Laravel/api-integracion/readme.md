@@ -1,0 +1,3 @@
+El zip contiene el proyecto de laravel completo.
+El archivo **json de insomnia** tiene ya rutas y datos de prueba para mayor facilidad, cuando haga el login ponga ese token en las variables de entorno de esa coleccion.
+El archivo **swagger.json** es la documentacion de swagger que la realice en https://editor.swagger.io/ en vez de en el propio laravel, me di cuenta tarde, puede colocarlo en esa pagina web para ver la documentacion o si tiene el plugin de **swagger preview en VS Code** tambien puede verlo
