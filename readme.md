@@ -13,5 +13,3 @@ Hay cuatro carpetas con ejercicios practicos de 2ºDAW **[PHP Nativo](PHP%20Nati
 Tambien esta  la configuracion inicial para un **[proyecto en VUE para una asignatura de diseño](Dor/README.md)**
 
 Realizados en el periodo de Septiembre 2023 a Febrero de 2024. 
-
----
