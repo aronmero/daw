@@ -1,0 +1,3 @@
+juan,12paquita,35sara,25
+carlos,24
+sofia,38

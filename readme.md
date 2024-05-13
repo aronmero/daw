@@ -1,9 +1,17 @@
 # Introduccion 
 
-Este repositorio contiene los ejercicios practicos realizados en 2º DAW *(Desarrollo de aplicaciones web)*.
+Este repositorio contiene los ejercicios practicos realizados en 1º y 2º DAW *(Desarrollo de aplicaciones web)*
 
-Hay cuatro carpetas cada una con los ejercicios de dicho apartado, [php nativo](PHP%20Nativo/readme.md), [php con laravel](Laravel/readme.md), [javascript nativo](Javascript%20Nativo/readme.md) y [vue](Vue/readme.md).
+# 1ºDAW
 
-Tambien esta  la configuracion inicial para un [proyecto en vue para una asignatura de diseño](Dor/README.md)
+Hay una carpeta con los ejercicios [Java](Java/readme.md) realizado en el periodo de Abril a Junio de 2023
+
+# 2ºDAW
+
+Hay cuatro carpetas con ejercicios practicos de 2ºDAW **[PHP Nativo](PHP%20Nativo/readme.md)**, **[PHP con Laravel](Laravel/readme.md)**, **[javascript nativo](Javascript%20Nativo/readme.md)** y **[vue](Vue/readme.md)**.
+
+Tambien esta  la configuracion inicial para un **[proyecto en VUE para una asignatura de diseño](Dor/README.md)**
 
 Realizados en el periodo de Septiembre 2023 a Febrero de 2024. 
+
+---
